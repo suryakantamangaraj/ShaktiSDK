@@ -1,0 +1,3 @@
+[submodule "shakti-tools"]
+	path = shakti-tools
+	url = https://gitlab.com/shaktiproject/software/shakti-tools
