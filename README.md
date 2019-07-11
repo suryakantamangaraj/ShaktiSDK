@@ -197,6 +197,6 @@ Please follow the below steps to create a issue.
 
 ## Public release
 
-Our sincere thanks to Scientis from Meity, GoI
+Our sincere thanks to Meity, GoI
 
 ![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/inaug1.jpg) <br/>
