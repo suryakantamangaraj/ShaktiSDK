@@ -1,4 +1,23 @@
 
+/*
+MPU6050.h - Header file for the MPU6050 Triple Axis Gyroscope & Accelerometer Arduino Library.
+Version: 1.0.3
+(c) 2014-2015 Korneliusz Jarzebski
+www.jarzebski.pl
+This program is free software: you can redistribute it and/or modify
+it under the terms of the version 3 GNU General Public License as
+published by the Free Software Foundation.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+code reused by Kottee and Yasaswini for shakti porting
+*/
+
+
 #ifndef MPU6050_h
 #define MPU6050_h
 #define MPU6050_ADDRESS             (0x68) // 0x69 when AD0 pin to Vcc
