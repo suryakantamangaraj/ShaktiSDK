@@ -130,8 +130,8 @@ git submodule update --init --recursive
   - Building new application [`doc/howto`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md)
      * README explaining the procedure to develop software using shakti-sdk.
   - How to use the board [`doc/board_use`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md)
-     * The procedure to generate the RTL and load the RTL to board.
-     * The procedure to upload an ELF image to target boards.
+     * The procedure to generate the RTL and load the RTL to the board.
+     * The procedure to upload an ELF image to the target board.
   
 * **software** (found under [`software/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software))
   - The `software` houses three repos as below,
