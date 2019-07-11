@@ -47,7 +47,7 @@ git submodule update --init --recursive
 The shakti-sdk uses riscv-tools. The tool chain can be installed in two ways,
 
 * 'Manual method' - Build and install toolchain from [`here`](https://gitlab.com/shaktiproject/software/riscv-tools.git).
-* 'Automatic method' - Toolchain executables are already hosted in shakti-sdk as a submodule [`shakti-tools/`](https://gitlab.com/shaktiproject/software/shakti-tools).
+* 'Automatic method' - Toolchain executables are already hosted in shakti-sdk as a submodule ([shakti-tools](https://gitlab.com/shaktiproject/software/shakti-tools)).
    Please export them to *PATH* variable to use. The steps to export them are provided below,
 
 #### Exporting the tool chain ####
