@@ -76,11 +76,11 @@ Things to do
 Automatic method
 
 ```
-system:~$ git clone https://gitlab.com/shaktiproject/software/shakti-sdk-dev.git"
+system:~$ git clone https://gitlab.com/shaktiproject/software/shakti-sdk.git"
 system:~$ pwd
 /home/user
-system:~$ cd shakti-sdk-dev
-system:~$ SHAKTISDK=/home/user/shakti-sdk-dev
+system:~$ cd shakti-sdk
+system:~$ SHAKTISDK=/home/user/shakti-sdk
 system:~$ export PATH=$PATH:$SHAKTISDK/shakti-tools/bin
 system:~$ which riscv64-unknown-elf-gcc
 **/home/user/shakti-tools/bin**
@@ -101,47 +101,47 @@ git submodule update --init --recursive
 ## Developing applications
   
   Shakti-sdk provides a platform to develop standalone applications and projects. We also provide support on FPGA development boards.
-  Please read files under [doc](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/doc) for further details.
+  Please read files under [doc](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/doc) for further details.
   We sincerely request the developers to read through the rest of the document, before starting development.
 
 ## Contents of shakti-sdk
 
-* **board support package** (found under [`bsp/`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/bsp))
+* **board support package** (found under [`bsp/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp))
 
   The `bsp` implements the board related softwares for application developement. It includes the following
-  - drivers [`bsp/drivers`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/bsp/drivers)
+  - drivers [`bsp/drivers`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/drivers)
     * Exposes a set of wrapper APIs to upper layer. 
     * These are low level API's to execute a particular task in the hardware.
     * These API's are usually peripheral specific.
-  - include[`bsp/include`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/bsp/include)
+  - include[`bsp/include`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/include)
     * This has header files for core and drivers.
-  - libwrap [`bsp/libwrap`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/bsp/libwrap)
+  - libwrap [`bsp/libwrap`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/libwrap)
     * list of basic library functions.
-  - Third party boards [`bsp/third_party/`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/bsp/third_party)
+  - Third party boards [`bsp/third_party/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/third_party)
     * List of FPGA boards shakti supports.
 
 
-* **doc** (found under [`doc/`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/doc))
-  - Shakti supported boards [`doc/board_info`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/board_info.md)
+* **doc** (found under [`doc/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/doc))
+  - Shakti supported boards [`doc/board_info`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_info.md)
      * README explaining the different boards that shakti supports. 
-  - Building new application [`doc/howto`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/howto.md)
+  - Building new application [`doc/howto`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md)
      * README explaining the procedure to develop software using shakti-sdk.
-  - How to use the board [`doc/board_use`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/board_use.md)
+  - How to use the board [`doc/board_use`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md)
      * The procedure to generte the rtl and load the rtl to board.
      * The procedure to upload an elf image to target boards.
   
-* **software** (found under [`software/`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/software))
+* **software** (found under [`software/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software))
   - The `software` houses three repos as below,
     * projects
       - This consists of applications developed using different sensors.
-      - These are usually a combination of standalone applns under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/software/examples).
+      - These are usually a combination of standalone applns under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
     * benchmarking
       - Standalone projects and sub-modules that can be used to benchmark the shakti rtl.
       - These benchmarking repos usually describe the capabiity of shakti class of processors.
     * examples
       -	This is the place where any new standalone application is built.
-      - The bsp and core support libraries can be found under [`bsp`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/bsp).
-      - Few sensors are already developed for different peripherals and kept under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/software/examples).
+      - The bsp and core support libraries can be found under [`bsp`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp).
+      - Few sensors are already developed for different peripherals and kept under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
       - See [`here`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/howto.md) for a detail description on application development.
 
 * **tools** (found under [`shakti-tools/`](https://gitlab.com/shaktiproject/software/shakti-tools))
@@ -150,7 +150,7 @@ git submodule update --init --recursive
   - The tools needs to be exported for use.
   - Tools can be installed manually from [`here`](https://gitlab.com/shaktiproject/software/riscv-tools).
 
-* **Makefile** (found under [`./`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/Makefile)).
+* **Makefile** (found under [`./`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/Makefile)).
   - The Makefile has support for different target boards and applications. The supported `make` commands are
 
     * make help
@@ -187,7 +187,7 @@ Before raising an issue, please check if there are any similar issues.
 
 Please follow the below steps to create a issue.
 
-- Go to [`issues`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/issues).
+- Go to [`issues`](https://gitlab.com/shaktiproject/software/shakti-sdk/issues).
 - After clicking on New Issue you will get an option to select a template.
 - Click on choose template, list of available templates will be displayed, Select template "Bug".
 - Once the template named 'Bug' is selected, the description text box is populated by the template.
