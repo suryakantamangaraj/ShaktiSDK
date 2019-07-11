@@ -19,8 +19,8 @@ Details on board support for different classes fo processors are given below
   * [`shakti c class`](https://shakti.org.in/c-class.html) supported on [`artix7_100t board`](https://www.xilinx.com/products/boards-and-kits/1-w51quh.html).
 
 ### Buying Board  ###
-  - [digilent](https://store.digilentinc.com/arty-a7-artix-7-fpga-development-board-for-makers-and-hobbyists/)
-  - [amazon](https://www.amazon.in/Digilent-Artix-7-Development-Makers-Hobbyists/dp/B017BOBNEO?tag=googinhydr18418-21)
+  - [Digilent](https://store.digilentinc.com/arty-a7-artix-7-fpga-development-board-for-makers-and-hobbyists/)
+  - [Amazon](https://www.amazon.in/Digilent-Artix-7-Development-Makers-Hobbyists/dp/B017BOBNEO?tag=googinhydr18418-21)
   
 ### Vendor Documentation ###
 
