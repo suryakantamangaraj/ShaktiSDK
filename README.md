@@ -11,7 +11,7 @@
 
 * Master branch is the stable one. It has gpio, i2c, timer and uart support.
 * Next release is expected to have qspi, spi and plic support.
-* This repository is currently under inhouse testing.
+* This repository is currently under in-house testing.
 
 ## Setting up the shakti-sdk 
 
@@ -108,9 +108,9 @@ git submodule update --init --recursive
 
 * **board support package** (found under [`bsp/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp))
 
-  The `bsp` implements the board related softwares for application developement. It includes the following
+  The `bsp` implements the board related software for application development. It includes the following
   - drivers [`bsp/drivers`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/drivers)
-    * Exposes a set of wrapper APIs to upper layer. 
+    * Exposes a set of API's to upper layer.
     * These are low level API's to execute a particular task in the hardware.
     * These API's are usually peripheral specific.
   - include[`bsp/include`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/include)
@@ -118,26 +118,28 @@ git submodule update --init --recursive
   - libwrap [`bsp/libwrap`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/libwrap)
     * list of basic library functions.
   - Third party boards [`bsp/third_party/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp/third_party)
-    * List of FPGA boards shakti supports.
+    * List of FPGA boards supported by shakti.
 
 
 * **doc** (found under [`doc/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/doc))
+   The 'doc' contains following documents,
+
   - Shakti supported boards [`doc/board_info`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_info.md)
      * README explaining the different boards that shakti supports. 
   - Building new application [`doc/howto`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md)
      * README explaining the procedure to develop software using shakti-sdk.
   - How to use the board [`doc/board_use`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md)
-     * The procedure to generte the rtl and load the rtl to board.
-     * The procedure to upload an elf image to target boards.
+     * The procedure to generate the RTL and load the RTL to board.
+     * The procedure to upload an ELF image to target boards.
   
 * **software** (found under [`software/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software))
   - The `software` houses three repos as below,
     * projects
       - This consists of applications developed using different sensors.
-      - These are usually a combination of standalone applns under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
+      - These are usually a combination of standalone applications under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
     * benchmarking
       - Standalone projects and sub-modules that can be used to benchmark the shakti rtl.
-      - These benchmarking repos usually describe the capabiity of shakti class of processors.
+      - These benchmarking repos usually describe the capability of shakti class of processors.
     * examples
       -	This is the place where any new standalone application is built.
       - The bsp and core support libraries can be found under [`bsp`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp).
@@ -145,8 +147,8 @@ git submodule update --init --recursive
       - See [`here`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/howto.md) for a detail description on application development.
 
 * **tools** (found under [`shakti-tools/`](https://gitlab.com/shaktiproject/software/shakti-tools))
-  - The tools folder has "ready to use" riscv tools.
-  - It has a risc-v gnu tool chain, risc-v intruction set simulator, openocd (debugger) and riscv proxy kernel.
+  - The tools folder has "ready to use" RISC-V tools.
+  - It has RISC-V GNU tool chain, RISC-V intruction set simulator, OpenOCD (debugger) and RISC-V proxy kernel.
   - The tools needs to be exported for use.
   - Tools can be installed manually from [`here`](https://gitlab.com/shaktiproject/software/riscv-tools).
 
