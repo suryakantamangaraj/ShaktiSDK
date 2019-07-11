@@ -23,45 +23,19 @@
    ************************************************************************/
 #ifndef UART_H
 #define UART_H
-// UART TX (W) and RX (R) buffers
-#define UART_DATA_REGISTER 0
-// UART interrupt enable (RW)
-#define UART_INT_ENABLE_REGISTER 1
-// UART interrupt identification (R)
-#define UART_INT_IDENTI_REGISTER 2
-// UART FIFO control (W)
-#define UART_FIFO_CTRL_REGISTER 2
-// UART Line Control Register (RW)
-#define UART_LINE_CTRL_REGISTER 3
-// UART Modem Control (W)
-#define UART_MODEM_CTRL_REGISTER 4
-// UART Line Status (R)
-#define UART_LINE_STATUS_REGISTER 5
-// UART Modem Status (R)
-#define UART_MODEM_STATUS_REGISTER 6
-// UART base address of peripheral in NIOS memory map
-#define UART_SCRATCH_REGISTER 7
 
-// UART Divisor Registers offsets
-#define UART_DIVISOR_LSB_LATCH_REGISTER 0
-#define UART_DIVISOR_MSB_LATCH_REGISTER 1
-
-
-#define INPUT_CLOCK_FREQ 20000000
-
-#define UART0 0
-#define UART1 1
-
-
-int uart_0_init();
-
-void uart_write(unsigned char offSet, unsigned char uartSel, unsigned char writeData);
-
-unsigned char uart_read(unsigned char offSet, unsigned char uartSel);
-
-void uart_1_init(int baud);
+/*! UART Baud Rate Configuration Registers sets the uart clock rate */
+#define UART_BAUDRATE_CFG_REGISTER 0
+// UART Data Transmit Register (W)
+#define UART_DATA_TX_REGISTER 4
+// UART Data Receive Register (R)
+#define UART_DATA_RX_REGISTER 8
+// UART Status REgister (R)
+#define UART_STS_REGISTER 0x0C
 
 int putchar(int ch);
+
+int is_empty();
 
 int getchar();
 

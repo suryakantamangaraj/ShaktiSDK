@@ -53,23 +53,18 @@ help:
 
 
 #BOARD_DIR holds the list of boards in a third_party path
-BOARD_DIR := $(shell ls ./bsp/third_party) $(shell ls ./bsp/shakti_board)
+BOARD_DIR := $(shell ls ./bsp/third_party) 
 
 
 #Below variables hold the list of C files in there path
 #Each C file corresponds to a appln. Each appln has a label in makefile
 #that corresponds to each C file.
 
-#GPIO_DIR := $(shell find ./software/examples/gpio_applns/ -maxdepth 1 -type d   -printf	"%f\n")
-#UART_DIR := $(shell find ./software/examples/uart_applns/ -maxdepth 1 -type d  -printf	"%f\n")
-#I2C_DIR := $(shell find ./software/examples/i2c_applns/ -maxdepth 1 -type d  -printf	"%f\n")
 GPIO_DIR := $(shell cd ./software/examples/gpio_applns/ && ls -d ./*/  )
 UART_DIR := $(shell cd ./software/examples/uart_applns/ && ls -d ./*/ )
 I2C_DIR := $(shell cd software/examples/i2c_applns/ && ls -d ./*/  )
 APP_DIR := $(GPIO_DIR) $(UART_DIR) $(I2C_DIR)
-SUBDIRS1 := $(wildcard ./software/examples/gpio_applns/*)
-SUBDIRS2 := $(wildcard ./software/examples/uart_applns/*)
-SUBDIRS3 := $(wildcard ./software/examples/i2c_applns/*)
+
 
 
 #List the boards that are supported by Shakti Sdk

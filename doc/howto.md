@@ -75,6 +75,41 @@ For example if you want to write a hello world program
 - Create a .c file and write a program for that.
 - Create a Makefile for program.
 
+E class memory map:
+
+| Sl. No  | Peripheral  | Base Address Start  | Base Address End | 
+| ------- | ----------- | ------------------- | ---------------- |
+| 1. | Memory (TCM) (128kB)  | 0x80000000  | 0x87FFFFFF | 
+| 2. | Debug  | 0x00000010  | 0x0000001F | 
+| 3. | PWM 0  | 0x00030000  | 0x000300FF | 
+| 4. | PWM 1  | 0x00030100  | 0x000301FF | 
+| 5. | PWM 2  | 0x00030200  | 0x000302FF | 
+| 6.  | PWM 3  | 0x00030300  | 0x000303FF | 
+| 7. | PWM 4  | 0x00030400  | 0x000304FF | 
+| 8.  | PWM 5  |  0x00030500 | 0x000305FF | 
+| 9.  | SPI 0  | 0x00020000  | 0x000200FF | 
+| 10.  | SPI 1  | 0x00020100  | 0x000201FF | 
+| 11.  | SPI 2  | 0x00020200  | 0X000202FF | 
+| 12.  |  Uart 0 | 0x00011300  | 0x00011340 | 
+| 13.  | Uart 1  | 0x00011400  |  0x00011440 |
+| 14.  | Uart 2  | 0x00011500  | 0x00011540 | 
+| 15.  | Clint  | 0x02000000  | 0x020BFFFF | 
+| 16.  | Gpio  | 0x00040200  | 0x000402FF | 
+| 17. | Plic  | 0x00040100  | 0x000401FF | 
+| 18.  | I2C  | 0x00040000  | 0x000400FF | 
+| 19.  | XADC  | 0x00041000  |  0x00041400 |
+
+C class memory map
+
+| Sl. No  | Peripheral  | Base Address Start  | Base Address End |
+| ------- | ----------- | ------------------- | ---------------- |
+| 1. | Memory (DDR) (128Mb)  | 0x80000000  | 0x87FFFFFF| 
+| 2. | Debug  | 0x00000000  | 0x0000000F| 
+| 3. | Uart  | 0x00011300  | 0x00011340| 
+| 4. | Gpio  | 0x02100000  | 0x021000FF| 
+| 5. | I2C  | 0x020C0000  | 0x020C00FF| 
+| 6. | Clint  | 0x02000000  | 0x020BFFFF| 
+| 7. | Plic  | 0x020D0000  | 0x020D00FF|  
 
 ### Video tutorial
 
