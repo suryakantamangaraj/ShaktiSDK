@@ -7,7 +7,6 @@
   * [Public release](#public-release)
   
 ## Information ##
-![](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/raw/master/doc/images/inaug1.jpg) <br/>
 
 * Master branch is the stable one. It has gpio, i2c, timer and uart support.
 * Next release is expected to have qspi, spi and plic support.
