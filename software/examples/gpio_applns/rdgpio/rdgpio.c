@@ -38,17 +38,6 @@ void main()
 	unsigned long readData = 0;
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
 
-#ifndef ARTIX7_35T
-	write_word(GPIO_PULL_UP_CNTRL_REG, 0xFFFFFFFF);
-
-	write_word(GPIO_DRV_CNTRL_REG0, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG1, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG2, 0x00);
-
-	write_word(GPIO_MODE_SEL_REG, 0xFFFFFFFF);
-
-	write_word(GPIO_PROG_SLEW_CNTRL_REG, 0xFFFFFFFF);
-#endif
 	while(1)
 	{
 		readData =read_word(GPIO_DATA_REG);//copies the GPIO_DATA_REG Register contents//

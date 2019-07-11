@@ -76,7 +76,3 @@ Email id: sathya281@gmail.com
 #define GPIO_COUNT  0x10
 
 #endif
-
-
-
-#endif

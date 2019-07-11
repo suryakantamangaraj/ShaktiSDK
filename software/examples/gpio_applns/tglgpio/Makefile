@@ -53,8 +53,8 @@ all: create_dir
 tglgpio.riscv: crt.o syscalls.shakti create_dir
 	@echo -e "$(GREEN) Compiling code $(NC)"
 	@echo -e "$(RED) Caveat: Code starts at 0x80000000. Configure RTL appropriately $(NC)"
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc)  -I$(bspboard) -c ./tglgpio.c -o ./output/tglgpio.o -march=rv$(XLEN)imafd -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bsplib)/util.c -o ./output/util.o -march=rv$(XLEN)imafd -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc)  -I$(bspboard) -c ./tglgpio.c -o ./output/tglgpio.o -march=rv$(XLEN)imafdc -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bsplib)/util.c -o ./output/util.o -march=rv$(XLEN)imafdc -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)link.ld  ./output/util.o ./output/tglgpio.o ./output/syscalls.shakti ./output/crt.o -o ./output/tglgpio.shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/tglgpio.shakti > ./output/tglgpio.dump
 

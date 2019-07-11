@@ -33,12 +33,6 @@
 void init()
 {
 	write_word(GPIO_DIRECTION_CNTRL_REG, ~(1 << 0) );
-
-#ifndef ARTIX7_35T
-	write_word(GPIO_DRV_CNTRL_REG0, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG1, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG2, 0x00);
-#endif
 }
 
 /*********************************************************************

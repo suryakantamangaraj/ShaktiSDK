@@ -37,15 +37,6 @@ void main()
 	printf("Motor Control\n");
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
-#ifndef ARTIX7_35T
-	write_word(GPIO_PULL_UP_CNTRL_REG, 0x00);
-	write_word(GPIO_DRV_CNTRL_REG0, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG1, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG2, 0x00);
-	write_word(GPIO_MODE_SEL_REG, 0xFFFFFFFF);
-	write_word(GPIO_MODE_SEL_REG, 0xFFFFFFFF);
-#endif
-
 	while(1)
 	{
 		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);

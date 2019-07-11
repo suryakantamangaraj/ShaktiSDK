@@ -49,6 +49,7 @@ void main()
 		DelayLoop(1000, 5000);
 		write_word(GPIO_DATA_REG, 0x00);
 		DelayLoop(1000, 5000);
+		
 	}
 
 }
