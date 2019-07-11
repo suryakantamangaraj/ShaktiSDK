@@ -265,7 +265,6 @@ int shakti_readbytes(char *buf, int count, int last)
 	return i-1; //excluding the dummy read
 }
 #endif
-#endif
 
 
 /************************************************************************

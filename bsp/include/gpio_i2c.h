@@ -25,16 +25,29 @@
 #ifndef GPIO_I2C_H
 #define GPIO_I2C_H
 
+#include "platform.h"
+#include "gpio.h"
+
+#define I2C_SCL GPIO0
+#define I2C_SDA GPIO1
+#define GPIOD_IS_IN 0
+#define GPIOD_IS_OUT 1
+#define I2C_WRITE 0
+#define I2C_READ 1
 
 void I2cInit();
 void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
 void I2cWriteByte(unsigned char , unsigned char );
 unsigned char I2cReadByte(unsigned char );
 void I2cWriteData(unsigned char , unsigned char );
-unsigned char I2cReadDataWithAck(unsigned char );
+unsigned char I2cReadDataAck(unsigned char );
 unsigned char I2cReadDataNack(unsigned char );
 void I2cStart(unsigned char );
 void I2cStop(unsigned char );
+void I2c_Write_byte(unsigned char ,unsigned char , unsigned char , unsigned char);
+int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
+int I2c_shakti_readbytes(char *, int , int , unsigned char );
+void ReadAckForWrite(unsigned char delay);
 
 
 #endif

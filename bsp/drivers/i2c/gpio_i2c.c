@@ -22,6 +22,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+#include "platform.h"
+#include "gpio.h"
+#include "gpio_i2c.h"
 extern void DelayLoop(unsigned long , unsigned long );
 
 
@@ -425,7 +428,7 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
 
 }
 
-/** @fn static unsigned char I2cReadDataWithAck(unsigned char delay)
+/** @fn static unsigned char I2cReadDataAck(unsigned char delay)
  * @brief Sends ack for the read byte.
  *
  * @details Ack is sent to the slave so that it can make sure the data is read,
@@ -436,7 +439,7 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
  * @param[in] delay.
  * @param[Out] returns the value of readData .
  */
-unsigned char I2cReadDataWithAck(unsigned char delay)
+unsigned char I2cReadDataAck(unsigned char delay)
 {
   unsigned char readData = 0;
   SetSdaDirection(GPIOD_IS_IN);
@@ -505,3 +508,71 @@ void I2cStop(unsigned char delay)
   stop(delay);
 }
 
+/*************************************
+  @Brief: To write one byte of data into a particular register of a partivular slave
+  @parameters[in]:slave address, register address, data to be written
+  @parameters[out]:none
+ *************************************/
+void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsigned char data, unsigned char delay )
+{
+	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);
+	I2cWriteData(reg_address, delay);
+	I2cWriteData(data,delay);
+	I2cStop(delay);
+}
+/*************************************
+  @Brief: To read one byte of data from a particular register of a partivular slave
+  @parameters[in]:slave address, register address
+  @parameters[out]:readdata
+ *************************************/
+int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
+{
+	unsigned char readData;
+	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);//selecting slave to be read
+	I2cWriteData(reg_address, delay);//selecting register to be read
+	I2cSendSlaveAddress(slave_address, I2C_READ, delay);
+	readData = I2cReadDataAck(delay);
+	I2cStop(delay);
+	return (int) readData;
+}
+
+/*************************************
+  @Brief: To burst read (i.e read multiple bytes byte of data)
+  @parameters[in]:readbuf to store read data, count to tell how many bytes to read , last
+  @parameters[out]:No. of values(bytes) read
+ *************************************/
+int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
+{
+	printf("start reading the slave device\n");
+	int i=0;
+#ifdef PCF8584
+	for(i=0;i<=count;i++)
+	{
+		if(i!=0 && i<count)
+		{
+			readbuf[i]=I2cReadDataAck(delay);
+
+		}
+		else if(i==0) I2cReadDataAck(delay);//dummy read
+		else
+		{
+			readbuf[i] = I2cReadDataNack(delay);
+		}
+		/*The following loop is useful only  for eeprom*/
+		if (last)  I2cStop(delay);
+		else  I2cStart(delay);//sending repeated start
+	}
+	return i-1; //excluding the dummy read
+#else
+	for(i=0;i<count-1;i++)
+		*(buf + i) = I2cReadDataAck(delay);
+	*(buf + i) = I2cReadDataNack(delay);
+
+	/*The following loop is useful only  for eeprom*/
+	if (last)
+		I2cStop(delay);
+	else
+		I2cStart(delay);//sending repeated start
+#endif
+	return i+1;
+}

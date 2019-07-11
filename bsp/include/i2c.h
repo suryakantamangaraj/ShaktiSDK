@@ -22,6 +22,7 @@
 #ifndef I2C_H
 #define I2C_H
 
+#include "platform.h"
 
 #define ETIMEOUT -60
 #define DEF_TIMEOUT 60

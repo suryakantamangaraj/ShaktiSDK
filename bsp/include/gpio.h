@@ -25,7 +25,7 @@
 #ifndef GPIO_H
 #define GPIO_H
 
-
+#include "platform.h"
 #define GPIO_DIRECTION_CNTRL_REG (GPIO_START  + (0 * GPIO_OFFSET ))
 #define GPIO_DATA_REG  (GPIO_START + (1 * GPIO_OFFSET ))
 
@@ -37,10 +37,7 @@
 * Return                : int
 * *******************************************************************/
 
-long int read_word(int *addr)
-{
-  return *addr;
-}
+long int read_word(int *addr);
 
 /*****************************************************
 * Brief Description     : writes a value to an address
@@ -48,9 +45,6 @@ long int read_word(int *addr)
 * Return                : int
 * ****************************************************/
 
-void write_word(int *addr, unsigned long val)
-{
-    *addr = val;
-}
+void write_word(int *addr, unsigned long val);
 
 #endif

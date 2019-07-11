@@ -1,4 +1,4 @@
-#Created by Sathya Narayanan N
+ #Created by Sathya Narayanan N
 # Email id: sathya281@gmail.com
 
 #   Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -13,20 +13,16 @@
 #MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 SHELL := /bin/bash # Use bash syntax
 XLEN=64
 DC=
 
+#default target board
 TARGET ?= artix7_35t
 DEBUG ?=
-
-bspinc:=../../../../bsp/include
-bspdri:=../../../../bsp/drivers
-bsplib:=../../../../bsp/libwrap
-bspboard:=../../../../bsp/third_party/$(TARGET)
 
 ifeq ($(TARGET),artix7_35t)
 	XLEN=32
@@ -42,25 +38,32 @@ ifeq ($(DEBUG),DEBUG)
 	DC=-g
 endif
 
+#bsp incl file path
+bspinc:=../../../../bsp/include
+bspdri:=../../../../bsp/drivers
+#bsp lib file path
+bsplib:=../../../../bsp/libwrap
+#bsp board specific files path
+bspboard:=../../../../bsp/third_party/$(TARGET)/
+
 
 all: create_dir
-	make lm75.riscv
+	make gyro_softi2c.riscv
+
+
+gyro_softi2c.riscv: crt.o syscalls.shakti create_dir
+	@echo -e "$(GREEN) Compiling code $(NC)"
+	@echo -e "$(RED) Caveat: Code starts at 0x80000000. Configure RTL appropriately $(NC)"
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc) -I$(bspboard) -c ./gyroi2c.c -o ./output/gyroi2c.o -march=rv$(XLEN)imafdc -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bsplib)/util.c -o ./output/util.o -march=rv$(XLEN)imafdc -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)   -c $(bspboard)/uart.c -o ./output/uart.o -march=rv$(XLEN)imafdc -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri)  -I$(bspboard)  -c $(bspdri)/i2c/gpio_i2c.c -o ./output/gpio_i2c.o -march=rv$(XLEN)imafdc -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld  ./output/util.o ./output/gpio_i2c.o ./output/gyroi2c.o ./output/uart.o ./output/syscalls.shakti ./output/crt.o -o ./output/gyroi2c.shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-objdump -D ./output/gyroi2c.shakti > ./output/gyroi2c.dump
+
 
 create_dir:
 	@mkdir -p ./output
-
-
-lm75.riscv: crt.o syscalls.shakti create_dir
-	@echo -e "$(GREEN) Compiling code $(NC)"
-	@echo -e "$(RED) Caveat: Code starts at 0x80000000. Configure RTL appropriately $(NC)"
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) $(flags) -c ./lm75.c -o ./output/lm75.o -march=rv$(XLEN)imafd -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bspboard)/uart.c -o ./output/uart.o -march=rv$(XLEN)imafd -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bsplib)/util.c -o ./output/util.o -march=rv$(XLEN)imafdc -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri)  -I$(bspboard)  -c $(bspdri)/i2c/i2c_driver.c -o ./output/i2c_driver.o -march=rv$(XLEN)imafdc -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld   ./output/util.o ./output/i2c_driver.o ./output/lm75.o ./output/syscalls.shakti ./output/uart.o ./output/crt.o -o ./output/lm75.shakti -static -nostartfiles -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-objdump -D ./output/lm75.shakti > ./output/lm75.dump
-
-
 
 
 crt.o: create_dir
@@ -68,4 +71,3 @@ crt.o: create_dir
 
 syscalls.shakti:
 	@riscv$(XLEN)-unknown-elf-gcc -march=rv$(XLEN)imafd  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf  -c $(bsplib)/syscalls.c -o ./output/syscalls.shakti -I$(bspinc)
-

@@ -44,7 +44,7 @@ help:
 	@echo " Builds the requested PROGRAM with debug options"
 	@echo ""
 	@echo ""
-	@echo " clean" 
+	@echo " clean"
 	@echo " Cleans compiled objects in every example applns."
 	@echo ""
 	@echo " clean [CLEAR=$(PROGRAM)]"
@@ -53,7 +53,7 @@ help:
 
 
 #BOARD_DIR holds the list of boards in a third_party path
-BOARD_DIR := $(shell ls ./bsp/third_party) 
+BOARD_DIR := $(shell ls ./bsp/third_party)
 
 
 #Below variables hold the list of C files in there path
@@ -62,13 +62,13 @@ BOARD_DIR := $(shell ls ./bsp/third_party)
 
 GPIO_DIR := $(shell cd ./software/examples/gpio_applns/ && ls -d ./*/  )
 UART_DIR := $(shell cd ./software/examples/uart_applns/ && ls -d ./*/ )
-I2C_DIR := $(shell cd software/examples/i2c_applns/ && ls -d ./*/  )
+I2C_DIR := $(shell cd software/examples/i2c_applns/ && ls -d ./*/ )
 APP_DIR := $(GPIO_DIR) $(UART_DIR) $(I2C_DIR)
 
 
 
 #List the boards that are supported by Shakti Sdk
-.PHONY: all 
+.PHONY: all
 all:
 	cd  ./software/examples/gpio_applns && $(MAKE) all
 	cd  ./software/examples/uart_applns && $(MAKE) all
@@ -89,7 +89,7 @@ software:
 	@echo $(PROGRAM) $(TARGET)
 	@echo "make for that program on that board"
 	cd ./software/examples && $(MAKE) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
-	
+
 .PHONY: debug
 debug:
 	@echo $(PROGRAM) $(TARGET) $(DEBUG)
@@ -122,6 +122,9 @@ else
 ifeq ($(CLEAR),keypad)
 	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
 else
+ifeq ($(CLEAR),gyro_softi2c)
+	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
+else
 ifeq ($(CLEAR),maze)
 	cd ./software/examples/uart_applns && $(MAKE) clean CLEAR=$(CLEAR)
 else
@@ -130,6 +133,7 @@ ifeq ($(CLEAR),)
 	cd ./software/examples/i2c_applns && $(MAKE) clean CLEAR=$(CLEAR)
 	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
 else
+endif
 endif
 endif
 endif
