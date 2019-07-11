@@ -51,6 +51,8 @@ The board has to be used along with a [`debugger version 10.1 part no 8.08.90`](
 | |TMS  |JA[1]| |  |
 | |TCK  |JA[8]| |  |
 | |TDO  |JA[7]| |  |
+| |Vcc  |JA[6]| |  |
+| |Gnd  |JA[5]| |  |
 |4.|UART0 TX  |J10  |Digilent JTAG USB circuitry |UART |
 | |UART0 RX  |J10| |  |
 |5.|INTERRUPT 0  |CKIO28 (J4[6],IO - Lower)|Arduino Header (ChipKit Outer Digital Header) |Interrupts|
@@ -59,7 +61,7 @@ The board has to be used along with a [`debugger version 10.1 part no 8.08.90`](
 | |INTERRUPT 3  |CKIO31 (J4[12],IO - Lower)| |  |
 | |INTERRUPT 4|CKIO32 (J4[14],IO - Lower) || |
 | |INTERRUPT 5  |CKIO33 (J4[16],IO - Lower)| |  |
-| | INTERRUPT 6 |CKIO34 (J2[2],IO - Lower)| |  |
+| |INTERRUPT 6 |CKIO34 (J2[2],IO - Lower)| |  |
 | |INTERRUPT 7  |CKIO35 (J2[4],IO - Lower)| |  |
  
 
@@ -91,6 +93,8 @@ The board has to be used along with a [`debugger version 10.1 part no 8.08.90`](
 |  | TMS  | JA[1]  |   |   |  
 |  |  TCK |  JA[8] |   |   |  
 |  | TDO  | JA[7]  |   |   |  
+| |Vcc  |JA[6]| |  |   |   |
+| |Gnd  |JA[5]| |  |   |   |
 |4.| UART0 TX  | J10  | Diligent JTAG USB circuitary  | UART |  
 |  | UART0 RX  |  J10 |   |   |  
 |5.|  UART1 TX |  JC[7] - 3P | UART1  |   |  
@@ -143,28 +147,32 @@ Pre-requisites:
 
 * sudo apt-get install python-serial
 
-* There will be three terminals required. 
+* Open three terminals, one for each of the following
+
   - One terminal for openocd.
   - Another for gdb server
   - And the last one for uart terminal display.
 
 Follow the steps below to set up and run programs
 
-* Open a terminal and launch OpenOCD with sudo permissions.
-  Assume you are in the shakti-sdk directory.
+* In the first terminak launch OpenOCD with sudo permission. Please ensure you are in the shakti-sdk directory.
+
+For example,
+        $ pwd
+        /home/user/shakti-sdk
 
         $ cd ./bsp/third_party/artix7_35t
         $ sudo openocd -f spike.cfg
 
-* Open another terminal and launch gdb
+* In the second  terminal and launch gdb, applications will be loaded to RAM and executed from this terminal
 
         $ riscv64-unknown-elf-gdb -x gdb.script
         $ file "executable with absolute path"
         $ load
         $ c
 
-* Open another terminal to capture UART output (The default baud rate is 19200)
+* In the third terminal open miniterm.py to display output from UART
 
-        $ sudo miniterm.py /dev/ttyUSB1 240000
+        $ sudo miniterm.py /dev/ttyUSB1 19200
 
-For UART, we need miniterm or GTKterm.
+note: For 32 bit applications, please use riscv32-unknown-elf-gdb
