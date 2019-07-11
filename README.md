@@ -93,6 +93,7 @@ system:~$
 Please follow the below commands, to update the shakti-sdk to the latest version.
 
 ```
+cd $SHAKTISDK
 git pull origin master
 git submodule update --init --recursive
 ```
