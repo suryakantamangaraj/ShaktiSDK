@@ -1,4 +1,5 @@
 ## Guide
+
   * [Information](#information)
   * [Setting up the sdk](#setting-up-the-shakti-sdk)
   * [Contents of sdk](#contents-of-shakti-sdk)
@@ -16,7 +17,7 @@
 
 ### Prerequisites ###
 
-To use this SDK, you will need the following OS/software available on your machine:
+To use this SDK, you will need the following OS and software packages available on your machine:
 
 * OS = Ubuntu 16.04
 * To solve software dependencies, copy paste the below command in terminal and press enter.
@@ -31,7 +32,7 @@ note: We have tested SDK in ubuntu 16.04 only.
 This repository can be cloned by running the following commands:
 
 ```
-git clone --recursive https://gitlab.com/shaktiproject/software/shakti-sdk-dev.git
+git clone --recursive https://gitlab.com/shaktiproject/software/shakti-sdk.git
 cd shakti-sdk
 ```
 
@@ -96,7 +97,6 @@ git pull origin master
 git submodule update --init --recursive
 ```
 ****
-
 
 ## Developing applications
   
@@ -178,7 +178,6 @@ git submodule update --init --recursive
       - CLEAR?= any application under list_applns
       - clean the executables for a application.
       
-
 
 ## Logging Issue 
 
