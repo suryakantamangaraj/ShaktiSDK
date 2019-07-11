@@ -8,7 +8,7 @@
 
 Shakti-sdk aims to provide support for different types of boards. As part of this plan, initially we support two variety of FPGA boards. <br/>
 Artix 7 35T board corresponds to E class and Artix 7 100T corresponds to C class. E class of processors are 32 bit cores and C class are 64 bit cores.<br/>
-The readme, includes information on installing Vivado, building the bitsream, connecting a JTAG, programming the on-board configuration memory and running example shakti-sdk projects.
+The readme, includes information on installing Vivado, building the bitsream. [board_use.md](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md) provides information on connecting a JTAG, programming the on-board configuration memory and running example shakti-sdk projects.
 
 ### Board information ###
 Details on board support for different classes fo processors are given below
