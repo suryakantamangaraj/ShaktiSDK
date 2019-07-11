@@ -25,7 +25,7 @@ To use this SDK, you will need the following OS and software packages available 
 ```
 sudo apt-get install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config libexpat-dev
 ```
-note: We have tested SDK in ubuntu 16.04 only. 
+note: shakti-sdk is tested in ubuntu 16.04 only. 
 
 ### Download the Repository ###
 
@@ -101,9 +101,9 @@ git submodule update --init --recursive
 
 ## Developing applications
   
-  Shakti-sdk provides a platform to develop standalone applications and projects. We also provide support on FPGA development boards.
+  Shakti-sdk provides a platform to develop standalone applications and projects. Two FPGA development boards are supported for development.
   Please read files under [doc](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/doc) for further details.
-  We sincerely request the developers to read through the rest of the document, before starting development.
+  It is requested to read through the rest of the document, before starting development.
 
 ## Contents of shakti-sdk
 
@@ -147,11 +147,11 @@ git submodule update --init --recursive
       - Few sensors are already developed for different peripherals and kept under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
       - See [`here`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/howto.md) for a detail description on application development.
 
-* **tools** (found under [`shakti-tools/`](https://gitlab.com/shaktiproject/software/shakti-tools))
-  - The tools folder has "ready to use" RISC-V tools.
+* **shakti-tools** (found under [`shakti-tools/`](https://gitlab.com/shaktiproject/software/shakti-tools))
+  - The shakti-tools folder has "ready to use" RISC-V tools.
   - It has RISC-V GNU tool chain, RISC-V intruction set simulator, OpenOCD (debugger) and RISC-V proxy kernel.
-  - The tools needs to be exported for use.
-  - Tools can be installed manually from [`here`](https://gitlab.com/shaktiproject/software/riscv-tools).
+  - The tools needs to be exported to PATH vairable to use everywhere.
+  - Tools can also be installed manually from [`here`](https://gitlab.com/shaktiproject/software/riscv-tools).
 
 * **Makefile** (found under [`./`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/Makefile)).
   - The Makefile has support for different target boards and applications. The supported `make` commands are
