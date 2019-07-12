@@ -18,14 +18,14 @@ Currently the artix7* build only supports booting in debug mode. On reset the, t
 The debugger for the board can be Xilinx FTDI or used along with a [`debugger version 10.1 part no 8.08.90`](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/).<br />
 The details to connect the debugger to board is given below:
 
-**1. Debug Interface over Xilinx FTDI (recommended).**
+**1. Debug interface over Xilinx FTDI (recommended).**
 
 The FPGA board is powered on by connecting the micro usb to J10. This also connects internally to the FTDI.<br />
 No new connection has to be done here.
 
 <image pending here>
 
-**2. JTAG-Board connection**
+**2. Debug interface over JTAG**
 
 Make the below connection for connecting Jlink Jtag to board.
 
@@ -169,7 +169,7 @@ Pre-requisites:
 
 Follow the steps below to set up and run programs
 
-* In the first terminal launch OpenOCD with sudo permission. Please ensure you are in the shakti-sdk directory.
+1. In the first terminal launch OpenOCD with sudo permission. Please ensure you are in the shakti-sdk directory.
 
 For example,
 
@@ -177,11 +177,22 @@ For example,
         /home/user/shakti-sdk
 
 Running openocd:
+
+   1.1. Using FTDI
+
 ```
         $ cd ./bsp/third_party/artix7_35t
-        $ sudo openocd -f spike.cfg
+        $ sudo openocd -f ftdi.cfg
 ```
-* In the second terminal launch gdb. Applications will be loaded to memory in FPGA board and run in this terminal.
+
+   1.2. Using JLINK
+
+```
+        $ cd ./bsp/third_party/artix7_35t
+        $ sudo openocd -f jlink.cfg
+```
+
+2. In the second terminal launch gdb. Applications will be loaded to memory in FPGA board and run in this terminal.
 
 ``` 
         $ riscv64-unknown-elf-gdb -x gdb.script
@@ -189,7 +200,7 @@ Running openocd:
         $ load
         $ c
 ```
-* In the third terminal open miniterm.py to display output from UART
+3. In the third terminal open miniterm.py to display output from UART
 ```
         $ sudo miniterm.py /dev/ttyUSB1 19200
 ```
