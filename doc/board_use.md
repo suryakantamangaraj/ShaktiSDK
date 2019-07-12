@@ -155,24 +155,30 @@ Pre-requisites:
 
 Follow the steps below to set up and run programs
 
-* In the first terminak launch OpenOCD with sudo permission. Please ensure you are in the shakti-sdk directory.
+* In the first terminal launch OpenOCD with sudo permission. Please ensure you are in the shakti-sdk directory.
 
 For example,
+
         $ pwd
         /home/user/shakti-sdk
 
+Running openocd:
+```
         $ cd ./bsp/third_party/artix7_35t
         $ sudo openocd -f spike.cfg
+```
+* In the second terminal launch gdb. Applications will be loaded to memory in FPGA board and run in this terminal.
 
-* In the second  terminal and launch gdb, applications will be loaded to RAM and executed from this terminal
-
+``` 
         $ riscv64-unknown-elf-gdb -x gdb.script
         $ file "executable with absolute path"
         $ load
         $ c
-
+```
 * In the third terminal open miniterm.py to display output from UART
-
+```
         $ sudo miniterm.py /dev/ttyUSB1 19200
-
-note: For 32 bit applications, please use riscv32-unknown-elf-gdb
+```
+note: 
+    1. For 32 bit applications, please use riscv32-unknown-elf-gdb
+    2. To install miniterm.py, run sudo apt-get install pyserial in terminal.
