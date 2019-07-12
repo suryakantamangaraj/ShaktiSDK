@@ -2,27 +2,45 @@
 
 The below steps need to be followed to setup the board.
 
-1. Generating the RTL bitstream for a particular class of shakti processor and loading it to the board.
-2. Connecting the JTAG module to the board and settint up the wiring for the application.
-3. Compiling the application for the corresponding class of processor and running it.
+1. Generate the RTL bitstream for a particular class of shakti processor and load it to the board.
+2. Connect the JTAG module or Xilinx FTDI to the board. This is the debugger for the application.
+3. Compile the application for the corresponding class of processor, load on to the board and run applications on it.
 
-### Set up board with RTL bitstream ###
+### Setting up the board with RTL bitstream ###
 
+* Power on the board.
 * Generate and load the RTL bitstream for E class on artix7 35T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/12-eclass-on-35t/fpga/boards/artya7-35t/e-class).
 * Generate and load the RTL bitstream for C class on artix7 100T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/master/fpga/boards/artya7-100t/c-class).
 
-### JTAG-Board connection ###
+### Setting up the debugger ###
 
 Currently the artix7* build only supports booting in debug mode. On reset the, the core will start executing the infinite debug-loop at 0x00000000.<br />
-The board has to be used along with a [`debugger version 10.1 part no 8.08.90`](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/).
+The debugger for the board can be Xilinx FTDI or used along with a [`debugger version 10.1 part no 8.08.90`](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/).<br />
+The details to connect the debugger to board is given below:
+
+**1. Debug Interface over Xilinx FTDI (recommended).**
+
+The FPGA board is powered on by connecting the micro usb to J10. This also connects internally to the FTDI.<br />
+No new connection has to be done here.
+
+<image pending here>
+
+**2. JTAG-Board connection**
+
+Make the below connection for connecting Jlink Jtag to board.
 
 ![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/connections.jpg)
 
-    
-#### Accessories & Wires ####
 
-* Connect neccessories sensors to devices on SoC.
-* The pin mapping for GPIO, I2C  and other devices geven below.
+### Software image
+
+Please compile the application image for the corresponding board. Also setup the board with necessary debugger connection.<br />
+Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md) for application development.
+
+### Device pin mapping ###
+
+Inorder to connect neccessory sensors to devices on the Shakti SoC. A device pin mapping list is provided below.
+The board support package supports the memory mapping and driver support for different devices. Use the below pin mapping table for any physical connections.
 
 1. Artix7_100T pin - board details
 
@@ -44,8 +62,8 @@ The board has to be used along with a [`debugger version 10.1 part no 8.08.90`](
 | |GPIO13  |CKIO13 (J2[11],IO - Higher)| |  |
 | |GPIO14|CKIO26 (J4[2],IO - Lower) || |
 | |GPIO15  |CKIO27 (J4[4],IO - Lower)| |  |
-|2.|SDA  |CK|_SDA (J3[1] )  |J3|I2C  |
-| |SCL  |CK|_SCL (J3[2])| |  |
+|2.|SDA  | CK _SDA (J3[1]) | J3 | I2C |
+|  |SCL  | CK _SCL (J3[2]) | | |
 |3.|TRST  |JA[4]  |PMOD Connector (JA)|JLINK JTAG - OPENOCD|
 | |TDI  |JA[2]| |  |
 | |TMS  |JA[1]| |  |
@@ -85,9 +103,9 @@ The board has to be used along with a [`debugger version 10.1 part no 8.08.90`](
 |  | GPIO12  | CKIO12 (J2[9],IO - Higher)  |   |   |  
 |  | GPIO13  | CKIO13 (J2[11],IO - Higher)  |   |   |  
 |  | GPIO14  | CKIO26 (J4[2],IO - Lower)  |   |   |  
-|  | GPIO15  | CKIO27 (J4[4],IO - Lower)  |   |   |  
-| 2. | SDA  | CK\_SDA (J3[1] )  |  J3 |  I2C|  
-|  | SCL  | CK\_SCL (J3[2])  |   |   |  
+|  | GPIO15  | CKIO27 (J4[4],IO - Lower)  |   |   |
+|2.|SDA  | CK _SDA (J3[1]) | J3 | I2C |
+|  |SCL  | CK _SCL (J3[2]) | |  | |
 | 3.| TRST  | JA[4]  | PMOD Connector(JA) | JLINK JTAG -OPENOCD|  
 |  | TDI  | JA[2]  |   |   |  
 |  | TMS  | JA[1]  |   |   |  
@@ -134,10 +152,6 @@ The board has to be used along with a [`debugger version 10.1 part no 8.08.90`](
 |  | SPI2 MISO  | JC[3] - 2P  |   |   |  
 |  | SPI2 MOSI  | JC[4] - 2N  |   |   |  
 
-### Software image
-
-Please compile the application image for the corresponding board. <br />
-Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md) for application development.
 
 ## Connecting to the board
 
