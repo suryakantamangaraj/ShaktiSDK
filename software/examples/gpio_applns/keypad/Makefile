@@ -40,6 +40,7 @@ endif
 
 #bsp incl file path
 bspinc:=../../../../bsp/include
+bspdri:=../../../../bsp/drivers
 #bsp lib file path
 bsplib:=../../../../bsp/libwrap
 #bsp board specific files path
@@ -53,11 +54,11 @@ all: create_dir
 keypad.riscv: crt.o syscalls.shakti create_dir
 	@echo -e "$(GREEN) Compiling GPIO KEYPAD TEST code $(NC)"
 	@echo -e "$(RED) Caveat: GPIO Code starts at 0x80000000. Configure RTL appropriately $(NC)"
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc) -I$(bspboard) -c ./keypad.c -o ./output/keypad.o -march=rv$(XLEN)imafd -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc) -I$(bspdri) -I$(bspboard) -c ./keypad.c -o ./output/keypad.o -march=rv$(XLEN)imafd -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bsplib)/util.c -o ./output/util.o -march=rv$(XLEN)imafd -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./output/util.o ./output/keypad.o ./output/syscalls.shakti ./output/crt.o -o ./output/keypad.shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)   -c $(bspboard)/uart.c -o ./output/uart.o -march=rv$(XLEN)imafdc -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./output/util.o ./output/keypad.o  ./output/uart.o ./output/syscalls.shakti ./output/crt.o -o ./output/keypad.shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/keypad.shakti > ./output/keypad.dump
-
 
 create_dir:
 	@mkdir -p ./output
@@ -68,4 +69,3 @@ crt.o: create_dir
 
 syscalls.shakti:
 	@riscv$(XLEN)-unknown-elf-gcc -march=rv$(XLEN)imafd  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf  -c $(bsplib)/syscalls.c -o ./output/syscalls.shakti -I$(bspinc)
-

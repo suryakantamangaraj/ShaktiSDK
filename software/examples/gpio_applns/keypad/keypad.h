@@ -29,20 +29,9 @@
 #define KYPD_ROWNUM 4
 #define KYPD_COLNUM 4
 
-#define GPIO_START 0X00011100
-#define GPIO_DIRECTION_CNTRL_REG (GPIO_START + 0X00)
-#define GPIO_DATA_REG  (GPIO_START + 0X04)
-#define GPIO_DRV_CNTRL_REG0 (GPIO_START + 0X08)
-#define GPIO_DRV_CNTRL_REG1 (GPIO_START + 0X0C)
-#define GPIO_DRV_CNTRL_REG2 (GPIO_START + 0X10)
-#define GPIO_PULL_DOWN_CNTRL_REG (GPIO_START + 0X14)
-#define GPIO_MODE_SEL_REG (GPIO_START + 0X18)
-#define GPIO_PROG_SLEW_CNTRL_REG (GPIO_START + 0X1C)
-#define GPIO_PULL_UP_CNTRL_REG (GPIO_START + 0X20)
-#define CORE_PWR_DOWN_STS_REG0 (GPIO_START + 0X24)
-#define CORE_PWR_DOWN_STS_REG1 (GPIO_START + 0X28)
-#define OUTPINS_OFFSET 24
-#define INPINS_OFFSET 16
+
+#define OUTPINS_OFFSET 0
+#define INPINS_OFFSET 4
 #define OUTPINS (0xF << OUTPINS_OFFSET)
 #define INPINS  (0xF << INPINS_OFFSET)
 /* ------------------------------------------------------------ */
@@ -52,7 +41,7 @@
 
 
     void setPins(unsigned int* row, unsigned int* col);
-    void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM]);  
+    void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM]);
     int getKey();
     int getColRow(void);
     unsigned int rowPins[KYPD_ROWNUM];

@@ -26,7 +26,7 @@ export PROGRAM
 export DEBUG
 
 # appln and target board
-PROGRAM ?= all 
+PROGRAM ?= all
 TARGET ?=artix7_35t
 DEBUG ?=
 
@@ -61,6 +61,11 @@ ifeq ($(PROGRAM),keypad)
 else
 ifeq ($(PROGRAM),maze)
 	cd uart_applns/maze && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+ifeq ($(PROGRAM),gyro_softi2c)
+	cd gpio_applns/gyro_softi2c && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+endif
 endif
 endif
 endif

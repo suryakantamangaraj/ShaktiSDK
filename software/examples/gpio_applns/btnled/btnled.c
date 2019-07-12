@@ -3,7 +3,7 @@
 * Name of the file	     		:  btnled.c
 * Created date			        :  26.02.2019
 * Brief Description of file             :  Controls the led operation with help of button,gpio based.
-* Name of Author    	                :  Sathya Narayanan N
+* Name of Author    	                :  Sathya Narayanan N & Raghav
 * Email ID                              :  sathya281@gmail.com
 
     Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -33,12 +33,6 @@
 void init()
 {
 	write_word(GPIO_DIRECTION_CNTRL_REG, ~(1 << 0) );
-
-#ifndef ARTIX7_35T
-	write_word(GPIO_DRV_CNTRL_REG0, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG1, 0xFFFFFFFF);
-	write_word(GPIO_DRV_CNTRL_REG2, 0x00);
-#endif
 }
 
 /*********************************************************************
