@@ -68,12 +68,12 @@ Email id: sathya281@gmail.com
 
 /*!General Purpose Input / Output */
 #define GPIO_START 0x00040200 //GPIO Start Address */
-#define GPIO_OFFSET 0x04 /*!Generic offset used to access GPIO registers*/
+#define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
 
 
 
-/* 
- * General Purpose IOs supported 
+/*
+ * General Purpose IOs supported
  */
 #define GPIO0 (1 <<  0)
 #define GPIO1 (1 <<  1)

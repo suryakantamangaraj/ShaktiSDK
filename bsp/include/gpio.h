@@ -32,7 +32,7 @@
 
 /*********************************************************************
 * Brief Description     : returns the value stored at a given address
-*                         Here we assume the word size to be 32 bits for gpio     
+*                         Here we assume the word size to be 32 bits for gpio
 * Parameters            : int*
 * Return                : int
 * *******************************************************************/
