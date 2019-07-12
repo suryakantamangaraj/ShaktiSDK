@@ -179,6 +179,7 @@ Running openocd:
 ```
         $ sudo miniterm.py /dev/ttyUSB1 19200
 ```
-note: 
-    1. For 32 bit applications, please use riscv32-unknown-elf-gdb
-    2. To install miniterm.py, run sudo apt-get install pyserial in terminal.
+note 
+
+   1. For 32 bit applications, please use riscv32-unknown-elf-gdb.\
+   2. To install miniterm.py, run sudo apt-get install pyserial in terminal.
