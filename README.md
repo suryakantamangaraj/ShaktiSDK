@@ -127,7 +127,7 @@ git submodule update --init --recursive
 
   - Shakti supported boards [`doc/board_info`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_info.md)
      * README explaining the different boards that shakti supports. 
-  - Building new application [`doc/howto`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md)
+  - Building new application [`doc/howto_develop`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md)
      * README explaining the procedure to develop software using shakti-sdk.
   - How to use the board [`doc/board_use`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md)
      * The procedure to generate the RTL and load the RTL to the board.
@@ -145,7 +145,7 @@ git submodule update --init --recursive
       -	This is the place where any new standalone application is built.
       - The bsp and core support libraries can be found under [`bsp`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp).
       - Few sensors are already developed for different peripherals and kept under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
-      - See [`here`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/howto.md) for a detail description on application development.
+      - See [`here`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md) for a detail description on application development.
 
 * **shakti-tools** (found under [`shakti-tools/`](https://gitlab.com/shaktiproject/software/shakti-tools))
   - The shakti-tools folder has "ready to use" RISC-V tools.
@@ -195,7 +195,7 @@ Please follow the below steps to create a issue.
 - Once the template named 'Bug' is selected, the description text box is populated by the template.
 - Please fill all the fields in the description textbox.
 
-**Note**: Check [`docs`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/doc) for further information and check [Logging Issue](#logging-issue) section for any clarification.
+**Note**: Check [`docs`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/doc) for further information and check [Logging Issue](#logging-issue) section for any clarification.
 
 ## Public release
 
