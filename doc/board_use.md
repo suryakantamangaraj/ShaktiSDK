@@ -44,9 +44,9 @@ Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/ma
 Inorder to connect neccessory sensors to devices on the Shakti SoC. A device pin mapping list is provided below.
 The board support package supports the memory mapping and driver support for different devices. Use the below pin mapping table for any physical connections.
 
-1. Artix7_100T pin - board details
+**1. Artix7_100T pin mapping details**
 
-| s. no | pin description | artix7_100T pin mapping | remarks | peripheral |
+| **s.no** | **pin description** | **artix7_100T pin mapping** | **remarks** | **peripheral** |
 | ------ | ----------------------- | ------------------------ | ------- | ---------- |
 | 1. | GPIO0 | CKIO0 (J4[1],IO - Lower) | Arduino Header (ChipKit Outer Digital Header) | General Purpose Input/Output pins |
 |  |GPIO1  |CKIO1 (J4[3],IO - Lower)| |  |
@@ -84,11 +84,10 @@ The board support package supports the memory mapping and driver support for dif
 | |INTERRUPT 6 |CKIO34 (J2[2],IO - Lower)| |  |
 | |INTERRUPT 7  |CKIO35 (J2[4],IO - Lower)| |  |
  
+**2. Artix7_35T pin mapping details**
 
-2. Artix7_35T pin - board details
 
-
-| s. no | pin description | artix7_35T pin mapping | remarks | peripheral |
+| **s.no** | **pin description** | **artix7_100T pin mapping** | **remarks** | **peripheral** |
 | ----- | ------------------------ | ------------------------ | -------- | ---------- |
 | 1. |  GPIO0 | CKIO0 (J4[1],IO - Lower)  |  Arduino Header (ChipKit Outer Digital Header) |  General Purpose Input/Output pins |  
 |  | GPIO1  | CKIO1 (J4[3],IO - Lower)  |   |   |  
