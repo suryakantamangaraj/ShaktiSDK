@@ -23,7 +23,7 @@ The details to connect the debugger to board is given below:
 The FPGA board is powered on by connecting the micro usb to J10. This also connects internally to the FTDI.<br />
 No new connection has to be done here.
 
-![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/IMDDDDG.png)png)
+![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/IMDDDDG.png)
 
 <image pending here>
 
