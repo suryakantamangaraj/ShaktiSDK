@@ -1,1 +1,4 @@
-lm75 with i2c is Work in Progress
+sensor - lm75
+peripheral - i2c
+
+<readme to follow>
