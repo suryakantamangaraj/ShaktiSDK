@@ -23,7 +23,7 @@ The details to connect the debugger to board is given below:
 The FPGA board is powered on by connecting the micro usb to J10. This also connects internally to the FTDI.<br />
 No new connection has to be done here. 
 
-![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/IMDDDDG.png)
+![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/IMDDDDG.png){: .img-small} 
 
 <image pending here>
 
@@ -184,14 +184,14 @@ Running openocd:
 Press reset in the board and run the below commands.
 
 ```
-        $ cd ./bsp/third_party/artix7_35t
+        $ cd ./bsp/third_party/artix7_100t
         $ sudo openocd -f ftdi.cfg
 ```
 
    1.2. Using JLINK
 
 ```
-        $ cd ./bsp/third_party/artix7_35t
+        $ cd ./bsp/third_party/artix7_100t
         $ sudo openocd -f jlink.cfg
 ```
 
@@ -205,6 +205,9 @@ Press reset in the board and run the below commands.
 ```
 3. In the third terminal open miniterm.py to display output from UART
 ```
-        $ sudo miniterm.py /dev/ttyUSB1 19200
+        $ sudo miniterm.py /dev/ttyUSB0 19200
 ```
-note: For 32 bit applications, please use riscv32-unknown-elf-gdb.
+note: 
+1. "/dev/ttyUSB0" - ttyUSB means "USB serial port adapter" and the "0" ( "0" or "1" or whatever) is the USB device number.
+2. For 32 bit applications, please use riscv32-unknown-elf-gdb instead of riscv64-unknown-elf-gdb.
+
