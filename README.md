@@ -62,7 +62,7 @@ export PATH=$PATH:$SHAKTISDK/shakti-tools/bin
 
 Things to do
 
-* Please put the above line in .bashrc in home folder.
+* Please put the above two lines in .bashrc file in home folder. See below image for reference.
 
 * The `$SHAKTISDK` is the location of `shakti-sdk`.
 
@@ -85,8 +85,11 @@ system:~$ SHAKTISDK=/home/user/shakti-sdk
 system:~$ export PATH=$PATH:$SHAKTISDK/shakti-tools/bin
 system:~$ which riscv64-unknown-elf-gcc
 **/home/user/shakti-tools/bin**
-system:~$ 
+system:~$ gedit .bashrc
+
 ```
+.bashrc <br/>
+<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/3-small-changes-to-improve-image-size/doc/images/bashrc.png" alt="/home/user/.bashrc" width="50%" height="50%">
 
 ### Updating SHAKTI-SDK ###
 
