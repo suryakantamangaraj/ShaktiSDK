@@ -36,7 +36,8 @@ note: shakti-sdk is tested in ubuntu 16.04 only.
 
 ### Download the Repository ###
 
-This repository can be cloned by running the following commands:
+
+Please open the terminal and try the below commands. This repository can be cloned by running the following commands:
 
 ```
 git clone --recursive https://gitlab.com/shaktiproject/software/shakti-sdk.git
