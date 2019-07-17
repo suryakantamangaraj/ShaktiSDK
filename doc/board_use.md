@@ -23,7 +23,7 @@ The details to connect the debugger to board is given below:
 The FPGA board is powered on by connecting the micro usb to J10. This also connects internally to the FTDI.<br />
 No new connection has to be done here. 
 
-<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/3-small-changes-to-improve-image-size/doc/images/ftdi_connection.png" alt="" width="50%" height="50%">
+<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/ftdi_connection.png" alt="" width="50%" height="50%">
 
 
 **2. Debug interface over JTAG**
@@ -43,8 +43,9 @@ Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/ma
 
 ### Device pin mapping ###
 
-Inorder to connect neccessory sensors to devices on the Shakti SoC. A device pin mapping list is provided below.
-The board support package supports the memory mapping and driver support for different devices. Use the below pin mapping table for any physical connections.
+To connect sensors to devices on the Shakti SoC, a device pin mapping table is provided below. 
+The board support package takes care of the memory mapping and provides driver support for different devices.
+Use the below pin mapping table for any physical connections.
 
 **1. Artix7_100T pin mapping details**
 
