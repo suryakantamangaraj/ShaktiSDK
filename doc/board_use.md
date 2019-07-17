@@ -8,14 +8,14 @@ The below steps need to be followed to setup the board.
 
 ### Setting up the board with RTL bitstream ###
 
-* Power on the board.
+* Power on the board by connecting a micro usb to J10.
 * Generate and load the RTL bitstream for E class on artix7 35T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/12-eclass-on-35t/fpga/boards/artya7-35t/e-class).
 * Generate and load the RTL bitstream for C class on artix7 100T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/master/fpga/boards/artya7-100t/c-class).
 
 ### Setting up the debugger ###
 
 Currently the artix7* build only supports booting in debug mode. On reset the, the core will start executing the infinite debug-loop at 0x00000000.<br />
-The debugger for the board can be Xilinx FTDI or used along with a [`debugger version 10.1 part no 8.08.90`](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/).<br />
+The debugger for the board can be Xilinx FTDI or segger jlink [`debugger version 10.1 part no 8.08.90`](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/).<br />
 The details to connect the debugger to board is given below:
 
 **1. Debug interface over Xilinx FTDI (recommended).**
@@ -26,8 +26,6 @@ No new connection has to be done here.
 <img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/IMDDDDG.png
 " alt="alt text" width="50%" height="50%">
 
-
-<image pending here>
 
 **2. Debug interface over JTAG**
 
