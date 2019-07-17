@@ -36,18 +36,34 @@ Make the below connection for connecting Jlink Jtag to board.
 
 
 
-### Software image
+### Application development
 
-Please compile the application image for the corresponding board. Also setup the board with necessary debugger connection.<br />
-Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md) for application development.
+Follow the [howto_develop](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md) document for developing applications.
+Compile the application image for the corresponding board.<br />
+The following sections, provide information on the devices in the SoC.
+
 
 ### Device pin mapping ###
 
-To connect sensors to devices on the Shakti SoC, a device pin mapping table is provided below. 
+To connect different sensors/peripherals to the SoC, a device pin mapping table is provided below. 
 The board support package takes care of the memory mapping and provides driver support for different devices.
 Use the below pin mapping table for any physical connections.
 
-**1. Artix7_100T pin mapping details**
+
+**1. Device description**
+
+| **Device name** | **Abbreviation** |
+| ----------------- | ------------------ |
+| GPIO | General Purporse Input Output pins |
+| I2C | Inter-Integrated Circuit |
+| SPI  | Serial Peripheral Interface |
+| PWM | Pulse Width Modulation |
+| PLIC | Platform Level Interrupt Controller |
+| CLIC | Core Level Interrupt Controller |
+| ADC | Analog Digital Converter |
+| UART | Universal Asynchronous Receiver Transmitter |
+
+**2. Artix7_100T pin mapping details**
 
 | **s.no** | **pin description** | **artix7_100T pin mapping** | **remarks** | **peripheral** |
 | ------ | ----------------------- | ------------------------ | ------- | ---------- |
@@ -87,7 +103,7 @@ Use the below pin mapping table for any physical connections.
 | |INTERRUPT 6 |CKIO34 (J2[2],IO - Lower)| |  |
 | |INTERRUPT 7  |CKIO35 (J2[4],IO - Lower)| |  |
  
-**2. Artix7_35T pin mapping details**
+**3. Artix7_35T pin mapping details**
 
 
 | **s.no** | **pin description** | **artix7_100T pin mapping** | **remarks** | **peripheral** |
@@ -157,9 +173,10 @@ Use the below pin mapping table for any physical connections.
 |  | SPI2 MOSI  | JC[4] - 2N  |   |   |  
 
 
-## Connecting to the board
+## Testing applications to the board
 
-After setting up the board with RTL bitstream loaded, please follow the below procedure.
+After loading the board with RTL bitstream, software applications are developed. The developed application is tested on the board by following the below procedure.
+
 
 Pre-requisites:
 
