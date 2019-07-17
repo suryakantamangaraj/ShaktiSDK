@@ -64,7 +64,7 @@ Export the tool chain to the `PATH` variable. This will help in using the toolch
 Assuming you are in shakti-sdk repository.
 
 ```
-SHAKTISDK=/complete/path/of/shakti/sdk
+SHAKTISDK=/complete/path/of/shakti/sdk      --------> (shakti-sdk path in your system)
 export PATH=$PATH:$SHAKTISDK/shakti-tools/bin
 ```
 
