@@ -18,7 +18,7 @@ Read the documents in the following order
 1. [README](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/README.md)
 2. [board_info](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_info.md)
 3. [board_use](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md)
-4. [howto_develop](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_howto_develop.md)
+4. [howto_develop](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md)
 
 ## Setting up the shakti-sdk 
 
