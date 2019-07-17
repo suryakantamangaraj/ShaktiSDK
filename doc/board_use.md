@@ -37,7 +37,7 @@ Make the below connection for connecting Jlink Jtag to board.
 ### Software image
 
 Please compile the application image for the corresponding board. Also setup the board with necessary debugger connection.<br />
-Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto.md) for application development.
+Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md) for application development.
 
 ### Device pin mapping ###
 
