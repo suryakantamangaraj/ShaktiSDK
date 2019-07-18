@@ -97,7 +97,7 @@ system:~$ gedit .bashrc
 
 ```
 .bashrc <br/>
-<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/3-small-changes-to-improve-image-size/doc/images/bashrc.png" alt="/home/user/.bashrc" width="50%" height="50%">
+<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/bashrc.png" alt="/home/user/.bashrc" width="50%" height="50%">
 
 ### Updating SHAKTI-SDK ###
 
