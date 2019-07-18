@@ -5,17 +5,19 @@ The below steps need to be followed to setup the board.
 1. Generate the RTL bitstream for a particular class of shakti processor and load it to the board.
 2. Connect the JTAG module or Xilinx FTDI to the board. This is the debugger for the application.
 3. Compile the application for the corresponding class of processor, load on to the board and run applications on it.
+4. Refer this [manual](https://reference.digilentinc.com/reference/programmable-logic/arty/reference-manual?redirect=1) for power on.
 
 ### Setting up the board with RTL bitstream ###
 
-* Power on the board.
+
+* Connect a micro usb to J10. 
 * Generate and load the RTL bitstream for E class on artix7 35T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/12-eclass-on-35t/fpga/boards/artya7-35t/e-class).
 * Generate and load the RTL bitstream for C class on artix7 100T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/master/fpga/boards/artya7-100t/c-class).
 
 ### Setting up the debugger ###
 
 Currently the artix7* build only supports booting in debug mode. On reset the, the core will start executing the infinite debug-loop at 0x00000000.<br />
-The debugger for the board can be Xilinx FTDI or used along with a [`debugger version 10.1 part no 8.08.90`](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/).<br />
+The debugger for the board can be Xilinx FTDI or segger jlink [`debugger version 10.1 part no 8.08.90`](https://www.segger.com/products/debug-probes/j-link/models/j-link-edu/).<br />
 The details to connect the debugger to board is given below:
 
 **1. Debug interface over Xilinx FTDI (recommended).**
@@ -23,28 +25,47 @@ The details to connect the debugger to board is given below:
 The FPGA board is powered on by connecting the micro usb to J10. This also connects internally to the FTDI.<br />
 No new connection has to be done here. 
 
-![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/IMDDDDG.png)
+<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/ftdi_connection.png" alt="" width="50%" height="50%">
 
-<image pending here>
 
 **2. Debug interface over JTAG**
 
 Make the below connection for connecting Jlink Jtag to board.
 
-![](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/connections.jpg)
 
 
-### Software image
+<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/connections.jpg" alt="alt text" width="50%" height="50%">
 
-Please compile the application image for the corresponding board. Also setup the board with necessary debugger connection.<br />
-Please check [here](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md) for application development.
+
+
+### Application development
+
+Follow the [howto_develop](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md) document for developing applications.
+Compile the application image for the corresponding board.<br />
+The following sections, provide information on the devices in the SoC.
+
 
 ### Device pin mapping ###
 
-Inorder to connect neccessory sensors to devices on the Shakti SoC. A device pin mapping list is provided below.
-The board support package supports the memory mapping and driver support for different devices. Use the below pin mapping table for any physical connections.
+To connect different sensors/peripherals to the SoC, a device pin mapping table is provided below. 
+The board support package takes care of the memory mapping and provides driver support for different devices.
+Use the below pin mapping table for any physical connections.
 
-**1. Artix7_100T pin mapping details**
+
+**1. Device description**
+
+| **Device name** | **Abbreviation** |
+| ----------------- | ------------------ |
+| GPIO | General Purporse Input Output pins |
+| I2C | Inter-Integrated Circuit |
+| SPI  | Serial Peripheral Interface |
+| PWM | Pulse Width Modulation |
+| PLIC | Platform Level Interrupt Controller |
+| CLIC | Core Level Interrupt Controller |
+| ADC | Analog Digital Converter |
+| UART | Universal Asynchronous Receiver Transmitter |
+
+**2. Artix7_100T pin mapping details**
 
 | **s.no** | **pin description** | **artix7_100T pin mapping** | **remarks** | **peripheral** |
 | ------ | ----------------------- | ------------------------ | ------- | ---------- |
@@ -84,7 +105,7 @@ The board support package supports the memory mapping and driver support for dif
 | |INTERRUPT 6 |CKIO34 (J2[2],IO - Lower)| |  |
 | |INTERRUPT 7  |CKIO35 (J2[4],IO - Lower)| |  |
  
-**2. Artix7_35T pin mapping details**
+**3. Artix7_35T pin mapping details**
 
 
 | **s.no** | **pin description** | **artix7_100T pin mapping** | **remarks** | **peripheral** |
@@ -154,9 +175,10 @@ The board support package supports the memory mapping and driver support for dif
 |  | SPI2 MOSI  | JC[4] - 2N  |   |   |  
 
 
-## Connecting to the board
+## Testing applications on the board
 
-After setting up the board with RTL bitstream loaded, please follow the below procedure.
+After loading the board with RTL bitstream, software applications are developed. The developed application is tested on the board by following the below procedure.
+
 
 Pre-requisites:
 
@@ -184,14 +206,14 @@ Running openocd:
 Press reset in the board and run the below commands.
 
 ```
-        $ cd ./bsp/third_party/artix7_35t
+        $ cd ./bsp/third_party/artix7_100t
         $ sudo openocd -f ftdi.cfg
 ```
 
    1.2. Using JLINK
 
 ```
-        $ cd ./bsp/third_party/artix7_35t
+        $ cd ./bsp/third_party/artix7_100t
         $ sudo openocd -f jlink.cfg
 ```
 
@@ -205,6 +227,9 @@ Press reset in the board and run the below commands.
 ```
 3. In the third terminal open miniterm.py to display output from UART
 ```
-        $ sudo miniterm.py /dev/ttyUSB1 19200
+        $ sudo miniterm.py /dev/ttyUSB0 19200
 ```
-note: For 32 bit applications, please use riscv32-unknown-elf-gdb.
+note: 
+1. "/dev/ttyUSB0" - ttyUSB means "USB serial port adapter" and the "0" ( "0" or "1" or whatever) is the USB device number.
+2. For 32 bit applications, please use riscv32-unknown-elf-gdb instead of riscv64-unknown-elf-gdb.
+

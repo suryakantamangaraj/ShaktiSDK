@@ -13,6 +13,13 @@
 * Next release is expected to have qspi, spi and plic support.
 * This repository is currently under in-house testing.
 
+Read the documents in the following order
+
+1. [README](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/README.md)
+2. [board_info](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_info.md)
+3. [board_use](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md)
+4. [howto_develop](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md)
+
 ## Setting up the shakti-sdk 
 
 ### Prerequisites ###
@@ -29,7 +36,8 @@ note: shakti-sdk is tested in ubuntu 16.04 only.
 
 ### Download the Repository ###
 
-This repository can be cloned by running the following commands:
+
+Please open the terminal and try the below commands. This repository can be cloned by running the following commands:
 
 ```
 git clone --recursive https://gitlab.com/shaktiproject/software/shakti-sdk.git
@@ -56,13 +64,13 @@ Export the tool chain to the `PATH` variable. This will help in using the toolch
 Assuming you are in shakti-sdk repository.
 
 ```
-SHAKTISDK=/complete/path/of/shakti/sdk
+SHAKTISDK=/complete/path/of/shakti/sdk      --------> (shakti-sdk path in your system)
 export PATH=$PATH:$SHAKTISDK/shakti-tools/bin
 ```
 
 Things to do
 
-* Please put the above line in .bashrc in home folder.
+* Please put the above two lines in .bashrc file in home folder. See below image for reference.
 
 * The `$SHAKTISDK` is the location of `shakti-sdk`.
 
@@ -85,8 +93,11 @@ system:~$ SHAKTISDK=/home/user/shakti-sdk
 system:~$ export PATH=$PATH:$SHAKTISDK/shakti-tools/bin
 system:~$ which riscv64-unknown-elf-gcc
 **/home/user/shakti-tools/bin**
-system:~$ 
+system:~$ gedit .bashrc
+
 ```
+.bashrc <br/>
+<img src="https://gitlab.com/shaktiproject/software/shakti-sdk/raw/3-small-changes-to-improve-image-size/doc/images/bashrc.png" alt="/home/user/.bashrc" width="50%" height="50%">
 
 ### Updating SHAKTI-SDK ###
 
