@@ -175,7 +175,7 @@ Use the below pin mapping table for any physical connections.
 |  | SPI2 MOSI  | JC[4] - 2N  |   |   |  
 
 
-## Testing applications to the board
+## Testing applications on the board
 
 After loading the board with RTL bitstream, software applications are developed. The developed application is tested on the board by following the below procedure.
 
