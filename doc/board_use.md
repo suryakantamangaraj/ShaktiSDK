@@ -5,10 +5,12 @@ The below steps need to be followed to setup the board.
 1. Generate the RTL bitstream for a particular class of shakti processor and load it to the board.
 2. Connect the JTAG module or Xilinx FTDI to the board. This is the debugger for the application.
 3. Compile the application for the corresponding class of processor, load on to the board and run applications on it.
+4. Refer this [manual](https://reference.digilentinc.com/reference/programmable-logic/arty/reference-manual?redirect=1) for power on.
 
 ### Setting up the board with RTL bitstream ###
 
-* Power on the board by connecting a micro usb to J10.
+
+* Connect a micro usb to J10. 
 * Generate and load the RTL bitstream for E class on artix7 35T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/12-eclass-on-35t/fpga/boards/artya7-35t/e-class).
 * Generate and load the RTL bitstream for C class on artix7 100T from [here](https://gitlab.com/shaktiproject/cores/shakti-soc/tree/master/fpga/boards/artya7-100t/c-class).
 
