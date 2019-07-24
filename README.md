@@ -155,11 +155,12 @@ git submodule update --init --recursive
     * projects
       - This consists of applications developed using different sensors.
       - These are usually a combination of standalone applications under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
+      - These standalone applications can be combined to make a project.
     * benchmarking
       - Standalone projects and sub-modules that can be used to benchmark the shakti rtl.
       - These benchmarking repos usually describe the capability of shakti class of processors.
     * examples
-      -	This is the place where all standalone applications are put.
+      -	This is the place where all standalone applications are hosted.
       - The bsp and core support libraries can be found under [`bsp`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp).
       - Few sensors are already developed for different peripherals and kept under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
       - See [`here`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md) for a detailed description on application development.
