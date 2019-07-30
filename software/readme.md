@@ -1,3 +1,5 @@
-*  [`License`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/LICENSE) for a detailed description on License.
+Please refer 
 
-*  [`doc/howto_develop.md`](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/howto_develop.md) for a detailed description on application development.
+*  [`License`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/License) for a detail description on License.
+
+*  [`doc/howto_develop.md`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/blob/master/doc/howto_develop.md) for a detail description on application development.
