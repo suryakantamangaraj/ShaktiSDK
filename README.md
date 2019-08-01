@@ -36,7 +36,7 @@ sudo apt-get install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev
 ```
 **note: shakti-sdk is tested in ubuntu 16.04 only.**
 
-### Download the Repository ###
+### Download the repository ###
 
 Please open the terminal and run the following commands to clone the repository:
 
@@ -151,14 +151,14 @@ git submodule update --init --recursive
      * The procedure to upload an ELF image to the target board.
   
 * **software** (found under [`software/`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software))
-  - The `software` houses three repos as below,
+  - The `software` houses three repositories as described below,
     * projects
       - This consists of applications developed using different sensors.
       - These are usually a combination of standalone applications under [`examples`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/software/examples).
       - These standalone applications can be combined to make a project.
     * benchmarking
       - Standalone projects and sub-modules that can be used to benchmark the shakti rtl.
-      - These benchmarking repos usually describe the capability of shakti class of processors.
+      - The benchmarking repositories usually describe the capability of shakti class of processors.
     * examples
       -	This is the place where all standalone applications are hosted.
       - The bsp and core support libraries can be found under [`bsp`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/bsp).
