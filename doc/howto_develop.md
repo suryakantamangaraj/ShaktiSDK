@@ -61,8 +61,7 @@ A newer application is a small program that works with a sensor/peripheral. It e
 - Make an entry in the Top [Makefile](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/Makefile) for `make clean` command.
 - The name of the directory corresponds to the name of the application.
 - This name will echo everywhere in the shakti-sdk.
-- Do `make list-applns`, this will list applications in shakti-sdk.
-
+- Do `make list-applns`. This will list the new application as part of shakti-sdk.
 
 
 ### Example program ###
