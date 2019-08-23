@@ -10,6 +10,7 @@
 ## Information ##
 
 * Master branch is the stable one. It has gpio, i2c, timer and uart support.
+* The Arty boards support an abridged version of E and C class i.e I, M, A, C.
 * Next release is expected to have qspi, spi and plic support.
 * This repository is currently under in-house testing.
 * Read the documents completely, before starting development.
