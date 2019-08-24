@@ -21,9 +21,21 @@
 * Name of the file	     		:  i2c_driver.c
 * Created date			        :  
 * Brief Description of file     :  Demonstartes the working of i2c protocol.
-*/
+****************************************************************************/
 
 #include "i2c.h"//Includes the definitions of i2c communication protocol//
+
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
 
 char get_i2c_shakti(char *addr)
 {
@@ -37,6 +49,18 @@ char get_i2c_shakti(char *addr)
 #endif
 }
 
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
+
 void set_i2c_shakti(char *addr, char val)
 {
 #ifdef ASM
@@ -46,6 +70,18 @@ void set_i2c_shakti(char *addr, char val)
     *addr = val;
 #endif
 }
+
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
 
 void waitfor(unsigned int secs) 
 {
@@ -84,6 +120,17 @@ void i2c_nack()
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_NACK);
 }
 
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
 
 int shakti_init_i2c()
 {
@@ -148,6 +195,18 @@ int shakti_init_i2c()
     printf("\tI2C successfully initialized\n");
 }
 
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
+
 int wait_for_bb()
 {
 
@@ -170,6 +229,18 @@ int wait_for_bb()
 	return 0;
 }
 
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
+ 
 int wait_for_pin(int *status)
 {
 
@@ -190,6 +261,18 @@ int wait_for_pin(int *status)
 	return 0;
 }
 
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
+ 
 int shakti_sendbytes( const char *buf, int count, int last, int eni)
 {
 	int wrcount, status, timeout;
@@ -224,6 +307,19 @@ int shakti_sendbytes( const char *buf, int count, int last, int eni)
 }
 
 #ifdef DEBUG
+
+/** @fn 
+ * @brief 
+ *
+ * @details 
+ *  
+ *
+ * @warning 
+ *
+ * @param[in] 
+ * @param[Out] 
+ */
+ 
 int shakti_readbytes(char *buf, int count, int last)
 {
 	int i, status;
