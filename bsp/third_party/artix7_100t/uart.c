@@ -27,7 +27,6 @@ uart.c - src file for uart
 #define UART1_BASE_ADDRESS 0x11300
 
 #undef putchar
-
 /** @fn 
  * @brief 
  *
@@ -39,7 +38,6 @@ uart.c - src file for uart
  * @param[in] 
  * @param[Out] 
  */
- 
 int putchar(int ch)
 {
   register char a0 asm("a0") = ch;
@@ -55,7 +53,6 @@ int putchar(int ch)
 }
 
 // function used to check if UART is empty. Can be used before exiting a function
-
 /** @fn 
  * @brief 
  *
@@ -67,7 +64,6 @@ int putchar(int ch)
  * @param[in] 
  * @param[Out] 
  */
- 
 int is_empty()
 {
     asm volatile (
