@@ -106,34 +106,63 @@ void __attribute__((noreturn)) tohost_exit(uintptr_t code)
 	tohost = (code << 1) | 1;
 	while (1);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 uintptr_t __attribute__((weak)) handle_trap(uintptr_t cause, uintptr_t epc, uintptr_t regs[32])
 {
 	tohost_exit(1337);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void exit(int code)
 {
 	tohost_exit(code);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void abort()
 {
 	exit(128 + SIGABRT);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void printstr(const char* s)
 {
 	syscall(SYS_write, 1, (uintptr_t)s, strlen(s));
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int __attribute__((weak)) main(int argc, char** argv)
 {
 	// single-threaded programs override this function.
 	printstr("Implement main(), foo!\n");
 	return -1;
 }
-
 /** @fn 
  * @brief 
  * @details 
@@ -159,7 +188,6 @@ void _init(int cid, int nc)
 
 	exit(ret);
 }
-
 /** @fn 
  * @brief 
  * @details 
