@@ -22,7 +22,13 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave//
-
+/** @fn int main()
+ * @brief  
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 int main()
 {
 	int timeout;
