@@ -29,12 +29,8 @@ uart.c - src file for uart
 #undef putchar
 /** @fn 
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
@@ -55,12 +51,8 @@ int putchar(int ch)
 // function used to check if UART is empty. Can be used before exiting a function
 /** @fn 
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
