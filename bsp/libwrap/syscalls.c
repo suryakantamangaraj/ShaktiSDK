@@ -43,6 +43,13 @@ modified for shakti
 extern volatile uint64_t tohost;
 extern volatile uint64_t fromhost;
 
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 static uintptr_t syscall(uintptr_t which, uint64_t arg0, uint64_t arg1, uint64_t arg2)
 {
 	volatile uint64_t magic_mem[8] __attribute__((aligned(64)));
@@ -64,7 +71,13 @@ static uintptr_t syscall(uintptr_t which, uint64_t arg0, uint64_t arg1, uint64_t
 #define NUM_COUNTERS 2
 static uintptr_t counters[NUM_COUNTERS];
 static char* counter_names[NUM_COUNTERS];
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void setStats(int enable)
 {
 	int i = 0;
@@ -80,7 +93,13 @@ void setStats(int enable)
 
 #undef READ_CTR
 	}
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void __attribute__((noreturn)) tohost_exit(uintptr_t code)
 {
 	
@@ -115,8 +134,13 @@ int __attribute__((weak)) main(int argc, char** argv)
 	return -1;
 }
 
-
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void _init(int cid, int nc)
 {
 	//init_tls();
@@ -136,7 +160,13 @@ void _init(int cid, int nc)
 	exit(ret);
 }
 
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void printhex(uint64_t x)
 {
 	char str[17];
@@ -150,7 +180,13 @@ void printhex(uint64_t x)
 
 	printstr(str);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 static inline void printnum(void (*putch)(int, void**), void **putdat,
 		unsigned long long num, unsigned base, int width, int padc)
 {
@@ -171,7 +207,13 @@ static inline void printnum(void (*putch)(int, void**), void **putdat,
 	while (pos-- > 0)
 		putch(digs[pos] + (digs[pos] >= 10 ? 'a' - 10 : '0'), putdat);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 static unsigned long long getuint(va_list *ap, int lflag)
 {
 	if (lflag >= 2)
@@ -181,7 +223,13 @@ static unsigned long long getuint(va_list *ap, int lflag)
 	else
 		return va_arg(*ap, unsigned int);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 static long long getint(va_list *ap, int lflag)
 {
 	if (lflag >= 2)
@@ -191,7 +239,13 @@ static long long getint(va_list *ap, int lflag)
 	else
 		return va_arg(*ap, int);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 float pow_10(unsigned int y)
 {
 	unsigned int x;
@@ -204,7 +258,13 @@ float pow_10(unsigned int y)
 
 	return ((float) x);
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void reverse(char *str, int len) 
 { 
   int i=0, j=len-1, temp; 
@@ -216,7 +276,13 @@ void reverse(char *str, int len)
     i++; j--; 
   } 
 } 
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int intToStr(int x, char str[], int d) 
 { 
   int i = 0; 
@@ -235,7 +301,13 @@ int intToStr(int x, char str[], int d)
   str[i] = '\0'; 
   return i; 
 } 
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void ftoa(float n, char *res, int afterpoint) 
 { 
   int i=0;
@@ -297,8 +369,13 @@ void ftoa(float n, char *res, int afterpoint)
     intToStr((int)fpart, res + i + 1, afterpoint); 
   } 
 } 
-
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 static void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap)
 {
 	register const char* p;
@@ -455,7 +532,13 @@ signed_number:
 		}
 	}
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int printf(const char* fmt, ...)
 {
 	va_list ap;
@@ -466,7 +549,13 @@ int printf(const char* fmt, ...)
 	va_end(ap);
 	return 0; // incorrect return value, but who cares, anyway?
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int sprintf(char* str, const char* fmt, ...)
 {
 	va_list ap;
@@ -487,7 +576,13 @@ int sprintf(char* str, const char* fmt, ...)
 	return str - str0;
 }
 
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 size_t strlen(const char *s)
 {
 	const char *p = s;
@@ -495,7 +590,13 @@ size_t strlen(const char *s)
 		p++;
 	return p - s;
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 size_t strnlen(const char *s, size_t n)
 {
 	const char *p = s;
@@ -503,7 +604,13 @@ size_t strnlen(const char *s, size_t n)
 		p++;
 	return p - s;
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int strcmp(const char* s1, const char* s2)
 {
 	unsigned char c1, c2;
@@ -515,7 +622,13 @@ int strcmp(const char* s1, const char* s2)
 
 	return c1 - c2;
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 char* strcpy(char* dest, const char* src)
 {
 	char* d = dest;
@@ -523,7 +636,13 @@ char* strcpy(char* dest, const char* src)
 		;
 	return dest;
 }
-
+/** @fn 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 long atol(const char* str)
 {
 	long res = 0;
