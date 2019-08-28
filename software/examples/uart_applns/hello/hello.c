@@ -23,8 +23,13 @@
 
 ***************************************************************************/
 #include "uart.h"//Includes the definitions of uart communication protocol//
-
-
+/** @fn  void main() 
+ * @brief  prints hello world
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 void main()
 {	
 	printf("Hello world !\n");
