@@ -34,7 +34,7 @@ unsigned char delay = 100;
 /*
    soft float library need to be added, if hardfloat not there
  */
- /** @fn 
+ /** @fn void measuring_value()
  * @brief 
  * @details 
  * @warning 
@@ -64,7 +64,7 @@ void measuring_value()
 	GyroY = GyroY - GyroErrorY; // GyroErrorY
 	GyroZ = GyroZ + GyroErrorZ; // GyroErrorZ
 }
-/** @fn 
+/** @fn int main()
  * @brief 
  * @details 
  * @warning 
@@ -122,7 +122,7 @@ int main()
 
 	return 0;
 }
-/** @fn 
+/** @fn void calculate_imu_error()
  * @brief 
  * @details 
  * @warning 

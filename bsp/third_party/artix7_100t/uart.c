@@ -27,7 +27,7 @@ uart.c - src file for uart
 #define UART1_BASE_ADDRESS 0x11300
 
 #undef putchar
-/** @fn 
+/** @fn int putchar(int ch)
  * @brief 
  * @details 
  * @warning 
@@ -49,7 +49,7 @@ int putchar(int ch)
 }
 
 // function used to check if UART is empty. Can be used before exiting a function
-/** @fn 
+/** @fn int is_empty()
  * @brief 
  * @details 
  * @warning 

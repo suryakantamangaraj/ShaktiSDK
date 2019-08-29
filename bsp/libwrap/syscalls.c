@@ -43,7 +43,7 @@ modified for shakti
 extern volatile uint64_t tohost;
 extern volatile uint64_t fromhost;
 
-/** @fn 
+/** @fn static uintptr_t syscall(uintptr_t which, uint64_t arg0, uint64_t arg1, uint64_t arg2)
  * @brief 
  * @details 
  * @warning 
@@ -71,7 +71,7 @@ static uintptr_t syscall(uintptr_t which, uint64_t arg0, uint64_t arg1, uint64_t
 #define NUM_COUNTERS 2
 static uintptr_t counters[NUM_COUNTERS];
 static char* counter_names[NUM_COUNTERS];
-/** @fn 
+/** @fn void setStats(int enable)
  * @brief 
  * @details 
  * @warning 
@@ -93,7 +93,7 @@ void setStats(int enable)
 
 #undef READ_CTR
 	}
-/** @fn 
+/** @fn void __attribute__((noreturn)) tohost_exit(uintptr_t code)
  * @brief 
  * @details 
  * @warning 
@@ -106,7 +106,7 @@ void __attribute__((noreturn)) tohost_exit(uintptr_t code)
 	tohost = (code << 1) | 1;
 	while (1);
 }
-/** @fn 
+/** @fn uintptr_t __attribute__((weak)) handle_trap(uintptr_t cause, uintptr_t epc, uintptr_t regs[32])
  * @brief 
  * @details 
  * @warning 
@@ -117,7 +117,7 @@ uintptr_t __attribute__((weak)) handle_trap(uintptr_t cause, uintptr_t epc, uint
 {
 	tohost_exit(1337);
 }
-/** @fn 
+/** @fn void exit(int code)
  * @brief 
  * @details 
  * @warning 
@@ -128,7 +128,7 @@ void exit(int code)
 {
 	tohost_exit(code);
 }
-/** @fn 
+/** @fn void abort()
  * @brief 
  * @details 
  * @warning 
@@ -139,7 +139,7 @@ void abort()
 {
 	exit(128 + SIGABRT);
 }
-/** @fn 
+/** @fn  void printstr(const char* s)
  * @brief 
  * @details 
  * @warning 
@@ -150,7 +150,7 @@ void printstr(const char* s)
 {
 	syscall(SYS_write, 1, (uintptr_t)s, strlen(s));
 }
-/** @fn 
+/** @fn int __attribute__((weak)) main(int argc, char** argv)
  * @brief 
  * @details 
  * @warning 
@@ -163,7 +163,7 @@ int __attribute__((weak)) main(int argc, char** argv)
 	printstr("Implement main(), foo!\n");
 	return -1;
 }
-/** @fn 
+/** @fn void _init(int cid, int nc)
  * @brief 
  * @details 
  * @warning 
@@ -188,7 +188,7 @@ void _init(int cid, int nc)
 
 	exit(ret);
 }
-/** @fn 
+/** @fn void printhex(uint64_t x)
  * @brief 
  * @details 
  * @warning 
@@ -208,7 +208,8 @@ void printhex(uint64_t x)
 
 	printstr(str);
 }
-/** @fn 
+/** @fn static inline void printnum(void (*putch)(int, void**), void **putdat,
+ *		unsigned long long num, unsigned base, int width, int padc)
  * @brief 
  * @details 
  * @warning 
@@ -235,7 +236,7 @@ static inline void printnum(void (*putch)(int, void**), void **putdat,
 	while (pos-- > 0)
 		putch(digs[pos] + (digs[pos] >= 10 ? 'a' - 10 : '0'), putdat);
 }
-/** @fn 
+/** @fn static unsigned long long getuint(va_list *ap, int lflag)
  * @brief 
  * @details 
  * @warning 
@@ -251,7 +252,7 @@ static unsigned long long getuint(va_list *ap, int lflag)
 	else
 		return va_arg(*ap, unsigned int);
 }
-/** @fn 
+/** @fn static long long getint(va_list *ap, int lflag)
  * @brief 
  * @details 
  * @warning 
@@ -267,7 +268,7 @@ static long long getint(va_list *ap, int lflag)
 	else
 		return va_arg(*ap, int);
 }
-/** @fn 
+/** @fn float pow_10(unsigned int y)
  * @brief 
  * @details 
  * @warning 
@@ -286,7 +287,7 @@ float pow_10(unsigned int y)
 
 	return ((float) x);
 }
-/** @fn 
+/** @fn void reverse(char *str, int len) 
  * @brief 
  * @details 
  * @warning 
@@ -304,7 +305,7 @@ void reverse(char *str, int len)
     i++; j--; 
   } 
 } 
-/** @fn 
+/** @fn int intToStr(int x, char str[], int d)
  * @brief 
  * @details 
  * @warning 
@@ -329,7 +330,7 @@ int intToStr(int x, char str[], int d)
   str[i] = '\0'; 
   return i; 
 } 
-/** @fn 
+/** @fn void ftoa(float n, char *res, int afterpoint) 
  * @brief 
  * @details 
  * @warning 
@@ -397,7 +398,7 @@ void ftoa(float n, char *res, int afterpoint)
     intToStr((int)fpart, res + i + 1, afterpoint); 
   } 
 } 
-/** @fn 
+/** @fn static void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap)
  * @brief 
  * @details 
  * @warning 
@@ -560,7 +561,7 @@ signed_number:
 		}
 	}
 }
-/** @fn 
+/** @fn int printf(const char* fmt, ...)
  * @brief 
  * @details 
  * @warning 
@@ -577,7 +578,7 @@ int printf(const char* fmt, ...)
 	va_end(ap);
 	return 0; // incorrect return value, but who cares, anyway?
 }
-/** @fn 
+/** @fn int sprintf(char* str, const char* fmt, ...)
  * @brief 
  * @details 
  * @warning 
@@ -604,7 +605,7 @@ int sprintf(char* str, const char* fmt, ...)
 	return str - str0;
 }
 
-/** @fn 
+/** @fn size_t strlen(const char *s)
  * @brief 
  * @details 
  * @warning 
@@ -618,7 +619,7 @@ size_t strlen(const char *s)
 		p++;
 	return p - s;
 }
-/** @fn 
+/** @fn size_t strnlen(const char *s, size_t n)
  * @brief 
  * @details 
  * @warning 
@@ -632,7 +633,7 @@ size_t strnlen(const char *s, size_t n)
 		p++;
 	return p - s;
 }
-/** @fn 
+/** @fn int strcmp(const char* s1, const char* s2)
  * @brief 
  * @details 
  * @warning 
@@ -650,7 +651,7 @@ int strcmp(const char* s1, const char* s2)
 
 	return c1 - c2;
 }
-/** @fn 
+/** @fn char* strcpy(char* dest, const char* src)
  * @brief 
  * @details 
  * @warning 
@@ -664,7 +665,7 @@ char* strcpy(char* dest, const char* src)
 		;
 	return dest;
 }
-/** @fn 
+/** @fn long atol(const char* str)
  * @brief 
  * @details 
  * @warning 

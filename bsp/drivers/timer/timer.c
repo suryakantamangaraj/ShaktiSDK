@@ -21,14 +21,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-/** @fn 
+/** @fn  static unsigned long mtime_low(void)
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
@@ -42,14 +38,10 @@ static unsigned long mtime_low(void)
 /*
 Get each 32 bit and append for full timer value
 */
-/** @fn 
+/** @fn static uint32_t mtime_high(void)
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
@@ -57,14 +49,10 @@ static uint32_t mtime_high(void)
 {
   return *(volatile uint32_t *)(CLINT_CTRL_ADDR + CLINT_MTIME + 4);
 }
-/** @fn 
+/** @fn  uint64_t get_timer_value()
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
@@ -74,14 +62,10 @@ uint64_t get_timer_value()
 }
 
 #else 
-/** @fn 
+/** @fn uint64_t get_timer_value()
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
