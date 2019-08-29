@@ -32,6 +32,13 @@
  * Brief Description     : Performs the intilization of the corresponding registers of gpio pins.
  * Parameters            : Registers,conrol word.
  ********************************************************************/
+ /** @fn void main()
+ * @brief Performs the intilization of the corresponding registers of gpio pins.
+ * @details 
+ * @warning 
+ * @param[in] Registers,conrol word.
+ * @param[Out] 
+ */
 void main()
 {
 	printf("Motor Control\n");

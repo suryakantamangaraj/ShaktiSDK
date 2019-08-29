@@ -30,14 +30,26 @@
 * Brief Description     : Maintains the required delay to perform an operation. 
 * Parameters            : Delay  Required(ms).
 *************************************************************************/
-
+/** @fn extern void DelayLoop(unsigned long cntr1, unsigned long cntr2)
+ * @brief Maintains the required delay to perform an operation  
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
 
 /*********************************************************************
 * Brief Description     :Performs the toggling operation  with the help of button.
 * Parameters            :Registers,control word.
 ********************************************************************/
-  
+/** @fn void main()
+ * @brief Performs the toggling operation  with the help of button  
+ * @details 
+ * @warning
+ * @param[in] Registers,control word.
+ * @param[Out] 
+ */
 void main()
 {
 //Assumption 1 ---> output, 0 ---> input
