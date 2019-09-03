@@ -27,7 +27,7 @@ Email id: sathya281@gmail.com
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] NULl
  */
 void DelayLoop(unsigned long cntr1, unsigned long cntr2)
 {
@@ -47,13 +47,6 @@ void DelayLoop(unsigned long cntr1, unsigned long cntr2)
  * @param[in] int*
  * @param[Out] int
  */
-/*********************************************************************
-* Brief Description     : returns the value stored at a given address
-*                         Here we assume the word size to be 32 bits for gpio     
-* Parameters            : int*
-* Return                : int
-* *******************************************************************/
-
 long int read_word(int *addr)
 {
   return *addr;
@@ -63,14 +56,8 @@ long int read_word(int *addr)
  * @details 
  * @warning 
  * @param[in] int*
- * @param[Out] int
+ * @param[Out] NULL
  */
-/*****************************************************
-* Brief Description     : writes a value to an address
-* Parameters            : int*
-* Return                : int
-* ****************************************************/
-
 void write_word(int *addr, unsigned long val)
 {
     *addr = val;

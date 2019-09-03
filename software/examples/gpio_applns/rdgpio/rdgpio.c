@@ -27,24 +27,20 @@
 #include "gpio.h" // includes definitions of gpio pins and read, write functions
 #include "platform.h"
 
-/************************************************************************
-* Brief Description     : Maintains the required delay to perform an operation.
-* Parameters            : Delay  Required(ms).
-*************************************************************************/
 /** @fn extern void DelayLoop(unsigned long cntr1, unsigned long cntr2)
  * @brief Maintains the required delay to perform an operation.
  * @details 
  * @warning 
  * @param[in] Delay  Required(ms)
- * @param[Out] 
+ * @param[Out] NULL
  */
 extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
 /** @fn  void main()
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] Registers,control word.
+ * @param[Out] NULL
  */
 void main()
 {

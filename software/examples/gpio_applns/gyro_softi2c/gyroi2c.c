@@ -30,7 +30,6 @@ int GyroX, GyroY, GyroZ;
 int c = 0;
 int i=0;
 unsigned char delay = 100;
-
 /*
    soft float library need to be added, if hardfloat not there
  */
@@ -39,7 +38,7 @@ unsigned char delay = 100;
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] NULL
  */
 void measuring_value()
 {
@@ -69,7 +68,7 @@ void measuring_value()
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] int
  */
 int main()
 {
@@ -127,7 +126,7 @@ int main()
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] NULL
  */
 void calculate_imu_error()
 {

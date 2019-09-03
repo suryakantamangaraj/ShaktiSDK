@@ -32,7 +32,7 @@
  * @details 
  * @warning
  * @param[in] 
- * @param[Out] 
+ * @param[Out] NULL
  */
 void clear()
 {
@@ -71,12 +71,12 @@ void clear()
     };
 
 	char solution[SIZE][SIZE];
-	/** @fn void printsolution
+ /** @fn void printsolution
  * @brief  
  * @details 
  * @warning
  * @param[in] 
- * @param[Out] 
+ * @param[Out] NULL
  */
 void printsolution()
 {
@@ -110,8 +110,8 @@ void printsolution()
  * @brief  
  * @details 
  * @warning
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
     int solvemaze(int r, int c)
 {
@@ -146,8 +146,8 @@ void printsolution()
  * @brief  
  * @details 
  * @warning
- * @param[in] 
- * @param[Out] 
+ * @param[in] NULL
+ * @param[Out] int
  */
 int main()
 {

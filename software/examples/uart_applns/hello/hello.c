@@ -27,8 +27,8 @@
  * @brief  prints hello world
  * @details 
  * @warning
- * @param[in] 
- * @param[Out] 
+ * @param[in] NULL
+ * @param[Out] NULL
  */
 void main()
 {	

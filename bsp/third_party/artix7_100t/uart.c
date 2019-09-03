@@ -31,8 +31,8 @@ uart.c - src file for uart
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] char
+ * @param[Out] int
  */
 int putchar(int ch)
 {
@@ -53,8 +53,8 @@ int putchar(int ch)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] NULL
+ * @param[Out] int
  */
 int is_empty()
 {

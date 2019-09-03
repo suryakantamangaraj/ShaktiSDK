@@ -24,33 +24,23 @@
 ***************************************************************************/
 #include "gpio.h" // includes definitions of gpio pins and read, write function
 #include "platform.h"
-
-/*********************************************************************
-* Brief Description     : Performs the intilization of the corresponding registers of gpio pins.
-* Parameters            : Registers,conrol word.
-********************************************************************/
 /** @fn void init()
  * @brief Performs the intilization of the corresponding registers of gpio pins.
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] Registers,conrol word
+ * @param[Out] NULL
  */
 void init()
 {
 	write_word(GPIO_DIRECTION_CNTRL_REG, ~(1 << 0) );
 }
-
-/*********************************************************************
-* Brief Description     : Performs the printing of hello. 
-* Return                : int.
-********************************************************************/
 /** @fn int main(void)
  * @brief Performs the printing of hello. 
  * @details 
  * @warning
- * @param[in] 
- * @param[Out] 
+ * @param[in] Registers,controls word
+ * @param[Out] int
  */
 int main(void)
 {

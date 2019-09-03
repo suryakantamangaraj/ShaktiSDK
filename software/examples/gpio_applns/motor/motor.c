@@ -28,16 +28,13 @@
 
 #define MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
 #define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
-/*********************************************************************
- * Brief Description     : Performs the intilization of the corresponding registers of gpio pins.
- * Parameters            : Registers,conrol word.
- ********************************************************************/
+
  /** @fn void main()
  * @brief Performs the intilization of the corresponding registers of gpio pins.
  * @details 
  * @warning 
  * @param[in] Registers,conrol word.
- * @param[Out] 
+ * @param[Out] NULL
  */
 void main()
 {

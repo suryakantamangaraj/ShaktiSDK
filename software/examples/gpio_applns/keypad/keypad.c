@@ -55,19 +55,12 @@ int  keyTable[4][4] =
 	{  3,  6,  9, 14},
 	{ 10, 11, 12, 13}
 };
-
-
-/************************************************************
-*	Description:
-*	This function sets the pins for the row and column
-* Creates temp. copy of the col and row pins.
-************************************************************/
 /** @fn void  setPins(unsigned int*  row, unsigned int* col)
  * @brief This function sets the pins for the row and column
  * @details Creates temp. copy of the col and row pins.
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] row,column
+ * @param[Out] NULL
  */
 void  setPins(unsigned int*  row, unsigned int* col)
 {
@@ -81,18 +74,12 @@ void  setPins(unsigned int*  row, unsigned int* col)
 	}
 
 }
-
-/************************************************************
-*	Description:
-*	This function maps table in to keymap
-* Maps the values to all the key entries.
-************************************************************/
 /** @fn void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
  * @brief This function maps table in to keymap
  * @details Maps the values to all the key entries.
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] KYPD_COLNUM,KYPD_ROWNUM
+ * @param[Out] NULL
  */
 void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
 {
@@ -105,20 +92,13 @@ void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
 		}
 	}
 }
-
-/************************************************************
-*	Description:
-*	This function returns the corresponding value in the keymap
-*
-************************************************************/
 /** @fn int getKeyAnotherWay()
  * @brief This function returns the corresponding value in the keymap
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] int
  */
-
 int getKeyAnotherWay()
 {
 
@@ -140,46 +120,23 @@ int getKeyAnotherWay()
 
 	return 0;
 }
-
-/* ------------------------------------------------------------------- */
-/** int getKey(int colRow)
-**
-**	Parameters:
-**		colRow - a 32 bit column-row indicator, where the first 16 bit is
-**               column and the last 16 bit is row
-**
-**	Return Value:
-**      int - key pressed
-**
-**	Errors:
-**		TBD
-**
-**	Description:
-**		This function returns the corresponding value in the keymap
-** of the 32bit column-row indicator
-*/
 /** @fn int getKey(int colRow)
- * @brief 
+ * @brief This function returns the corresponding value in the keymap
+          of the 32bit column-row indicator
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] colRow - a 32 bit column-row indicator, where the first 16 bit is
+                       column and the last 16 bit is row
+ * @param[Out]  int - key pressed
  */
 int getKey(int colRow)
 {
     return keyMap[colRow>>16][0xFFFF & colRow];
 }
-
-
-/************************************************************
- *	Description:
- *	This function returns the column-row
- *  Identifies the pressed key by making the corresponding coloumn
- *  low and reading the row values.
- ***********************************************************/
 /** @fn int getColRow(void)
  * @brief This function returns the column-row
- * @details 
+ * @details Identifies the pressed key by making the corresponding coloumn
+            low and reading the row values.
  * @warning 
  * @param[in] 
  * @param[Out] 
@@ -212,17 +169,12 @@ int getColRow(void)
 
 	return -1;
 }
-
-/*********************************************************************
-* Brief Description     :This maps the keypad from pins.
-* Parameters            :rows,columns.
-********************************************************************/
 /** @fn void gpio_init()
  * @brief This maps the keypad from pins.
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] rows,columns
+ * @param[Out] NULL
  */
 void gpio_init()
 {
@@ -238,7 +190,7 @@ void gpio_init()
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] int
  */
 int main()
 {

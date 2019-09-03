@@ -381,7 +381,7 @@ int Break, Done, NotMonot, Monot, Anomaly, IEEE,
 /*U2  gap above 1.0, i.e, 1.0+U2 is next number above 1.0 */
 
 /* floating point exception receiver */
-/** @fn 
+/** @fn            
  * @brief   
  * @details 
  * @warning
@@ -403,7 +403,7 @@ sigfpe(INT x)
 		}
 	exit(1);
 }
-/** @fn 
+/** @fn main(VOID)
  * @brief   
  * @details 
  * @warning

@@ -27,7 +27,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * @details 
  * @warning
  * @param[in] 
- * @param[Out] 
+ * @param[Out] int
  */
 int main()
 {
