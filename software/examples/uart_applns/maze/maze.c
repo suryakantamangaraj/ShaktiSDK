@@ -1,10 +1,7 @@
  /***************************************************************************
 * Project           			:  shakti devt board
 * Name of the file	     		:  maze.c
-* Created date			        :  26.02.2019
 * Brief Description of file             :  A configurable rat in a maze.
-* Name of Author    	                :  Sathya Narayanan N
-* Email ID                              :  sathya281@gmail.com
 
     Copyright (C) 2019  IIT Madras. All rights reserved.
 
