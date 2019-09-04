@@ -381,6 +381,7 @@ int Break, Done, NotMonot, Monot, Anomaly, IEEE,
 /*U2  gap above 1.0, i.e, 1.0+U2 is next number above 1.0 */
 
 /* floating point exception receiver */
+
 /** @fn            
  * @brief   
  * @details 
@@ -388,6 +389,7 @@ int Break, Done, NotMonot, Monot, Anomaly, IEEE,
  * @param[in] 
  * @param[Out] 
  */
+
  void
 sigfpe(INT x)
 {
@@ -403,6 +405,7 @@ sigfpe(INT x)
 		}
 	exit(1);
 }
+
 /** @fn main(VOID)
  * @brief   
  * @details 
@@ -410,6 +413,7 @@ sigfpe(INT x)
  * @param[in] 
  * @param[Out] 
  */
+
 main(VOID)
 {
 	/* First two assignments use integer right-hand sides. */
@@ -1935,6 +1939,7 @@ Sign (FP X)
 FLOAT X;
 #endif
 { return X >= 0. ? 1.0 : -1.0; }
+
 /** @fn 
  * @brief   
  * @details 
@@ -1942,6 +1947,7 @@ FLOAT X;
  * @param[in] 
  * @param[Out] 
  */
+
  void
 Pause(VOID)
 {
@@ -1957,6 +1963,7 @@ Pause(VOID)
 	++Milestone;
 	++PageNo;
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -1964,6 +1971,7 @@ Pause(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 TstCond (INT K, INT Valid, CHARP T)
 #ifdef KR_headers
@@ -1971,6 +1979,7 @@ int K, Valid;
 char *T;
 #endif
 { if (! Valid) { BadCond(K,T); printf(".\n"); } }
+
 /** @fn 
  * @brief   
  * @details 
@@ -1978,6 +1987,7 @@ char *T;
  * @param[in] 
  * @param[Out] 
  */
+
  void
 BadCond(INT K, CHARP T)
 #ifdef KR_headers
@@ -1998,6 +2008,7 @@ char *T;
  * @param[in] 
  * @param[Out] 
  */
+
  FLOAT
 Random(VOID)
 /*  Random computes
@@ -2016,6 +2027,7 @@ Random(VOID)
 	Random1 = Y + X * 0.000005;
 	return(Random1);
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2023,6 +2035,7 @@ Random(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 SqXMinX (INT ErrKind)
 #ifdef KR_headers
@@ -2043,6 +2056,7 @@ int ErrKind;
 		printf("\tinstead of correct value 0 .\n");
 		}
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2050,6 +2064,7 @@ int ErrKind;
  * @param[in] 
  * @param[Out] 
  */
+
  void
 NewD(VOID)
 {
@@ -2063,6 +2078,7 @@ NewD(VOID)
 		}
 	D = Radix * D;
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2070,6 +2086,7 @@ NewD(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 SR3750(VOID)
 {
@@ -2085,6 +2102,7 @@ SR3750(VOID)
 		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
 		}
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2092,6 +2110,7 @@ SR3750(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 IsYeqX(VOID)
 {
@@ -2109,6 +2128,7 @@ IsYeqX(VOID)
 		N = N + 1; /* ... count discrepancies. */
 		}
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2116,6 +2136,7 @@ IsYeqX(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 SR3980(VOID)
 {
@@ -2127,6 +2148,7 @@ SR3980(VOID)
 		X = Z * X;
 		} while ( X < W );
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2134,11 +2156,13 @@ SR3980(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 PrintIfNPositive(VOID)
 {
 	if (N > 0) printf("Similar discrepancies have occurred %d times.\n", N);
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2146,6 +2170,7 @@ PrintIfNPositive(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 TstPtUf(VOID)
 {
@@ -2204,6 +2229,7 @@ very_serious:
 			}
 		}
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2211,6 +2237,7 @@ very_serious:
  * @param[in] 
  * @param[Out] 
  */
+
  void
 notify(CHARP s)
 #ifdef KR_headers
@@ -2224,6 +2251,7 @@ notify(CHARP s)
 /*SPLIT msgs.c
 #include "paranoia.h"
 */
+
 /** @fn 
  * @brief   
  * @details 
@@ -2231,12 +2259,14 @@ notify(CHARP s)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 msglist(CHARPP s)
 #ifdef KR_headers
 char **s;
 #endif
 { while(*s) printf("%s\n", *s++); }
+
 /** @fn 
  * @brief   
  * @details 
@@ -2244,6 +2274,7 @@ char **s;
  * @param[in] 
  * @param[Out] 
  */
+
  void
 Instructions(VOID)
 {
@@ -2261,6 +2292,7 @@ Instructions(VOID)
 
 	msglist(instr);
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2268,6 +2300,7 @@ Instructions(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 Heading(VOID)
 {
@@ -2294,6 +2327,7 @@ Heading(VOID)
 
 	msglist(head);
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2301,6 +2335,7 @@ Heading(VOID)
  * @param[in] 
  * @param[Out] 
  */
+
  void
 Characteristics(VOID)
 {
@@ -2328,6 +2363,7 @@ Characteristics(VOID)
 
 	msglist(chars);
 	}
+
 /** @fn 
  * @brief   
  * @details 
@@ -2335,6 +2371,7 @@ Characteristics(VOID)
  * @param[in] 
  * @param[Out] 
  */
+ 
  void
 History(VOID)
 { /* History */

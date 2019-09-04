@@ -34,7 +34,9 @@
  * @param[in] Delay  Required(ms)
  * @param[Out] NULL
  */
+
 extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
+
 /** @fn  void main()
  * @brief 
  * @details 
@@ -42,6 +44,7 @@ extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
  * @param[in] Registers,control word.
  * @param[Out] NULL
  */
+ 
 void main()
 {
 	unsigned long readData = 0;
