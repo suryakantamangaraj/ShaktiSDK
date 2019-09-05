@@ -18,24 +18,23 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
-
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave//
+
 /** @fn int main()
  * @brief  
  * @details 
  * @warning
- * @param[in] 
+ * @param[in] NULL
  * @param[Out] int
  */
+
 int main()
 {
 	int timeout;
 	unsigned int tempReadValue = 0;
 
 	printf("\tI2C: Starting Transaction\n");
-
 
 	char writebuf1[2] = {0,0};
 	char writebuf[18], writeData = 0x30;
@@ -57,11 +56,9 @@ int main()
 	else
 		printf("\tIntilization Happened Fine\n");
 
-
 	while(1)
 	{
 		printf("\n\r Reading the sensor again");
-
 
 		/*Do a busy wait*/
 		while(wait_for_bb())
@@ -69,7 +66,6 @@ int main()
 			printf("\tError in Waiting for BB\n");
 			return 0;
 		}
-
 
 		/*Write the slave address in Axi bus*/
 
@@ -82,7 +78,6 @@ int main()
 			printf("\n\tSomething wrong in reading bytes\n -- Diagnose");
 			return 0;
 		}
-
 
 		printf("\n\tReadValue: %x; %x", readbuf[0], readbuf[1]);
 

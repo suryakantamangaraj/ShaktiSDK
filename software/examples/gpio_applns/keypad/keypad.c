@@ -26,7 +26,6 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
 /***********************************************************
 *		Include File Definitions
 ************************************************************/
@@ -47,7 +46,6 @@ unsigned int col[4]={0, 1, 2, 3};
 unsigned int row[4]={4, 5, 6, 7};
 int keyMap[KYPD_COLNUM][KYPD_ROWNUM];
 
-
 int  keyTable[4][4] =
 {
 	{  1,  4,  7,  0},
@@ -55,6 +53,7 @@ int  keyTable[4][4] =
 	{  3,  6,  9, 14},
 	{ 10, 11, 12, 13}
 };
+
 /** @fn void  setPins(unsigned int*  row, unsigned int* col)
  * @brief This function sets the pins for the row and column
  * @details Creates temp. copy of the col and row pins.
@@ -62,6 +61,7 @@ int  keyTable[4][4] =
  * @param[in] row,column
  * @param[Out] NULL
  */
+
 void  setPins(unsigned int*  row, unsigned int* col)
 {
 	for(int i = 0 ; i < KYPD_COLNUM ; i++)
@@ -74,6 +74,7 @@ void  setPins(unsigned int*  row, unsigned int* col)
 	}
 
 }
+
 /** @fn void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
  * @brief This function maps table in to keymap
  * @details Maps the values to all the key entries.
@@ -81,6 +82,7 @@ void  setPins(unsigned int*  row, unsigned int* col)
  * @param[in] KYPD_COLNUM,KYPD_ROWNUM
  * @param[Out] NULL
  */
+
 void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
 {
 
@@ -92,13 +94,15 @@ void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
 		}
 	}
 }
+
 /** @fn int getKeyAnotherWay()
  * @brief This function returns the corresponding value in the keymap
  * @details 
  * @warning 
- * @param[in] 
+ * @param[in] NULL
  * @param[Out] int
  */
+
 int getKeyAnotherWay()
 {
 
@@ -120,6 +124,7 @@ int getKeyAnotherWay()
 
 	return 0;
 }
+
 /** @fn int getKey(int colRow)
  * @brief This function returns the corresponding value in the keymap
           of the 32bit column-row indicator
@@ -129,18 +134,21 @@ int getKeyAnotherWay()
                        column and the last 16 bit is row
  * @param[Out]  int - key pressed
  */
+
 int getKey(int colRow)
 {
     return keyMap[colRow>>16][0xFFFF & colRow];
 }
+
 /** @fn int getColRow(void)
  * @brief This function returns the column-row
  * @details Identifies the pressed key by making the corresponding coloumn
             low and reading the row values.
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] NULL
+ * @param[Out] int
  */
+
 int getColRow(void)
 {
 	int colRow = 0;
@@ -169,6 +177,7 @@ int getColRow(void)
 
 	return -1;
 }
+
 /** @fn void gpio_init()
  * @brief This maps the keypad from pins.
  * @details 
@@ -176,6 +185,7 @@ int getColRow(void)
  * @param[in] rows,columns
  * @param[Out] NULL
  */
+
 void gpio_init()
 {
 	setPins(row, col);
@@ -185,13 +195,15 @@ void gpio_init()
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
 	write_word(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
 }
+
 /** @fn int main()
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
+ * @param[in] NULL
  * @param[Out] int
  */
+
 int main()
 {
 	int prevColRow = 0;

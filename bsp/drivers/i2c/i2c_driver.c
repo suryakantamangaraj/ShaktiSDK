@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
- *
  *   Copyright (C) 1995-1997 Simon G. Vogl
  *		   1998-2000 Hans Berglund
  *
@@ -32,6 +31,7 @@
  * @param[in] 
  * @param[Out] 
  */
+
 char get_i2c_shakti(char *addr)
 {
 #ifdef ASM
@@ -43,6 +43,7 @@ char get_i2c_shakti(char *addr)
   return *addr;
 #endif
 }
+
 /** @fn void set_i2c_shakti(char *addr, char val)
  * @brief 
  * @details 
@@ -50,6 +51,7 @@ char get_i2c_shakti(char *addr)
  * @param[in] 
  * @param[Out] 
  */
+
 void set_i2c_shakti(char *addr, char val)
 {
 #ifdef ASM
@@ -59,6 +61,7 @@ void set_i2c_shakti(char *addr, char val)
     *addr = val;
 #endif
 }
+
 /** @fn void waitfor(unsigned int secs)
  * @brief 
  * @details   
@@ -66,11 +69,13 @@ void set_i2c_shakti(char *addr, char val)
  * @param[in] 
  * @param[Out] 
  */
+
 void waitfor(unsigned int secs) 
 {
 	unsigned int time = 0;
 	while(time++ < secs);
 }
+
 /** @fn void i2c_start()
  * @brief 
  * @details   
@@ -78,10 +83,12 @@ void waitfor(unsigned int secs)
  * @param[in] 
  * @param[Out] 
  */
+
 void i2c_start()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_START);
 }
+
 /** @fn void i2c_start_eni()
  * @brief 
  * @details   
@@ -89,10 +96,12 @@ void i2c_start()
  * @param[in] 
  * @param[Out] 
  */
+
 void i2c_start_eni()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_START);
 }
+
 /** @fn void i2c_repstart()
  * @brief 
  * @details   
@@ -100,10 +109,12 @@ void i2c_start_eni()
  * @param[in] 
  * @param[Out] 
  */
+
 void i2c_repstart()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_REPSTART);
 }
+
 /** @fn void i2c_repstart_eni()
  * @brief 
  * @details   
@@ -111,10 +122,12 @@ void i2c_repstart()
  * @param[in] 
  * @param[Out] 
  */
+
 void i2c_repstart_eni()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_REPSTART);
 }
+
 /** @fn void i2c_stop()
  * @brief 
  * @details   
@@ -122,10 +135,12 @@ void i2c_repstart_eni()
  * @param[in] 
  * @param[Out] 
  */
+
 void i2c_stop()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_STOP);
 }
+
 /** @fn void i2c_nack()
  * @brief 
  * @details   
@@ -133,10 +148,12 @@ void i2c_stop()
  * @param[in] 
  * @param[Out] 
  */
+
 void i2c_nack()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_NACK);
 }
+
 /** @fn int shakti_init_i2c()
  * @brief 
  * @details 
@@ -144,6 +161,7 @@ void i2c_nack()
  * @param[in] 
  * @param[Out] 
  */
+
 int shakti_init_i2c()
 {
    unsigned char temp = 0;
@@ -206,6 +224,7 @@ int shakti_init_i2c()
 
     printf("\tI2C successfully initialized\n");
 }
+
 /** @fn int wait_for_bb()
  * @brief 
  * @details 
@@ -213,6 +232,7 @@ int shakti_init_i2c()
  * @param[in] 
  * @param[Out] 
  */
+
 int wait_for_bb()
 {
 
@@ -234,13 +254,15 @@ int wait_for_bb()
 
 	return 0;
 }
+
 /** @fn int wait_for_pin(int *status)
  * @brief 
  * @details 
  * @warning 
  * @param[in] 
  * @param[Out] 
- */ 
+ */
+
 int wait_for_pin(int *status)
 {
 
@@ -260,6 +282,7 @@ int wait_for_pin(int *status)
 
 	return 0;
 }
+
 /** @fn int shakti_sendbytes( const char *buf, int count, int last, int eni)
  * @brief 
  * @details 
@@ -267,6 +290,7 @@ int wait_for_pin(int *status)
  * @param[in] 
  * @param[Out] 
  */
+
 int shakti_sendbytes( const char *buf, int count, int last, int eni)
 {
 	int wrcount, status, timeout;
@@ -302,6 +326,7 @@ int shakti_sendbytes( const char *buf, int count, int last, int eni)
 
 #ifdef DEBUG
 
+
 /** @fn int shakti_readbytes(char *buf, int count, int last)
  * @brief 
  * @details 
@@ -309,6 +334,7 @@ int shakti_sendbytes( const char *buf, int count, int last, int eni)
  * @param[in] 
  * @param[Out] 
  */
+
 int shakti_readbytes(char *buf, int count, int last)
 {
 	int i, status;
@@ -351,12 +377,6 @@ int shakti_readbytes(char *buf, int count, int last)
 }
 #endif
 
-
-/************************************************************************
-* Brief Description     : Performs the i2c protocol configuration. 
-* Parameters            : prescalar clock,serial clock.
-* Return                : int. 
-*************************************************************************/
 /** @fn int i2c_configure(int psc, int sclkFrequency)
  * @brief Performs the i2c protocol configuration.
  * @details 
@@ -364,6 +384,7 @@ int shakti_readbytes(char *buf, int count, int last)
  * @param[in] prescalar clock,serial clock.
  * @param[Out] int
  */
+
 int i2c_configure(int psc, int sclkFrequency)
 {
 	unsigned char temp = 0;
@@ -466,11 +487,7 @@ int i2c_configure(int psc, int sclkFrequency)
 
 	printf("\tI2C successfully initialized\n");
 }
-/************************************************************************
-* Brief Description     : Performs the intilization of i2c slave. 
-* Parameters            : slave address.
-* Return                : int. 
-*************************************************************************/
+
 /** @fn int i2c_slave_init(unsigned char slaveAddress)
  * @brief Performs the intilization of i2c slave.
  * @details 
@@ -478,6 +495,7 @@ int i2c_configure(int psc, int sclkFrequency)
  * @param[in] slave address.
  * @param[Out] int.
  */
+
 int i2c_slave_init(unsigned char slaveAddress)
 {
 	int timeout;
@@ -510,11 +528,7 @@ int i2c_slave_init(unsigned char slaveAddress)
 		printf("\tSome status check failing\n");
 	}
 }
-/************************************************************************
-* Brief Description     : It does the reading or writing from the address specified . 
-* Parameters            : starting address.
-* Return                : int. 
-*************************************************************************/
+
 /** @fn int SendAddressToReadOrWrite(unsigned int startAddress)
  * @brief It does the reading or writing from the address specified 
  * @details 
@@ -522,6 +536,7 @@ int i2c_slave_init(unsigned char slaveAddress)
  * @param[in] starting address
  * @param[Out] int
  */
+
 int SendAddressToReadOrWrite(unsigned int startAddress)
 {
 	int timeout;
@@ -558,11 +573,7 @@ int SendAddressToReadOrWrite(unsigned int startAddress)
 		printf("\tSome status check failing\n");
 	}
 }
-/************************************************************************
-* Brief Description     : It does the reading or writing from the address specified . 
-* Parameters            : starting address.
-* Return                : int. 
-*************************************************************************/
+
 /** @fn int i2c_rw_wait(int *status)
  * @brief It does the reading or writing from the address specified
  * @details 
@@ -570,6 +581,7 @@ int SendAddressToReadOrWrite(unsigned int startAddress)
  * @param[in] starting address
  * @param[Out] int
  */
+
 int i2c_rw_wait(int *status)
 {
 	int timeout = DEF_TIMEOUT;
@@ -588,11 +600,7 @@ int i2c_rw_wait(int *status)
 
 	return 0;
 }
-/**************************************************************************
-* Brief Description     : This makes the read or write operation to wait until the count has been completed . 
-* Parameters            : count value.
-* Return                : int. 
-*************************************************************************/
+
 /** @fn int i2c_datawrite( const char *buf, int count, int last, int eni)
  * @brief This makes the read or write operation to wait until the count has been completed
  * @details 
@@ -600,6 +608,7 @@ int i2c_rw_wait(int *status)
  * @param[in] count value
  * @param[Out] int
  */
+
 int i2c_datawrite( const char *buf, int count, int last, int eni)
 {
 	int wrcount, status, timeout;
@@ -640,11 +649,7 @@ int i2c_datawrite( const char *buf, int count, int last, int eni)
 
 	return i;
 }
-/************************************************************************
-* Brief Description     : It does the data reading. 
-* Parameters            : count value,ending address.
-* Return                : int. 
-*************************************************************************/
+
 /** @fn  int i2c_dataread(char *buf, int count, int last)
  * @brief It does the data reading
  * @details 
@@ -652,6 +657,7 @@ int i2c_datawrite( const char *buf, int count, int last, int eni)
  * @param[in] count value,ending address
  * @param[Out] int
  */
+
 int i2c_dataread(char *buf, int count, int last)
 {
 	int i, status;

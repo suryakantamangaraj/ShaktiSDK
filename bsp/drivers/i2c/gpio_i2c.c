@@ -28,6 +28,7 @@
 extern void DelayLoop(unsigned long , unsigned long );
 
 //If inout control = 1, output else input
+
 /** @fn static void SetSCLAsOutput()
  * @brief Function for configure GPIO 0 as SCL output.
  * @details This function will be called to make the scl line (defined by I2C_SCL)
@@ -36,6 +37,7 @@ extern void DelayLoop(unsigned long , unsigned long );
  * @param[in] No input parameters.
  * @param[Out] No output parameters.
  */
+
 static void SetSCLAsOutput()
 {
 	unsigned long readData = 0;
@@ -43,8 +45,8 @@ static void SetSCLAsOutput()
 	write_word(GPIO_DIRECTION_CNTRL_REG, (readData | I2C_SCL) );
 	printf("SCL set as output\n");
 }
-
 //If inout control = 1, output else input
+
 /**@brief Function for configure GPIO 0 as SCL output.
  * @details This function will be called to make the scl line (defined by I2C_SCL)
  *  macro as output.
@@ -52,6 +54,7 @@ static void SetSCLAsOutput()
  * @param[in] No input parameters.
  * @param[Out] No output parameters.
  */
+
 static void SetSdaDirection(int inOutCntrl)
 {
 	unsigned long readData = 0;
@@ -76,6 +79,7 @@ static void SetSdaDirection(int inOutCntrl)
  * @param[in] delay.
  * @param[Out] No output parameters.
  */
+
 static void start(unsigned char delay)
 {
 	unsigned long readData = 0;
@@ -107,6 +111,7 @@ static void start(unsigned char delay)
  * @param[in] delay.
  * @param[Out] No output parameters.
  */
+
 static void stop(unsigned char delay)
 {
 	unsigned long readData = 0;
@@ -135,6 +140,7 @@ static void stop(unsigned char delay)
  * @param[in] delay.
  * @param[Out] No output parameters.
  */
+
 void I2cWriteByte(unsigned char writeData, unsigned char delay)
 {
 	unsigned char j=0,k;
@@ -177,6 +183,7 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
  * @param[in] delay.
  * @param[Out] returns the value of readData .
  */
+
 unsigned char I2cReadByte(unsigned char delay)
 {
 	unsigned char j = 0, i = 0;
@@ -207,7 +214,6 @@ unsigned char I2cReadByte(unsigned char delay)
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
 		DelayLoop(delay, delay);
 
-
 		++j;
 	}
 
@@ -224,6 +230,7 @@ unsigned char I2cReadByte(unsigned char delay)
  * @param[in] delay.
  * @param[Out] NULL.
  */
+
 void ReadAckForWrite(unsigned char delay)
 {
 	unsigned long readData = 0;
@@ -256,6 +263,7 @@ void ReadAckForWrite(unsigned char delay)
  * @param[in] delay.
  * @param[Out] NULL.
  */
+
  static void SendAckForRead(unsigned char delay)
 {
 	unsigned long readData = 0;
@@ -279,7 +287,6 @@ void ReadAckForWrite(unsigned char delay)
 
 }
 
-
 /** @fn static void SendNackForRead(unsigned char delay)
  * @brief After the READ operation is done the master will send Nack
  *        to slave if it wants to terminates the I2C communication.
@@ -290,6 +297,7 @@ void ReadAckForWrite(unsigned char delay)
  * @param[in] delay.
  * @param[Out] NULL.
  */
+
  static void SendNackForRead(unsigned char delay)
  {
   unsigned long readData = 0;
@@ -312,6 +320,7 @@ void ReadAckForWrite(unsigned char delay)
   SetSdaDirection(GPIOD_IS_IN);
 
  }
+
 /** @fn static void I2cInit()
  * @brief Configuring the SDA and SCL as OUTPUTS so that Start, Slave address
  * ,and register address or register value that needs to be writen.
@@ -321,13 +330,13 @@ void ReadAckForWrite(unsigned char delay)
  * @param[in] Null.
  * @param[Out] Null.
  */
+
 void I2cInit()
 {
   SetSCLAsOutput();
   SetSdaDirection(GPIOD_IS_OUT);
   printf("Initialization successfully done");
 }
-
 
 /** @fn static void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWRCntrl)
  * @brief Sends the slave address to the I2C device and check for acknowledge
@@ -340,6 +349,7 @@ void I2cInit()
  * @param[in] Read / Write Control (0 --> Write, 1 --> Read).
  * @param[Out] NULL.
  */
+
 void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned char delay)
 {
   SetSdaDirection(GPIOD_IS_OUT);
@@ -375,6 +385,7 @@ void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, un
  * or register value).
  * @param[Out] NULL.
  */
+
 void I2cWriteData(unsigned char writeData, unsigned char delay)
 {
   SetSdaDirection(GPIOD_IS_OUT);
@@ -389,6 +400,7 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
   ReadAckForWrite(delay);
 
 }
+
 /** @fn static unsigned char I2cReadDataAck(unsigned char delay)
  * @brief Sends ack for the read byte.
  * @details Ack is sent to the slave so that it can make sure the data is read,
@@ -397,6 +409,7 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
  * @param[in] delay.
  * @param[Out] returns the value of readData .
  */
+
 unsigned char I2cReadDataAck(unsigned char delay)
 {
   unsigned char readData = 0;
@@ -418,6 +431,7 @@ unsigned char I2cReadDataAck(unsigned char delay)
  * @param[in] delay.
  * @param[Out] returns the value of readData .
  */
+
 unsigned char I2cReadDataNack(unsigned char delay)
 {
   unsigned char readData = 0;
@@ -429,6 +443,7 @@ unsigned char I2cReadDataNack(unsigned char delay)
   	SendNackForRead(delay);
     return readData;
 }
+
 /** @fn static void start(unsigned char delay)
  * @brief Sending start condition for the I2C.
  * @details Start condition is making SDA low when clock is high.
@@ -436,6 +451,7 @@ unsigned char I2cReadDataNack(unsigned char delay)
  * @param[in] delay.
  * @param[Out] No output parameters.
  */
+
 void I2cStart(unsigned char delay)
 {
   printf("\n\tI2C: I2C start\n");
@@ -449,11 +465,13 @@ void I2cStart(unsigned char delay)
  * @param[in] delay.
  * @param[Out] No output parameters.
  */
+
 void I2cStop(unsigned char delay)
 {
   printf("\n\tI2C: I2C stop\n");
   stop(delay);
 }
+
  /** @fn void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsigned char data, unsigned char delay )
  * @brief To write one byte of data into a particular register of a partivular slave
  * @details 
@@ -461,6 +479,7 @@ void I2cStop(unsigned char delay)
  * @param[in] slave address, register address, data to be written
  * @param[Out] none
  */
+
 void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsigned char data, unsigned char delay )
 {
 	I2cSendSlaveAddress(slave_address, I2C_WRITE, delay);
@@ -468,6 +487,7 @@ void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsig
 	I2cWriteData(data,delay);
 	I2cStop(delay);
 }
+
  /** @fn int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
  * @brief To read one byte of data from a particular register of a partivular slave
  * @details 
@@ -475,6 +495,7 @@ void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsig
  * @param[in] slave address, register address
  * @param[Out] readdata
  */
+
 int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
 {
 	unsigned char readData;
@@ -485,6 +506,7 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
 	I2cStop(delay);
 	return (int) readData;
 }
+
 /** @fn int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
  * @brief To burst read (i.e read multiple bytes byte of data)
  * @details 
@@ -492,6 +514,7 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
  * @param[in] readbuf to store read data, count to tell how many bytes to read , last
  * @param[Out] No. of values(bytes) read
  */
+ 
 int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
 {
 	printf("start reading the slave device\n");

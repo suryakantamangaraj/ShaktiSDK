@@ -24,9 +24,7 @@ PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED
 HEREUNDER IS PROVIDED "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE
 MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
-
 modified for shakti
-
 */
 
 #include <stdio.h>
@@ -50,6 +48,7 @@ extern volatile uint64_t fromhost;
  * @param[in] 
  * @param[Out] 
  */
+
 static uintptr_t syscall(uintptr_t which, uint64_t arg0, uint64_t arg1, uint64_t arg2)
 {
 	volatile uint64_t magic_mem[8] __attribute__((aligned(64)));
@@ -71,6 +70,7 @@ static uintptr_t syscall(uintptr_t which, uint64_t arg0, uint64_t arg1, uint64_t
 #define NUM_COUNTERS 2
 static uintptr_t counters[NUM_COUNTERS];
 static char* counter_names[NUM_COUNTERS];
+
 /** @fn void setStats(int enable)
  * @brief 
  * @details 
@@ -78,6 +78,7 @@ static char* counter_names[NUM_COUNTERS];
  * @param[in] 
  * @param[Out] 
  */
+
 void setStats(int enable)
 {
 	int i = 0;
@@ -93,6 +94,7 @@ void setStats(int enable)
 
 #undef READ_CTR
 	}
+
 /** @fn void __attribute__((noreturn)) tohost_exit(uintptr_t code)
  * @brief 
  * @details 
@@ -100,12 +102,14 @@ void setStats(int enable)
  * @param[in] 
  * @param[Out] 
  */
+
 void __attribute__((noreturn)) tohost_exit(uintptr_t code)
 {
 	
 	tohost = (code << 1) | 1;
 	while (1);
 }
+
 /** @fn uintptr_t __attribute__((weak)) handle_trap(uintptr_t cause, uintptr_t epc, uintptr_t regs[32])
  * @brief 
  * @details 
@@ -113,10 +117,12 @@ void __attribute__((noreturn)) tohost_exit(uintptr_t code)
  * @param[in] 
  * @param[Out] 
  */
+
 uintptr_t __attribute__((weak)) handle_trap(uintptr_t cause, uintptr_t epc, uintptr_t regs[32])
 {
 	tohost_exit(1337);
 }
+
 /** @fn void exit(int code)
  * @brief 
  * @details 
@@ -124,10 +130,12 @@ uintptr_t __attribute__((weak)) handle_trap(uintptr_t cause, uintptr_t epc, uint
  * @param[in] 
  * @param[Out] 
  */
+
 void exit(int code)
 {
 	tohost_exit(code);
 }
+
 /** @fn void abort()
  * @brief 
  * @details 
@@ -135,10 +143,12 @@ void exit(int code)
  * @param[in] 
  * @param[Out] 
  */
+
 void abort()
 {
 	exit(128 + SIGABRT);
 }
+
 /** @fn  void printstr(const char* s)
  * @brief 
  * @details 
@@ -146,10 +156,12 @@ void abort()
  * @param[in] 
  * @param[Out] 
  */
+
 void printstr(const char* s)
 {
 	syscall(SYS_write, 1, (uintptr_t)s, strlen(s));
 }
+
 /** @fn int __attribute__((weak)) main(int argc, char** argv)
  * @brief 
  * @details 
@@ -157,12 +169,14 @@ void printstr(const char* s)
  * @param[in] 
  * @param[Out] 
  */
+
 int __attribute__((weak)) main(int argc, char** argv)
 {
 	// single-threaded programs override this function.
 	printstr("Implement main(), foo!\n");
 	return -1;
 }
+
 /** @fn void _init(int cid, int nc)
  * @brief 
  * @details 
@@ -170,6 +184,7 @@ int __attribute__((weak)) main(int argc, char** argv)
  * @param[in] 
  * @param[Out] 
  */
+
 void _init(int cid, int nc)
 {
 	//init_tls();
@@ -188,6 +203,7 @@ void _init(int cid, int nc)
 
 	exit(ret);
 }
+
 /** @fn void printhex(uint64_t x)
  * @brief 
  * @details 
@@ -195,6 +211,7 @@ void _init(int cid, int nc)
  * @param[in] 
  * @param[Out] 
  */
+
 void printhex(uint64_t x)
 {
 	char str[17];
@@ -208,6 +225,7 @@ void printhex(uint64_t x)
 
 	printstr(str);
 }
+
 /** @fn static inline void printnum(void (*putch)(int, void**), void **putdat,
  *		unsigned long long num, unsigned base, int width, int padc)
  * @brief 
@@ -216,6 +234,7 @@ void printhex(uint64_t x)
  * @param[in] 
  * @param[Out] 
  */
+
 static inline void printnum(void (*putch)(int, void**), void **putdat,
 		unsigned long long num, unsigned base, int width, int padc)
 {
@@ -236,6 +255,7 @@ static inline void printnum(void (*putch)(int, void**), void **putdat,
 	while (pos-- > 0)
 		putch(digs[pos] + (digs[pos] >= 10 ? 'a' - 10 : '0'), putdat);
 }
+
 /** @fn static unsigned long long getuint(va_list *ap, int lflag)
  * @brief 
  * @details 
@@ -243,6 +263,7 @@ static inline void printnum(void (*putch)(int, void**), void **putdat,
  * @param[in] 
  * @param[Out] 
  */
+
 static unsigned long long getuint(va_list *ap, int lflag)
 {
 	if (lflag >= 2)
@@ -252,6 +273,7 @@ static unsigned long long getuint(va_list *ap, int lflag)
 	else
 		return va_arg(*ap, unsigned int);
 }
+
 /** @fn static long long getint(va_list *ap, int lflag)
  * @brief 
  * @details 
@@ -259,6 +281,7 @@ static unsigned long long getuint(va_list *ap, int lflag)
  * @param[in] 
  * @param[Out] 
  */
+
 static long long getint(va_list *ap, int lflag)
 {
 	if (lflag >= 2)
@@ -268,6 +291,7 @@ static long long getint(va_list *ap, int lflag)
 	else
 		return va_arg(*ap, int);
 }
+
 /** @fn float pow_10(unsigned int y)
  * @brief 
  * @details 
@@ -275,6 +299,7 @@ static long long getint(va_list *ap, int lflag)
  * @param[in] 
  * @param[Out] 
  */
+
 float pow_10(unsigned int y)
 {
 	unsigned int x;
@@ -287,6 +312,7 @@ float pow_10(unsigned int y)
 
 	return ((float) x);
 }
+
 /** @fn void reverse(char *str, int len) 
  * @brief 
  * @details 
@@ -294,6 +320,7 @@ float pow_10(unsigned int y)
  * @param[in] 
  * @param[Out] 
  */
+
 void reverse(char *str, int len) 
 { 
   int i=0, j=len-1, temp; 
@@ -304,7 +331,8 @@ void reverse(char *str, int len)
     str[j] = temp; 
     i++; j--; 
   } 
-} 
+}
+
 /** @fn int intToStr(int x, char str[], int d)
  * @brief 
  * @details 
@@ -312,6 +340,7 @@ void reverse(char *str, int len)
  * @param[in] 
  * @param[Out] 
  */
+
 int intToStr(int x, char str[], int d) 
 { 
   int i = 0; 
@@ -329,7 +358,8 @@ int intToStr(int x, char str[], int d)
   reverse(str, i); 
   str[i] = '\0'; 
   return i; 
-} 
+}
+
 /** @fn void ftoa(float n, char *res, int afterpoint) 
  * @brief 
  * @details 
@@ -337,6 +367,7 @@ int intToStr(int x, char str[], int d)
  * @param[in] 
  * @param[Out] 
  */
+
 void ftoa(float n, char *res, int afterpoint) 
 { 
   int i=0;
@@ -397,7 +428,8 @@ void ftoa(float n, char *res, int afterpoint)
 
     intToStr((int)fpart, res + i + 1, afterpoint); 
   } 
-} 
+}
+
 /** @fn static void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap)
  * @brief 
  * @details 
@@ -405,6 +437,7 @@ void ftoa(float n, char *res, int afterpoint)
  * @param[in] 
  * @param[Out] 
  */
+
 static void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap)
 {
 	register const char* p;
@@ -561,6 +594,7 @@ signed_number:
 		}
 	}
 }
+
 /** @fn int printf(const char* fmt, ...)
  * @brief 
  * @details 
@@ -568,6 +602,7 @@ signed_number:
  * @param[in] 
  * @param[Out] 
  */
+
 int printf(const char* fmt, ...)
 {
 	va_list ap;
@@ -578,6 +613,7 @@ int printf(const char* fmt, ...)
 	va_end(ap);
 	return 0; // incorrect return value, but who cares, anyway?
 }
+
 /** @fn int sprintf(char* str, const char* fmt, ...)
  * @brief 
  * @details 
@@ -585,6 +621,7 @@ int printf(const char* fmt, ...)
  * @param[in] 
  * @param[Out] 
  */
+
 int sprintf(char* str, const char* fmt, ...)
 {
 	va_list ap;
@@ -612,6 +649,7 @@ int sprintf(char* str, const char* fmt, ...)
  * @param[in] 
  * @param[Out] 
  */
+
 size_t strlen(const char *s)
 {
 	const char *p = s;
@@ -619,6 +657,7 @@ size_t strlen(const char *s)
 		p++;
 	return p - s;
 }
+
 /** @fn size_t strnlen(const char *s, size_t n)
  * @brief 
  * @details 
@@ -626,6 +665,7 @@ size_t strlen(const char *s)
  * @param[in] 
  * @param[Out] 
  */
+
 size_t strnlen(const char *s, size_t n)
 {
 	const char *p = s;
@@ -633,6 +673,7 @@ size_t strnlen(const char *s, size_t n)
 		p++;
 	return p - s;
 }
+
 /** @fn int strcmp(const char* s1, const char* s2)
  * @brief 
  * @details 
@@ -640,6 +681,7 @@ size_t strnlen(const char *s, size_t n)
  * @param[in] 
  * @param[Out] 
  */
+
 int strcmp(const char* s1, const char* s2)
 {
 	unsigned char c1, c2;
@@ -651,6 +693,7 @@ int strcmp(const char* s1, const char* s2)
 
 	return c1 - c2;
 }
+
 /** @fn char* strcpy(char* dest, const char* src)
  * @brief 
  * @details 
@@ -658,6 +701,7 @@ int strcmp(const char* s1, const char* s2)
  * @param[in] 
  * @param[Out] 
  */
+
 char* strcpy(char* dest, const char* src)
 {
 	char* d = dest;
@@ -665,6 +709,7 @@ char* strcpy(char* dest, const char* src)
 		;
 	return dest;
 }
+
 /** @fn long atol(const char* str)
  * @brief 
  * @details 
@@ -672,6 +717,7 @@ char* strcpy(char* dest, const char* src)
  * @param[in] 
  * @param[Out] 
  */
+ 
 long atol(const char* str)
 {
 	long res = 0;

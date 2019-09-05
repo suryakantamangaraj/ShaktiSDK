@@ -22,7 +22,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+
 #include "uart.h"//Includes the definitions of uart communication protocol//
+
 /** @fn  void main() 
  * @brief  prints hello world
  * @details 
@@ -30,6 +32,7 @@
  * @param[in] NULL
  * @param[Out] NULL
  */
+ 
 void main()
 {	
 	printf("Hello world !\n");

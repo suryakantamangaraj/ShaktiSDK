@@ -24,13 +24,15 @@
 #include <wchar.h>//
 #include <locale.h>
 #define SIZE 8
+
 /** @fn void clear()
  * @brief  
  * @details 
  * @warning
- * @param[in] 
+ * @param[in] NULL
  * @param[Out] NULL
  */
+
 void clear()
 {
     printf("\e[2J\e[H");
@@ -68,13 +70,15 @@ void clear()
     };
 
 	char solution[SIZE][SIZE];
+
  /** @fn void printsolution
  * @brief  
  * @details 
  * @warning
- * @param[in] 
+ * @param[in] NULL
  * @param[Out] NULL
  */
+
 void printsolution()
 {
     int i,j;
@@ -103,13 +107,15 @@ void printsolution()
         printf("\n");
     }
 }
+
 /** @fn int solvemaze(int r,int c)
  * @brief  
  * @details 
  * @warning
- * @param[in] int
+ * @param[in] row,column
  * @param[Out] int
  */
+
     int solvemaze(int r, int c)
 {
     if(maze[r][c]=='f')
@@ -139,6 +145,7 @@ void printsolution()
     return 0;
 
 }
+
 /** @fn int main()
  * @brief  
  * @details 
@@ -146,6 +153,7 @@ void printsolution()
  * @param[in] NULL
  * @param[Out] int
  */
+
 int main()
 {
 	printf("\e[2J\e[H");

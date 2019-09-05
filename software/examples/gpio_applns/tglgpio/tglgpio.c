@@ -33,7 +33,9 @@
  * @param[in] Delay  Required(ms).
  * @param[Out] NULL
  */
+
 extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
+
 /** @fn void main()
  * @brief Performs the toggling operation  with the help of button  
  * @details 
@@ -41,6 +43,7 @@ extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
  * @param[in] Registers,control word.
  * @param[Out] NULL
  */
+ 
 void main()
 {
 //Assumption 1 ---> output, 0 ---> input
