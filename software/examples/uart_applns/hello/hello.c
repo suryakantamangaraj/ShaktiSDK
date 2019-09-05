@@ -25,16 +25,16 @@
 
 #include "uart.h"//Includes the definitions of uart communication protocol//
 
-/** @fn  void main() 
+/** @fn  main
  * @brief  prints hello world
- * @details 
- * @warning
+ * @details main function, execution starts from here 
+ * @warning none
  * @param[in] NULL
  * @param[Out] NULL
  */
- 
+
 void main()
-{	
+{
 	printf("Hello world !\n");
 }
 

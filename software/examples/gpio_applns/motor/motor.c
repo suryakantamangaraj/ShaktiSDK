@@ -30,13 +30,13 @@
 #define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
 
  /** @fn void main()
- * @brief Performs the intilization of the corresponding registers of gpio pins.
+ * @brief Runs the motor
  * @details 
  * @warning 
- * @param[in] Registers,conrol word.
+ * @param[in] NULL
  * @param[Out] NULL
  */
- 
+
 void main()
 {
 	printf("Motor Control\n");
