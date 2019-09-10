@@ -29,11 +29,15 @@ PROGRAM ?=
 ifeq ($(TARGET),artix7_35t)
 	XLEN=32
 	flags= -D ARTIX7_35T
+ 	MARCH=rv32imac
+	MABI=ilp32
 endif
 
 ifeq ($(TARGET),artix7_100t)
 	XLEN=64
 	flags= -D ARTIX7_100T
+	MARCH=rv64imac
+	MABI=lp64
 endif
 
 ifeq ($(DEBUG),DEBUG)
@@ -54,16 +58,17 @@ all: create_dir
 btnled.riscv: crt.o syscalls.shakti create_dir
 	@echo -e "$(GREEN) Compiling code $(NC)"
 	@echo -e "$(RED) Caveat: Code starts at 0x80000000. Configure RTL appropriately $(NC)"
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc) -I$(bspboard) -c ./btnled.c -o ./output/btnled.o -march=rv$(XLEN)imafd -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc)  -c $(bsplib)/util.c -o ./output/util.o -march=rv$(XLEN)imafd -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld  ./output/util.o ./output/btnled.o ./output/syscalls.shakti ./output/crt.o -o ./output/btnled.shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc) -I$(bspboard) -c ./btnled.c -o ./output/btnled.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc)  -c $(bsplib)/util.c -o ./output/util.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bspboard)/uart.c -o ./output/uart.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld  ./output/util.o ./output/uart.o ./output/btnled.o ./output/syscalls.shakti ./output/crt.o -o ./output/btnled.shakti -static -nostartfiles -lm -lgcc
 
 create_dir:
 	@mkdir -p ./output
 
 
 crt.o: create_dir
-	@riscv$(XLEN)-unknown-elf-gcc -march=rv$(XLEN)imafd  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf -D__ASSEMBLY__=1 -c $(bspinc)/crt.S -o ./output/crt.o
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf -D__ASSEMBLY__=1 -c $(bspinc)/crt.S -o ./output/crt.o
 
 syscalls.shakti:
-	@riscv$(XLEN)-unknown-elf-gcc -march=rv$(XLEN)imafd  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf  -c $(bsplib)/syscalls.c -o ./output/syscalls.shakti -I$(bspinc)
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(flags) -c $(bsplib)/syscalls.c -o ./output/syscalls.shakti -I$(bspinc)
