@@ -22,7 +22,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-
 #include "platform.h"
 #include "gpio.h" // includes definitions of gpio pins and read, write functions//
 
@@ -49,7 +48,5 @@ void main()
 		DelayLoop(1000, 5000);
 		write_word(GPIO_DATA_REG, 0x00);
 		DelayLoop(1000, 5000);
-		
 	}
-
 }

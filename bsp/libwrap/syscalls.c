@@ -37,7 +37,7 @@ modified for shakti
 #include <encoding.h>
 
 #define SYS_write 64
-
+    
 #undef strcmp
 
 extern volatile uint64_t tohost;
@@ -115,8 +115,6 @@ int __attribute__((weak)) main(int argc, char** argv)
 	return -1;
 }
 
-
-
 void _init(int cid, int nc)
 {
 	//init_tls();
@@ -192,6 +190,8 @@ static long long getint(va_list *ap, int lflag)
 		return va_arg(*ap, int);
 }
 
+#if  !defined (ARTIX7_35T) && !defined (ARTIX7_100T) 
+
 float pow_10(unsigned int y)
 {
 	unsigned int x;
@@ -204,6 +204,8 @@ float pow_10(unsigned int y)
 
 	return ((float) x);
 }
+
+#endif
 
 void reverse(char *str, int len) 
 { 
@@ -236,6 +238,7 @@ int intToStr(int x, char str[], int d)
   return i; 
 } 
 
+ #if !defined(ARTIX7_35T) && !defined(ARTIX7_100T)
 void ftoa(float n, char *res, int afterpoint) 
 { 
   int i=0;
@@ -298,6 +301,7 @@ void ftoa(float n, char *res, int afterpoint)
   } 
 } 
 
+#endif
 
 static void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap)
 {
@@ -411,8 +415,10 @@ process_precision:
 				goto signed_number;
 
 			case 'f':
-
-				float_num =  va_arg(ap, double);
+                        
+                                #if !defined(ARTIX7_35T) && !defined(ARTIX7_100T) 
+ 
+                                float_num = va_arg(ap, double);
 
 				ftoa(float_num, float_arr, 6); 
 
@@ -421,7 +427,10 @@ process_precision:
 					putch(float_arr[i], putdat);
 					if(i > 29) break;
 				}
+                                #endif
+
 				break;
+                      
 
 				// unsigned decimal
 			case 'u':
@@ -487,7 +496,6 @@ int sprintf(char* str, const char* fmt, ...)
 	return str - str0;
 }
 
-
 size_t strlen(const char *s)
 {
 	const char *p = s;
@@ -544,3 +552,4 @@ long atol(const char* str)
 
 	return sign ? -res : res;
 }
+

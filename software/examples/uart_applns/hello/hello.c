@@ -24,10 +24,7 @@
 ***************************************************************************/
 #include "uart.h"//Includes the definitions of uart communication protocol//
 
-
 void main()
 {	
 	printf("Hello world !\n");
 }
-
-
