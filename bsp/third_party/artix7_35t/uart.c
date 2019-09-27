@@ -20,37 +20,31 @@ uart.c - src file for uart
 */
 
 #include "uart.h"
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+
 
 #define UART1_BASE_ADDRESS 0x11300
+#define BASE_ADDR ((volatile unsigned int *) UART1_BASE_ADDRESS) /* 32 bits */
+#define STATUS_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0xc)) /* 8 bits */
+#define WRITE_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x4)) /* 8 bits */
+#define READ_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x8)) /* 8 bits */
+#define RECV_NOT_EMPTY 0x8
+#define TRANS_NOT_FULL 0x2
+
+
+#undef getchar
+int getchar()
+{
+  char *ch;
+	while((*STATUS_REG & RECV_NOT_EMPTY) == 0);
+  ch = READ_REG;
+  return *ch;
+}
 
 #undef putchar
 int putchar(int ch)
 {
-  register char a0 asm("a0") = ch;
-  asm volatile ("li t1, 0x11300" "\n\t"	//The base address of UART config registers
-        "uart_status_simple: lb a1, 12(t1)" "\n\t"
-        "andi a1,a1,0x2" "\n\t"
-        "beqz a1, uart_status_simple" "\n\t"
-				"sb a0, 4(t1)"  "\n\t"
-				:
-				:
-				:"a0","t1","cc","memory");
-  return 0;
-}
-
-// function used to check if UART is empty. Can be used before exiting a function
-int is_empty()
-{
-    asm volatile (
-        "uart_end: li t1, 0x11300" "\n\t"	//The base address of UART config registers
-        "lb a0, 12(t1)" "\n\t"
-        "andi a0, a0, 0x1" "\n\t"
-        "beqz a0, uart_end" "\n\t"
-				:
-				:
-				:"a0","t1","cc","memory");
-  return 0;
+  unsigned char c = ch;
+	while((*STATUS_REG & TRANS_NOT_FULL) == 0);
+	*WRITE_REG = c;
+	return 0;
 }
