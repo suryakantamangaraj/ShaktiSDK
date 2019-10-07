@@ -47,16 +47,16 @@ bsplib:=../../../../bsp/libwrap
 bspboard:=../../../../bsp/third_party/$(TARGET)
 
 all: create_dir
-	make calculator.riscv
+	make asm_calculator.riscv
 
-calculator.riscv: crt.o syscalls.shakti create_dir
+asm_calculator.riscv: crt.o syscalls.shakti create_dir
 	@echo -e "$(GREEN) Compiling code $(NC)"
 	@echo $(TARGET)
 	@echo -e "$(RED) Caveat: Code starts at 0x80000000. Configure RTL appropriately $(NC)"
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc)  -c ./calculator.c -o ./output/calculator.o -march=rv$(XLEN)imafdc -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspinc)  -c ./asm_calculator.c -o ./output/asm_calculator.o -march=rv$(XLEN)imafdc -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c $(bspboard)/uart.c -o ./output/uart.o -march=rv$(XLEN)imafdc -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./output/calculator.o ./output/syscalls.shakti ./output/uart.o ./output/crt.o -o ./output/calculator.shakti -static -nostartfiles -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-objdump -D ./output/calculator.shakti > ./output/calculator.dump
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./output/asm_calculator.o ./output/syscalls.shakti ./output/uart.o ./output/crt.o -o ./output/asm_calculator.shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-objdump -D ./output/asm_calculator.shakti > ./output/asm_calculator.dump
 
 create_dir:
 	@mkdir -p ./output
