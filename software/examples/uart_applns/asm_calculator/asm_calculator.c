@@ -65,52 +65,52 @@ int getchar()
 int main()
 {
 
-int a,b,c;
+int a, b, c;
 printf("Enter 2 numbers\n");			//Getting the inputs
-a=getchar() - '0';
-printf(" a =  %d",a);
-b=getchar() - '0';
-printf(" b =  %d",b);
+a= getchar() - '0';
+printf(" a =  %d", a);
+b= getchar() - '0';
+printf(" b =  %d", b);
 printf("Enter operation 1.Add 2.Subtract 3.Multiply 4.Divide\n");
-c=getchar() - '0';
-printf(" c =  %d",c);
+c= getchar() - '0';
+printf(" c =  %d", c);
 register int a1 asm ("x18");
 register int a2 asm ("x19");
 register int a3 asm ("x20");
-a1=a;
-a2=b;
-a3=c;
+a1 = a;
+a2 = b;
+a3 = c;
 register int a4 asm ("x21");			//register to store output of computation
 asm volatile(
-	"li x22,1""\n\t"
-	"li x23,2""\n\t"
-	"li x24,3""\n\t"			//using 4 registers to compare with the options
-	"li x25,4""\n\t"
+	"li x22, 1""\n\t"
+	"li x23, 2""\n\t"
+	"li x24, 3""\n\t"			//using 4 registers to compare with the options
+	"li x25, 4""\n\t"
 );
 
 asm volatile(
-	"beq x20,x22,addlabel""\n\t"
-	"beq x20,x23,sublabel""\n\t"
-	"beq x20,x24,mullabel""\n\t"
-	"beq x20,x25,divlabel""\n\t"		//conditional branching based on choice
+	"beq x20, x22, addlabel""\n\t"
+	"beq x20, x23, sublabel""\n\t"
+	"beq x20, x24, mullabel""\n\t"
+	"beq x20, x25, divlabel""\n\t"		//conditional branching based on choice
 	"addlabel:""\n\t"
-	"add x21,x18,x19""\n\t"	
+	"add x21, x18, x19""\n\t"	
 	"j end""\n\t"
 	"sublabel:""\n\t"
-	"sub x21,x18,x19""\n\t"
+	"sub x21, x18, x19""\n\t"
 	"j end""\n\t"
 	"mullabel:""\n\t"
-	"mul x21,x18,x19""\n\t"
+	"mul x21, x18, x19""\n\t"
 	"j end""\n\t"	
 	"divlabel:""\n\t"
-	"div x21,x18,x19""\n\t"
+	"div x21, x18, x19""\n\t"
 	"j end""\n\t"
 );
 
 asm volatile(
 	"end:""\n\t"				//end of branch
 );
-printf("\nThe result is %d",a4);
+printf("\nThe result is %d", a4);
 return 0;
 }
 
