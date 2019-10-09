@@ -1,3 +1,14 @@
+/** @fn int getchar()
+ * @brief getchar function uses UART to accept one character from input
+ *
+ * @details This function uses UART to accept one character from input
+ *
+ * @warning none
+ *
+ * @param[in] none
+ * @param[Out] returns one character
+ */
+
 int getchar()
 {
  register char a0 asm("a0");
@@ -14,6 +25,17 @@ int getchar()
 
    return a0;
 }
+
+/** @fn int main()
+ * @brief Main function performs the calculator operations in asm
+ *
+ * @details This function performs the calculator operations in asm
+ *
+ * @warning none
+ *
+ * @param[in] none
+ * @param[Out] returns 0
+ */
 
 int main()
 {
@@ -64,6 +86,7 @@ asm volatile(
 	"end:""\n\t"				//end of branch
 );
 printf("\nThe result is %d",a4);
+return 0;
 }
 
 
