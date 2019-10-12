@@ -1,0 +1,13 @@
+build:
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+
+  script:
+    - source ./setenv.sh
+    - env
+    - make all
+    - make all TARGET=artix7_100t
+
+  tags:
+    - sw-runner

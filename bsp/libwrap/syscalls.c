@@ -35,7 +35,7 @@ modified for shakti
 #include <encoding.h>
 
 #define SYS_write 64
-
+    
 #undef strcmp
 
 extern volatile uint64_t tohost;
@@ -299,6 +299,7 @@ static long long getint(va_list *ap, int lflag)
  * @param[in] 
  * @param[Out] 
  */
+#if  !defined (ARTIX7_35T) && !defined (ARTIX7_100T) 
 
 float pow_10(unsigned int y)
 {
@@ -312,6 +313,7 @@ float pow_10(unsigned int y)
 
 	return ((float) x);
 }
+#endif
 
 /** @fn void reverse(char *str, int len) 
  * @brief 
@@ -359,6 +361,8 @@ int intToStr(int x, char str[], int d)
   str[i] = '\0'; 
   return i; 
 }
+
+ #if !defined(ARTIX7_35T) && !defined(ARTIX7_100T)
 
 /** @fn void ftoa(float n, char *res, int afterpoint) 
  * @brief 
@@ -429,6 +433,7 @@ void ftoa(float n, char *res, int afterpoint)
     intToStr((int)fpart, res + i + 1, afterpoint); 
   } 
 }
+#endif
 
 /** @fn static void vprintfmt(void (*putch)(int, void**), void **putdat, const char *fmt, va_list ap)
  * @brief 
@@ -550,8 +555,10 @@ process_precision:
 				goto signed_number;
 
 			case 'f':
-
-				float_num =  va_arg(ap, double);
+                        
+                                #if !defined(ARTIX7_35T) && !defined(ARTIX7_100T) 
+ 
+                                float_num = va_arg(ap, double);
 
 				ftoa(float_num, float_arr, 6); 
 
@@ -560,7 +567,10 @@ process_precision:
 					putch(float_arr[i], putdat);
 					if(i > 29) break;
 				}
+                                #endif
+
 				break;
+                      
 
 				// unsigned decimal
 			case 'u':
