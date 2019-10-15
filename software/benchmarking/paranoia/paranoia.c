@@ -381,6 +381,15 @@ int Break, Done, NotMonot, Monot, Anomaly, IEEE,
 /*U2  gap above 1.0, i.e, 1.0+U2 is next number above 1.0 */
 
 /* floating point exception receiver */
+
+/** @fn            
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 sigfpe(INT x)
 {
@@ -396,6 +405,14 @@ sigfpe(INT x)
 		}
 	exit(1);
 }
+
+/** @fn main(VOID)
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
 main(VOID)
 {
@@ -1923,6 +1940,14 @@ FLOAT X;
 #endif
 { return X >= 0. ? 1.0 : -1.0; }
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 Pause(VOID)
 {
@@ -1939,6 +1964,14 @@ Pause(VOID)
 	++PageNo;
 	}
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 TstCond (INT K, INT Valid, CHARP T)
 #ifdef KR_headers
@@ -1946,6 +1979,14 @@ int K, Valid;
 char *T;
 #endif
 { if (! Valid) { BadCond(K,T); printf(".\n"); } }
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 BadCond(INT K, CHARP T)
@@ -1960,6 +2001,13 @@ char *T;
 	printf("%s:  %s", msg[K], T);
 	}
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  FLOAT
 Random(VOID)
@@ -1979,6 +2027,14 @@ Random(VOID)
 	Random1 = Y + X * 0.000005;
 	return(Random1);
 	}
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 SqXMinX (INT ErrKind)
@@ -2001,6 +2057,14 @@ int ErrKind;
 		}
 	}
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 NewD(VOID)
 {
@@ -2014,6 +2078,14 @@ NewD(VOID)
 		}
 	D = Radix * D;
 	}
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 SR3750(VOID)
@@ -2030,6 +2102,14 @@ SR3750(VOID)
 		if (SqEr > MaxSqEr) MaxSqEr = SqEr;
 		}
 	}
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 IsYeqX(VOID)
@@ -2049,6 +2129,14 @@ IsYeqX(VOID)
 		}
 	}
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 SR3980(VOID)
 {
@@ -2061,11 +2149,27 @@ SR3980(VOID)
 		} while ( X < W );
 	}
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 PrintIfNPositive(VOID)
 {
 	if (N > 0) printf("Similar discrepancies have occurred %d times.\n", N);
 	}
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 TstPtUf(VOID)
@@ -2126,6 +2230,14 @@ very_serious:
 		}
 	}
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 notify(CHARP s)
 #ifdef KR_headers
@@ -2140,12 +2252,28 @@ notify(CHARP s)
 #include "paranoia.h"
 */
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+
  void
 msglist(CHARPP s)
 #ifdef KR_headers
 char **s;
 #endif
 { while(*s) printf("%s\n", *s++); }
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 Instructions(VOID)
@@ -2164,6 +2292,14 @@ Instructions(VOID)
 
 	msglist(instr);
 	}
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 Heading(VOID)
@@ -2191,6 +2327,14 @@ Heading(VOID)
 
 	msglist(head);
 	}
+
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
 
  void
 Characteristics(VOID)
@@ -2220,6 +2364,14 @@ Characteristics(VOID)
 	msglist(chars);
 	}
 
+/** @fn 
+ * @brief   
+ * @details 
+ * @warning
+ * @param[in] 
+ * @param[Out] 
+ */
+ 
  void
 History(VOID)
 { /* History */

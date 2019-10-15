@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
- *
  *   Copyright (C) 1995-1997 Simon G. Vogl
  *		   1998-2000 Hans Berglund
  *
@@ -21,10 +20,19 @@
 * Name of the file	     		:  i2c_driver.c
 * Created date			        :  
 * Brief Description of file     :  Demonstartes the working of i2c protocol.
-*/
+****************************************************************************/
 
 #include "i2c.h"//Includes the definitions of i2c communication protocol//
 
+/** @fn char get_i2c_shakti(char *addr)
+ * @brief: Reads the contents of the specified memory location. 
+ * @details: This function reads and returns the passed memory address. 
+ *           The same function can be used to read any valid memory location if 
+ *           the memory is mapped to a byte address.
+ * @warning: Do not try to read more than one byte.
+ * @param[in]: Byte Address that needs to be read.
+ * @param[Out]: value read from the passed location.
+ */
 char get_i2c_shakti(char *addr)
 {
 #ifdef ASM
@@ -37,6 +45,15 @@ char get_i2c_shakti(char *addr)
 #endif
 }
 
+/** @fn void set_i2c_shakti(char *addr, char val)
+ * @brief: Writes the passed value into the passed memory location. 
+ * @details: This function writes the passed value into passed memory address. 
+ *           The same function can be used to write any valid memory location if the 
+ *           the memory is mapped to a byte address.
+ * @warning: Do not try to read more than one byte.
+ * @param[in]: Byte Address that needs to be read.
+ * @param[Out]: value read from the passed location.
+ */
 void set_i2c_shakti(char *addr, char val)
 {
 #ifdef ASM
@@ -47,44 +64,110 @@ void set_i2c_shakti(char *addr, char val)
 #endif
 }
 
-void waitfor(unsigned int secs) 
+/** @fn void waitfor(unsigned int secs)
+  * @brief: provides delay. 
+ * @details: This function is mainly used to provide some delay when polling 
+ *           method is used to access any mapped location.
+ * @warning: Nil.
+ * @param[in]: delay_value.
+ * @param[Out]: 
+ */
+void waitfor(unsigned int delay_value) 
 {
 	unsigned int time = 0;
-	while(time++ < secs);
+	while(time++ < delay_value);
 }
 
+/** @fn void i2c_start()
+ * @brief: Initiates the I2C communication 
+ * @details: I2C read/ write needs a start condition that needs to be sent to the
+ *           slave device. This function creates the start condition.
+ * @warning: Nil 
+ * @param[in]: Nil. 
+ * @param[Out]: Nil 
+ */
 void i2c_start()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_START);
 }
 
+/** @fn void i2c_start_eni()
+ * @brief: Function sends start condition with end of interrupt. 
+ * @details: Internally this function is same as i2c_start. Vinod has to decide 
+ *           whether we need this function or not.
+ * @warning: Nil 
+ * @param[in]: Nil 
+ * @param[Out]: Nil 
+ */
 void i2c_start_eni()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_START);
 }
 
+/** @fn void i2c_repstart()
+ * @brief: Function which calls repeated start condition.
+ * @details: To make I2C communication faster when doing burst read / burst write
+ *           operations (provided the same is supported by the I2C device), 
+ *           repeated start will reduce the time by starting accessing next read
+ *           without sending stop sequence.
+ * @warning: Nil 
+ * @param[in]: Nil 
+ * @param[Out]: Nil 
+ */
 void i2c_repstart()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_REPSTART);
 }
 
+/** @fn void i2c_repstart_eni()
+ * @brief: Function sends repeated start condition with end of interrupt. 
+ * @details: Internally this function is same as i2c_repstart. Vinod has to decide 
+ *           whether we need this function or not.
+ * @warning: Nil 
+ * @param[in]: Nil 
+ * @param[Out]: Nil 
+ */
 void i2c_repstart_eni()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_REPSTART);
 }
 
+/** @fn void i2c_stop()
+ * @brief: stops the i2c communication 
+ * @details: When the master wants to stops the I2C communication, this function
+ *           sends the stop condition to the device.
+ * @warning: nil 
+ * @param[in]: Nil 
+ * @param[Out]: Nil 
+ */
 void i2c_stop()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_STOP);
 }
 
-
+/** @fn void i2c_nack()
+ * @brief: Sends the Nack condition to the slave.
+ * @details: This function sends NACK condition to the slave so that the slave 
+ *           device to indicate the master is not ready to do any more communication
+ *           with the device.
+ * @warning: Nil
+ * @param[in]: None 
+ * @param[Out]: None 
+ */
 void i2c_nack()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_NACK);
 }
 
-
+/** @fn int shakti_init_i2c()
+ * @brief: Basic Initialisation for I2C communication. 
+ * @details: This function configures the serial clock frequency for the I2C 
+ *           Communication. 
+ * @warning: Nil 
+ * @param[in]: Currently we are internally fixing the serial clock. But we need 
+ *             to make it programmable
+ * @param[Out]: zero if success, else ENXIO
+ */
 int shakti_init_i2c()
 {
    unsigned char temp = 0;
@@ -96,7 +179,6 @@ int shakti_init_i2c()
     /* Load Byte 80H into Control                                                                                                           */
     /* load Clock Register S2 */ /* We are doing the opposite -- Setting the clock and then the registers -- Doesn't really matter actually */
     /* Send C1H to S1 - Set I2C to Idle mode -- SDA and SCL should be high                                                                  */
-
     set_i2c_shakti(i2c_prescale,0x1F);  //Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock
     temp = get_i2c_shakti(i2c_prescale);
     set_i2c_shakti(i2c_scl,0x91);  //Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock
@@ -146,8 +228,16 @@ int shakti_init_i2c()
         printf("\tAll is well till here \n");
 
     printf("\tI2C successfully initialized\n");
+    return 0;
 }
 
+/** @fn int wait_for_bb()
+ * @brief: Waits till the bus becomes free.
+ * @details: Wait for the bus to become free till the timeout happens.
+ * @warning: None 
+ * @param[in]: None 
+ * @param[Out]: Returns 0, when bus becomes free, else returns ETIMEOUT. 
+ */
 int wait_for_bb()
 {
 
@@ -170,6 +260,14 @@ int wait_for_bb()
 	return 0;
 }
 
+/** @fn int wait_for_pin(int *status)
+ * @brief: Waot for complete I2C byte transfer. 
+ * @details: This polling based I2C function is called to check whether a 
+ *           byte operation is completed or not.
+ * @warning: None
+ * @param[in]: pointer to the variable which holds the status register value. 
+ * @param[Out]: If time out happens, returns DEF_TIMEOUT. else 0. 
+ */
 int wait_for_pin(int *status)
 {
 
@@ -190,6 +288,18 @@ int wait_for_pin(int *status)
 	return 0;
 }
 
+/** @fn int shakti_sendbytes( const char *buf, int count, int last, int eni)
+ * @brief: Function to carry out burst write operation.
+ * @details : Whenever master wants to write n number of values into the I2C slave 
+ *            device, this function will write the n number of value in the slave
+ *            registers.
+ * @warning: The slave should have support for this option.
+ * @param[in]: Buffer pointer which has n numberof values.
+ *             count ---> number of  bytes to be written.
+ *             last ---> decides whether to stop operation or not.
+ *             eni ---> decides whether end of interrupt is to be used.
+ * @param[Out]: Number of bytes written successfully.
+ */
 int shakti_sendbytes( const char *buf, int count, int last, int eni)
 {
 	int wrcount, status, timeout;
@@ -224,6 +334,20 @@ int shakti_sendbytes( const char *buf, int count, int last, int eni)
 }
 
 #ifdef DEBUG
+
+
+/** @fn int shakti_readbytes(char *buf, int count, int last)
+ * @brief Function to carry out burst read operation.
+ * @details  Whenever master wants to read n number of values from the I2C slave 
+ *            device, this function will read the n number of value from the slave
+ *            registers.
+ * @warning The slave should have support for this option.
+ * @param[in] Buffer pointer which holds n number of read values.
+ *             count ---> number of  bytes to be read.
+ *             last ---> decides whether to stop operation or not.
+ *             eni ---> decides whether end of interrupt is to be used.
+ * @param[Out] Number of bytes read successfully.
+ */
 int shakti_readbytes(char *buf, int count, int last)
 {
 	int i, status;
@@ -266,13 +390,14 @@ int shakti_readbytes(char *buf, int count, int last)
 }
 #endif
 
-
-/************************************************************************
-* Brief Description     : Performs the i2c protocol configuration. 
-* Parameters            : prescalar clock,serial clock.
-* Return                : int. 
-*************************************************************************/
-
+/** @fn int i2c_configure(int psc, int sclkFrequency)
+ * @brief Performs the i2c protocol configuration.
+ * @details Writes the passed prescaller value and serial clock values 
+ *           I2C configurration registers. Then clears the status register. 
+ * @warning None
+ * @param[in] prescalar clock,serial clock.
+ * @param[Out] Returns 0, if initialisation is proper. Else returns ENIXO.
+ */
 int i2c_configure(int psc, int sclkFrequency)
 {
 	unsigned char temp = 0;
@@ -288,13 +413,11 @@ int i2c_configure(int psc, int sclkFrequency)
 	temp = get_i2c_shakti(i2c_prescale);//copies the prescalar clock value to the temp variable//
 	
 	if(temp != psc)
-	
 	{
 		printf("\n\t Error in setting prescaler clock; Wr. Value: 0x%02x; Read Value: 0x%02x", psc, temp);
 	}
 	
 	else
-	
 	{
 		printf("\n\t Prescaler value is written successfully\n");
 	}
@@ -319,17 +442,6 @@ int i2c_configure(int psc, int sclkFrequency)
 	}
 #endif
 
-#ifdef DEBUG
-	
-	printf("\tSetting Control Register with 0x01 \n");
-	
-	set_i2c_shakti(i2c_control, 0x01);	// Reading set control Register Value to ensure sanctity//
-	
-	temp = get_i2c_shakti(i2c_control);//copies the i2c control variable to temp//
-	
-	printf("\tControl Register Read Value 0x%x \n", temp);
-	
-#endif
 
 	/* S1=0x80 S0 selected, serial interface off */
 	printf("\tSetting Control Register with 0x80 \n");
@@ -374,13 +486,18 @@ int i2c_configure(int psc, int sclkFrequency)
 	}
 
 	printf("\tI2C successfully initialized\n");
+	return 0;
 }
-/************************************************************************
-* Brief Description     : Performs the intilization of i2c slave. 
-* Parameters            : slave address.
-* Return                : int. 
-*************************************************************************/
 
+/** @fn int i2c_slave_init(unsigned char slaveAddress)
+ * @brief Performs the intilization of i2c slave.
+ * @details This function enables start sequence and sends the slave address for 
+ *          so that the slave device can be accessed further.
+ * @warning 
+ * @param[in] slave address.
+ * @param[Out] Zero if success, else ENIXO --> If the master is not receiving 
+ *             ack from slave. EREMOTEIO --> if the PIN is not becoming low.
+ */
 int i2c_slave_init(unsigned char slaveAddress)
 {
 	int timeout;
@@ -411,14 +528,20 @@ int i2c_slave_init(unsigned char slaveAddress)
 	if (status & I2C_SHAKTI_LRB) { 
 	    i2c_stop();
 		printf("\tSome status check failing\n");
+		return ENIXO;
 	}
+	return 0;
 }
-/************************************************************************
-* Brief Description     : It does the reading or writing from the address specified . 
-* Parameters            : starting address.
-* Return                : int. 
-*************************************************************************/
 
+/** @fn int SendAddressToReadOrWrite(unsigned int startAddress)
+ * @brief It does the reading or writing from the specified address.
+ * @details: the passed address value is divided into two bytes and sent one by one
+ * @warning: this function can be used with i2c devices which has 16bit 
+ *           registers as well as 8 bit registers. If 16 bits address is to be 
+ *           written, define the macro "_16Bit".
+ * @param[in] register(memory) address
+ * @param[Out] int
+ */
 int SendAddressToReadOrWrite(unsigned int startAddress)
 {
 	int timeout;
@@ -455,11 +578,15 @@ int SendAddressToReadOrWrite(unsigned int startAddress)
 		printf("\tSome status check failing\n");
 	}
 }
-/************************************************************************
-* Brief Description     : It does the reading or writing from the address specified . 
-* Parameters            : starting address.
-* Return                : int. 
-*************************************************************************/
+
+/** @fn int i2c_rw_wait(int *status)
+ * @brief It does the reading or writing from the address specified
+ * @details Waits in the loop till PIN Bit becomes inactive (indicating 
+ *          Completion of byte transfer), else timeout happens.
+ * @warning Nil
+ * @param[in] Pointer that will hold the status register value
+ * @param[Out] returns 0 if success else ETIMEDOUT
+ */
 int i2c_rw_wait(int *status)
 {
 	int timeout = DEF_TIMEOUT;
@@ -478,12 +605,18 @@ int i2c_rw_wait(int *status)
 
 	return 0;
 }
-/**************************************************************************
-* Brief Description     : This makes the read or write operation to wait until the count has been completed . 
-* Parameters            : count value.
-* Return                : int. 
-*************************************************************************/
 
+/** @fn int i2c_datawrite( const char *buf, int count, int last, int eni)
+ * @brief This makes the write operation to wait until the count has been 
+ *        completed
+ * @details The function writes n bytes of data into the slave i2c device.
+ * @warning : Nil
+ * @param[in] buf ---> pointer which is holding the data tobe return.
+ *            count ---> no. of bytes needs to be written.
+ *            last ---> controls whether stop condition has to be sent or not.
+ *            eni ---> end of interrupt has to be sent or not.
+ * @param[Out] No. of bytes needs to be written.
+ */
 int i2c_datawrite( const char *buf, int count, int last, int eni)
 {
 	int wrcount, status, timeout;
@@ -524,11 +657,18 @@ int i2c_datawrite( const char *buf, int count, int last, int eni)
 
 	return i;
 }
-/************************************************************************
-* Brief Description     : It does the data reading. 
-* Parameters            : count value,ending address.
-* Return                : int. 
-*************************************************************************/
+
+/** @fn  int i2c_dataread(char *buf, int count, int last)
+ * @brief Function to carry out burst read operation.
+ * @details  Whenever master wants to read n number of values from the I2C slave 
+ *            device, this function will read the n number of value from the slave
+ *            registers.
+ * @warning The slave should have support for this option.
+ * @param[in] Buffer pointer which holds n number of read values.
+ *             count ---> number of  bytes to be read.
+ *             last ---> decides whether to stop operation or not.
+ * @param[Out] Number of bytes read successfully.
+ */
 int i2c_dataread(char *buf, int count, int last)
 {
 	int i, status;

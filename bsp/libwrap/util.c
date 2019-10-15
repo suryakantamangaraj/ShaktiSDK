@@ -1,5 +1,4 @@
 /*
-
 utll.c - src file for util
 
 Created by Sathya Narayanan N
@@ -19,9 +18,15 @@ Email id: sathya281@gmail.com
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 */
 
+/** @fn void DelayLoop(unsigned long cntr1, unsigned long cntr2)
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] int
+ * @param[Out] NULl
+ */
 
 void DelayLoop(unsigned long cntr1, unsigned long cntr2)
 {
@@ -34,25 +39,27 @@ void DelayLoop(unsigned long cntr1, unsigned long cntr2)
 
 }
 
-
-
-/*********************************************************************
-* Brief Description     : returns the value stored at a given address
-*                         Here we assume the word size to be 32 bits for gpio     
-* Parameters            : int*
-* Return                : int
-* *******************************************************************/
+/** @fn long int read_word(int *addr)
+ * @brief returns the value stored at a given address
+          Here we assume the word size to be 32 bits for gpio
+ * @details 
+ * @warning 
+ * @param[in] address
+ * @param[Out] int
+ */
 
 long int read_word(int *addr)
 {
   return *addr;
 }
 
-/*****************************************************
-* Brief Description     : writes a value to an address
-* Parameters            : int*
-* Return                : int
-* ****************************************************/
+/** @fn void write_word(int *addr, unsigned long val)
+ * @brief writes a value to an address
+ * @details 
+ * @warning 
+ * @param[in] int
+ * @param[Out] NULL
+ */
 
 void write_word(int *addr, unsigned long val)
 {

@@ -1,8 +1,7 @@
 /*
 uart.c - src file for uart
-
-    Created by Arjun menon <c.arjunmenon@gmail.com> and Kotteeswaran <kottee.1@gmail.com>
-
+    Created by Niketan Shahapur <niketanshahpur@gmail.com>
+    
     Copyright (C) 2019  IIT Madras. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
@@ -22,7 +21,6 @@ uart.c - src file for uart
 #include "uart.h"
 
 
-
 #define UART1_BASE_ADDRESS 0x11300
 #define BASE_ADDR ((volatile unsigned int *) UART1_BASE_ADDRESS) /* 32 bits */
 #define STATUS_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0xc)) /* 8 bits */
@@ -31,7 +29,14 @@ uart.c - src file for uart
 #define RECV_NOT_EMPTY 0x8
 #define TRANS_NOT_FULL 0x2
 
-
+/** @fn int getchar( )
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] none
+ * @param[Out] char
+ */
+ 
 #undef getchar
 int getchar()
 {
@@ -40,6 +45,15 @@ int getchar()
   ch = READ_REG;
   return *ch;
 }
+
+
+/** @fn int putchar(int ch)
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] char
+ * @param[Out] int
+ */
 
 #undef putchar
 int putchar(int ch)
