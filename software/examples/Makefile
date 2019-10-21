@@ -65,6 +65,10 @@ else
 ifeq ($(PROGRAM),gyro_softi2c)
 	cd gpio_applns/gyro_softi2c && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
 else
+ifeq ($(PROGRAM),asm_calculator)
+	cd uart_applns/asm_calculator && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+endif
 endif
 endif
 endif
