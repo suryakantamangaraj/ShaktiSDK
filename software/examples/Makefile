@@ -29,6 +29,7 @@ export DEBUG
 PROGRAM ?= all
 TARGET ?=artix7_35t
 DEBUG ?=
+UPLOAD ?=
 
 # Invoke all possible combinations of applns for different targets
 # There is a provision to make in the exact folder where code is written
@@ -36,38 +37,73 @@ DEBUG ?=
 all:
 	@echo "$(TARGET)"
 ifeq ($(PROGRAM),hello)
+ifeq ($(UPLOAD),UPLOAD)
+	cd uart_applns/hello && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else 
 	cd uart_applns/hello && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),uartmp3)
-	cd uart_applns/uartmp3 && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),lm75)
-	cd i2c_applns/lm75 && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),btnled)
-	cd gpio_applns/btnled && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),tglgpio)
-	cd gpio_applns/tglgpio && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),rdgpio)
-	cd gpio_applns/rdgpio && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),motor)
-	cd gpio_applns/motor && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),keypad)
-	cd gpio_applns/keypad && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),maze)
-	cd uart_applns/maze && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-ifeq ($(PROGRAM),gyro_softi2c)
-	cd gpio_applns/gyro_softi2c && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
 else
 ifeq ($(PROGRAM),asm_calculator)
+ifeq ($(UPLOAD),UPLOAD)
+	cd uart_applns/asm_calculator && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else 
 	cd uart_applns/asm_calculator && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
 else
+ifeq ($(PROGRAM),maze)
+ifeq ($(UPLOAD),UPLOAD)
+	cd uart_applns/wifi && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd uart_applns/wifi && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
+else
+ifeq ($(PROGRAM),lm75)
+ifeq ($(UPLOAD),UPLOAD)
+	cd i2c_applns/lm75 && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd i2c_applns/lm75 && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
+else
+ifeq ($(PROGRAM),btnled)
+ifeq ($(UPLOAD),UPLOAD)
+	cd gpio_applns/btnled && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd gpio_applns/btnled && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
+else
+ifeq ($(PROGRAM),tglgpio)
+ifeq ($(UPLOAD),UPLOAD)
+	cd gpio_applns/tglgpio && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd gpio_applns/tglgpio && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
+else
+ifeq ($(PROGRAM),rdgpio)
+ifeq ($(UPLOAD),UPLOAD)
+	cd gpio_applns/rdgpio && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd gpio_applns/rdgpio && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
+else
+ifeq ($(PROGRAM),motor)
+ifeq ($(UPLOAD),UPLOAD)
+	cd gpio_applns/motor && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd gpio_applns/motor && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
+else
+ifeq ($(PROGRAM),keypad)
+ifeq ($(UPLOAD),UPLOAD)
+	cd gpio_applns/keypad && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd gpio_applns/keypad && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+endif
+else
+ifeq ($(PROGRAM),gyro_softi2c)
+ifeq ($(UPLOAD),UPLOAD)
+	cd gpio_applns/gyro_softi2c && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+	cd gpio_applns/gyro_softi2c && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
 endif
 endif
 endif

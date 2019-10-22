@@ -22,6 +22,7 @@ PROGRAM ?= hello
 TARGET ?= artix7_35t
 DEBUG ?= DEBUG
 CLEAR ?=
+UPLOAD ?= UPLOAD
 
 #############################################################
 # Prints help message
@@ -43,6 +44,8 @@ help:
 	@echo " debug [PROGRAM=$(PROGRAM)] [TARGET=$(TARGET)]"
 	@echo " Builds the requested PROGRAM with debug options"
 	@echo ""
+	@echo " upload [PROGRAM=$(PROGRAM)] [TARGET=$(TARGET)]"
+	@echo " Uploads the requested PROGRAM to the Flash memory in the board"
 	@echo ""
 	@echo " clean"
 	@echo " Cleans compiled objects in every example applns."
@@ -63,16 +66,20 @@ BOARD_DIR := $(shell ls ./bsp/third_party)
 GPIO_DIR := $(shell cd ./software/examples/gpio_applns/ && ls -d * | grep -v Makefile )
 UART_DIR := $(shell cd ./software/examples/uart_applns/ && ls -d * | grep -v Makefile )
 I2C_DIR := $(shell cd software/examples/i2c_applns/ && ls -d * | grep -v Makefile )
-APP_DIR := $(GPIO_DIR) $(UART_DIR) $(I2C_DIR)
+#PWM_DIR := $(shell cd software/examples/pwm_applns/ && ls -d * | grep -v Makefile )
+#SPI_DIR := $(shell cd software/examples/spi_applns/ && ls -d * | grep -v Makefile )
+APP_DIR := $(GPIO_DIR) $(UART_DIR) $(I2C_DIR) $(SPI_DIR) $(PWM_DIR)
 
 
 
 #List the boards that are supported by Shakti Sdk
 .PHONY: all
 all:
-	cd  ./software/examples/gpio_applns && $(MAKE) all
 	cd  ./software/examples/uart_applns && $(MAKE) all
 	cd  ./software/examples/i2c_applns && $(MAKE) all
+	cd  ./software/examples/gpio_applns && $(MAKE) all
+#	cd  ./software/examples/spi_applns && $(MAKE) all
+#	cd  ./software/examples/pwm_applns && $(MAKE) all
 
 .PHONY: target
 list_targets:
@@ -89,6 +96,12 @@ software:
 	@echo $(PROGRAM) $(TARGET)
 	@echo "make for that program on that board"
 	cd ./software/examples && $(MAKE) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
+
+.PHONY: upload
+upload:
+	@echo upload $(PROGRAM) $(TARGET)
+	@echo "that program on that board"
+	cd ./software/examples && $(MAKE) UPLOAD=$(UPLOAD) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
 
 .PHONY: debug
 debug:
@@ -113,6 +126,9 @@ else
 ifeq ($(CLEAR),tglgpio)
 	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
 else
+ifeq ($(CLEAR),leds)
+	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
+else
 ifeq ($(CLEAR),rdgpio)
 	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
 else
@@ -130,9 +146,12 @@ ifeq ($(CLEAR),maze)
 else
 ifeq ($(CLEAR),)
 	cd ./software/examples/uart_applns && $(MAKE) clean CLEAR=$(CLEAR)
-	cd ./software/examples/i2c_applns && $(MAKE) clean CLEAR=$(CLEAR)
 	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
+	cd ./software/examples/i2c_applns && $(MAKE) clean CLEAR=$(CLEAR)
+#	cd ./software/examples/spi_applns && $(MAKE) clean CLEAR=$(CLEAR)
+#	cd ./software/examples/pwm_applns && $(MAKE) clean CLEAR=$(CLEAR)
 else
+endif
 endif
 endif
 endif
