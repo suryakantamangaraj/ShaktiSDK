@@ -1,6 +1,12 @@
-/*
-   Created by Kotteeswaran                                                                            
-   Email id: kottee.1@gmail.com    
+/***************************************************************************
+* Project                               :  shakti devt board
+* Name of the file                      :  lm75.c
+* Created date                          :  26.02.2019
+* Brief Description of file             :  Example program to demonstrate 
+                                           using lm75 with Shakti.
+* Name of Author                        :  Kotteeswaran
+* Email ID                              :  kottee.1@gmail.com
+
 
    Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -16,7 +22,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
+***************************************************************************/
 
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave//

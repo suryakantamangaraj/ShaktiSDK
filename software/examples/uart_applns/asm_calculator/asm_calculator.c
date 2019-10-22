@@ -33,8 +33,7 @@
  * @param[in] none
  * @param[Out] returns one character
  */
-
-int getchar()
+int get_char()
 {
  register char a0 asm("a0");
  register int a1 asm("a1") = 0;
@@ -67,12 +66,12 @@ int main()
 
 int a, b, c;
 printf("Enter 2 numbers\n");			//Getting the inputs
-a= getchar() - '0';
+a= get_char() - '0';
 printf(" a =  %d", a);
-b= getchar() - '0';
+b= get_char() - '0';
 printf(" b =  %d", b);
 printf("Enter operation 1.Add 2.Subtract 3.Multiply 4.Divide\n");
-c= getchar() - '0';
+c= get_char() - '0';
 printf(" c =  %d", c);
 register int a1 asm ("x18");
 register int a2 asm ("x19");
