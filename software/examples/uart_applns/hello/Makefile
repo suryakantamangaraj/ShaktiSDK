@@ -18,19 +18,15 @@
 
 
 SHELL := /bin/bash # Use bash syntax
-XLEN=64
 DC=
 PROGRAM=hello
 #default target board
 TARGET ?=artix7_35t
 DEBUG ?=
-MARCH ?=
-MABI  ?=
-
-	XLEN=32
-	flags= -D ARTIX7_35T
-	MARCH=rv32imac
-	MABI=ilp32
+XLEN=32
+flags= -D ARTIX7_35T
+MARCH=rv32imac
+MABI=ilp32
 
 ifeq ($(TARGET),artix7_100t)
 	XLEN=64

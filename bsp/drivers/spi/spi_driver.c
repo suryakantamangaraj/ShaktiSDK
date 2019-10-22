@@ -36,7 +36,6 @@ int* spi_crcpr  = (int*) SPI_CRCPR;
 int* spi_rxcrcr = (int*) SPI_RXCRCR;
 int* spi_txcrcr = (int*) SPI_TXCRCR; 
 
-//int read_data[4096];
 
 /** @fn set_spi
  * @brief to assign value to memory mapped spi register
@@ -225,7 +224,6 @@ int flash_write_enable()
 	set_spi(spi_dr1, 0x06000000);
 	set_spi(spi_dr5, 0x06);
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
-	//	waitfor(20);
 	spi_notbusy();
 	return 1;
 }
@@ -452,60 +450,3 @@ int flash_device_id()
 
 	return 1;	
 }
-
-#if 0
-/** @fn flash_cmd_to_read_xip_mode
- * @brief use for sending 8bit command+32bit of address
- * @details It can be use as xip mode but receive data is limited to max 20bytes
- * @warning bits_to_be_received <= 160bits
- * @param[in] int
- * @param[Out] No output parameter
- */
-
-void flash_cmd_to_read_xip_mode(int command, int addr, int bits_to_be_received, int read_data_store)
-{
-	int dr1,dr2,dr3,dr4,dr5;
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int cmd_addr = command  | address1;
-
-	address2 = address2 << 24;
-	printf("\n");
-	set_spi(spi_dr1, cmd_addr);
-	set_spi(spi_dr2, address2);
-	set_spi(spi_dr5, 0);
-	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(bits_to_be_received)|SPI_SPE|SPI_CPHA|SPI_CPOL));
-
-	if(spi_rxne_enable())
-	{
-		dr5 = *spi_dr5;
-		dr4 = *spi_dr4;
-		dr3 = *spi_dr3;
-		dr2 = *spi_dr2;
-		dr1 = *spi_dr1;
-		read_data[read_data_store] = dr1;
-		read_data[read_data_store+1] = dr2;
-		read_data[read_data_store+2] = dr3;
-		read_data[read_data_store+3] = dr4;
-		read_data[read_data_store+4] = dr5;
-		printf("Data received : %d : %x, %x, %x, %x, %x \n", read_data_store,dr5,dr4,dr3,dr2,dr1);
-		printf("\n");
-	}
-}
-
-/** @fn flash_xip_read
- * @brief to read upto 20bytes of data
- * @details 
- * @warning 
- * @param[in] int
- * @param[Out] No output parameter
- */
-
-void flash_xip_read(int start_address,int bits_to_be_received,int read_data_store)
-{
-	printf("XIP mode : Reading from flash\n");
-	flash_cmd_to_read_xip_mode(0x13000000,start_address,bits_to_be_received,read_data_store);
-	printf("Read request for XIP mode done\n");
-}
-#endif

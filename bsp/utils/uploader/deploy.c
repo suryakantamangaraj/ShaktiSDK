@@ -27,7 +27,6 @@
 #include "spi.h"
 #include "flashdata.h"
 
-#define DEBUG
 
 /** @fn main
  * @brief The function uploads the hex file to the flash starting from location 0x00b00000
@@ -44,36 +43,27 @@ void main(){
 	flash_device_id(); 
 	int read_address = 0x00b00000;  // read/write from/to this address
 	int size_of_array;
-#ifdef DEBUG
-printf("\n SPI INIT done");
-#endif
 
-//flash write start
-#ifdef DEBUG
-printf("\n Starting write to FLASH");
-#endif
-		printf("\n Erasing FLASH\n");
-		flash_write_enable();
-		flash_erase(read_address); //erases an 64kb sector
-		flash_status_register_read();
+	printf("\n Erasing FLASH\n");
+	flash_write_enable();
+	flash_erase(read_address); //erases an 64kb sector
+	flash_status_register_read();
+	printf("\n Starting to write to FLASH\n");
 
-		flash_write_enable();
-                flash_write(read_address,SIZE);
-		flash_status_register_read();
-		read_address+=4;
+	flash_write_enable();
+        flash_write(read_address,SIZE);
+	flash_status_register_read();
+	read_address+=4;
 	size_of_array = write_data[0];
 
 	for(int i =1; i < size_of_array; i++)
 	{
 		flash_write_enable();
-        flash_write(read_address,write_data[i]);
+        	flash_write(read_address,write_data[i]);
 		flash_status_register_read();
 		read_address+=4;
 	}
-//flash write end
-#ifdef DEBUG
-printf("\n Completed write to FLASH\n");
-#endif
+	printf("\n Completed write to FLASH\n");
 
 asm volatile ("ebreak");
 }
