@@ -528,7 +528,7 @@ int i2c_slave_init(unsigned char slaveAddress)
 	if (status & I2C_SHAKTI_LRB) { 
 	    i2c_stop();
 		printf("\tSome status check failing\n");
-		return ENIXO;
+		return ENXIO;
 	}
 	return 0;
 }

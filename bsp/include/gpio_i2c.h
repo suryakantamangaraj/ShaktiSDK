@@ -44,10 +44,12 @@ unsigned char I2cReadDataAck(unsigned char );
 unsigned char I2cReadDataNack(unsigned char );
 void I2cStart(unsigned char );
 void I2cStop(unsigned char );
-void I2c_Write_byte(unsigned char ,unsigned char , unsigned char , unsigned char);
+void I2c_Write_byte(unsigned char, unsigned char, unsigned char, unsigned char);
 int I2c_Read_byte(unsigned char ,unsigned char , unsigned char );
 int I2c_shakti_readbytes(char *, int , int , unsigned char );
 void ReadAckForWrite(unsigned char delay);
+void SendNackForRead(unsigned char delay);
+void SendAckForRead(unsigned char delay);
 
 
 #endif
