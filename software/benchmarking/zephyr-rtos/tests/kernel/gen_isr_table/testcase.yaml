@@ -1,4 +1,0 @@
-tests:
-  arch.interrupt:
-    filter: CONFIG_GEN_ISR_TABLES and CONFIG_ARMV7_M_ARMV8_M_MAINLINE
-    tags: interrupt isr_table

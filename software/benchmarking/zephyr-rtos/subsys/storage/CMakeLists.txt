@@ -1,1 +1,0 @@
-add_subdirectory_ifdef(CONFIG_FLASH_MAP  flash_map)

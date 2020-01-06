@@ -1,4 +1,0 @@
-tests:
-  arch.interrupt:
-    arch_exclude: nios2 riscv32
-    tags: interrupt

@@ -1,4 +1,0 @@
-tests:
-  crypto.tinycrypt:
-    tags: tinycrypt crypto aes ccm
-    min_ram: 48
