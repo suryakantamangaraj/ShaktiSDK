@@ -24,25 +24,20 @@
 
 #include <stdio.h>
 
-/** @fn main
- * @brief Converts the elf file to an array of hex.
- * @details na
- * @warning na
- * @param[in] na
- * @param[Out] na
- */
+#ifndef FILEPATH
+#endif
+
 void main()
 {
 	printf(" Converting codemem to array\n");
 	FILE *myFile;
 	FILE *Cypress;
-	unsigned int i=0;
+	unsigned int  i= 0;
 	int write_data;
 	int count=0;
-
-	myFile = fopen("./output/code.mem", "r");
-	Cypress = fopen("./output/flashdata.h","w");
-	if (!myFile) {
+	myFile = fopen(FILEPATH "/output/code.mem", "r");
+	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
+	if(!myFile) {
 		printf(" unable to read code.mem\n");
 		return;
 	}
@@ -56,7 +51,8 @@ void main()
 	}
 
 	rewind(myFile);
-	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count);
+
+	fprintf(Cypress,"unsigned int write_data[%d] = { 0x%x", count + 1, count); 
 
 	while (fscanf(myFile, "%x", &write_data) != EOF)
 	{
@@ -71,5 +67,6 @@ void main()
 	fclose(myFile);
 	printf("\n Converted codemem to array\n");
 
+	//asm volatile ("ebreak");
 }
 

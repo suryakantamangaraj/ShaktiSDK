@@ -25,5 +25,90 @@
 #ifndef PLIC_DRIVER_H
 #define PLIC_DRIVER_H
 #include "platform.h"
+#include "traps.h"
+
+/*
+   Macros
+ */
+
+/*
+   Offsets for different registers in plic
+ */
+
+#define PLIC_PRIORITY_OFFSET            0x0000UL
+#define PLIC_PENDING_OFFSET             0x1000UL
+#define PLIC_ENABLE_OFFSET              0x2000UL
+#define PLIC_THRESHOLD_OFFSET           0x10000UL
+#define PLIC_CLAIM_OFFSET               0x10010UL
+
+/*
+   The priority value for each int src can be found at addresses 4 bytes apart
+   starting from base address + priority offset
+ */
+
+#define PLIC_PRIORITY_SHIFT_PER_INT  2
+
+/*
+   7 priority levels are supported.
+   PLIC_PRIORITY_1 means 'no interrupt'
+ */
+
+#define PLIC_PRIORITY_1 0X00
+#define PLIC_PRIORITY_2 0X01
+#define PLIC_PRIORITY_3 0X02
+#define PLIC_PRIORITY_4 0X04
+#define PLIC_PRIORITY_5 0X08
+#define PLIC_PRIORITY_6 0X10
+#define PLIC_PRIORITY_7 0X20
+
+#define PLIC_PENDING_SHIFT_PER_SOURCE   0
+#define PLIC_MAX_INTERRUPT_SRC 27
+/*
+   Enumerators
+ */
+
+typedef enum
+{
+	INACTIVE = 0,
+	ACTIVE   = 1,
+	SERVICED = 2,
+	MASKED
+}interrupt_status_e;
+
+/*
+   Structures and Unions
+ */
+
+typedef struct
+{
+	unsigned int id; /*id of the interrupt target source*/
+	unsigned int priority; /*priority assigned to it*/
+	interrupt_status_e state; /*state of the interrupt*/
+	unsigned int count; /*number of times this interrupt occured*/
+} interrupt_data_t;
+
+/*
+   Platform Level Interrupt Controller (PLIC) table
+   Each entry in the table corresponds to an interrupt service routine
+ */
+
+typedef void (*plic_fptr_t) (unsigned int);
+plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+
+/*
+   Global variable declaration
+ */
+
+//extern interrupt_data_t *hart0_interrupt_matrix;
+
+/*
+   Function prototypes
+ */
+
+void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
+
+void configure_interrupt_pin(unsigned int pin);
+
+void configure_interrupt(unsigned int int_id);
 
 #endif

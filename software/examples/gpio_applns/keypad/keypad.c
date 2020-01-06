@@ -24,7 +24,8 @@
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+****************************************************************************************/
+
 
 /***********************************************************
 *		Include File Definitions
@@ -46,6 +47,7 @@ unsigned int col[4]={0, 1, 2, 3};
 unsigned int row[4]={4, 5, 6, 7};
 int keyMap[KYPD_COLNUM][KYPD_ROWNUM];
 
+
 int  keyTable[4][4] =
 {
 	{  1,  4,  7,  0},
@@ -54,12 +56,12 @@ int  keyTable[4][4] =
 	{ 10, 11, 12, 13}
 };
 
-/** @fn void  setPins(unsigned int*  row, unsigned int* col)
+/** @fn setPins
  * @brief This function sets the pins for the row and column
- * @details Creates temp. copy of the col and row pins.
+ * @details 
  * @warning 
- * @param[in] row,column
- * @param[Out] NULL
+ * @param[in] 
+ * @param[Out] 
  */
 
 void  setPins(unsigned int*  row, unsigned int* col)
@@ -75,12 +77,12 @@ void  setPins(unsigned int*  row, unsigned int* col)
 
 }
 
-/** @fn void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
+/** @fn setKeyMap
  * @brief This function maps table in to keymap
- * @details Maps the values to all the key entries.
+ * @details 
  * @warning 
- * @param[in] KYPD_COLNUM,KYPD_ROWNUM
- * @param[Out] NULL
+ * @param[in] 
+ * @param[Out] 
  */
 
 void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
@@ -95,12 +97,12 @@ void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
 	}
 }
 
-/** @fn int getKeyAnotherWay()
+/** @fn getKeyAnotherWay
  * @brief This function returns the corresponding value in the keymap
  * @details 
  * @warning 
- * @param[in] NULL
- * @param[Out] int
+ * @param[in] 
+ * @param[Out] 
  */
 
 int getKeyAnotherWay()
@@ -108,13 +110,13 @@ int getKeyAnotherWay()
 
 	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
 
-	for(int i = 0 ; i < KYPD_COLNUM ; i++)
+	for (int i = 0 ; i < KYPD_COLNUM ; i++)
 	{
 		write_word(GPIO_DATA_REG, ~(0x1 << (OUTPINS_OFFSET + i) )   );
 
-		for(int j = 0 ; j < KYPD_ROWNUM ; j++)
+		for (int j = 0 ; j < KYPD_ROWNUM ; j++)
 		{
-			if( ( read_word(rowPins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
+			if ( ( read_word(rowPins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
 			{
 				return keyMap[i][j];
 			}
@@ -125,14 +127,12 @@ int getKeyAnotherWay()
 	return 0;
 }
 
-/** @fn int getKey(int colRow)
+/** @fn getkey
  * @brief This function returns the corresponding value in the keymap
-          of the 32bit column-row indicator
  * @details 
  * @warning 
- * @param[in] colRow - a 32 bit column-row indicator, where the first 16 bit is
-                       column and the last 16 bit is row
- * @param[Out]  int - key pressed
+ * @param[in] 
+ * @param[Out] 
  */
 
 int getKey(int colRow)
@@ -140,13 +140,13 @@ int getKey(int colRow)
     return keyMap[colRow>>16][0xFFFF & colRow];
 }
 
-/** @fn int getColRow(void)
+/** @fn getColRow
  * @brief This function returns the column-row
  * @details Identifies the pressed key by making the corresponding coloumn
-            low and reading the row values.
+   low and reading the row values     
  * @warning 
- * @param[in] NULL
- * @param[Out] int
+ * @param[in] 
+ * @param[Out] 
  */
 
 int getColRow(void)
@@ -178,9 +178,9 @@ int getColRow(void)
 	return -1;
 }
 
-/** @fn void gpio_init()
- * @brief This maps the keypad from pins.
- * @details 
+/** @fn gpio_init
+ * @brief This maps the keypad from pins
+ * @details    
  * @warning 
  * @param[in] rows,columns
  * @param[Out] NULL
@@ -196,12 +196,12 @@ void gpio_init()
 	write_word(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
 }
 
-/** @fn int main()
+/** @fn main
  * @brief 
- * @details 
+ * @details    
  * @warning 
- * @param[in] NULL
- * @param[Out] int
+ * @param[in] 
+ * @param[Out] 
  */
 
 int main()
@@ -226,11 +226,11 @@ int main()
 				}
 #else
 				printf("\nThe %x Key Pressed", colRow);
-				DelayLoop(600, 2000);
+				delay_loop(600, 2000);
 #endif
 		}
 
-//		DelayLoop(100,2000);
+//		delay_loop(100,2000);
 	}
 
 	return 0;

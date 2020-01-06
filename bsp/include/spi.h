@@ -21,32 +21,37 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+
+/**
+ * @file spi.h
+ * @project shakti devt board
+ * @brief Header to spi driver 
+ */
 #ifndef SPI_H
 #define SPI_H
 
 #include<stdlib.h>
 
-#define SPI_CR1	 0x00020000
-#define SPI_CR2	 0x00020004
-#define SPI_SR   0x00020008
-#define SPI_DR1	 0x0002000C
-#define SPI_DR2	 0x00020010
-#define SPI_DR3	 0x00020014
-#define SPI_DR4	 0x00020018
-#define SPI_DR5	 0x0002001C
+#define SPI_CR1	     0x00020000
+#define SPI_CR2	     0x00020004
+#define SPI_SR       0x00020008
+#define SPI_DR1	     0x0002000C
+#define SPI_DR2	     0x00020010
+#define SPI_DR3	     0x00020014
+#define SPI_DR4	     0x00020018
+#define SPI_DR5      0x0002001C
 #define SPI_CRCPR    0x00020020
 #define SPI_RXCRCR   0x00020024
 #define SPI_TXCRCR   0x00020028
 
 // defining SPI_CR1 register
-
 #define SPI_CPHA				(1 << 0)
 #define SPI_CPOL				(1 << 1)
 #define SPI_MSTR				(1 << 2)
 #define SPI_BR(x)				(x << 3)
-#define SPI_SPE				(1 << 6)
+#define SPI_SPE		     		(1 << 6)
 #define SPI_LSBFIRST			(1 << 7)
-#define SPI_SSI				(1 << 8)
+#define SPI_SSI			    	(1 << 8)
 #define SPI_SSM					(1 << 9)
 #define SPI_RXONLY				(1 << 10)
 #define SPI_CRCL				(1 << 11)
@@ -58,7 +63,6 @@
 #define SPI_TOTAL_BITS_RX(x)	(x << 24)
 
 // defining SPI_CR2 register
-
 #define SPI_RX_IMM_START (1 << 16)
 #define SPI_RX_START	 (1 << 15)
 #define SPI_LDMA_TX		 (1 << 14)
@@ -75,7 +79,6 @@
 #define SPI_RXDMAEN		 (1 << 0)
 
 //defining SR register
-
 #define SPI_FTLVL(x)	(x << 11)
 #define SPI_FRLVL(x)	(x << 9)
 #define SPI_FRE			(1 << 8)
@@ -84,5 +87,29 @@
 #define SPI_CRCERR		(1 << 4)
 #define TXE				(1 << 1)
 #define RXNE			(1 << 0)
+
+// function prototype
+void set_spi(int* addr, int val);
+int get_spi(int* addr);
+void spi_init();
+void spi_tx_rx_start();
+void spi_enable();
+void spi_rx_enable();
+int bitExtracted(int number, int k, int p) ;
+int concat(int x, int y) ;
+int spi_rxne_enable();
+int spi_notbusy();
+void bin(unsigned n);
+int flash_write_enable();
+int flash_clear_sr();
+int flash_cmd_addr(int command, int addr);
+void flash_cmd_addr_data(int command, int addr, int data);
+void flash_write(int address, int data);
+int flash_cmd_to_read(int command, int addr);
+int flash_read(int address);
+int flash_cmd_read(int command);
+void flash_erase(int address);
+int flash_status_register_read();
+int flash_device_id();
 
 #endif

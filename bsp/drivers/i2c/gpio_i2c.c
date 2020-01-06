@@ -25,7 +25,7 @@
 #include "platform.h"
 #include "gpio.h"
 #include "gpio_i2c.h"
-extern void DelayLoop(unsigned long , unsigned long);
+extern void delay_loop(unsigned long , unsigned long);
 
 //If inout control = 1, output else input
 /** @fn static void SetSCLAsOutput()
@@ -82,19 +82,19 @@ static void start(unsigned char delay)
 
 //	sda=1;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA | I2C_SCL) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 //		scl=1;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 //		sda=0;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 //		scl=0;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 	printf("\n\tI2C: I2C Start condition sent\n");
 }
@@ -112,15 +112,15 @@ static void stop(unsigned char delay)
 	readData = read_word(GPIO_DATA_REG);
 //	sda=0;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 //	scl=1;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 //	sda=1;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 	printf("\n\tI2C: I2C Start condition sent\n");
 
 }
@@ -147,20 +147,20 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
 //		sda=CY;
 		if (k == 0) {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
-			DelayLoop(delay, delay);
+			delay_loop(delay, delay);
 		}
 		else {
 			write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
-			DelayLoop(delay, delay);
+			delay_loop(delay, delay);
 		}
 
 	//	scl=1;
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
-		DelayLoop(delay, delay);
+		delay_loop(delay, delay);
 
 	//	scl=0;
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
-		DelayLoop(delay, delay);
+		delay_loop(delay, delay);
 		++j;
 	}
 }
@@ -186,7 +186,7 @@ unsigned char I2cReadByte(unsigned char delay)
 	while (j < 8) {
 	//	scl=1;
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
-		DelayLoop(delay, delay);
+		delay_loop(delay, delay);
 
 //		d1 = sda;
 		readGpioData = read_word(GPIO_DATA_REG)  & I2C_SDA;
@@ -196,11 +196,11 @@ unsigned char I2cReadByte(unsigned char delay)
 			bitValue = 0;
 	    readData = readData << 1;
 		readData = readData | bitValue;
-		DelayLoop(delay, delay);
+		delay_loop(delay, delay);
 
 	//	scl=0;
 		write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
-		DelayLoop(delay, delay);
+		delay_loop(delay, delay);
 
 		++j;
 	}
@@ -223,11 +223,11 @@ void ReadAckForWrite(unsigned char delay)
 	unsigned long readData = 0;
 	printf("\n\tI2C: I2C Read\n");
 	readData = read_word(GPIO_DATA_REG);
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 //	scl=1;delay
 	printf("\n\tI2C: I2C Write\n");
 	write_word(GPIO_DATA_REG, (readData | I2C_SCL) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 		printf("\n\tI2C: I2C Write\n");
 		readData = read_word(GPIO_DATA_REG)  & I2C_SDA;
@@ -235,7 +235,7 @@ void ReadAckForWrite(unsigned char delay)
 //	scl=0;
 	printf("\n\tI2C: I2C Write\n");
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 	printf("\n\tI2C: I2C ReadNackForWrite sent\n");
 
 }
@@ -259,15 +259,15 @@ void SendAckForRead(unsigned char delay)
 
 //	sda=0;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SDA)) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 //	scl=1;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
 //	scl=0;
 	write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
-	DelayLoop(delay, delay);
+	delay_loop(delay, delay);
 
   SetSdaDirection(GPIOD_IS_IN);
 }
@@ -291,15 +291,15 @@ void SendNackForRead(unsigned char delay)
 
  //	sda=0;
   write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG)  | (I2C_SDA)) );
-  DelayLoop(delay, delay);
+  delay_loop(delay, delay);
 
  //	scl=1;
   write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SCL) );
-  DelayLoop(delay, delay);
+  delay_loop(delay, delay);
 
  //	scl=0;
   write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) & ~(I2C_SCL) ) );
-  DelayLoop(delay, delay);
+  delay_loop(delay, delay);
 
   SetSdaDirection(GPIOD_IS_IN);
  }
@@ -348,7 +348,7 @@ void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, un
 	}
   //	sda=1;
   write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
-  DelayLoop(delay, delay);
+  delay_loop(delay, delay);
 
   printf("\n\tI2C: I2C Write Ack\n");
   SetSdaDirection(GPIOD_IS_IN);
@@ -371,7 +371,7 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
   I2cWriteByte( writeData, delay);
   //	sda=1;
   write_word(GPIO_DATA_REG, (read_word(GPIO_DATA_REG) | I2C_SDA) );
-  DelayLoop(delay, delay);
+  delay_loop(delay, delay);
 
   printf("\n\tI2C: I2C Write Ack\n");
   SetSdaDirection(GPIOD_IS_IN);

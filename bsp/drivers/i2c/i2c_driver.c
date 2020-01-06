@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
+ *
  *   Copyright (C) 1995-1997 Simon G. Vogl
  *		   1998-2000 Hans Berglund
  *
@@ -18,160 +19,115 @@
 /***************************************************************************
 * Project           			:  shakti devt board
 * Name of the file	     		:  i2c_driver.c
-* Created date			        :  
+* Created date			        :
 * Brief Description of file     :  Demonstartes the working of i2c protocol.
-****************************************************************************/
-
+*/
+#define I2C_DRV
 #include "i2c.h"//Includes the definitions of i2c communication protocol//
+#include "log.h"
+#include "utils.h"
 
-/** @fn char get_i2c_shakti(char *addr)
- * @brief: Reads the contents of the specified memory location. 
- * @details: This function reads and returns the passed memory address. 
- *           The same function can be used to read any valid memory location if 
- *           the memory is mapped to a byte address.
- * @warning: Do not try to read more than one byte.
- * @param[in]: Byte Address that needs to be read.
- * @param[Out]: value read from the passed location.
+/** @fn static void get_i2c_shakti(unsigned char delay)
+ * @brief Reads  into any of the shakti io locations (Here mainly I2C).
+ *
+ * @details There are 5 registers which are configurable. This function
+ *  reads into the register based on the passed address.
+ *
+ * @warning Nil.
+ *
+ * @param[in] address from where data needs to be read.
+ * @param[Out] Data read from the passed address.
  */
 char get_i2c_shakti(char *addr)
 {
 #ifdef ASM
 	char val;
-	printf("\n The address is %p;", (char *) addr);
+	log_debug("\n The address is %p;", (char *) addr);
 	asm volatile("lb %0, 0(%1)" : "=r" (val) : "r" (*addr));
 	return val;
 #else
+//	printf("\nRead: Address: %x; Value: %x", addr, *addr);
   return *addr;
 #endif
 }
 
-/** @fn void set_i2c_shakti(char *addr, char val)
- * @brief: Writes the passed value into the passed memory location. 
- * @details: This function writes the passed value into passed memory address. 
- *           The same function can be used to write any valid memory location if the 
- *           the memory is mapped to a byte address.
- * @warning: Do not try to read more than one byte.
- * @param[in]: Byte Address that needs to be read.
- * @param[Out]: value read from the passed location.
+/** @fn static void set_i2c_shakti(unsigned char delay)
+ * @brief Writes into any of the shakti io locations (Here mainly I2C).
+ *
+ * @details There are 4 registers which are configurable. This function
+ *  writes into the register based on the passed address.
+ *
+ * @warning Nil.
+ *
+ * @param[in] address at which data needs to be written, data .
+ * @param[Out] No output parameters.
  */
-void set_i2c_shakti(char *addr, char val)
+void set_i2c_shakti(int *addr, int val)
 {
 #ifdef ASM
-	printf("\n The address is %p; value: %x", (char *) addr, val);
+	log_info("\n The address is %p; value: %x", (char *) addr, val);
 	asm volatile("sb %0, 0(%1)" : : "r" (val), "r" (*addr));
 #else
     *addr = val;
+//		printf("\nWrite: Address: %x; Value: %x", addr, *addr);
 #endif
 }
 
-/** @fn void waitfor(unsigned int secs)
-  * @brief: provides delay. 
- * @details: This function is mainly used to provide some delay when polling 
- *           method is used to access any mapped location.
- * @warning: Nil.
- * @param[in]: delay_value.
- * @param[Out]: 
- */
-void waitfor(unsigned int delay_value) 
-{
-	unsigned int time = 0;
-	while(time++ < delay_value);
-}
-
-/** @fn void i2c_start()
- * @brief: Initiates the I2C communication 
- * @details: I2C read/ write needs a start condition that needs to be sent to the
- *           slave device. This function creates the start condition.
- * @warning: Nil 
- * @param[in]: Nil. 
- * @param[Out]: Nil 
- */
 void i2c_start()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_START);
 }
 
-/** @fn void i2c_start_eni()
- * @brief: Function sends start condition with end of interrupt. 
- * @details: Internally this function is same as i2c_start. Vinod has to decide 
- *           whether we need this function or not.
- * @warning: Nil 
- * @param[in]: Nil 
- * @param[Out]: Nil 
- */
 void i2c_start_eni()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_START);
 }
 
-/** @fn void i2c_repstart()
- * @brief: Function which calls repeated start condition.
- * @details: To make I2C communication faster when doing burst read / burst write
- *           operations (provided the same is supported by the I2C device), 
- *           repeated start will reduce the time by starting accessing next read
- *           without sending stop sequence.
- * @warning: Nil 
- * @param[in]: Nil 
- * @param[Out]: Nil 
- */
 void i2c_repstart()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_REPSTART);
 }
 
-/** @fn void i2c_repstart_eni()
- * @brief: Function sends repeated start condition with end of interrupt. 
- * @details: Internally this function is same as i2c_repstart. Vinod has to decide 
- *           whether we need this function or not.
- * @warning: Nil 
- * @param[in]: Nil 
- * @param[Out]: Nil 
- */
 void i2c_repstart_eni()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_REPSTART);
 }
 
-/** @fn void i2c_stop()
- * @brief: stops the i2c communication 
- * @details: When the master wants to stops the I2C communication, this function
- *           sends the stop condition to the device.
- * @warning: nil 
- * @param[in]: Nil 
- * @param[Out]: Nil 
- */
 void i2c_stop()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_STOP);
 }
 
-/** @fn void i2c_nack()
- * @brief: Sends the Nack condition to the slave.
- * @details: This function sends NACK condition to the slave so that the slave 
- *           device to indicate the master is not ready to do any more communication
- *           with the device.
- * @warning: Nil
- * @param[in]: None 
- * @param[Out]: None 
- */
+
 void i2c_nack()
 {
 	set_i2c_shakti(i2c_control, I2C_SHAKTI_NACK);
 }
 
-/** @fn int shakti_init_i2c()
- * @brief: Basic Initialisation for I2C communication. 
- * @details: This function configures the serial clock frequency for the I2C 
- *           Communication. 
- * @warning: Nil 
- * @param[in]: Currently we are internally fixing the serial clock. But we need 
- *             to make it programmable
- * @param[Out]: zero if success, else ENXIO
+void i2c_idle()
+{
+	set_i2c_shakti(i2c_control, I2C_SHAKTI_IDLE);
+}
+
+/** @fn static void shakti_init_i2c(unsigned char prescale_div, unsigned char
+ *             scl_div)
+ * @brief This routine configures the serial clock frequency count and
+ * prescaler count.
+ *
+ * @details There are 4 registers which are configurable. This function
+ *  writes into the register based on the passed address. he serial clock count
+ *  and prescalar count decides the frequency (sck) that needs to be used for
+ *  the I2C serial communication. Then resets status register.
+ *
+ * @warning Nil.
+ *
+ * @param[in] prescale_div, scl_div.
+ * @param[Out] No output parameters.
  */
-int shakti_init_i2c()
+ int shakti_init_i2c(unsigned char prescale_div, unsigned char scl_div)
 {
    unsigned char temp = 0;
-    printf("\tI2C: Initializing the Controller\n");
+    log_debug("\tI2C: Initializing the Controller\n");
 
     /* Doing an initialization sequence as how PCF8584 was supposed to be initialized                                                       */
     /* The Initialization Sequence is as follows                                                                                            */
@@ -179,69 +135,79 @@ int shakti_init_i2c()
     /* Load Byte 80H into Control                                                                                                           */
     /* load Clock Register S2 */ /* We are doing the opposite -- Setting the clock and then the registers -- Doesn't really matter actually */
     /* Send C1H to S1 - Set I2C to Idle mode -- SDA and SCL should be high                                                                  */
-    set_i2c_shakti(i2c_prescale,0x1F);  //Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock
-    temp = get_i2c_shakti(i2c_prescale);
-    set_i2c_shakti(i2c_scl,0x91);  //Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock
-    temp = get_i2c_shakti(i2c_scl);
-/* Just reading the written value to see if all is well -- Compiler should not optimize this load!!! Compiler can just optimize the store to pointer address followed by load pointer to a register to just an immediate load to the register since clock register is not used anywhere -- but the purpose is lost. Don't give compiler optimizations */
+		if(prescale_div  != get_i2c_shakti(i2c_prescale) )
+		{
+	    set_i2c_shakti(i2c_prescale, prescale_div);  //Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock
+	    temp = get_i2c_shakti(i2c_prescale);
+			/* Just reading the written value to see if all is well -- Compiler should not optimize this load!!! Compiler can just optimize the store to pointer address followed by load pointer to a register to just an immediate load to the register since clock register is not used anywhere -- but the purpose is lost. Don't give compiler optimizations */
+			    if((temp | 0x00) != prescale_div)
+					{
+			        log_error("\t Failed to write Prescale division Written Value: 0x%02x; read Value: 0x%02x\n", prescale_div, temp);
+			        return -ENXIO;
+			    }
+			    else
+					{
+			        log_debug("\tPrescaler successfully initalized\n");
+			    }
+			}
 
-    if((temp | 0x00) != 0x91){
-        printf("\tClock initialization failed Write Value: 0x91; read Value: %02x\n", temp);
-        return -ENXIO;
-    }
-    else{
-        printf("\tClock successfully initalized\n");
-    }
+		if(scl_div != get_i2c_shakti(i2c_scl) )
+		{
+	    set_i2c_shakti(i2c_scl, scl_div);  //Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock
+	    temp = get_i2c_shakti(i2c_scl);
+
+	/* Just reading the written value to see if all is well -- Compiler should not optimize this load!!! Compiler can just optimize the store to pointer address followed by load pointer to a register to just an immediate load to the register since clock register is not used anywhere -- but the purpose is lost. Don't give compiler optimizations */
+	    if((temp | 0x00) != scl_div){
+	        log_error("\tClock initialization failed Write Value: 0x%02x; read Value: 0x%02x\n", scl_div, temp);
+	        return -ENXIO;
+	    }
+	    else{
+	        log_debug("\tClock successfully initalized\n");
+	    }
+		}
 
 
     /* S1=0x80 S0 selected, serial interface off */
-    printf("\tSetting Control Register with 0x80 \n");
-	set_i2c_shakti(i2c_control, I2C_SHAKTI_PIN);
-    printf("\tControl Register Successfully set \n");
+    log_debug("\tClearing the status register. \n");
+		set_i2c_shakti(i2c_control, I2C_SHAKTI_PIN);
 
     // Reading set control Register Value to ensure sanctity
-    printf("\tReading Control Register \n");
+    log_debug("\tReading Status Register \n");
     temp = get_i2c_shakti(i2c_control);
-    printf("\tControl Register is Written with 0x%x \n", temp);
 
+//Check whether the status register is cleared or not.
     if((temp & 0x7f) != 0){
-        printf("\tDevice Not Recognized\n");
+        log_error("\tDevice Not Recognized\n");
         return -ENXIO;
     }
 
-    printf("\tWaiting for a specified time\n ");
+    log_debug("\tWaiting for a specified time\n ");
     waitfor(900); //1 Second software wait -- Should be 900000 but setting to 900 now since simulation is already slow
-    printf("\tDone Waiting \n ");
-
+    log_debug("\tDone Waiting \n ");
+	log_info("\nControl: %02x; Status: %02x", get_i2c_shakti(i2c_control), get_i2c_shakti(i2c_status));
     /* Enable Serial Interface */
     set_i2c_shakti(i2c_control, I2C_SHAKTI_IDLE);
     waitfor(900); //1 Second software wait -- Should be 900000 but setting to 900 now since simulation is already slow
+
+#if 1
     temp = get_i2c_shakti(i2c_status);
-    printf("\tStatus Reg value after sending I2C_SHAKTI_IDLE is : 0x%x \n",temp);
+//    printf("\tStatus Reg value after sending I2C_SHAKTI_IDLE is : 0x%x \n",temp);
 
     /* Check to see if I2C is really in Idle and see if we can access the status register -- If not something wrong in initialization. This also verifies if Control is properly written since zero bit will be initialized to zero*/
     if(temp != (I2C_SHAKTI_PIN | I2C_SHAKTI_BB)){
-        printf("\tInitialization failed\n");
+        log_error("\n\tInitialization failed; Status Reg: %02x\n", temp);
         return -ENXIO;
     }
     else
-        printf("\tAll is well till here \n");
-
-    printf("\tI2C successfully initialized\n");
-    return 0;
+        log_debug("\tAll is well till here \n");
+#endif
+    log_info("\tI2C Initialization success\n");
+		return 0;
 }
 
-/** @fn int wait_for_bb()
- * @brief: Waits till the bus becomes free.
- * @details: Wait for the bus to become free till the timeout happens.
- * @warning: None 
- * @param[in]: None 
- * @param[Out]: Returns 0, when bus becomes free, else returns ETIMEOUT. 
- */
-int wait_for_bb()
+int wait_till_I2c_bus_free()
 {
-
-    printf("\tIs bus busy?\n");
+  log_debug("\tCheck for I2C Bus Busy to be free.\n");
 	int timeout = DEF_TIMEOUT;
 	int status;
 
@@ -253,22 +219,14 @@ int wait_for_bb()
 	}
 
 	if (timeout == 0) {
-        printf("\t Bus busy wait - timed out. Resetting\n");
+        log_error("\t Bus busy wait - timed out. Resetting\n");
 		return ETIMEDOUT;
 	}
 
 	return 0;
 }
 
-/** @fn int wait_for_pin(int *status)
- * @brief: Waot for complete I2C byte transfer. 
- * @details: This polling based I2C function is called to check whether a 
- *           byte operation is completed or not.
- * @warning: None
- * @param[in]: pointer to the variable which holds the status register value. 
- * @param[Out]: If time out happens, returns DEF_TIMEOUT. else 0. 
- */
-int wait_for_pin(int *status)
+int wait_till_txrx_operation_Completes(int *status)
 {
 
 	int timeout = DEF_TIMEOUT;
@@ -281,36 +239,24 @@ int wait_for_pin(int *status)
 	}
 
 	if (timeout == 0){
-        printf("\tWait for pin timed out\n");
+        log_info("\tWait for pin timed out\n");
 		return ETIMEDOUT;
     }
-
+	log_debug("\n I2C tx_rx operation is completed");
 	return 0;
 }
 
-/** @fn int shakti_sendbytes( const char *buf, int count, int last, int eni)
- * @brief: Function to carry out burst write operation.
- * @details : Whenever master wants to write n number of values into the I2C slave 
- *            device, this function will write the n number of value in the slave
- *            registers.
- * @warning: The slave should have support for this option.
- * @param[in]: Buffer pointer which has n numberof values.
- *             count ---> number of  bytes to be written.
- *             last ---> decides whether to stop operation or not.
- *             eni ---> decides whether end of interrupt is to be used.
- * @param[Out]: Number of bytes written successfully.
- */
 int shakti_sendbytes( const char *buf, int count, int last, int eni)
 {
 	int wrcount, status, timeout;
     printf("\tStarting Write Transaction -- Did you create tri1 nets for SDA and SCL in verilog?\n");
 	for (wrcount=0; wrcount<count; ++wrcount) {
 		set_i2c_shakti(i2c_data,buf[wrcount]);
-		timeout = wait_for_pin(&status);
+		timeout = wait_till_txrx_operation_Completes(&status);
 		if (timeout) {
             printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
-			i2c_stop(); //~
-			return EREMOTEIO;
+						i2c_stop();
+						return EREMOTEIO;
 		}
 		if (status & I2C_SHAKTI_LRB) { // What error is this?
 			i2c_stop();//~
@@ -333,21 +279,7 @@ int shakti_sendbytes( const char *buf, int count, int last, int eni)
 	return wrcount;
 }
 
-#ifdef DEBUG
-
-
-/** @fn int shakti_readbytes(char *buf, int count, int last)
- * @brief Function to carry out burst read operation.
- * @details  Whenever master wants to read n number of values from the I2C slave 
- *            device, this function will read the n number of value from the slave
- *            registers.
- * @warning The slave should have support for this option.
- * @param[in] Buffer pointer which holds n number of read values.
- *             count ---> number of  bytes to be read.
- *             last ---> decides whether to stop operation or not.
- *             eni ---> decides whether end of interrupt is to be used.
- * @param[Out] Number of bytes read successfully.
- */
+//#ifdef DEBUG
 int shakti_readbytes(char *buf, int count, int last)
 {
 	int i, status;
@@ -355,7 +287,7 @@ int shakti_readbytes(char *buf, int count, int last)
     int read_value = 0;
 	/* increment number of bytes to read by one -- read dummy byte */
 	for (i = 0; i <= count; i++) {
-        wfp = wait_for_pin(&status);
+        wfp = wait_till_txrx_operation_Completes(&status);
 		if (wfp) {
 			i2c_stop();
             return -1;
@@ -388,333 +320,117 @@ int shakti_readbytes(char *buf, int count, int last)
 
 	return i-1; //excluding the dummy read
 }
-#endif
-
-/** @fn int i2c_configure(int psc, int sclkFrequency)
- * @brief Performs the i2c protocol configuration.
- * @details Writes the passed prescaller value and serial clock values 
- *           I2C configurration registers. Then clears the status register. 
- * @warning None
- * @param[in] prescalar clock,serial clock.
- * @param[Out] Returns 0, if initialisation is proper. Else returns ENIXO.
- */
-int i2c_configure(int psc, int sclkFrequency)
-{
-	unsigned char temp = 0;
-	
-	printf("\n\tI2C: Initializing the Controller");
-	                                       
-	 set_i2c_shakti(i2c_prescale, psc); /*	  Setting Prescaler Clock	 */
-	
-	//Setting the I2C clock value to be 1, which will set the clock for module and prescaler clock //
-
-#ifdef DEBUG	/*	 Verify the above written psc value	 */
-	
-	temp = get_i2c_shakti(i2c_prescale);//copies the prescalar clock value to the temp variable//
-	
-	if(temp != psc)
-	{
-		printf("\n\t Error in setting prescaler clock; Wr. Value: 0x%02x; Read Value: 0x%02x", psc, temp);
-	}
-	
-	else
-	{
-		printf("\n\t Prescaler value is written successfully\n");
-	}
-
-#endif
-	    set_i2c_shakti(i2c_scl, sclkFrequency);/* Set I2C Serial clock frequency */
+//#endif
 
 
-#ifdef DEBUG  /* Verify the above written serial clock  value */
+/************************************************************************
+* Brief Description     : Performs the intilization of i2c slave.
+* Parameters            : slave address.
+* Return                : int.
+*************************************************************************/
 
-	temp = get_i2c_shakti(i2c_scl);
-/* Just reading the written value to see if all is well -- Compiler should not optimize this load!!! Compiler can just optimize the store to pointer address followed by load pointer to a register to just an immediate load to the register since clock register is not used anywhere -- but the purpose is lost. Don't give compiler optimizations */
-
-	if(temp != sclkFrequency){/*if prescalar clock is not equal to serial clock*/
-	
-		printf("\n\tClock initialization failed Write Value: 0x%02x; read Value: 0x%02x", sclkFrequency, temp);
-		return -ENXIO;
-	}
-	
-	else{
-		printf("\tClock successfully initalized\n");
-	}
-#endif
-
-
-	/* S1=0x80 S0 selected, serial interface off */
-	printf("\tSetting Control Register with 0x80 \n");
-	set_i2c_shakti(i2c_control, I2C_SHAKTI_PIN);
-
-#ifdef DEBUG
-	printf("\tControl Register Successfully set \n");	// Reading set control Register Value to ensure sanctity //
-	printf("\tReading Control Register \n");
-	temp = get_i2c_shakti(i2c_control);
-	printf("\tControl Register is Written with 0x%x \n", temp);
-#endif
-
-	if((temp & 0x7f) != 0){
-		printf("\tDevice Not Recognized\n");
-		return -ENXIO;
-	}
-
-	printf("\tWaiting for a specified time\n ");
-	waitfor(900); //1 Second software wait -- Should be 900000 but setting to 900 now since simulation is already slow
-	printf("\tDone Waiting \n ");
-
-	i2c_stop();
-
-	/* Enable Serial Interface */
-	printf("\n Making the I2C chip in idle State");
-	set_i2c_shakti(i2c_control, I2C_SHAKTI_IDLE);
-
-	printf("\n\tWaiting for a specified time After setting idle\n ");
-	waitfor(900); //1 Second software wait -- Should be 900000 but setting to 900 now since simulation is already slow
-	printf("\tDone Waiting \n ");
-
-#ifdef DEBUG
-	temp = get_i2c_shakti(i2c_status);
-	printf("\tStatus Reg value is : 0x%x \n",temp);
-
-#endif
-/* Check to see if I2C is really in Idle and see if we can access the status register.This also verifies if Control is properly written since zero bit will be initialized to zero	 */
-	   
-	if(temp != (I2C_SHAKTI_PIN | I2C_SHAKTI_BB)){
-		printf("\tInitialization failed\n");
-		return -ENXIO;
-	}
-
-	printf("\tI2C successfully initialized\n");
-	return 0;
-}
-
-/** @fn int i2c_slave_init(unsigned char slaveAddress)
- * @brief Performs the intilization of i2c slave.
- * @details This function enables start sequence and sends the slave address for 
- *          so that the slave device can be accessed further.
- * @warning 
- * @param[in] slave address.
- * @param[Out] Zero if success, else ENIXO --> If the master is not receiving 
- *             ack from slave. EREMOTEIO --> if the PIN is not becoming low.
- */
-int i2c_slave_init(unsigned char slaveAddress)
+int i2c_send_slave_address(unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
 {
 	int timeout;
 	unsigned char temp = 0;
 	int status = 0;
-	printf("\n\tSetting Slave Address : 0x%02x\n", slaveAddress);/* Writes the slave address to I2C controller */
-	
-	set_i2c_shakti(i2c_data,slaveAddress);
-	printf("\tSlave Address set\n");
+	if(rdWrCntrl == 0)
+		slaveAddress |= I2C_WRITE;
+	else
+		slaveAddress |= I2C_READ;
+	log_debug("\n\tSetting Slave Address : 0x%02x\n", slaveAddress);/* Writes the slave address to I2C controller */
+//Writing the slave address that needs to be written into data register.
+	set_i2c_shakti(i2c_data, slaveAddress);
+	log_debug("\tSlave Address is written into data register\n");
 
-
+//Reads back the data register to confirm
 	temp = get_i2c_shakti(i2c_data); //Reads the slave address from I2C controller
-	printf("\tSet slave address read again, which is 0x%x\n",temp);
-
+	log_debug("\tSet slave address read again, which is 0x%x\n",temp);
 	if(slaveAddress != (int)temp)
-		printf("\tSlave address is not matching; Written Add. Value: 0x%02x; Read Add. Value: 0x%02x\n", slaveAddress, temp);
-	
+	{
+		log_error("\tSlave address is not matching; Written Add. Value: 0x%02x; Read Add. Value: 0x%02x\n", slaveAddress, temp);
+		log_error("\n There is some issue in AXI interface. Please check.");
+		return EAXI_ERROR;
+	}
+
+		//Waits till the bus becomes free.
+			while(wait_till_I2c_bus_free())
+			{
+			 log_error("\tError in Waiting for BB\n");
+			 return EI2C_BUS_ERROR;
+			}
+
+
+//Send the start condition and slave address to slave
 	i2c_start(); //Sending the slave address to the I2C slave
 
-	
-	timeout = wait_for_pin(&status);
+//Wait for PIN to become low.
+	timeout = wait_till_txrx_operation_Completes(&status);
 	if (timeout) {//Asking the controller to send a start signal to initiate the transaction
 		printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
 		i2c_stop(); //~
-		return EREMOTEIO;
+		return EI2C_PIN_ERROR;
 	}
 
-	if (status & I2C_SHAKTI_LRB) { 
+	if (status & I2C_SHAKTI_LRB) {
 	    i2c_stop();
 		printf("\tSome status check failing\n");
-		return ENXIO;
+		return EI2C_LRB_ERROR;
 	}
-	return 0;
+//	i2c_stop();
+//	delay_loop(delay, delay);
+#ifdef DEBUG_PRINT
+	printf("\n Slave address is written successfully");
+#endif
+	return I2C_SUCCESS;
 }
 
-/** @fn int SendAddressToReadOrWrite(unsigned int startAddress)
- * @brief It does the reading or writing from the specified address.
- * @details: the passed address value is divided into two bytes and sent one by one
- * @warning: this function can be used with i2c devices which has 16bit 
- *           registers as well as 8 bit registers. If 16 bits address is to be 
- *           written, define the macro "_16Bit".
- * @param[in] register(memory) address
- * @param[Out] int
- */
-int SendAddressToReadOrWrite(unsigned int startAddress)
+/************************************************************************
+* Brief Description     : It does the reading or writing from the address specified .
+* Parameters            : starting address.
+* Return                : int.
+*************************************************************************/
+
+int i2c_write_data(unsigned char writeData, unsigned char delay)
 {
 	int timeout;
-	unsigned char temp = 0;
 	int status = 0;
 
-#ifdef _16Bit
-	set_i2c_shakti(i2c_data, (startAddress >> 8) & 0xFF);
-	timeout = wait_for_pin(&status);
+	set_i2c_shakti(i2c_data, writeData);
+	timeout = wait_till_txrx_operation_Completes(&status);
 	if (timeout) {
 		printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
 		i2c_stop(); //~
 		return EREMOTEIO;
 	}
 
-	if (status & I2C_SHAKTI_LRB) { // What error is this?
-		i2c_stop();//~
-		printf("\tSome status check failing\n");
-		return EREMOTEIO;
-	}
-#endif
-
-	set_i2c_shakti(i2c_data, (startAddress >> 0) & 0xFF);
-	timeout = wait_for_pin(&status);
-	if (timeout) {
-		printf("\tTimeout happened - Write did not go through the BFM -- Diagnose\n");
-		i2c_stop(); //~
-		return EREMOTEIO;
-	}
-
-	if (status & I2C_SHAKTI_LRB) 
+	if (status & I2C_SHAKTI_LRB)
 	{ // What error is this?
 		i2c_stop();//~
 		printf("\tSome status check failing\n");
+		return EI2C_LRB_ERROR;
 	}
+	return I2C_SUCCESS;
 }
 
-/** @fn int i2c_rw_wait(int *status)
- * @brief It does the reading or writing from the address specified
- * @details Waits in the loop till PIN Bit becomes inactive (indicating 
- *          Completion of byte transfer), else timeout happens.
- * @warning Nil
- * @param[in] Pointer that will hold the status register value
- * @param[Out] returns 0 if success else ETIMEDOUT
- */
-int i2c_rw_wait(int *status)
+
+/************************************************************************
+* Brief Description     : It does the reading or writing from the address specified .
+* Parameters            : starting address.
+* Return                : int.
+*************************************************************************/
+
+int i2c_read_data(unsigned char *read_data, unsigned char delay)
 {
-	int timeout = DEF_TIMEOUT;
+	int timeout;
+	int status = 0;
 
-	*status = get_i2c_shakti(i2c_status);
-
-	while ((*status & I2C_SHAKTI_PIN) && --timeout) 
-	{
-		waitfor(10000); /* wait for 100 us */
-		*status = get_i2c_shakti(i2c_status);
-	}
-	if (timeout == 0){
-		printf("\tWait for pin timed out\n");
-		return ETIMEDOUT;
-	}
-
-	return 0;
-}
-
-/** @fn int i2c_datawrite( const char *buf, int count, int last, int eni)
- * @brief This makes the write operation to wait until the count has been 
- *        completed
- * @details The function writes n bytes of data into the slave i2c device.
- * @warning : Nil
- * @param[in] buf ---> pointer which is holding the data tobe return.
- *            count ---> no. of bytes needs to be written.
- *            last ---> controls whether stop condition has to be sent or not.
- *            eni ---> end of interrupt has to be sent or not.
- * @param[Out] No. of bytes needs to be written.
- */
-int i2c_datawrite( const char *buf, int count, int last, int eni)
-{
-	int wrcount, status, timeout;
-	int i = 0;
-
-	printf("\tStarting Write Transaction -- Did you create tri1 nets for SDA and SCL in verilog?\n");
-
-	for (i = 0; i < count; ++i)
-	{
-		printf("\n\t Writing the value 0x%02x into EEPROM", buf[i]);
-		set_i2c_shakti(i2c_data, buf[i]);
-		if( ETIMEDOUT == i2c_rw_wait(&status))
-		{
-			printf("\n I2C Write Timed out");
-			i2c_stop(); //~
-			return EREMOTEIO;
-		}
-		if (status & I2C_SHAKTI_LRB)
-		{
-			i2c_stop();//~
-			printf("\tSome status check failing\n");
-			return EREMOTEIO;
-		}
-	}
-
-	if (last){
-		printf("\n\tLast byte sent : Issue a stop\n");
-		i2c_stop();
-	}
-	else
-	{
-		printf("\n\tSending Rep Start and doing some other R/W transaction\n");
-		if(!eni)
-			i2c_repstart();
-		else
-			i2c_repstart_eni();
-	}
-
-	return i;
-}
-
-/** @fn  int i2c_dataread(char *buf, int count, int last)
- * @brief Function to carry out burst read operation.
- * @details  Whenever master wants to read n number of values from the I2C slave 
- *            device, this function will read the n number of value from the slave
- *            registers.
- * @warning The slave should have support for this option.
- * @param[in] Buffer pointer which holds n number of read values.
- *             count ---> number of  bytes to be read.
- *             last ---> decides whether to stop operation or not.
- * @param[Out] Number of bytes read successfully.
- */
-int i2c_dataread(char *buf, int count, int last)
-{
-	int i, status;
-	int wfp;
-	int read_value = 0;
-
-	/* increment number of bytes to read by one -- read dummy byte */
-	for (i = -1; i < count; i++)
-	{
-		if( ETIMEDOUT == i2c_rw_wait(&status))
-		{
-			printf("\n I2C Read Timed out");
-			i2c_stop(); 
-			return EREMOTEIO;
-		}
-		if (status & I2C_SHAKTI_LRB)
-		{
-			i2c_stop();//~
-			printf("\tSome status check failing\n");
-			return EREMOTEIO;
-		}
-		
-
-		if (-1 != i)//Do Dummy Read initially//
-		{
-			buf[i] = get_i2c_shakti(i2c_data);
-			printf("\n\t Read Address Offset: %d; Value: %x", i, buf[i]);
-		}
-		else
-		{
-			printf("\n\t Dummy Read Value: 0x%02x", get_i2c_shakti(i2c_data) & 0xFF ); /* dummy read */
-		}
-
-		               
-		if (i == count - 2)/*send NACK after the penultimate byte*/
-		{
-			i2c_nack();
-			waitfor(10000);
-		}
-
-		if (i == count - 1)  	/*send STOP after the last byte*/
-		{
-			waitfor(10000);
-			i2c_stop();
-		}
-	}
-	printf("\n\t Read %d Bytes from EEPROM", i);
-	return i; //excluding the dummy read
+	/* Make a dummy read as per spec of the I2C controller */
+			*read_data = get_i2c_shakti(i2c_data);
+			while(wait_till_txrx_operation_Completes(&status))
+				{
+						printf("\twaiting for pin\n");
+						waitfor(delay);
+				}
+				return I2C_SUCCESS;
 }

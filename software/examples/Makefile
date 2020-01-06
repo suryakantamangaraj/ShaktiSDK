@@ -1,5 +1,5 @@
-#Created by Sathya Narayanan N
-# Email id: sathya281@gmail.com
+#Created by Sathya Narayanan N & Abhinav Ramnath
+# Email id: sathya281@gmail.com & abhinavramnath13@gmail.com
 
 #   Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -17,93 +17,258 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-
-
-
-
-export TARGET
-export PROGRAM
-export DEBUG
+SHELL := /bin/bash # Use bash syntax
+export XLEN
+export MABI
+export MARCH
+export FLAGS
+export DC
+export filepath
 
 # appln and target board
-PROGRAM ?= all
+PROGRAM ?=all
 TARGET ?=artix7_35t
 DEBUG ?=
 UPLOAD ?=
+FLASH ?=
+XLEN ?=32
+filepath ?= 
+D ?= 
 
 # Invoke all possible combinations of applns for different targets
 # There is a provision to make in the exact folder where code is written
 # We are using that provision to invole appropriate makefile scripts from top folder
-all:
-	@echo "$(TARGET)"
+all: check library do upload flash finish
+	@echo "TARGET is" $(TARGET)
+check:
+ifeq ($(DEBUG),DEBUG)
+	@$(eval D = -g)
+endif
+ifeq ($(TARGET),artix7_35t)
+	@$(eval XLEN = 32)
+	@$(eval FLAGS= -D ARTIX7_35T)
+	@$(eval MARCH=rv32imac)
+	@$(eval MABI=ilp32)
+	@$(eval INTERFACE=$(bspboard)/ftdi)
+	@$(eval DC =$(FLAGS) $(D) )
+else
+ifeq ($(TARGET),artix7_100t)
+	@$(eval XLEN = 64)
+	@$(eval FLAGS= -D ARTIX7_100T)
+	@$(eval MARCH=rv64imafdc)
+	@$(eval MABI=lp64d)
+	@$(eval INTERFACE=$(bspboard)/ftdi)
+	@$(eval DC =$(FLAGS) $(D) )
+else
+ifeq ($(TARGET),aardonyx)
+	@echo $(filepath)
+	@$(eval XLEN = 32)
+	@$(eval FLAGS= -D AARDONYX)
+	@$(eval MARCH=rv32imac)
+	@$(eval MABI=ilp32)
+	@$(eval UPLOADER=$(UPLOADDIR)/micron)
+	@$(eval FLASHSPEC=$(bspdri)/qspi/qspi_micron.c)
+	@$(eval INTERFACE=$(bspboard)/jlink)
+	@$(eval DC =$(FLAGS) $(D) )
+	@echo -e "$(DC) not supported"
+else
+	@echo -e "$(TARGET) not supported"
+endif
+endif
+endif
+
+
+library: 
+ifeq ($(CLEAR),)
+	make compile build
+endif
+compile:
+	@mkdir -p ./gen_lib
+	@echo $(bspboard)
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bspdri)/qspi/qspi_micron.c -o ./gen_lib/qspi_micron.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/pwm/pwm_driver.c -o ./gen_lib/pwm_driver.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc)  -c $(bspboard)/uart.c -o ./gen_lib/uart.o -march=$(MARCH)  -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc)  -c $(bspboard)/shakti_uart.c -o ./gen_lib/shakti_uart.o -march=$(MARCH)  -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/start.S -o ./gen_lib/start.o
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/trap.S -o ./gen_lib/trap.o
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH)  -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf  -c $(bsplib)/printf.c -o ./gen_lib/printf.shakti -I$(bspinc)
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bsplib)/log.c -o ./gen_lib/log.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bspcore)/traps.c -o ./gen_lib/traps.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+build:
+	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o  ./gen_lib/shakti_uart.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o 
+	
+do:
+ifeq ($(PROGRAM),all)
+	cd ./gpio_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./pwm_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./spi_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./i2c_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./plic_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./uart_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./clint_applns && $(MAKE) all TARGET=$(TARGET)
+	cd ./malloc_test && $(MAKE) all TARGET=$(TARGET)
+else
 ifeq ($(PROGRAM),hello)
-ifeq ($(UPLOAD),UPLOAD)
-	cd uart_applns/hello && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
-else 
-	cd uart_applns/hello && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+filepath := uart_applns/hello
 else
-ifeq ($(PROGRAM),asm_calculator)
-ifeq ($(UPLOAD),UPLOAD)
-	cd uart_applns/asm_calculator && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
-else 
-	cd uart_applns/asm_calculator && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+ifeq ($(PROGRAM),csr_test)
+filepath := uart_applns/csr_test
 else
-ifeq ($(PROGRAM),maze)
-ifeq ($(UPLOAD),UPLOAD)
-	cd uart_applns/wifi && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+ifeq ($(PROGRAM),uartmp3)
+filepath := uart_applns/uartmp3
 else
-	cd uart_applns/wifi && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+ifeq ($(PROGRAM),wifi)
+filepath := uart_applns/wifi
+else
+ifeq ($(PROGRAM),pwminterrupt)
+filepath := plic_applns/pwminterrupt
+else
+ifeq ($(PROGRAM),pwminterrupt_test1)
+filepath := plic_applns/pwminterrupt_test1
+else
+ifeq ($(PROGRAM),pwminterrupt_test2)
+filepath := plic_applns/pwminterrupt_test2
+else
+ifeq ($(PROGRAM),pwminterrupt_test2)
+filepath := plic_applns/pwminterrupt_test2
+else
+ifeq ($(PROGRAM),pwminterrupt_test3)
+filepath := plic_applns/pwminterrupt_test3
+else
+ifeq ($(PROGRAM),pwminterrupt_test4)
+filepath := plic_applns/pwminterrupt_test4
+else
+ifeq ($(PROGRAM),pwminterrupt_test5)
+filepath := plic_applns/pwminterrupt_test5
+else
+ifeq ($(PROGRAM),pwminterrupt_test6)
+filepath := plic_applns/pwminterrupt_test6
+else
+ifeq ($(PROGRAM),esp8266)
+filepath := uart_applns/esp8266
 else
 ifeq ($(PROGRAM),lm75)
-ifeq ($(UPLOAD),UPLOAD)
-	cd i2c_applns/lm75 && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+filepath := i2c_applns/lm75
 else
-	cd i2c_applns/lm75 && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+ifeq ($(PROGRAM),pcf8591)
+filepath := i2c_applns/pcf8591
+else
+ifeq ($(PROGRAM),ds3231)
+filepath := i2c_applns/ds3231
 else
 ifeq ($(PROGRAM),btnled)
-ifeq ($(UPLOAD),UPLOAD)
-	cd gpio_applns/btnled && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-	cd gpio_applns/btnled && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+filepath := gpio_applns/btnled
 else
 ifeq ($(PROGRAM),tglgpio)
-ifeq ($(UPLOAD),UPLOAD)
-	cd gpio_applns/tglgpio && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-	cd gpio_applns/tglgpio && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+filepath := gpio_applns/tglgpio
 else
 ifeq ($(PROGRAM),rdgpio)
-ifeq ($(UPLOAD),UPLOAD)
-	cd gpio_applns/rdgpio && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+filepath := gpio_applns/rdgpio
 else
-	cd gpio_applns/rdgpio && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+ifeq ($(PROGRAM),leds)
+filepath := gpio_applns/leds
 else
 ifeq ($(PROGRAM),motor)
-ifeq ($(UPLOAD),UPLOAD)
-	cd gpio_applns/motor && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
-else
-	cd gpio_applns/motor && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+filepath := gpio_applns/motor
 else
 ifeq ($(PROGRAM),keypad)
-ifeq ($(UPLOAD),UPLOAD)
-	cd gpio_applns/keypad && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+filepath := gpio_applns/keypad
 else
-	cd gpio_applns/keypad && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
-endif
+ifeq ($(PROGRAM),maze)
+filepath := uart_applns/maze
+else
+ifeq ($(PROGRAM),adc)
+filepath := uart_applns/adc
+else
+ifeq ($(PROGRAM),active_buzzer)
+filepath := gpio_applns/active_buzzer
+else
+ifeq ($(PROGRAM),passive_buzzer)
+filepath := gpio_applns/passive_buzzer
+else
+ifeq ($(PROGRAM),pwminterrupt)
+filepath := plic_applns/pwminterrupt
+else
+ifeq ($(PROGRAM),pwminterrupt_test1)
+filepath := plic_applns/pwminterrupt_test1
+else
+ifeq ($(PROGRAM),pwminterrupt_test2)
+filepath := plic_applns/pwminterrupt_test2
+else
+ifeq ($(PROGRAM),pwminterrupt_test3)
+filepath := plic_applns/pwminterrupt_test3
+else
+ifeq ($(PROGRAM),pwminterrupt_test4)
+filepath := plic_applns/pwminterrupt_test4
+else
+ifeq ($(PROGRAM),pwminterrupt_test5)
+filepath := plic_applns/pwminterrupt_test5
+else
+ifeq ($(PROGRAM),pwminterrupt_test6)
+filepath := plic_applns/pwminterrupt_test6
+else
+ifeq ($(PROGRAM),rgb)
+filepath := gpio_applns/rgb
+else
+ifeq ($(PROGRAM),light_blocking)
+filepath := gpio_applns/light_blocking
+else
+ifeq ($(PROGRAM),moisture)
+filepath := gpio_applns/moisture
+else
+ifeq ($(PROGRAM),relay)
+filepath := gpio_applns/relay
+else
+ifeq ($(PROGRAM),human_detection)
+filepath := gpio_applns/human_detection
+else
+ifeq ($(PROGRAM),lm75_softi2c)
+filepath := gpio_applns/lm75_softi2c
+else
+ifeq ($(PROGRAM),soft_i2c)
+filepath := gpio_applns/soft_i2c
+else
+ifeq ($(PROGRAM),ds3231_gpio)
+filepath := gpio_applns/ds3231_gpio
+else
+ifeq ($(PROGRAM),malloc_test)
+filepath := malloc_test/malloc_test
 else
 ifeq ($(PROGRAM),gyro_softi2c)
-ifeq ($(UPLOAD),UPLOAD)
-	cd gpio_applns/gyro_softi2c && $(MAKE) upload TARGET=$(TARGET) DEBUG=$(DEBUG)
+filepath := gpio_applns/gyro_softi2c
 else
-	cd gpio_applns/gyro_softi2c && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+ifeq ($(PROGRAM),onewire)
+filepath := gpio_applns/onewire
+else
+ifeq ($(PROGRAM),spiwrite)
+filepath := spi_applns/spiwrite
+else
+ifeq ($(PROGRAM),spireadwrite)
+filepath := spi_applns/spireadwrite
+else
+ifeq ($(PROGRAM),spi)
+filepath := spi_applns/spi
+else
+ifeq ($(PROGRAM),pwmmotor)
+filepath := pwm_applns/pwmmotor
+else
+ifeq ($(PROGRAM),pwmled)
+filepath := pwm_applns/pwmled
+else
+ifeq ($(PROGRAM),interrupt_demo)
+filepath := plic_applns/interrupt_demo
+else
+ifeq ($(PROGRAM),switches)
+filepath := gpio_applns/switches
+else
+ifeq ($(PROGRAM),counter)
+filepath := clint_applns/counter
+else
+	@echo "Entry for $(PROGRAM) not present"
 endif
 endif
 endif
@@ -115,3 +280,135 @@ endif
 endif
 endif
 endif
+endif
+endif
+endif
+endif	
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+endif
+
+upload: path do
+path:
+FILEPATH:='"$(GENLIB)$(filepath)"'
+
+do:
+ifeq ($(UPLOAD),UPLOAD)
+	@echo $(FILEPATH)	
+	@elf2hex 4 8192 $(filepath)/output/$(PROGRAM).shakti 2147483648 > $(filepath)/output/code.mem
+	@echo -e $(BSP)
+	@gcc -g -w -D FILEPATH='"$(FILEPATH)"' $(UPLOADDIR)/elf_to_header.c -o $(filepath)/output/elf_to_header
+	@$(filepath)/output/elf_to_header
+#       @echo -e "Converted Codemem to array"
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(filepath)/output -c $(UPLOADER)/deploy.c -o $(filepath)/output/deploy.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(FLASHSPEC) -o $(filepath)/output/flash_driver.o -march=$(MARCH)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(filepath)/output/deploy.o $(filepath)/output/flash_driver.o $(GENLIB)/gen_lib/libshakti$(XLEN).a -o $(filepath)/output/deploy.shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-objdump -D $(filepath)/output/deploy.shakti > $(filepath)/output/deploy.dump
+	@echo -e "Upload elf to Flash"
+#@$(UPLOADDIR)/burnFlash.py ./gen)lib/deploy.shakti
+	@sudo $(OCDPATH)/openocd -f $(INTERFACE).cfg -c "reset init"  -c "load_image $(filepath)/output/deploy.shakti;resume 0x80000000;shutdown"
+	@rm -rf ./gen_lib/*.o
+endif
+
+
+flash:
+ifeq ($(FLASH),FLASH) 	
+#	@flashrom -p ft2232_spi:type=2232h,port=A > ./$(filepath)/output/flashoutput.txt
+	@flashrom -p ft2232_spi:type=arm-usb-tiny-h > ./$(filepath)/output/flashoutput.txt
+	make aardonyx
+endif
+aardonyx : flashsize flashcheck objectsize swap filesize fill layoutsize layout flashrom clean
+flashsize:
+	@echo "Calculating flash size"
+	@$(eval FLASHROM = $(shell egrep -o -e '[0-9]+\ kB' ./$(filepath)/output/flashoutput.txt | egrep -o '[0-9]+') )
+	@$(eval FLASHSIZE = $(shell echo  $(FLASHROM)*1024  | bc ) )
+	@echo "Checking for flash"
+flashcheck:
+	@echo "Size of flash attached is" $(FLASHSIZE)
+#	Converts .shakti file to binary file	
+	@riscv32-unknown-elf-objcopy -O binary ./$(filepath)/output/$(PROGRAM).shakti ./$(filepath)/output/output.bin      
+
+objectsize:
+#Find size of output.bin and append it to the binary file
+	$(eval FILE = $(shell stat -c %s ./$(filepath)/output/output.bin))
+swap:
+	@echo "The size of the bin file is : " $(FILE) 
+#	Swaps endianness from little-endian to big-endian as the flash programmer swaps endianness during write.
+	@hexdump -v -e '1/4 "%08x"' -e '"\n"' ./$(filepath)/output/output.bin | xxd -r -p > ./$(filepath)/output/bigoutput.bin	
+	@printf "%08x\n" $(FILE) > ./$(filepath)/output/size.txt
+#	Appending file size to bin file	
+	@xxd -r -p ./$(filepath)/output/size.txt ./$(filepath)/output/newoutput.bin
+	@cat ./$(filepath)/output/bigoutput.bin >> ./$(filepath)/output/newoutput.bin
+filesize:
+	@$(eval FILESIZE=$(shell stat -c%s ./$(filepath)/output/newoutput.bin) )
+fill:
+	@$(eval SPACE = $(shell echo  $(FLASHSIZE)-$(FILESIZE)  | bc ) )
+	@echo "Expanding bin to flash size. This might take a few seconds.."
+#the file is expanded to 32kb and appended with 0's where required.
+	@dd if=/dev/zero of=./$(filepath)/output/newoutput.bin bs=1 count=$(SPACE) conv=notrunc oflag=append
+layoutsize:
+	@printf "%x\n" $(FLASHSIZE) > ./$(filepath)/output/size1.txt	
+layout:
+	@$(eval FILESIZE= $(shell cat ./$(filepath)/output/size.txt) )
+	@echo $(FILESIZE)
+	@echo "0000:$(FILESIZE) flash" > ./$(filepath)/output/layout.txt
+flashrom:
+#	@flashrom -p ft2232_spi:type=2232h,port=A -l ./$(filepath)/output/layout.txt -i flash -w ./$(filepath)/output/newoutput.bin
+	@flashrom -p ft2232_spi:type=arm-usb-tiny-h -l ./$(filepath)/output/layout.txt -i flash -w ./$(filepath)/output/newoutput.bin
+clean:
+	@rm -rf ./$(filepath)/output/*.txt
+	@rm -rf ./$(filepath)/output/*.bin
+
+
+finish:
+ifeq ($(PROGRAM),all)
+	@echo -e "make all over"
+else
+ifeq ($(CLEAR),)
+	cd $(filepath) && $(MAKE) $(PROGRAM).riscv TARGET=$(TARGET) DEBUG=$(DEBUG)
+else
+ifeq ($(PROGRAM),)
+	cd $(filepath)/../ && $(MAKE) clean CLEAR=$(CLEAR)
+else
+	cd $(filepath)/../ && $(MAKE) clean PROGRAM=$(PROGRAM) CLEAR=$(CLEAR)
+endif
+endif
+endif
+
+
+

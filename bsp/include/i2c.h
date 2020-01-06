@@ -1,24 +1,20 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-/*
- *
+/******************************************************************************************************************
  *   Copyright (C) 1995-1997 Simon G. Vogl
  *		   1998-2000 Hans Berglund
- *
  * With some changes from Kyösti Mälkki <kmalkki@cc.hut.fi> and
  * Frodo Looijaard <frodol@dds.nl>, and also from Martin Bailey
  * <mbailey@littlefeet-inc.com>
- *
  * Partially rewriten by Oleg I. Vdovikin <vdovikin@jscc.ru> to handle multiple
  * messages, proper stop/repstart signaling during receive, added detect code
- *
  * Partially rewritten by Vinod <g.vinod1993@gmail.com> and Kotteeswaran <kottee.1@gmail.com> for shakti i2c
- *
+ *******************************************************************************************************************/
+
+/**
+ * @file i2c.h
+ * @project shakti devt board
+ * @brief  Header file for i2c
  */
-/************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  i2c.h
-* Brief Description of file     :  Header file for i2c
-*/
 #ifndef I2C_H
 #define I2C_H
 
@@ -29,6 +25,13 @@
 #define ETIMEDOUT -80
 #define ENXIO -82
 #define EREMOTEIO -81
+
+
+#define I2C_SUCCESS 0
+#define EAXI_ERROR -1
+#define EI2C_BUS_ERROR -2
+#define EI2C_PIN_ERROR -3
+#define EI2C_LRB_ERROR -4
 
 #define I2C_SHAKTI_PIN	0x80
 #define I2C_SHAKTI_ESO	0x40
@@ -62,20 +65,27 @@
 #define I2C_BASE_ADDRESS I2C_START
 
 
-//Following the memory map provided
+// Following the memory map provided
 #define I2C_PRESCALE (I2C_BASE_ADDRESS  + 0)
 #define I2C_CONTROL (I2C_BASE_ADDRESS + 8)
 #define I2C_DATA (I2C_BASE_ADDRESS  + 0x10)
 #define I2C_STATUS (I2C_BASE_ADDRESS + 0x18)
 #define I2C_SCL (I2C_BASE_ADDRESS + 0x38)
 
-
-// Hardcoding the pointers with addresss -- let's see if this works
+#ifdef I2C_DRV
+//  Hardcoding the pointers with addresss -- let's see if this works
 int* i2c_control = (const int *) I2C_CONTROL;
 int* i2c_data    = (const int *) I2C_DATA;
 int* i2c_status  = (const int *) I2C_STATUS;
 int* i2c_prescale = (const int *) I2C_PRESCALE;
 int* i2c_scl = (const int *) I2C_SCL;
-
+#else
+extern int* i2c_control;
+extern int* i2c_data;
+extern int* i2c_status;
+extern int* i2c_prescale;
+extern int* i2c_scl;
 #endif
 
+
+#endif

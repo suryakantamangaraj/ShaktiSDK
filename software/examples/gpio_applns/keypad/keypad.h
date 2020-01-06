@@ -20,31 +20,32 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-/* ------------------------------------------------------------ */
-/*	     Include File Definitions			            		*/
-/* ------------------------------------------------------------ */
+
+/**
+ * @file keypad.h
+ * @project shakti devt board
+ * @brief Declaration for keypad library.
+ * @detail Include File Definitions	
+ */
+
 #if !defined(KYPD_H)
 #define KYPD_H
 
 #define KYPD_ROWNUM 4
 #define KYPD_COLNUM 4
 
-
 #define OUTPINS_OFFSET 0
 #define INPINS_OFFSET 4
 #define OUTPINS (0xF << OUTPINS_OFFSET)
 #define INPINS  (0xF << INPINS_OFFSET)
-/* ------------------------------------------------------------ */
-/*				Procedure Declarations						*/
-/* ------------------------------------------------------------ */
 
+//function prototype
+void setPins(unsigned int* row, unsigned int* col);
+void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM]);
+int getKey();
+int getColRow(void);
+unsigned int rowPins[KYPD_ROWNUM];
+unsigned int colPins[KYPD_COLNUM];
+int keyMap[KYPD_COLNUM][KYPD_ROWNUM];
 
-
-    void setPins(unsigned int* row, unsigned int* col);
-    void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM]);
-    int getKey();
-    int getColRow(void);
-    unsigned int rowPins[KYPD_ROWNUM];
-    unsigned int colPins[KYPD_COLNUM];
-    int keyMap[KYPD_COLNUM][KYPD_ROWNUM];
 #endif

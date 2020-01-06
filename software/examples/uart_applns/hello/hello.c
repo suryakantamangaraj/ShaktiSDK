@@ -23,17 +23,27 @@
 
 ***************************************************************************/
 
-#include "uart.h"//Includes the definitions of uart communication protocol//
+#include "platform.h"
+#include "shakti_uart.h"
+#include "uart.h"
 
-/** @fn  main
- * @brief  prints hello world
- * @details main function, execution starts from here 
- * @warning none
+/** @fn main
+ * @brief prints hello world 
  * @param[in] NULL
  * @param[Out] NULL
  */
 
 void main()
 {
-	printf("Hello world !\n");
+	long long int i= 0xfffff;
+	i = i;
+	printf("%s","Hello world !");
+	printf("\n%lu\n",i);
+	printf("\n%llu\n",i);
+	printf("\n%lld\n",i);
+	printf("\n%ld\n",i);
+while(1);
+
 }
+
+

@@ -22,12 +22,18 @@
 
    ************************************************************************/
 
+/**
+ * @file timer.h
+ * @project shakti devt board
+ * @brief Headerfile for Timer  
+ */
 #ifndef TIMER_H
 #define TIMER_H
 
 #define CLINT_CTRL_ADDR 0x02000000
 #define  CLINT_MTIME 0xbff8
 
+// function prototype
 uint64_t get_timer_value();
 
 #endif

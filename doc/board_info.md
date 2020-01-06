@@ -11,7 +11,7 @@ Artix 7 35T board corresponds to E class and Artix 7 100T corresponds to C class
 The readme, includes information on installing Vivado, building the bitsream. [board_use.md](https://gitlab.com/shaktiproject/software/shakti-sdk/blob/master/doc/board_use.md) provides information on connecting a JTAG, programming the on-board configuration memory and running example shakti-sdk projects.
 
 ### Board information ###
-Details on board support for different classes of processors are given below
+Details on board support for different classes fo processors are given below
 
 - 32 bit core
   * [`shakti e class`](https://shakti.org.in/e-class.html)supported on [`artix7_35t board`](https://www.xilinx.com/products/boards-and-kits/arty.html).

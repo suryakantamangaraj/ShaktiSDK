@@ -1,4 +1,25 @@
 The readme is a brief overview on gpio, i2c, uart example applications. Next Releases will includes applications of qspi, spi and pwm support.
+
+### GEN_LIB
+   * This consists of the common library files that are built and need to be linked with the applications.
+   * This consists of the following library files
+      - uart driver
+      - qspi_micron driver
+      - crt.S
+      - syscalls
+      - log
+      - util
+      - traps
+      - init
+      - plic driver
+      - clic driver
+   * Note: this folder is generated after issuing make
+
+### FLASHROM
+   - This is the open-source library that we use to program external flash
+   - Libraries required to install flashrom
+   - sudo apt-get install libpci-dev flashrom libftdi-dev libusb-dev
+   - flashrom automatically detects the flash. a list of supported flashes are available here : (https://flashrom.org/Supported_hardware)
      
 ### GPIO_APPLICATIONS
    - This consists of applications developed using the gpio pins.

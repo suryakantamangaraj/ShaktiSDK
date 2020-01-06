@@ -29,31 +29,29 @@
 #define MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
 #define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
 
- /** @fn void main()
- * @brief Runs the motor
+ /** @fn main
+ * @brief Performs the intilization of the corresponding registers of gpio pins.
  * @details 
  * @warning 
- * @param[in] NULL
- * @param[Out] NULL
+ * @param[in] Registers,conrol word. 
+ * @param[Out] 
  */
-
 void main()
 {
 	printf("Motor Control\n");
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
-	while(1)
-	{
+	while(1) {
 		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);
 		printf("Forward\n");
 		printf("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
-		DelayLoop(5000, 5000);
+		delay_loop(5000, 5000);
 
 		write_word(GPIO_DATA_REG, MOTOR_REVERSE_CNTRL);
 		printf("Reverse\n");
 		printf("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
-		DelayLoop(5000, 5000);
+		delay_loop(5000, 5000);
 	}
 
-	DelayLoop(5000, 5000);
+	delay_loop(5000, 5000);
 }

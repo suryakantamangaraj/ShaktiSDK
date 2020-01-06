@@ -22,6 +22,12 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+
+/**
+ * @file gpio_i2c.h
+ * @project shakti devt board
+ * @brief Header file the I2C operations using gpio pins.
+ */
 #ifndef GPIO_I2C_H
 #define GPIO_I2C_H
 
@@ -35,6 +41,7 @@
 #define I2C_WRITE 0
 #define I2C_READ 1
 
+// function prototype 
 void I2cInit();
 void I2cSendSlaveAddress(unsigned char , unsigned char , unsigned char );
 void I2cWriteByte(unsigned char , unsigned char );
@@ -50,6 +57,5 @@ int I2c_shakti_readbytes(char *, int , int , unsigned char );
 void ReadAckForWrite(unsigned char delay);
 void SendNackForRead(unsigned char delay);
 void SendAckForRead(unsigned char delay);
-
 
 #endif

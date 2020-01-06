@@ -16,13 +16,29 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+export bsplib
+export bspcore
+export bsputil
+export bspboard
+export bspinc
+export bspdri
+export UPLOADDIR
+export UPLOADER
+export OCDPATH
+export INTERFACE
+export FLASHSPEC
+export GENLIB
 
 # Default PROGRAM and TARGET
-PROGRAM ?= hello
+PROGRAM ?= 
 TARGET ?= artix7_35t
 DEBUG ?= DEBUG
 CLEAR ?=
 UPLOAD ?= UPLOAD
+FLASH ?= FLASH
+MARCH ?=
+MABI  ?=
+CLEAR ?=
 
 #############################################################
 # Prints help message
@@ -47,11 +63,14 @@ help:
 	@echo " upload [PROGRAM=$(PROGRAM)] [TARGET=$(TARGET)]"
 	@echo " Uploads the requested PROGRAM to the Flash memory in the board"
 	@echo ""
+	@echo " flash [PROGRAM=$(PROGRAM)] [TARGET=$(TARGET)]"
+	@echo " Flashes the requested PROGRAM to the Flash memory in the board"
+	@echo ""
 	@echo " clean"
 	@echo " Cleans compiled objects in every example applns."
 	@echo ""
-	@echo " clean [CLEAR=$(PROGRAM)]"
-	@echo " Cleans compiled objects of that example appln."
+	@echo " clean [PROGRAM=$(PROGRAM)]"
+	@echo " Cleans compiled objects of that particular appln."
 
 
 
@@ -66,20 +85,36 @@ BOARD_DIR := $(shell ls ./bsp/third_party)
 GPIO_DIR := $(shell cd ./software/examples/gpio_applns/ && ls -d * | grep -v Makefile )
 UART_DIR := $(shell cd ./software/examples/uart_applns/ && ls -d * | grep -v Makefile )
 I2C_DIR := $(shell cd software/examples/i2c_applns/ && ls -d * | grep -v Makefile )
-#PWM_DIR := $(shell cd software/examples/pwm_applns/ && ls -d * | grep -v Makefile )
-#SPI_DIR := $(shell cd software/examples/spi_applns/ && ls -d * | grep -v Makefile )
-APP_DIR := $(GPIO_DIR) $(UART_DIR) $(I2C_DIR) $(SPI_DIR) $(PWM_DIR)
+PWM_DIR := $(shell cd software/examples/pwm_applns/ && ls -d * | grep -v Makefile )
+SPI_DIR := $(shell cd software/examples/spi_applns/ && ls -d * | grep -v Makefile )
+PLIC_DIR := $(shell cd software/examples/plic_applns/ && ls -d * | grep -v Makefile )
+APP_DIR := $(GPIO_DIR) $(UART_DIR) $(I2C_DIR) $(SPI_DIR) $(PWM_DIR) $(PLIC_DIR)
 
 
+#bsp board specific files path
+BSP:=$(shell pwd)/bsp
+bspboard:=$(BSP)/third_party/$(TARGET)/
+bspdri:=$(BSP)/drivers
+bsputil:=$(BSP)/utils
+#bsp incl file path
+bspinc:=$(BSP)/include
+#bsp lib file path
+bsplib:=$(BSP)/libs
+#bsp board specific files path
+bspboard:=$(BSP)/third_party/$(TARGET)
+#bsp core file path
+bspcore:=$(BSP)/core
+UPLOADDIR :=$(bsputil)/uploader
+UPLOADER :=$(UPLOADDIR)/spansion
+FLASHSPEC :=$(bspdri)/spi/spi_spansion.c
+INTERFACE :=$(bspboard)/ftdi
+OCDPATH:=$(shell pwd)/shakti-tools/bin
+GENLIB:=$(shell pwd)/software/examples/
 
 #List the boards that are supported by Shakti Sdk
 .PHONY: all
 all:
-	cd  ./software/examples/uart_applns && $(MAKE) all
-	cd  ./software/examples/i2c_applns && $(MAKE) all
-	cd  ./software/examples/gpio_applns && $(MAKE) all
-#	cd  ./software/examples/spi_applns && $(MAKE) all
-#	cd  ./software/examples/pwm_applns && $(MAKE) all
+	cd  ./software/examples/  && $(MAKE) all TARGET=$(TARGET)
 
 .PHONY: target
 list_targets:
@@ -93,73 +128,40 @@ list_applns:
 #Software commands
 .PHONY: software
 software:
-	@echo $(PROGRAM) $(TARGET)
-	@echo "make for that program on that board"
+	@echo "Build $(PROGRAM) on $(TARGET) board"
 	cd ./software/examples && $(MAKE) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
 
 .PHONY: upload
 upload:
-	@echo upload $(PROGRAM) $(TARGET)
-	@echo "that program on that board"
+	@echo Build and upload $(PROGRAM) on $(TARGET) board
 	cd ./software/examples && $(MAKE) UPLOAD=$(UPLOAD) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
+
+.PHONY: flash
+flash:
+	@echo Build and flash $(PROGRAM) on $(TARGET) board
+	cd ./software/examples && $(MAKE) FLASH=$(FLASH) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
 
 .PHONY: debug
 debug:
-	@echo $(PROGRAM) $(TARGET) $(DEBUG)
-	@echo "make for that program on that board"
+	@echo Build $(PROGRAM) on $(TARGET) board with $(DEBUG)
 	cd ./software/examples/ && $(MAKE) PROGRAM=$(PROGRAM) TARGET=$(TARGET) DEBUG=$(DEBUG)
 
 .PHONY: clean
 clean:
-ifeq ($(CLEAR),hello)
-	cd ./software/examples/uart_applns && $(MAKE) clean CLEAR=$(CLEAR)
+#remove the gen_lib directory
+	@if [ -d software/examples/gen_lib/ ] ; then rm -rf software/examples/gen_lib/; fi
+ifeq ($(PROGRAM),)
+	cd ./software/examples/clint_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/spi_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/uart_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/i2c_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/pwm_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/plic_applns && $(MAKE) clean CLEAR=CLEAR
+	cd ./software/examples/malloc_test && $(MAKE) clean CLEAR=CLEAR
+
 else
-ifeq ($(CLEAR),uartmp3)
-	cd ./software/examples/uart_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),lm75)
-	cd ./software/examples/i2c_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),btnled)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),tglgpio)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),leds)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),rdgpio)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),motor)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),keypad)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),gyro_softi2c)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),maze)
-	cd ./software/examples/uart_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
-ifeq ($(CLEAR),)
-	cd ./software/examples/uart_applns && $(MAKE) clean CLEAR=$(CLEAR)
-	cd ./software/examples/gpio_applns && $(MAKE) clean CLEAR=$(CLEAR)
-	cd ./software/examples/i2c_applns && $(MAKE) clean CLEAR=$(CLEAR)
-#	cd ./software/examples/spi_applns && $(MAKE) clean CLEAR=$(CLEAR)
-#	cd ./software/examples/pwm_applns && $(MAKE) clean CLEAR=$(CLEAR)
-else
+	cd ./software/examples && $(MAKE) PROGRAM=$(PROGRAM) CLEAR=CLEAR
 endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
+
+
