@@ -21,7 +21,7 @@ void main()
         printf("\n Read Data:=0x%x", readData);
         if (readData == 0x00000001) {
             write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000002);
-            write_word(GPIO_DATA_REG, 0x0000002);
+            write_word(GPIO_DATA_REG, 0x00000002);
             printf("\nTurn on Motor");
         }
         else {
