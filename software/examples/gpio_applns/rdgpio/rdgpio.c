@@ -52,7 +52,7 @@ void main()
 
 	while (1) {
 		readData =read_word(GPIO_DATA_REG);//copies the GPIO_DATA_REG Register contents//
-		printf("\n Read Data is :0x%08x", readData);
-		delay_loop(3000, 5000);
+		printf("\n Read Data is :0x%x", readData);
+		delay_loop(1000, 3000);
 	}
 }
