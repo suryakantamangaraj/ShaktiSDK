@@ -1,4 +1,3 @@
-
 #Created by Sathya Narayanan N
 # Email id: sathya281@gmail.com
 
@@ -30,10 +29,10 @@ FLASHSPEC :=../../../../bsp/drivers/spi/spi_spansion.c
 FLAGS ?=
 
 all: create_dir
-	make spireadwrite.riscv
+	make spiread.riscv
 
 
-spireadwrite.riscv: create_dir
+spiread.riscv: create_dir
 	 
 	@echo -e $(BSP)
 	 
