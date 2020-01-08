@@ -44,8 +44,11 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @param[in] 
  * @param[Out] NULL
  */
-
 void main()
+{
+    readData(); 
+}
+readData()
 {
 	unsigned long readData = 0;
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
