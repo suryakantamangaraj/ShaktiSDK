@@ -86,11 +86,11 @@ int write_lm75_register(unsigned int reg_offset, unsigned int write_value, unsig
 int main()
 
 {
-    tempreading();
+    temperature_reading();
     return(1);
 }    
 
-int tempreading()
+int temperature_reading()
     {
 	int timeout;
 	unsigned int tempReadValue = 0;
