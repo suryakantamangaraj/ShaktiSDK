@@ -5,6 +5,11 @@ extern char _stack_end[];
 extern char _stack[];
 extern char _heap[];
 extern char _heap_end[];
+extern char __bss_end[];
+extern char __bss_start[];
+extern char __sbss_end[];
+extern char __sbss_start[];
+
 
 char *test1=(char *)&_free_space;
 char *test3=(char *)&_STACK_SIZE;
@@ -13,6 +18,11 @@ char *test5=(char *)&_stack_end;
 char *test6=(char *)&_stack;
 char *test7=(char *)&_heap;
 char *test8=(char *)&_heap_end;
+char *test9=(char *)&__bss_end;
+char *test10=(char *)&__bss_start;
+char *test11=(char *)&__sbss_end;
+char *test12=(char *)&__sbss_start;
+
 
 
 
@@ -22,7 +32,8 @@ int *pointer;
 int main()
 {
 printf("\n\n\n\n\n\nTest Running");
-printf("\n %x %x %x %x %x %x",&pointer,&c1,&c2,&c3,&c4,&c5);
+printf("\n %x %x %x %x %x %x %x %x %x %x %x",test1,test3,test4,test5,test6,test7,test8,test9,test10,test11,test12);
+printf("\n %x %d %x %x %x %x %x",&pointer,c1,&c1,&c2,&c3,&c4,&c5);
 static int b1,b2,b3,b4,b5;
 printf("\n %x %x %x %x %x",&b1,&b2,&b3,&b4,&b5);
 int a1,a2,a3,a4,a5;
@@ -91,5 +102,4 @@ b=malloc(1024);
 free(b);
 }*/
 //free(c);
-return 0;
 }

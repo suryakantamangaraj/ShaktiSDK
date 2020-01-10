@@ -44,8 +44,6 @@ extern char __bss_start[];
 extern char __sbss_end[];
 extern char __sbss_start[];
 
-
-
 char *stack_end=(char *)&_stack_end;
 char *stack_start=(char *)&_stack;
 char *heap_start=(char *)&_heap;
@@ -89,7 +87,13 @@ stack_end--;
 void trap_init()
 {
 	log_info("trap_init entered \n ");
-	//write_csr(mtvec,&trap_entry);
+
+//	write_csr(mtvec,&trap_entry);
+
+	asm volatile("la t0, trap_entry\t\n"
+		      " csrw mtvec, t0\t\n");
+
+
 
 	mcause_interrupt_table[USER_SW_INTERRUPT]        = default_handler;
 	mcause_interrupt_table[SUPER_SW_INTERRUPT]       = default_handler;
