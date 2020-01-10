@@ -37,6 +37,17 @@
 
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
+void readData()
+{
+	unsigned long data = 0;
+	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
+
+	while (1) {
+		data =read_word(GPIO_DATA_REG);//copies the GPIO_DATA_REG Register contents//
+		printf("\n Read Data is :%x", readData);
+		delay_loop(3000, 5000);
+	}
+}
 /** @fn main
  * @brief 
  * @details 
@@ -47,12 +58,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 void main()
 {
-	unsigned long readData = 0;
-	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
-
-	while (1) {
-		readData =read_word(GPIO_DATA_REG);//copies the GPIO_DATA_REG Register contents//
-		printf("\n Read Data is :%x", readData);
-		delay_loop(3000, 5000);
-	}
+    readData(); 
 }
+
+

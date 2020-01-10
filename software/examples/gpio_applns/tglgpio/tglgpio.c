@@ -44,6 +44,11 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  */  
 void main()
 {
+	tglgpio();
+	return 0;
+}
+void tglgpio()
+{
 //Assumption 1 ---> output, 0 ---> input
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00FFFFFF);
 

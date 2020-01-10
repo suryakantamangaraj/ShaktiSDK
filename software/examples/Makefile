@@ -247,8 +247,8 @@ else
 ifeq ($(PROGRAM),spiwrite)
 filepath := spi_applns/spiwrite
 else
-ifeq ($(PROGRAM),spireadwrite)
-filepath := spi_applns/spireadwrite
+ifeq ($(PROGRAM),spiread)
+filepath := spi_applns/spiread
 else
 ifeq ($(PROGRAM),spi)
 filepath := spi_applns/spi
