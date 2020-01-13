@@ -44,7 +44,7 @@ void readData()
 
 	while (1) {
 		data =read_word(GPIO_DATA_REG);//copies the GPIO_DATA_REG Register contents//
-		printf("\n Read Data is :%x", readData);
+		printf("\n Read Data is :%x", data);
 		delay_loop(3000, 5000);
 	}
 }
