@@ -1,9 +1,8 @@
-/************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  timer.h
-* Brief Description of file             :  Headerfile for Timer .
-*  Name of Author    	                :  Sathya Narayanan N
-* Email ID                              :  sathya281@gmail.com
+/*
+platform.h - header file for Aardonyx E class SoC
+
+Created by Sathya Narayanan N
+Email id: sathya281@gmail.com
 
     Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,20 +19,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-   ************************************************************************/
+*/
 
-/**
- * @file timer.h
- * @project shakti devt board
- * @brief Headerfile for Timer  
- */
-#ifndef TIMER_H
-#define TIMER_H
+#ifndef PINMUX_H
+#define PINMUX_H
+#include "platform.h"
 
-#define CLINT_CTRL_ADDR 0x02000000
-#define  CLINT_MTIME 0xbff8
+volatile unsigned int* pinmux_config_reg = PINMUX_CONFIGURE_REG;
 
-// function prototype
-uint64_t get_timer_value();
+#define PINMUX_CONFIG_1 
+#define PINMUX_CONFIG_2 
+#define PINMUX_CONFIG_3
 
 #endif

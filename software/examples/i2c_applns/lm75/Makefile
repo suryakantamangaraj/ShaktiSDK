@@ -30,15 +30,12 @@ XLEN  ?= 32
 FLAGS ?=
 
 all: create_dir
-	make lm75.riscv
+	make $(PROGRAM).riscv
 
 
-lm75.riscv: create_dir
-	 
-	 
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) -I$(bspboard) $(FLAGS) -c ./lm75.c -o ./output/lm75.o -march=$(MARCH) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri)  -I$(bspboard)  -c $(bspdri)/i2c/i2c_driver.c -o ./output/i2c_driver.o -march=$(MARCH) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/lm75.o ./output/i2c_driver.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
+$(PROGRAM).riscv: create_dir	 
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri) -I$(bspboard) $(FLAGS) -c ./$(PROGRAM).c -o ./output/$(PROGRAM).o -march=$(MARCH)  -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./output/$(PROGRAM).o $(GENLIB)/gen_lib/libshakti$(XLEN).a  -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:

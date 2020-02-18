@@ -29,118 +29,107 @@
  */
 #ifndef UART_H
 #define UART_H
+#include <stdint.h>
+#include "platform.h"
 
-#define UART_START 0x11300
+/* Struct to access UART registers as 32 bit registers */
+typedef struct
+{
+	unsigned short baud;	 /*! Baud rate configuration Register -- 16 bits*/
+	unsigned short reserv0;	 /*! reserved */
+	unsigned int  tx_reg;	 /*! Transmit register -- the value that needs to be tranmitted needs to be written here-32 bits*/
+	unsigned int  rcv_reg;	 /*! Receive register -- the value that received from uart can be read from here --32 bits*/
+	unsigned char  status;	 /*! Status register -- Reads various transmit and receive status - 8 bits*/
+	unsigned char  reserv1;	 /*! reserved */
+	unsigned short  reserv2; /*! reserved */
+	unsigned short delay;    /*! Delays the transmit with specified clock - 16bits*/
+	unsigned short reserv3;  /*! reserved */
+	unsigned short control;   /*! Control Register -- Configures the no. of bits used, stop bits, parity enabled or not - 16bits*/
+	unsigned short reserv5;  /*! reserved */
+	unsigned char ien;	     /*! Enables the required interrupts - 8 bits*/
+	unsigned char reserv6;   /*! reserved */
+	unsigned short reserv7;  /*! reserved */
+	unsigned char  iqcycles; /*! 8-bit register that indicates number of input qualification cycles - 8 bits*/
+	unsigned char reserv8;   /*! reserved */
+	unsigned short reserv9;  /*! reserved */
+#ifdef USE_RX_THRESHOLD /*! This is to be used only when support is there. */
+	unsigned char rx_threshold;	/*! RX FIFO size configuration register - 8 bits*/
+	unsigned char reserv10;    /*! reserved */ 
+	unsigned short reserv11;    /*! reserved */
+#endif	
+} uart_struct;
 
-#define TX_REG_OFFSET     0x4
-#define RX_REG_OFFSET     0x8
-#define STATUS_REG_OFFSET 0xC
+
+#ifdef ARTIX7_35T
 
 
-#define WRITE_REG  ((volatile unsigned char *)(UART0_START + 0x4)) /* 8 bits */
-#define READ_REG   ((volatile unsigned char *)(UART0_START + 0x8)) /* 8 bits */
-#define STATUS_REG ((volatile unsigned char *)(UART0_START + 0xC)) /* 8 bits */
+#define STS_RX_THRESHOLD	0x1 << 8
+#define BREAK_ERROR	1 << 7
+#define FRAME_ERROR	1 << 6
+#define OVERRUN        	1 << 5
+#define PARITY_ERROR        	1 << 4
+#define STS_RX_FULL 		1 << 3
+#define STS_RX_NOT_EMPTY 		1 << 2
+#define STS_TX_FULL 		1 << 1
+#define STS_TX_EMPTY 		1 << 0
 
+/*! UART Interrupt Enable bits description */
+#define ENABLE_RX_THRESHOLD	1 << 8
+#define ENABLE_BREAK_ERROR      1 << 7
+#define ENABLE_FRAME_ERROR      1 << 6
+#define ENABLE_OVERRUN          1 << 5
+#define ENABLE_PARITY_ERROR     1 << 4
+#define ENABLE_RX_FULL 		1 << 3
+#define ENABLE_RX_NOT_EMPTY 	1 << 2
+#define ENABLE_TX_FULL 		1 << 1
+#define ENABLE_TX_EMPTY 	1 << 0
 
+#define UARTX_BUFFER_SIZE 10000
 
-#if 0
-#define U0_BAUD_REG  ((volatile unsigned char *) (UART0_BASE_ADDRESS + 0x0)) /* 8 bits */
-#define U0_WRITE_REG  ((volatile unsigned char *)(UART0_BASE_ADDRESS + 0x4)) /* 8 bits */
-#define U0_READ_REG   ((volatile unsigned char *)(UART0_BASE_ADDRESS + 0x8)) /* 8 bits */
-#define U0_STATUS_REG ((volatile unsigned char *)(UART0_BASE_ADDRESS + 0xC)) /* 8 bits */
-#define U0_DELAY_REG   ((volatile unsigned char *)(UART0_BASE_ADDRESS + 0x10)) /* 8 bits */
-#define U0_CONTROL_REG   ((volatile unsigned char *)(UART0_BASE_ADDRESS + 0x14)) /* 8 bits */
-#define U0_INTERRUPT_ENABLE_REG   ((volatile unsigned char *)(UART0_BASE_ADDRESS + 0x18)) /* 8 bits */
-#define U0_IO_CYCLES_REG   ((volatile unsigned char *)(UART0_BASE_ADDRESS + 0x1C)) /* 8 bits */
+//#define UART0            ((uart_struct   *) UART0_START )
+//#define UART1            ((uart_struct   *) UART1_START )
+//#define UART2            ((uart_struct   *) UART2_START )
 
-#define U1_BAUD_REG  ((volatile unsigned char *) (UART1_BASE_ADDRESS + 0x0)) /* 8 bits */
-#define U1_WRITE_REG  ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x4)) /* 8 bits */
-#define U1_READ_REG   ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x8)) /* 8 bits */
-#define U1_STATUS_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0xC)) /* 8 bits */
-#define U1_DELAY_REG   ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x10)) /* 8 bits */
-#define U1_CONTROL_REG   ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x14)) /* 8 bits */
-#define U1_INTERRUPT_ENABLE_REG   ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x18)) /* 8 bits */
-#define U1_IO_CYCLES_REG   ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x1C)) /* 8 bits */
+extern uart_struct *uart_instance[MAX_UART_COUNT];
+extern unsigned char uart0_complete;
+extern unsigned char uart1_complete;
+extern unsigned char uart2_complete;
+extern unsigned int uart0_tx_isr_count ;
+extern unsigned int uart0_rcv_isr_count ;
+extern unsigned int uart1_tx_isr_count ;
+extern unsigned int uart1_rcv_isr_count ;
+extern unsigned int uart2_tx_isr_count ;
+extern unsigned int uart2_rcv_isr_count ;
+extern unsigned char u0_rcv_char[UARTX_BUFFER_SIZE];
+extern unsigned char u1_rcv_char[UARTX_BUFFER_SIZE];
+extern unsigned char u2_rcv_char[UARTX_BUFFER_SIZE];
 
-#define U2_BAUD_REG  ((volatile unsigned char *) (UART2_BASE_ADDRESS + 0x0)) /* 8 bits */
-#define U2_WRITE_REG  ((volatile unsigned char *)(UART2_BASE_ADDRESS + 0x4)) /* 8 bits */
-#define U2_READ_REG   ((volatile unsigned char *)(UART2_BASE_ADDRESS + 0x8)) /* 8 bits */
-#define U2_STATUS_REG ((volatile unsigned char *)(UART2_BASE_ADDRESS + 0xC)) /* 8 bits */
-#define U2_DELAY_REG   ((volatile unsigned char *)(UART2_BASE_ADDRESS + 0x10)) /* 8 bits */
-#define U2_CONTROL_REG   ((volatile unsigned char *)(UART2_BASE_ADDRESS + 0x14)) /* 8 bits */
-#define U2_INTERRUPT_ENABLE_REG   ((volatile unsigned char *)(UART2_BASE_ADDRESS + 0x18)) /* 8 bits */
-#define U2_IO_CYCLES_REG   ((volatile unsigned char *)(UART2_BASE_ADDRESS + 0x1C)) /* 8 bits */
+void uart_init();
+void set_baud_rate(uart_struct * uart_instance, unsigned int baudrate);
+void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt);
+void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold);
+uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character);
+uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string);
+uint8_t read_uart_character(uart_struct * uart_instance, char * prn_character);
+uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string) ;
+unsigned char uart0_isr();
+unsigned char uart1_isr();
+unsigned char uart2_isr();
+
 #else
-#define UART_BAUD_REG    0x00 /* 8 bits */
-#define UART_WRITE_REG   0x04 /* 8 bits */
-#define UART_READ_REG    0x08 /* 8 bits */
-#define UART_STATUS_REG  0x0C /* 8 bits */
-#define UART_DELAY_REG   0x10 /* 8 bits */
-#define UART_CONTROL_REG 0x14 /* 8 bits */
-#define UART_INTERRUPT_ENABLE_REG   0x18 /* 8 bits */
-#define UART_IO_CYCLES_REG   0x1C /* 8 bits */
-#endif
 
-#define RECV_NOT_EMPTY   0x8
-#define TRANS_FULL   0x2
+/*! UART Baud Rate Configuration Registers sets the uart clock rate */
+#define UART_BAUDRATE_CFG_REGISTER 0
+#define UART_DATA_TX_REGISTER 4
+#define UART_DATA_RX_REGISTER 8
+#define UART_STS_REGISTER 0x0C
 
-
-#define CLOCK_FREQUENCY 40000000
-
-// 8-bit Interrupt Enable register
-#define ENABLE_BREAK_ERROR		 1 << 7
-#define ENABLE_FRAME_ERROR		 1 << 6
-#define ENABLE_OVERRUN			 1 << 5
-#define ENABLE_PARITY_ERROR		 1 << 4
-/*
-#define ENABLE_RECV_NOT_EMPTY	 1 << 3
-#define ENABLE_RECV_NOT_FULL	 1 << 2
-#define ENABLE_TX_NOT_FULL		 1 << 1
-#define ENABLE_TX_DONE			 1 << 0
-
-
-#define STS_TX_EMPTY 1 << 0
-#define STS_TX_FULL 1 << 1
-#define STS_RX_NOT_EMPTY 1 << 2
-#define STS_RX_FULL 1 << 3
-
-
-#define ENABLE_TX_EMPTY 1 << 0
-#define ENABLE_TX_FULL 1 << 1
-#define ENABLE_RX_NOT_EMPTY 1 << 2
-#define ENABLE_RX_FULL 1 << 3
-
-
-*/
-
-/**
- * @brief Enumeration to select one of the UART base address. 
- */
-typedef enum uart_num {
-    UART0,
-    UART1, 
-    UART2
-} uart_num;
-
-//function prototype
-int read_uart(uart_num sel, unsigned int baudrate);
-int write_uart(int ch, uart_num sel, unsigned int baudrate);
-void flush_uart(uart_num sel);
-#undef putchar
 int putchar(int ch);
-#undef getchar
+
+int is_empty();
+
 int getchar();
-#ifdef SHAKTI_UART
-void enable_uart_interrupt(SHAKTI_UART_TypeDef * ptr_SHAKTI_UART, unsigned char interrupt);
-void init_uart(SHAKTI_UART_TypeDef * ptr_SHAKTI_UART, unsigned int baudrate);
+
+
 #endif
-
-
-#ifdef UART_NUM
-void enable_uart_interrupt(uart_num sel , unsigned int interrupt);
-void init_uart(uart_num sel , unsigned short baudrate);
-#endif
-
-
-
 #endif

@@ -1,8 +1,8 @@
 /***************************************************************************
  * Project           			:  shakti devt board
- * Name of the file	     		:  plic_driver.c
- * Brief Description of file            :  source file for plic.
- * Name of Author    	                :  Sathya Narayanan N
+ * Name of the file	     		:  init.c
+ * Brief Description of file            :  source file for system initialization.
+ * Name of Author    	                :  Sathya Narayanan N & Abhinav Ramnath
  * Email ID                             :  sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-****************************************************************************/
+ ****************************************************************************/
 
 #include "traps.h"
 #include "plic_driver.h"
@@ -30,10 +30,12 @@
 #include "qspi.h"
 #include "platform.h"
 #include "defines.h"
+#include "uart.h"
 
 
 extern void trap_entry();
 
+extern uart_struct *uart_instance[MAX_UART_COUNT];
 
 extern char _stack_end[];
 extern char _stack[];
@@ -56,42 +58,45 @@ char *sbss_start=(char *)&__sbss_start;
 void section_init()
 {
 
-int i;
+	int i;
 
-while(bss_start<=bss_end)
-{
-*bss_start=0x0;
-bss_start++;
+	while(bss_start<=bss_end)
+	{
+		*bss_start=0x0;
+		bss_start++;
+	}
+
+	while(sbss_start<=sbss_end)
+	{
+		*sbss_start=0x0;
+		sbss_start++;
+	}
+
+	while(heap_start<=heap_end)
+	{
+		*heap_start=0xffffffff;
+		heap_start++;
+	}
+
+	while(stack_end>=stack_start)
+	{
+		*stack_end=0x0;
+		stack_end--;
+	}
+
 }
 
-while(sbss_start<=sbss_end)
-{
-*sbss_start=0x0;
-sbss_start++;
-}
-
-while(heap_start<=heap_end)
-{
-*heap_start=0xffffffff;
-heap_start++;
-}
-
-while(stack_end>=stack_start)
-{
-*stack_end=0x0;
-stack_end--;
-}
-
-}
+/** @fn trap_init
+ * @brief initialize the trap and interrupt callback routines
+ * @details   Initialize the trap/interrupt callback routines
+ with user defined handler. For others assign default handler.
+ * @param[in]  void
+ * @param[Out] void
+ */
 
 void trap_init()
 {
 	log_info("trap_init entered \n ");
-
-//	write_csr(mtvec,&trap_entry);
-
-	asm volatile("la t0, trap_entry\t\n"
-		      " csrw mtvec, t0\t\n");
 
 
 
@@ -157,20 +162,25 @@ void trap_init()
 
 void init(void)
 {
+#ifdef ARTIX7_35T
+	uart_init();
+	
 	log_info("init entered \n ");
 
-	section_init();
+	asm volatile("la t0, trap_entry\t\n"
+			" csrw mtvec, t0\t\n");
 
 #ifdef AARDONYX
 	micron_disable_xip_volatile(0,0);
 	flashMemInit();
 #endif
-	
-	trap_init();	
 
+
+//	section_init();
+	trap_init();	
+#endif
 	main();
 
 	log_info("init exited\n");
 }
-
 

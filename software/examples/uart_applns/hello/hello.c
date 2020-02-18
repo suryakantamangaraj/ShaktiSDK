@@ -22,28 +22,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-
-#include "platform.h"
-#include "shakti_uart.h"
 #include "uart.h"
-
-/** @fn main
- * @brief prints hello world 
- * @param[in] NULL
- * @param[Out] NULL
- */
 
 void main()
 {
-	long long int i= 0xfffff;
-	i = i;
-	printf("%s","Hello world !");
-	printf("\n%lu\n",i);
-	printf("\n%llu\n",i);
-	printf("\n%lld\n",i);
-	printf("\n%ld\n",i);
-while(1);
-
+	printf ("Hello World !\n");
 }
-
-

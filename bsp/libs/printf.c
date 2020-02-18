@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdarg.h>
 #include "utils.h"
+#include "uart.h"
 
 /** @fn size_t strnlen
  * @brief
@@ -45,7 +46,7 @@ static inline void itoa (unsigned long long int number, unsigned base)
 		number /= base;
 		i++;
 	}
-i++;
+	i++;
 	while (i-- > 0)
 	{
 		if (digits[i] >= 10)
@@ -81,136 +82,135 @@ void _printf_(const char *fmt, va_list ap)
 				return;
 			putchar(ch);
 		}
-
 		fmt++;
 
 		// Process a %-escape sequence
 		last_fmt = fmt;
 		lflag = 0; 
 
-	backtothebeginning = 0;
-	for (;;) {
+		backtothebeginning = 0;
+		for (;;) {
 
-		switch (ch = *(unsigned char *) fmt++) {
+			switch (ch = *(unsigned char *) fmt++) {
 
-			// long flag (doubled for long long)
-			case 'l':
-				lflag++;
-				backtothebeginning = 1;
-				break;
+				// long flag (doubled for long long)
+				case 'l':
+					lflag++;
+					backtothebeginning = 1;
+					break;
 
-				// character
-			case 'c':
-				putchar(va_arg(ap, int));
-				break;
+					// character
+				case 'c':
+					putchar(va_arg(ap, int));
+					break;
 
-				// string
-			case 's':
-				if ((p = va_arg(ap, char *)) == NULL)
-					p = "(null)";
-				for (; (ch = *p) != '\0' ;) {
+					// string
+				case 's':
+					if ((p = va_arg(ap, char *)) == NULL)
+						p = "(null)";
+					for (; (ch = *p) != '\0' ;) {
+						putchar(ch);
+						p++;
+					}
+					break;
+
+					// (signed) decimal
+				case 'd':
+					base = 10;
+
+					if (lflag >= 2)
+						num = va_arg(ap, long long);
+					else if (lflag ==1)
+						num = va_arg(ap, long);
+					else
+						num = va_arg(ap, int);
+
+					if ((long long) num < 0) {
+						putchar('-');
+						num = -(long long) num;
+					}
+
+					itoa( num, base);
+
+					break;
+
+				case 'f':
+					float_num =  va_arg(ap, double);
+
+					ftoa(float_num, float_arr, 6);
+
+					for( i = 0; float_arr[i] != '\0'; i++)
+					{
+						putchar(float_arr[i]);
+						if(i > 29) break;
+					}
+					break;
+
+					// unsigned decimal
+				case 'u':
+					base = 10;
+
+					if (lflag >= 2)
+						num = va_arg(ap, unsigned long long);
+					else if (lflag)
+						num = va_arg(ap, unsigned long);
+					else
+						num = va_arg(ap, unsigned int);
+
+					itoa( num, base);
+
+					break;
+
+					// (unsigned) octal
+				case 'o':
+					// should do something with padding so it's always 3 octits
+					base = 8;
+
+					if (lflag >= 2)
+						num = va_arg(ap, unsigned long long);
+					else if (lflag)
+						num = va_arg(ap, unsigned long);
+					else
+						num = va_arg(ap, unsigned int);
+
+					itoa( num, base);
+
+					break;
+
+				case 'x':
+					base = 16;
+
+					if (lflag >= 2)
+						num = va_arg(ap, unsigned long long);
+					else if (lflag)
+						num = va_arg(ap, unsigned long);
+					else
+						num = va_arg(ap, unsigned int);
+
+					itoa( num, base);
+
+					break;
+
+					// escaped '%' character
+				case '%':
 					putchar(ch);
-					p++;
-				}
-				break;
+					break;
 
-				// (signed) decimal
-			case 'd':
-				base = 10;
+					// unrecognized escape sequence - just print it literally
+				default:
+					putchar('%');
+					fmt = last_fmt;
+					break;
+			}
 
-				if (lflag >= 2)
-					num = va_arg(ap, long long);
-				else if (lflag ==1)
-					num = va_arg(ap, long);
-				else
-					num = va_arg(ap, int);
-
-				if ((long long) num < 0) {
-					putchar('-');
-					num = -(long long) num;
-				}
-
-				itoa( num, base);
-
-				break;
-
-			case 'f':
-				float_num =  va_arg(ap, double);
-
-				ftoa(float_num, float_arr, 6);
-
-				for( i = 0; float_arr[i] != '\0'; i++)
-				{
-					putchar(float_arr[i]);
-					if(i > 29) break;
-				}
-				break;
-
-				// unsigned decimal
-			case 'u':
-				base = 10;
-
-				if (lflag >= 2)
-					num = va_arg(ap, unsigned long long);
-				else if (lflag)
-					num = va_arg(ap, unsigned long);
-				else
-					num = va_arg(ap, unsigned int);
-
-				itoa( num, base);
-
-				break;
-
-				// (unsigned) octal
-			case 'o':
-				// should do something with padding so it's always 3 octits
-				base = 8;
-
-				if (lflag >= 2)
-					num = va_arg(ap, unsigned long long);
-				else if (lflag)
-					num = va_arg(ap, unsigned long);
-				else
-					num = va_arg(ap, unsigned int);
-
-				itoa( num, base);
-
-				break;
-
-			case 'x':
-				base = 16;
-
-				if (lflag >= 2)
-					num = va_arg(ap, unsigned long long);
-				else if (lflag)
-					num = va_arg(ap, unsigned long);
-				else
-					num = va_arg(ap, unsigned int);
-
-				itoa( num, base);
-
-				break;
-
-				// escaped '%' character
-			case '%':
-				putchar(ch);
-				break;
-
-				// unrecognized escape sequence - just print it literally
-			default:
-				putchar('%');
-				fmt = last_fmt;
+			if (backtothebeginning)
+			{
+				backtothebeginning = 0;
+				continue;
+			}
+			else
 				break;
 		}
-
-		if (backtothebeginning)
-		{
-			backtothebeginning = 0;
-			continue;
-		}
-		else
-			break;
-	  }
 	}
 }
 
@@ -227,6 +227,8 @@ int printf(const char* fmt, ...)
 	va_start(ap, fmt);
 
 	_printf_(fmt, ap);
+
+	putchar(66);
 
 	va_end(ap);
 	return 0; // incorrect return value, but who cares, anyway?

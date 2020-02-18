@@ -31,10 +31,12 @@ Email id: sathya281@gmail.com
 #define CLINT_BASE 0x020000000
 #define MTIME      CLINT_BASE + 0xBFF8
 #define MTIMECMP   CLINT_BASE + 0x4000
+#define CLOCK_FREQUENCY 50000000
 
 #define MCAUSE_INT         0x80000000
 #define MCAUSE_CAUSE       0x7FFFFFFF
 
+#define PINMUX_CONFIGURE_REG 0x40310
 
 /*!Debugger Offset */
 #define DBG_MEM_START 0x00000000
@@ -57,9 +59,8 @@ Email id: sathya281@gmail.com
 
 /*!Universal Synchronous Receiver Transmitter Interface Offsets */
 #define UART0_START 0x00011300 /*! UART 0 */
-#define UARTx_OFFSET 0x100
-#define SHAKTI_UART_BASE 0x11300
-#define SHAKTI_UART_OFFSET 0X100
+#define UART_OFFSET 0x100
+#define MAX_UART_COUNT 1
 
 #define PINMUX_CONFIGURE_REG 0x40310
 
@@ -90,6 +91,9 @@ Email id: sathya281@gmail.com
 #define PLIC_INTERRUPT_26  26
 #define PLIC_INTERRUPT_25  25
 #define PLIC_INTERRUPT_27  27
+
+#define PLIC_MAX_INTERRUPT_SRC 28
+
 /*!General Purpose Input / Output */
 #define GPIO_START 0x02100000 //GPIO Start Address */
 #define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/

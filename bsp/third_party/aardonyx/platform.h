@@ -28,6 +28,10 @@ Email id: sathya281@gmail.com
  *@brief RISCV - E CLASS SOC Memory mapping
  */
 
+#define CLOCK_FREQUENCY 40000000
+
+/*! Core Local Interruptor CLINT */
+
 #define CLINT_BASE 0x020000000
 #define MTIME      CLINT_BASE + 0xBFF8
 #define MTIMECMP   CLINT_BASE + 0x4000
@@ -35,8 +39,8 @@ Email id: sathya281@gmail.com
 #define MCAUSE_INT         0x80000000
 #define MCAUSE_CAUSE       0x7FFFFFFF
 
-
 #define PINMUX_CONFIGURE_REG 0x40310
+
 /*!Debugger Offset */
 #define DBG_MEM_START 0x00000010
 
@@ -65,18 +69,18 @@ Email id: sathya281@gmail.com
 #define UART0_START 0x00011300 /*! UART 0 */
 #define UART1_START 0x00011400 /*! UART 1 */
 #define UART2_START 0x00011500 /*! UART 2 */
-#define UARTx_OFFSET 0x100
-#define SHAKTI_UART_BASE 0x11300
-#define SHAKTI_UART_OFFSET 0X100
+#define UART_OFFSET 0x100
+#define UART_BASE 0x11300
+#define MAX_UART_COUNT 3
 
-//#define PINMUX_CONFIGURE_REG 0x40310
+#define PINMUX_CONFIGURE_REG 0x40310
 
-/*! Core Local Interruptor CLINT */
-#define CLINT_START 0x02000000
+
+
 
 /*! Inter Integrated Circuit (I2C) Interface */
 #define I2C0_START 0x00040000 /*! I2C 0 Start Address */
-#define I2C1_START 0x00040400 /*! I2C 0 Start Address */
+#define I2C1_START 0x00040400 /*! I2C 1 Start Address */
 #define I2C_START I2C1_START /*! I2C Start Address */
 
 /*! Programmable Logic Interrupt Interface */
@@ -97,10 +101,19 @@ Email id: sathya281@gmail.com
 #define PLIC_INTERRUPT_14  14
 #define PLIC_INTERRUPT_15  15
 #define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_26  26
+#define PLIC_INTERRUPT_17  17
+#define PLIC_INTERRUPT_18  18
+#define PLIC_INTERRUPT_19  19
+#define PLIC_INTERRUPT_20  20
+#define PLIC_INTERRUPT_21  21
+#define PLIC_INTERRUPT_22  22
+#define PLIC_INTERRUPT_23  23
+#define PLIC_INTERRUPT_24  24
 #define PLIC_INTERRUPT_25  25
+#define PLIC_INTERRUPT_26  26
 #define PLIC_INTERRUPT_27  27
 
+#define PLIC_MAX_INTERRUPT_SRC 28
 
 /*!General Purpose Input / Output */
 #define GPIO_START 0x00040100 //GPIO Start Address */

@@ -62,7 +62,7 @@
 #define PLIC_PRIORITY_7 0X20
 
 #define PLIC_PENDING_SHIFT_PER_SOURCE   0
-#define PLIC_MAX_INTERRUPT_SRC 27
+
 /*
    Enumerators
  */

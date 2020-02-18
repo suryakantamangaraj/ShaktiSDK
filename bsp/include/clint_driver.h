@@ -30,6 +30,7 @@
 extern uint64_t* mtime;
 extern uint64_t* mtimecmp;
 
+uint64_t get_timer_value();
 void configure_counter(uint64_t value);
 void mach_clint_handler(uintptr_t int_id, uintptr_t epc);
 #endif

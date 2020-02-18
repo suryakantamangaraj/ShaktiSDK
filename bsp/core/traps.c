@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           			:  shakti devt board
- * Name of the file	     		:  plic_driver.c
- * Brief Description of file            :  source file for plic.
+ * Name of the file	     		:  traps.c
+ * Brief Description of file            :  source file for first level of trap handling.
  * Name of Author    	                :  Sathya Narayanan N
  * Email ID                             :  sathya281@gmail.com
 
@@ -66,9 +66,7 @@ void default_handler(uintptr_t mcause, uintptr_t epc)
 {
 	log_trace("\ndefault_handler entered\n");
 
-	//log_fatal("Fatal Trap\n");
-
-	//while(1);
+	while(1);
 
 	log_trace("default_handler exited\n");
 }
