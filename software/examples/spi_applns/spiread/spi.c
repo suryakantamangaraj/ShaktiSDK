@@ -10,6 +10,7 @@
  */
 void main(){
 
+    configure_spi(SPI1_OFFSET);	
 	spi_init();
 	printf("SPI init done\n");
 	flash_device_id();

@@ -24,7 +24,6 @@
 
 #include "spi.h"
 #include "utils.h"
-
 int* spi_cr1    = (int*) SPI_CR1;
 int* spi_cr2    = (int*) SPI_CR2;
 int* spi_sr     = (int*) SPI_SR ;
@@ -53,7 +52,6 @@ void configure_spi(int offset)
 	spi_rxcrcr = (int*) (SPI_RXCRCR + offset);
 	spi_txcrcr = (int*) (SPI_TXCRCR + offset); 
 }
-
 /** @fn set_spi
  * @brief to assign value to memory mapped spi register
  * @details 
@@ -214,18 +212,12 @@ int flash_clear_sr()
 
 int flash_cmd_addr(int command, int addr)
 {
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int data1 = command | address1 ;
-	address2 = address2 << 24;
 	printf("Erase dr1 \n");
-	set_spi(spi_dr1, data1);
-	set_spi(spi_dr2, address2);
+	set_spi(spi_dr1, ((command << 24) | (addr) ) );
 	set_spi(spi_dr5, 0);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(32)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
-
 	return 1;
 }
 
@@ -239,6 +231,7 @@ int flash_cmd_addr(int command, int addr)
 
 void flash_cmd_addr_data(int command, int addr, int data)
 {
+#if 0
 	int address1 = bitExtracted(addr, 24, 9);
 	int address2 = bitExtracted(addr, 8, 1);
 	int cmd_addr = command  | address1;
@@ -251,9 +244,21 @@ void flash_cmd_addr_data(int command, int addr, int data)
 	set_spi(spi_dr2, data1);
 	set_spi(spi_dr3, data2);
 	set_spi(spi_dr5, 0);
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(72)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
 	spi_notbusy();
+#else
+	set_spi(spi_dr1,  ( (command << 24) | (addr) ) );
+//	printf("\n Write Command: %x; Data: %x",  ((command << 24) | (addr) ), data );
+
+	set_spi(spi_dr2, data);
+//	set_spi(spi_dr3, data2);
+	set_spi(spi_dr5, 0);
+	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(64)|SPI_TOTAL_BITS_RX(0)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	waitfor(20);
+	spi_notbusy();
+
+#endif
 }
 
 /** @fn flash_write
@@ -266,7 +271,7 @@ void flash_cmd_addr_data(int command, int addr, int data)
 
 void flash_write(int address, int data)
 {
-	flash_cmd_addr_data(0x12000000, address,data);
+	flash_cmd_addr_data(0x02, address,data);
 }
 
 /** @fn flash_cmd_to_read
@@ -279,23 +284,25 @@ void flash_write(int address, int data)
 
 int flash_cmd_to_read(int command, int addr)
 {
+
 	int dr5;
-	int address1 = bitExtracted(addr, 24, 9);
-	int address2 = bitExtracted(addr, 8, 1);
-	int cmd_addr = command  | address1;
-	address2 = address2 << 24;
-	set_spi(spi_dr1, cmd_addr);
-	set_spi(spi_dr2, address2);
+//	int address1 = bitExtracted(addr, 24, 9);
+//    int address2 = bitExtracted(addr, 8, 1);
+//	int cmd_addr = command  | address1;
+//	int address2 = address2 << 24;
+//	printf("\n Read Command: %x",  ( (command << 24) | (addr) ) );
+	set_spi(spi_dr1,  ( (command << 24) | (addr) ) );
+//	set_spi(spi_dr2, address2);
 	set_spi(spi_dr5, 0);
 	spi_tx_rx_start();
-	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(48)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
+	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(40)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	waitfor(20);
-
+	 
 	if(spi_rxne_enable()) 
 	{
 		dr5 = *spi_dr5;
 	}
-
+   // printf("Reading from dr5 %x \n", dr5);
 	return dr5;
 
 }
@@ -310,7 +317,8 @@ int flash_cmd_to_read(int command, int addr)
 
 int flash_read(int address)
 {
-	int read_value = flash_cmd_to_read(0x0C000000,address);
+	int read_value = flash_cmd_to_read(0x0B,address);
+	
 	return read_value;
 }
 
@@ -331,7 +339,8 @@ int flash_cmd_read(int command)
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(32)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 	if(spi_rxne_enable()) {
 		dr5 = *spi_dr5;
-	}
+		}
+	
 	return dr5;
 }
 
@@ -346,7 +355,7 @@ int flash_cmd_read(int command)
 void flash_erase(int address)
 {
 	printf("Cypress erase \n");
-	flash_cmd_addr(0xdc000000, address);
+	flash_cmd_addr(0xD8, address);
 	printf("Cypress erase done\n");
 }
 
@@ -384,8 +393,8 @@ int flash_device_id()
 	int dr1, dr2, dr3;
 	int val1, val2;
 	flash_write_enable();
-	set_spi(spi_dr1, 0x9f000000);
-	set_spi(spi_dr5, 0x9f000000);
+	set_spi(spi_dr1, 0x9F000000);
+	set_spi(spi_dr5, 0x9F000000);
 	spi_tx_rx_start();
 	set_spi(spi_cr1, (SPI_BR(7)|SPI_TOTAL_BITS_TX(8)|SPI_TOTAL_BITS_RX(24)|SPI_SPE|SPI_CPHA|SPI_CPOL));
 

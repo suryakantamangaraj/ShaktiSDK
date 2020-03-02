@@ -26,14 +26,6 @@
 #define ENXIO -82
 #define EREMOTEIO -81
 
-/*!I2C base and Offset */
-#define I2C_BASE 0x40000
-#define I2C_OFFSET 0x400
-
-/*! I2C base addresses */
-#define I2C0_BASE       (I2C_BASE + (0 * I2C_OFFSET ))
-#define I2C1_BASE       (I2C_BASE + (1 * I2C_OFFSET ))
-
 
 
 #define I2C_SUCCESS 0
@@ -121,9 +113,6 @@ typedef struct
   
 } i2c_struct;
 
-#define I2C0            ((i2c_struct   *) I2C0_BASE )
-#define I2C1            ((i2c_struct   *) I2C1_BASE )
-
 
 int shakti_init_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
 int wait_till_I2c_bus_free(i2c_struct *);
@@ -138,5 +127,8 @@ int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
 
 unsigned char i2c_complete_flag;
 unsigned int i2c_read_value;
+
+extern i2c_struct *i2c_instance[MAX_I2C_COUNT];
+
 
 #endif

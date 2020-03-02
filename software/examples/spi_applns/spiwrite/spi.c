@@ -12,8 +12,10 @@ void main()
 {
 	int write_address = 0x00b00000;  // read/write from/to this address
 	int data = 0xDEADBEEF; //32 bits of data can be written at a time
-
+	
+    configure_spi(SPI1_OFFSET);
 	spi_init();
+	
 	printf("SPI init done\n");
 
 	flash_device_id(); 

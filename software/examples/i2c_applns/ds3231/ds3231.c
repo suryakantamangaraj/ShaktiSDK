@@ -22,11 +22,11 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 
 //#include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
-//#include "log.h"
+#include "log.h"
 #include "uart.h"
 #define UPDATE_TIME 1
 
-#define I2C I2C1
+#define I2C i2c_instance[1]
 
 #define DS3231_SLAVE_ADDRESS 0XD0
 #define DS3231_REG_OFFSET 0
@@ -133,10 +133,10 @@ void main()
 		write_buf[3] = dayofweek(date, month, year) + 1;
 		length = 7;
 	
-	set_baud_rate(uart_instance[0], 115200);
+//	set_baud_rate(uart_instance[0], 115200);
 	printf("\nHello Welcome to Shakti");
 
-
+    i2c_init();
 	if(shakti_init_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 			log_error("\tSomething Wrong In Initialization\n");

@@ -28,7 +28,7 @@
 
 uart_struct *uart_instance[MAX_UART_COUNT];
 
-#ifdef ARTIX7_35T
+#if defined(ARTIX7_35T) || defined(AARDONYX)
 
 #define RTS GPIO4
 #define USE_INTERRUPT 1

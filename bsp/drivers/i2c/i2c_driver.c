@@ -32,6 +32,29 @@
 #include "log.h"
 #include "utils.h"
 
+i2c_struct *i2c_instance[MAX_I2C_COUNT];
+
+
+
+/**
+ * @fn i2c_init()
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] No input parameters.
+ * @param[Out] 
+ */
+i2c_init()
+{
+	for(int i=0; i< MAX_I2C_COUNT; i++)
+	{
+		i2c_instance[i] = (i2c_struct*) (I2C0_BASE + (i * I2C_OFFSET));
+	}
+}
+
+
+
+
 /** @fn static void shakti_init_i2c(unsigned char prescale_div, unsigned char
  *             scl_div)
  * @brief This routine configures the serial clock frequency count and
@@ -51,6 +74,7 @@
 {
    unsigned char temp = 0;
     log_debug("\tI2C: Initializing the Controller\n");
+
 
     /* Doing an initialization sequence as how PCF8584 was supposed to be initialized                                                       */
     /* The Initialization Sequence is as follows                                                                                            */

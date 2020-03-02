@@ -4,26 +4,26 @@
  * Created date			        :  28.01.2020
  * Brief Description of file    :  This is a program for Intruder Detection System which uses PIR Sensor to detect any intrusion
  *                                   	    			        	
-  Modified to SHakti by Sambhav Jain 
+ Modified to SHakti by Sambhav Jain 
 
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of the GNU Lesser General Public
-  License as published by the Free Software Foundation; either
-  version 2.1 of the License, or (at your option) any later version.
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
 
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Lesser General Public License for more details.
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-****************************************************************************************/
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ ****************************************************************************************/
 
 /***********************************************************
-*		Pin Definitions
-************************************************************/
+ *		Pin Definitions
+ ************************************************************/
 // GPIOx       - Pin Mapped
 //     	0       -Keypad Top Line-4   	(Output)
 //		1       -Keypad Top Line-3		(Output)
@@ -35,7 +35,7 @@
 //		7       -Keypad Bottom Line-1	(Output)
 //		Gnd		-Keypad Bottom Line-5	
 //		Vcc		-Keypad Bottom Line-6	
- 
+
 
 //		8		-PIR Sensor Output Pin	(Input)
 //		16		-LED P1					(Output)
@@ -48,8 +48,8 @@
 //		25		-Deactivation Switch	(Input)
 
 /***********************************************************
-*		Include File Definitions
-************************************************************/
+ *		Include File Definitions
+ ************************************************************/
 
 #include "gpio.h"
 #include "platform.h"
@@ -117,8 +117,8 @@ void WriteGPIO(unsigned long GPIO_pin,int GPIO_pin_mode )
 	}
 	else
 	{
-    	write_word(GPIO_DATA_REG, ( read_data & (~GPIO_pin) ) );  
-  	}
+		write_word(GPIO_DATA_REG, ( read_data & (~GPIO_pin) ) );  
+	}
 
 }
 
@@ -132,29 +132,29 @@ void WriteGPIO(unsigned long GPIO_pin,int GPIO_pin_mode )
 
 int PIR_ReadState(unsigned long tempReadData)
 {
-  PIR_presentState= ((PIR_IN & tempReadData)>>PIR_OFFSET);  
-  if( (PIR_presentState== 1) && (PIR_previousState== 0) )
-  {
-	  //State of 0->1
-   	//printf("\nHuman Detected - Intrusion Alert %x -- %x ",PIR_presentState,PIR_previousState);
-	PIR_previousState = PIR_presentState;
-    return 1;
-  }
-  else if((PIR_presentState== 1) && (PIR_previousState== 1))
-  {
-	  //State of 1 -> 1
-	 
-	 // printf("\nCode 2 %x -- %x ",PIR_presentState,PIR_previousState);
-	PIR_previousState = PIR_presentState;
-	  return 2;
-  }
-  else
-  {
-	//State of 1->0 and 0->0
-   	//printf("\n. %x -- %x",PIR_presentState,PIR_previousState);
-    PIR_previousState =PIR_presentState;
-    return 0;
-  }
+	PIR_presentState= ((PIR_IN & tempReadData)>>PIR_OFFSET);  
+	if( (PIR_presentState== 1) && (PIR_previousState== 0) )
+	{
+		//State of 0->1
+		//printf("\nHuman Detected - Intrusion Alert %x -- %x ",PIR_presentState,PIR_previousState);
+		PIR_previousState = PIR_presentState;
+		return 1;
+	}
+	else if((PIR_presentState== 1) && (PIR_previousState== 1))
+	{
+		//State of 1 -> 1
+
+		// printf("\nCode 2 %x -- %x ",PIR_presentState,PIR_previousState);
+		PIR_previousState = PIR_presentState;
+		return 2;
+	}
+	else
+	{
+		//State of 1->0 and 0->0
+		//printf("\n. %x -- %x",PIR_presentState,PIR_previousState);
+		PIR_previousState =PIR_presentState;
+		return 0;
+	}
 }
 
 
@@ -168,28 +168,28 @@ int PIR_ReadState(unsigned long tempReadData)
 
 int panicButtonReadState(unsigned long tempReadData)
 {
-  panicPresentState= ((panicButton & tempReadData)>>PANIC_BUTTON_OFFSET);  
-  if( (panicPresentState== 1) && (panicPreviousState== 0) )
-  {
-   // printf("\nHuman Detected - Intrusion Alert %x -- %x ",PIR_presentState,PIR_previousState);
-   // printf("\nSOS -Panic Button Activated");
+	panicPresentState= ((panicButton & tempReadData)>>PANIC_BUTTON_OFFSET);  
+	if( (panicPresentState== 1) && (panicPreviousState== 0) )
+	{
+		// printf("\nHuman Detected - Intrusion Alert %x -- %x ",PIR_presentState,PIR_previousState);
+		// printf("\nSOS -Panic Button Activated");
 
-	panicPreviousState= panicPresentState;
-    return 1;
-  }
-  else if((panicPreviousState == 1) && (panicPresentState == 1))
-  {
-	  //Function Returns 2 when mode is 1-1 (present and prev state)
-	 // printf("\nCode 2 %x -- %x ",PIR_presentState,PIR_previousState);
-	panicPreviousState= panicPresentState;;
-	  return 2;
-  }
-  else
-  {
-   // printf("\n. %x -- %x",PIR_presentState,PIR_previousState);
-    panicPreviousState= panicPresentState;
-    return 0;
-  }
+		panicPreviousState= panicPresentState;
+		return 1;
+	}
+	else if((panicPreviousState == 1) && (panicPresentState == 1))
+	{
+		//Function Returns 2 when mode is 1-1 (present and prev state)
+		// printf("\nCode 2 %x -- %x ",PIR_presentState,PIR_previousState);
+		panicPreviousState= panicPresentState;;
+		return 2;
+	}
+	else
+	{
+		// printf("\n. %x -- %x",PIR_presentState,PIR_previousState);
+		panicPreviousState= panicPresentState;
+		return 0;
+	}
 }
 
 
@@ -207,12 +207,12 @@ void buzzerTone()
 	for (i = 0; i < 4; i++)
 	{
 		//printf("\nbuzz");
-		
+
 		WriteGPIO(Buzzer,HIGH);	//Sends tone
 		delay_loop(800,800);
 		WriteGPIO(Buzzer,LOW);		//No tone
 		delay_loop(500,500);
-    }
+	}
 }
 
 
@@ -267,7 +267,6 @@ void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
 
 int getKeyAnotherWay()
 {
-
 	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
 
 	for (int i = 0 ; i < KYPD_COLNUM ; i++)
@@ -283,7 +282,6 @@ int getKeyAnotherWay()
 		}
 		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
 	}
-
 	return 0;
 }
 
@@ -297,13 +295,13 @@ int getKeyAnotherWay()
 
 int getKey(int colRow)
 {
-    return keyMap[colRow>>16][0xFFFF & colRow];
+	return keyMap[colRow>>16][0xFFFF & colRow];
 }
 
 /** @fn getColRow
  * @brief This function returns the column-row
  * @details Identifies the pressed key by making the corresponding coloumn
-   low and reading the row values     
+ low and reading the row values     
  * @warning 
  * @param[in] 
  * @param[Out] 
@@ -331,10 +329,9 @@ int getColRow(void)
 			if( ( readValue & (1 << rowPins[j] ) ) == 0 )
 			{
 				//printf("\n The read value is %lx; [i:%d; j:%d] rowPins: %d; keyMap=%d", readValue, i, j, rowPins[j], keyMap[i][j]);
-					return keyMap[i][j];
+				return keyMap[i][j];
 			}
 		}
-
 		tempReadData = read_word(GPIO_DATA_REG);
 		write_word(GPIO_DATA_REG,(tempReadData | (0xF << OUTPINS_OFFSET) ) );
 	}
@@ -354,24 +351,23 @@ void gpio_init()
 {
 	setPins(row, col);	
 	setKeyMap(keyTable);
-	
+
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
 	write_word (GPIO_DIRECTION_CNTRL_REG, ( read_data | (OUTPINS ) ) );
-	
+
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
 	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | GPIO_OUTPINS ) );
 	//printf("\n GPIO Init- %x",(read_data | GPIO_OUTPINS));
 
 
-    //All the LED initially set to LOW
-    WriteGPIO(LED_P1,LOW);
-    WriteGPIO(LED_P2,LOW);
-    WriteGPIO(LED_P3,LOW);
-    WriteGPIO(LED_P4,LOW);
-    WriteGPIO(Buzzer,LOW);
-
+	//All the LED initially set to LOW
+	WriteGPIO(LED_P1,LOW);
+	WriteGPIO(LED_P2,LOW);
+	WriteGPIO(LED_P3,LOW);
+	WriteGPIO(LED_P4,LOW);
+	WriteGPIO(Buzzer,LOW);
 }
 
 /** @fn main
@@ -393,7 +389,7 @@ int main()
 	printf("\nInitialising...");
 	while(1)
 	{	
-		
+
 		readData = read_word(GPIO_DATA_REG);
 		if(powerSwitch & readData)
 		{
@@ -402,8 +398,8 @@ int main()
 				//First time giving the sensor to calibrate 
 				delay_loop(4000,4000);
 				printf("\nIntruder System activated");
-                firstFlag=0;
-                alarmCounterFlag =1;
+				firstFlag=0;
+				alarmCounterFlag =1;
 			}
 			//Intruder System - ON
 			WriteGPIO(LED_P2,HIGH);
@@ -417,12 +413,11 @@ int main()
 			{
 				deactivateFlag =0;
 			}
-			
 
 			int tempReadPIR  =PIR_ReadState(readData);
 			int tempReadPanic=panicButtonReadState(readData);
 			alarmPresentState= ((tempReadPIR > 0) || (tempReadPanic== 1) || alarmFlag==1 ) && (deactivateFlag == 0);
-			
+
 			if(alarmPresentState == 1 && alarmPreviousState ==0)
 			{
 				//printf("\n%x   %x",alarmPreviousState,alarmPresentState);
@@ -434,7 +429,7 @@ int main()
 				buzzerTone();
 				alarmFlag =1;
 
-                
+
 
 				alarmPreviousState = alarmPresentState;
 
@@ -448,21 +443,21 @@ int main()
 				alarmPreviousState = alarmPresentState;
 
 
-                alarmCounter++;
-                //printf("\n\t\t\t%x",alarmCounter);
-                if(alarmCounter == ALARM_TIMER & ( alarmCounterFlag ==1 ) )
-                {
-                    WriteGPIO(LED_P3,HIGH);
-                    
-                    printf("\nContacting Police for Assistance");
-                    alarmCounterFlag=0;
-                    alarmCounter=0;
-                }
-                else if(alarmCounter == ALARM_TIMER)
-                {
-                    //Making Sure the alarm counter does not overflow
-                    alarmCounter=0;
-                }
+				alarmCounter++;
+				//printf("\n\t\t\t%x",alarmCounter);
+				if(alarmCounter == ALARM_TIMER & ( alarmCounterFlag ==1 ) )
+				{
+					WriteGPIO(LED_P3,HIGH);
+
+					printf("\nContacting Police for Assistance");
+					alarmCounterFlag=0;
+					alarmCounter=0;
+				}
+				else if(alarmCounter == ALARM_TIMER)
+				{
+					//Making Sure the alarm counter does not overflow
+					alarmCounter=0;
+				}
 
 			}
 			else if(alarmPresentState == 0 && alarmPreviousState == 1)
@@ -472,23 +467,23 @@ int main()
 				alarmFlag =0;
 				WriteGPIO(LED_P1,LOW);
 
-                
-                WriteGPIO(LED_P3,LOW);
-                alarmCounterFlag =1;
-                alarmCounter=0;
-				
-                printf("\nAlarm Succesfully devactivated successfully");
+
+				WriteGPIO(LED_P3,LOW);
+				alarmCounterFlag =1;
+				alarmCounter=0;
+
+				printf("\nAlarm Succesfully devactivated successfully");
 				alarmPreviousState = alarmPresentState;
-				
+
 			}
 			else
 			{
-                //Flags
+				//Flags
 				alarmFlag =0;
-                alarmCounter=0;
-                alarmCounterFlag =1;
+				alarmCounter=0;
+				alarmCounterFlag =1;
 
-                //WriteGPIO(LED_P3,LOW);
+				//WriteGPIO(LED_P3,LOW);
 				WriteGPIO(LED_P1,LOW);
 				alarmPreviousState = alarmPresentState ;
 			}
@@ -497,56 +492,24 @@ int main()
 			//KeyPad Sensor 
 			if( colRow != -1 )
 			{
-	//			key = getKey(colRow);
-	#if 0
-					if(prevColRow != colRow)	
-					{
-	//			printf("\ncol: %d; row: %d is value: %d", colRow >> 16, (0xFFFF & colRow), key );
-					prevColRow = colRow;
-					printf("\nThe %x Key Pressed", colRow);
-					}
-	#else
-					printf("\nThe %x Key Pressed", colRow);
-                    
-					if( colRow == keyMap[3][3])
-					{
-						printf("\nEnter Password-");
-						//int i=0;
-                        //keypadCounter++;
-                        //keypadPasswordFlag=1;
+				printf("\nThe %x Key Pressed", colRow);
 
-						// for(i=0; i < passNum ; i++)
-						// {
-						// 	passData[i]=getColRow();
-						// 	delay_loop(600, 2000);
-						// 	printf("%x",passData[i]);
-						// }
-					}
-                    /*
-                    else if(keypadCounter == 1)
-                    {
-                        printf("\n%x", colRow);
-                        keypadCounter++;
-                    }
-                    else if(keypadCounter ==2)
-                    {
-
-                    }
-                    */
-
+				if( colRow == keyMap[3][3])
+				{
+					printf("\nEnter Password-");
 					delay_loop(600, 2000);
-	#endif
+				}
 			}
+			else
+			{	
+				//Intruder System Off
+				WriteGPIO(LED_P2,LOW);
+				firstFlag=1;
+				//printf("\nIntruder System Deactivated");
+			}
+			//end of infinite while loop
 		}
-		else
-		{	
-			//Intruder System Off
-			WriteGPIO(LED_P2,LOW);
-			firstFlag=1;
-			//printf("\nIntruder System Deactivated");
-		}
-		//end of infinite while loop
-	}
 
-	return 0;
+		return 0;
+	}
 }

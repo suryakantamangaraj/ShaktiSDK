@@ -25,7 +25,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "log.h"
 #include "uart.h"
 
-#define I2C I2C1
+#define I2C i2c_instance[0]
 
 #define LM75_SLAVE_ADDRESS 0x90//Defines the Starting address of slave//
 #define LM75_TEMP_REG_OFFSET 0x00
@@ -89,10 +89,10 @@ int main()
 	int timeout;
 	unsigned int tempReadValue = 0;
 	unsigned long delay = 1000;
-	set_baud_rate(uart_instance[0], 115200);
-
+//	set_baud_rate(uart_instance[0], 115200);
+    
 	log_debug("\n\tI2C: LM75 Temperature Sensor I2C read\n");
-
+    i2c_init();
 	//Initialises I2C Controller
 		if(shakti_init_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
 		{

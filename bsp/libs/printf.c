@@ -228,8 +228,6 @@ int printf(const char* fmt, ...)
 
 	_printf_(fmt, ap);
 
-	putchar(66);
-
 	va_end(ap);
 	return 0; // incorrect return value, but who cares, anyway?
 }

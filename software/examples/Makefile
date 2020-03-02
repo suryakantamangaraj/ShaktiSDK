@@ -255,6 +255,15 @@ else
 ifeq ($(PROGRAM),spi)
 filepath := spi_applns/spi
 else
+ifeq ($(PROGRAM),w25q32_write)
+filepath := spi_applns/w25q32_write
+else
+ifeq ($(PROGRAM),w25q32_read)
+filepath := spi_applns/w25q32_read
+else
+ifeq ($(PROGRAM),spidac)
+filepath := spi_applns/spidac
+else
 ifeq ($(PROGRAM),pwmmotor)
 filepath := pwm_applns/pwmmotor
 else
@@ -271,6 +280,9 @@ ifeq ($(PROGRAM),counter)
 filepath := clint_applns/counter
 else
 	@echo "Entry for $(PROGRAM) not present"
+endif
+endif
+endif
 endif
 endif
 endif
@@ -325,6 +337,7 @@ endif
 endif
 endif
 endif
+
 upload: path do
 path:
 FILEPATH:='"$(GENLIB)$(filepath)"'
@@ -336,7 +349,6 @@ ifeq ($(UPLOAD),UPLOAD)
 	@echo -e $(BSP)
 	@gcc -g -w -D FILEPATH='"$(FILEPATH)"' $(UPLOADDIR)/elf_to_header.c -o $(filepath)/output/elf_to_header
 	@$(filepath)/output/elf_to_header
-#       @echo -e "Converted Codemem to array"
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(filepath)/output -c $(UPLOADER)/deploy.c -o $(filepath)/output/deploy.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(FLASHSPEC) -o $(filepath)/output/flash_driver.o -march=$(MARCH)  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(filepath)/output/deploy.o $(filepath)/output/flash_driver.o $(GENLIB)/gen_lib/libshakti$(XLEN).a -o $(filepath)/output/deploy.shakti -static -nostartfiles -lm -lgcc
@@ -350,7 +362,6 @@ endif
 
 flash:
 ifeq ($(FLASH),FLASH) 	
-#	@flashrom -p ft2232_spi:type=2232h,port=A > ./$(filepath)/output/flashoutput.txt
 	@flashrom -p ft2232_spi:type=arm-usb-tiny-h > ./$(filepath)/output/flashoutput.txt
 	make aardonyx
 endif
@@ -390,7 +401,6 @@ layout:
 	@echo $(FILESIZE)
 	@echo "0000:$(FILESIZE) flash" > ./$(filepath)/output/layout.txt
 flashrom:
-#	@flashrom -p ft2232_spi:type=2232h,port=A -l ./$(filepath)/output/layout.txt -i flash -w ./$(filepath)/output/newoutput.bin
 	@flashrom -p ft2232_spi:type=arm-usb-tiny-h -l ./$(filepath)/output/layout.txt -i flash -w ./$(filepath)/output/newoutput.bin
 clean:
 	@rm -rf ./$(filepath)/output/*.txt

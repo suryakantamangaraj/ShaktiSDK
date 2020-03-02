@@ -1,5 +1,6 @@
 #include "qspi.h"
 #include "utils.h"
+#include "log.h"
 #define MEM_TYPE_N25Q256_ID 0x9d189d18
 
 char fail_bit = 0;
@@ -126,21 +127,21 @@ int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int addre
     return wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
 }
 int flashIdentificationDevice(){
-	printf("\tReading the ID register and discovering the Flash Device\n");
+	log_debug("\tReading the ID register and discovering the Flash Device\n");
 	set_qspi_shakti32(dlr,4);
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x90)|CCR_ADSIZE(THREEBYTE)|CCR_ADMODE(SINGLE)|CCR_DMODE(SINGLE)));
     set_qspi_shakti32(ar, 0);
     status = 0; // Useless Variable but still!!!!
     int ret = wait_for_tcf(status);
     int value = get_qspi_shakti(dr);
-	printf("\t device id %x\n",value);
+	log_info("\t device id %x\n",value);
     reset_interrupt_flags();
     if(value == MEM_TYPE_N25Q256_ID){
     	printf("\tN25Q256 Device Detected \n");
     	return 0;
     }
     else{
-    	printf("\t Device Not Detected - Diagnose %08x\n",value);
+    	log_fatal("\t Device Not Detected - Diagnose %08x\n",value);
     	return -1;
     }
 }
@@ -148,10 +149,10 @@ int flashIdentificationDevice(){
 int flashMemInit(){   //Supposedly a set of routines to check if the memory/interface or whatever is proper
 	int ret = flashIdentificationDevice();
 	if(ret==-1){
-		printf("Flash Mem Init Failed -- Quitting Program, Diagnose");
+		log_fatal("Flash Mem Init Failed -- Quitting Program, Diagnose");
 		return ret;
 	}
-	else printf("Flash Mem Init Success\n");
+	else log_debug("Flash Mem Init Success\n");
     return 0;
 	//to fill in code
 }
@@ -475,7 +476,7 @@ int micron_enable_4byte_addressing(int status){
 }
 
 int micron_configure_xip_volatile(int status, int value){
-    printf("\tWrite Volatile Configuration Register\n");
+    log_debug("\tWrite Volatile Configuration Register\n");
     set_qspi_shakti32(dlr,DL(1));
     set_qspi_shakti8(dr,value);  //The value to be written into the VECR register to enable XIP. Indicating XIP to operate in Quad Mode
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDWR)|CCR_DMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x81)));
@@ -487,7 +488,7 @@ int micron_configure_xip_volatile(int status, int value){
 }
 
 int micron_disable_xip_volatile(int status, int value){
-    printf("\tWrite Volatile Configuration Register to exit XIP\n");
+    log_debug("\tWrite Volatile Configuration Register to exit XIP\n");
     set_qspi_shakti32(cr,(CR_PRESCALER(0x3)|CR_TOIE|CR_TCIE|CR_TEIE|CR_SMIE|CR_FTIE|CR_ABORT|CR_EN));
     waitfor(30);
     qspi_init(27,0,3,1,15,1);
@@ -502,7 +503,7 @@ int micron_disable_xip_volatile(int status, int value){
 }
 
 int micron_read_id_cmd(int status, int value){
-    printf("\tRead ID Command to see if the Protocol is Proper\n");
+    log_debug("\tRead ID Command to see if the Protocol is Proper\n");
     set_qspi_shakti32(dlr,4);
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x9E)|CCR_DMODE(SINGLE)));
     int ret = wait_for_tcf(status);
@@ -517,6 +518,6 @@ int micron_read_configuration_register(int status, int value){
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)|CCR_DMODE(SINGLE)));
     int ret = wait_for_tcf(status);
     value = get_qspi_shakti(dr);
-    printf("Configuration Register Value: %08x",value);
+    log_debug("Configuration Register Value: %08x",value);
     return ret;
 }

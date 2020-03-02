@@ -31,7 +31,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #define SCLK_COUNT 0x91
 
 
-#define I2C I2C1
+#define I2C i2c_instance[0]
 
 int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
 {
@@ -90,10 +90,10 @@ int main()
 	unsigned long delay = 1000;
 	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
 	unsigned char length = 0;
-	set_baud_rate(uart_instance[0], 115200);
+//	set_baud_rate(uart_instance[0], 115200);
 	
 	log_debug("\tI2C: PCF8591 - ADC test\n");
-	
+	i2c_init();
 	if(shakti_init_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 			log_error("\tSomething Wrong In Initialization\n");

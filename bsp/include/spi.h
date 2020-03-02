@@ -31,6 +31,12 @@
 #define SPI_H
 
 #include<stdlib.h>
+/*By default SPI0 is enabled at initialization.
+SPI0 is not available externally in TARGET=artix7_35t*/
+#define SPI0_OFFSET 0x00000000
+#define SPI1_OFFSET 0x00000100
+#define SPI2_OFFSET 0x00000200
+
 
 #define SPI_CR1	     0x00020000
 #define SPI_CR2	     0x00020004
@@ -43,6 +49,8 @@
 #define SPI_CRCPR    0x00020020
 #define SPI_RXCRCR   0x00020024
 #define SPI_TXCRCR   0x00020028
+
+
 
 // defining SPI_CR1 register
 #define SPI_CPHA				(1 << 0)

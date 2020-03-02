@@ -1,5 +1,5 @@
-#Created by Sathya Narayanan N
-# Email id: sathya281@gmail.com
+#Created by Nambirajan G
+# Email id: nambirajan2004@gmail.com
 
 #   Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -28,16 +28,14 @@ XLEN  ?= 32
 FLAGS ?=
 
 all: create_dir
-	make csr_test.riscv
+	make spidac.riscv
 
-
-csr_test.riscv: create_dir
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -I$(bspboard) -I$(bspinc)  -c ./csr_test.c -o ./output/csr_test.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/csr_test.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
+spidac.riscv: create_dir
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -c ./mcp4921_dac.c -o ./output/spi.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bspdri)/spi/spi_spansion.c -o ./output/flash_driver.o -march=$(MARCH)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/flash_driver.o ./output/spi.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:
 	@mkdir -p ./output
-
-
 

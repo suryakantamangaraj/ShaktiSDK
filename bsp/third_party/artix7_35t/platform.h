@@ -74,7 +74,10 @@ Email id: sathya281@gmail.com
 #define CLINT_START 0x02000000
 
 /*! Inter Integrated Circuit (I2C) Interface */
-#define I2C_START 0x00040000 /*! I2C Start Address */
+#define I2C0_BASE 0x00040000 /*! I2C Start Address */
+#define I2C_OFFSET 0x000
+#define MAX_I2C_COUNT 1
+
 
 /*! Programmable Logic Interrupt Interface */
 #define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
@@ -94,9 +97,9 @@ Email id: sathya281@gmail.com
 #define PLIC_INTERRUPT_14  14
 #define PLIC_INTERRUPT_15  15
 #define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_26  26
-#define PLIC_INTERRUPT_25  25
-#define PLIC_INTERRUPT_27  27
+#define PLIC_INTERRUPT_25  25 //uart 0
+#define PLIC_INTERRUPT_26  26 //uart 1
+#define PLIC_INTERRUPT_27  27 //uart 2
 #define PLIC_MAX_INTERRUPT_SRC 28
 
 

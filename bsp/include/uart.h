@@ -60,8 +60,7 @@ typedef struct
 } uart_struct;
 
 
-#ifdef ARTIX7_35T
-
+#if defined(ARTIX7_35T) || defined(AARDONYX)
 
 #define STS_RX_THRESHOLD	0x1 << 8
 #define BREAK_ERROR	1 << 7
@@ -124,10 +123,12 @@ unsigned char uart2_isr();
 #define UART_DATA_RX_REGISTER 8
 #define UART_STS_REGISTER 0x0C
 
+#undef putchar
 int putchar(int ch);
 
 int is_empty();
 
+#undef getchar
 int getchar();
 
 
