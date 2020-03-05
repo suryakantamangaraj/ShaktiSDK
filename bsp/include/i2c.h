@@ -1,15 +1,3 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
-/******************************************************************************************************************
- *   Copyright (C) 1995-1997 Simon G. Vogl
- *		   1998-2000 Hans Berglund
- * With some changes from Kyösti Mälkki <kmalkki@cc.hut.fi> and
- * Frodo Looijaard <frodol@dds.nl>, and also from Martin Bailey
- * <mbailey@littlefeet-inc.com>
- * Partially rewriten by Oleg I. Vdovikin <vdovikin@jscc.ru> to handle multiple
- * messages, proper stop/repstart signaling during receive, added detect code
- * Partially rewritten by Vinod <g.vinod1993@gmail.com> and Kotteeswaran <kottee.1@gmail.com> for shakti i2c
- *******************************************************************************************************************/
-
 /**
  * @file i2c.h
  * @project shakti devt board
@@ -34,32 +22,32 @@
 #define EI2C_PIN_ERROR -3
 #define EI2C_LRB_ERROR -4
 
-#define I2C_SHAKTI_PIN	0x80
-#define I2C_SHAKTI_ESO	0x40
-#define I2C_SHAKTI_ES1	0x20
-#define I2C_SHAKTI_ES2	0x10
-#define I2C_SHAKTI_ENI	0x08
-#define I2C_SHAKTI_STA	0x04
-#define I2C_SHAKTI_STO	0x02
-#define I2C_SHAKTI_ACK	0x01
+#define I2C_PIN	0x80
+#define I2C_ESO	0x40
+#define I2C_ES1	0x20
+#define I2C_ES2	0x10
+#define I2C_ENI	0x08
+#define I2C_STA	0x04
+#define I2C_STO	0x02
+#define I2C_ACK	0x01
 
-#define I2C_SHAKTI_INI 0x40   /* 1 if not initialized */
-#define I2C_SHAKTI_STS 0x20
-#define I2C_SHAKTI_BER 0x10
-#define I2C_SHAKTI_AD0 0x08
-#define I2C_SHAKTI_LRB 0x08
-#define I2C_SHAKTI_AAS 0x04
-#define I2C_SHAKTI_LAB 0x02
-#define I2C_SHAKTI_BB  0x01
+#define I2C_INI 0x40   /* 1 if not initialized */
+#define I2C_STS 0x20
+#define I2C_BER 0x10
+#define I2C_AD0 0x08
+#define I2C_LRB 0x08
+#define I2C_AAS 0x04
+#define I2C_LAB 0x02
+#define I2C_BB  0x01
 
-#define I2C_SHAKTI_START         (I2C_SHAKTI_PIN | I2C_SHAKTI_ESO | I2C_SHAKTI_STA | I2C_SHAKTI_ACK)
-#define I2C_SHAKTI_START_ENI     (I2C_SHAKTI_PIN | I2C_SHAKTI_ESO | I2C_SHAKTI_STA | I2C_SHAKTI_ACK | I2C_SHAKTI_ENI)
-#define I2C_SHAKTI_STOP          (I2C_SHAKTI_PIN | I2C_SHAKTI_ESO | I2C_SHAKTI_STO | I2C_SHAKTI_ACK)
-#define I2C_SHAKTI_REPSTART      (                 I2C_SHAKTI_ESO | I2C_SHAKTI_STA | I2C_SHAKTI_ACK)
-#define I2C_SHAKTI_REPSTART_ENI  (                 I2C_SHAKTI_ESO | I2C_SHAKTI_STA | I2C_SHAKTI_ACK | I2C_SHAKTI_ENI)
-#define I2C_SHAKTI_IDLE          (I2C_SHAKTI_PIN | I2C_SHAKTI_ESO                  | I2C_SHAKTI_ACK)
-#define I2C_SHAKTI_NACK          (I2C_SHAKTI_ESO  )
-#define I2C_SHAKTI_STOP_ENI          (I2C_SHAKTI_PIN | I2C_SHAKTI_ESO | I2C_SHAKTI_STO | I2C_SHAKTI_ACK | I2C_SHAKTI_ENI)
+#define I2C_START         (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK)
+#define I2C_START_ENI     (I2C_PIN | I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
+#define I2C_STOP          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK)
+#define I2C_REPSTART      (                 I2C_ESO | I2C_STA | I2C_ACK)
+#define I2C_REPSTART_ENI  (                 I2C_ESO | I2C_STA | I2C_ACK | I2C_ENI)
+#define I2C_IDLE          (I2C_PIN | I2C_ESO                  | I2C_ACK)
+#define I2C_NACK          (I2C_ESO  )
+#define I2C_STOP_ENI          (I2C_PIN | I2C_ESO | I2C_STO | I2C_ACK | I2C_ENI)
 
 #define I2C_READ 1
 #define I2C_WRITE 0
@@ -114,11 +102,11 @@ typedef struct
 } i2c_struct;
 
 
-int shakti_init_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
+int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
 int wait_till_I2c_bus_free(i2c_struct *);
 int wait_till_txrx_operation_Completes(i2c_struct *,int *status);
-int shakti_sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
-int shakti_readbytes(i2c_struct *,char *buf, int count, int last);
+int sendbytes(i2c_struct *, const char *buf, int count, int last, int eni);
+int readbytes(i2c_struct *,char *buf, int count, int last);
 int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned char rdWrCntrl
 , unsigned long delay);
 int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);

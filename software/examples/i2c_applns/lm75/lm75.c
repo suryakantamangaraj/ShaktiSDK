@@ -47,7 +47,7 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 //Writes the pointer to address that needs to be read
 	i2c_write_data(i2c_instance, reg_offset , delay);
 //Stops the I2C transaction to start reading the temperature value.
-	i2c_instance->control = I2C_SHAKTI_STOP;
+	i2c_instance->control = I2C_STOP;
 
 
 //Writes the slave address for read
@@ -59,11 +59,11 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 
 //Reads the MSB Byte of temperature [D9 - D1]
 	i2c_read_data(i2c_instance, &read_buf[1], delay);
-	i2c_instance->control = I2C_SHAKTI_NACK;
+	i2c_instance->control = I2C_NACK;
 
 //Reads the MSB Byte of temperature [D9 - D1]
 	i2c_read_data(i2c_instance, &read_buf[0], delay);
-	i2c_instance->control = I2C_SHAKTI_STOP;
+	i2c_instance->control = I2C_STOP;
 	*readTemp = (read_buf[1] << 1) | (read_buf[0] >> 7);
 
 	return 0;
@@ -80,7 +80,7 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
 	i2c_write_data(i2c_instance,  ( ( (write_value & 0x01) << 7) & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	printf("\n Write Value[1]: %02x", ( ( (write_value & 0x01) << 7) & 0xff));
 //Stops the I2C transaction to start reading the temperature value.
-	i2c_instance->control = I2C_SHAKTI_STOP;
+	i2c_instance->control = I2C_STOP;
 	return 0;
 }
 
@@ -94,7 +94,7 @@ int main()
 	log_debug("\n\tI2C: LM75 Temperature Sensor I2C read\n");
     i2c_init();
 	//Initialises I2C Controller
-		if(shakti_init_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
+		if(config_i2c(I2C, PRESCALER_COUNT,SCLK_COUNT))
 		{
 				log_error("\tSomething Wrong In Initialization\n");
 				return -1;

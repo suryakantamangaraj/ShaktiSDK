@@ -47,7 +47,7 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
 //Writes the pointer to address that needs to be read
 		i2c_write_data(i2c_instance, reg_offset, delay);
 //Stops the I2C transaction to start reading the temperature value.
-		i2c_instance->control = I2C_SHAKTI_STOP;
+		i2c_instance->control = I2C_STOP;
 
 
 //Writes the slave address for read
@@ -64,10 +64,10 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
 			*readTemp = temp;
 //			printf("\n Read Value[%02d]: %02x", i, *readTemp);
 			if( i == (length - 2) )
-				i2c_instance->control = I2C_SHAKTI_NACK;
+				i2c_instance->control = I2C_NACK;
 			*readTemp++;
 		}
-		i2c_instance->control = I2C_SHAKTI_STOP;
+		i2c_instance->control = I2C_STOP;
 		return 0;
 }
 
@@ -82,7 +82,7 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
-		i2c_instance->control = I2C_SHAKTI_STOP;
+		i2c_instance->control = I2C_STOP;
 //		delay_loop(800, 800);
 
 
@@ -136,16 +136,17 @@ void main()
 //	set_baud_rate(uart_instance[0], 115200);
 	printf("\nHello Welcome to Shakti");
 
-    i2c_init();
-	if(shakti_init_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+	i2c_init();
+
+	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
-			log_error("\tSomething Wrong In Initialization\n");
-			return -1;
+		log_error("\tSomething Wrong In Initialization\n");
+		return -1;
 	}
-else
-			log_info("\tIntilization Happened Fine\n");
+	else
+		log_info("\tIntilization Happened Fine\n");
 #ifdef UPDATE_TIME
-			write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
+	write_ds3231_registers(I2C, 0x00, &write_buf[0], length, delay);
 			printf("\n Write complete");
 #endif
 	while(1)

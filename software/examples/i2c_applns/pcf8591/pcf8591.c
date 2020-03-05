@@ -43,7 +43,7 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 //Writes the pointer to address that needs to be read
 	i2c_write_data(i2c_instance, reg_offset, delay);
 //Stops the I2C transaction to start reading the temperature value.
-	i2c_instance->control = I2C_SHAKTI_STOP;
+	i2c_instance->control = I2C_STOP;
 
 //Writes the slave address for read
 	i2c_send_slave_address(i2c_instance, PCF8591_SLAVE_ADDRESS, I2C_READ, 800);
@@ -58,11 +58,11 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 		i2c_read_data(i2c_instance, &temp, delay);
 		*readTemp = temp;
 		if( i == (length - 2) )
-		i2c_instance->control = I2C_SHAKTI_NACK;
+		i2c_instance->control = I2C_NACK;
 		*readTemp++;
 	}
 	
-	i2c_instance->control = I2C_SHAKTI_STOP;
+	i2c_instance->control = I2C_STOP;
 	return 0;
 }
 
@@ -77,7 +77,7 @@ int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 		i2c_write_data(i2c_instance,  ( *write_value++  & 0xff) /*LM75_TEMP_REG_OFFSET */, delay);
 	}
 //Stops the I2C transaction to start reading the temperature value.
-	i2c_instance->control = I2C_SHAKTI_STOP;;
+	i2c_instance->control = I2C_STOP;;
 	return 0;
 }
 
@@ -90,11 +90,12 @@ int main()
 	unsigned long delay = 1000;
 	unsigned int write_buf[7] = {0x00}, read_buf[7] = {0x00};
 	unsigned char length = 0;
-//	set_baud_rate(uart_instance[0], 115200);
 	
 	log_debug("\tI2C: PCF8591 - ADC test\n");
+
 	i2c_init();
-	if(shakti_init_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
+
+	if(config_i2c(I2C, PRESCALER_COUNT, SCLK_COUNT))
 	{
 			log_error("\tSomething Wrong In Initialization\n");
 			return -1;
