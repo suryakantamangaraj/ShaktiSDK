@@ -18,7 +18,7 @@
 
 SHELL := /bin/bash # Use bash syntax
 DC ?=
-PROGRAM ?=
+PROGRAM=hello
 #default target board
 TARGET ?= artix7_35t
 DEBUG ?=
@@ -28,11 +28,11 @@ XLEN ?= 32
 FLAGS ?=
 
 all: create_dir
-	make hello.riscv
+	make $(PROGRAM).riscv
 
-hello.riscv: create_dir
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS)-I$(bsplib) -I$(bspinc) -I$(bspdri)/plic -I$(bspboard) -c ./hello.c -o ./output/hello.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/hello.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
+$(PROGRAM).riscv: create_dir
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS)-I$(bsplib) -I$(bspinc) -I$(bspdri)/plic -I$(bspboard) -c ./$(PROGRAM).c -o ./output/$(PROGRAM).o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/$(PROGRAM).o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:
