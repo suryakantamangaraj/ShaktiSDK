@@ -1,6 +1,6 @@
 /***************************************************************************
 * Project           	   		  :  shakti devt board
-* Name of the file	     	  	:  tglgpio.c
+* Name of the file	     	  	:  leds.c
 * Created date			          :  26.02.2019
 * Brief Description of file   :  Control an led with the help of a button, gpio based.
 * Name of Author    	        :  Sathya Narayanan N

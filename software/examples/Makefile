@@ -156,9 +156,6 @@ else
 ifeq ($(PROGRAM),pcf8591)
 filepath := i2c_applns/pcf8591
 else
-ifeq ($(PROGRAM),ds3231)
-filepath := i2c_applns/ds3231
-else
 ifeq ($(PROGRAM),btnled)
 filepath := gpio_applns/btnled
 else
@@ -243,9 +240,6 @@ else
 ifeq ($(PROGRAM),gyro_softi2c)
 filepath := gpio_applns/gyro_softi2c
 else
-ifeq ($(PROGRAM),onewire)
-filepath := gpio_applns/onewire
-else
 ifeq ($(PROGRAM),spiwrite)
 filepath := spi_applns/spiwrite
 else
@@ -280,7 +274,6 @@ ifeq ($(PROGRAM),counter)
 filepath := clint_applns/counter
 else
 	@echo "Entry for $(PROGRAM) not present"
-endif
 endif
 endif
 endif
@@ -336,7 +329,7 @@ endif
 endif
 endif
 endif
-endif
+ 
 
 upload: path do
 path:

@@ -1,8 +1,8 @@
 /***************************************************************************
  * Project           			:  shakti devt board
- * Name of the file	     		:  btnled.c
+ * Name of the file	     		:  pwminterrupt.c
  * Created date			        :  26.02.2019
- * Brief Description of file            :  Controls the led operation with help of button,gpio based.
+ * Brief Description of file            :  pwm interrupt .
  * Name of Author    	                :  Sathya Narayanan N  & Abhinav Ramnath
  * Email ID                             :  sathya281@gmail.com & abhinavramnath13@gmail.com 
 

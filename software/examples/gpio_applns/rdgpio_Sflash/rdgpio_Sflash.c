@@ -2,9 +2,9 @@
 * Project           			:  shakti devt board
 * Name of the file	     		:  rdgpio.c
 * Created date			        :  19.01.2020
-* Brief Description of file             :  Performs the reading operation with the help of gpio pins and write in spantionflash.
-* Name of Author    	                :  G Nambirajan
-* Email ID                              :  nambirajan2004@gmail.com
+* Brief Description of file     :  Performs the reading operation with the help of gpio pins and write in spantionflash.
+* Name of Author    	        :  G Nambirajan
+* Email ID                      :  nambirajan2004@gmail.com
 
     Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -46,7 +46,7 @@ void main()
 	printf("\n Read Data is :%x\n", readData);
 	delay_loop(1000, 1000);
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
-	*pinmux_reg = 0x154000;
+	//*pinmux_reg = 0x154000;
 	int write_address = 0x00b00000;  // read/write from/to this address
 	int data = readData; //32 bits of data can be written at a time
 	spi_init();
