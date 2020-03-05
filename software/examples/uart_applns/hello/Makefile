@@ -18,7 +18,7 @@
 
 SHELL := /bin/bash # Use bash syntax
 DC ?=
-PROGRAM=hello
+PROGRAM ?=
 #default target board
 TARGET ?= artix7_35t
 DEBUG ?=
