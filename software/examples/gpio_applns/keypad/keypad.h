@@ -31,8 +31,8 @@
 #if !defined(KYPD_H)
 #define KYPD_H
 
-#define KYPD_ROWNUM 4
-#define KYPD_COLNUM 4
+#define ROWNUM 4
+#define COLNUM 4
 
 #define OUTPINS_OFFSET 0
 #define INPINS_OFFSET 4
@@ -40,12 +40,12 @@
 #define INPINS  (0xF << INPINS_OFFSET)
 
 //function prototype
-void setPins(unsigned int* row, unsigned int* col);
-void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM]);
-int getKey();
-int getColRow(void);
-unsigned int rowPins[KYPD_ROWNUM];
-unsigned int colPins[KYPD_COLNUM];
-int keyMap[KYPD_COLNUM][KYPD_ROWNUM];
+void set_pins(unsigned int* row, unsigned int* col);
+void set_key_map(int table[COLNUM][ROWNUM]);
+int get_key();
+int get_col_row(void);
+unsigned int row_pins[ROWNUM];
+unsigned int col_pins[COLNUM];
+int key_map[COLNUM][ROWNUM];
 
 #endif

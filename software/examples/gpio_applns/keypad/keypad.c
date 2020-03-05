@@ -1,35 +1,25 @@
-/************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  keypad.c
- * Created date			        :  26.02.2019
- * Brief Description of file     : This is an example on how to get the value of
- a key  pressed on a Pmod keypad.
- * keypad details : https://reference.digilentinc.com/reference/pmod/pmodkypd/start
+/***************************************************************************
+* Project           			:  shakti devt board
+* Name of the file	     		:  keypad.c
+* Created date			        :  26.02.2019
+* Brief Description of file     : This is an example on how to get the value of
 
-  Author:	Michelle Yu				        	
-  Copyright (c) 2011, Digilent Inc.  	    			        
-	
-  Modified to SHakti by Kottee.1@gmail.com
+    Copyright (C) 2019  IIT Madras. All rights reserved.
 
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of the GNU Lesser General Public
-  License as published by the Free Software Foundation; either
-  version 2.1 of the License, or (at your option) any later version.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Lesser General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-****************************************************************************************/
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-/***********************************************************
-*		Include File Definitions
-************************************************************/
+***************************************************************************/
 
 #include "gpio.h"
 #include "platform.h"
@@ -39,16 +29,16 @@
 
 // initialize key and colrow to -1 indicate no key is pressed
 int key = -1;
-int colRow = -1;
+int col_row = -1;
 
-unsigned int rowPins[KYPD_ROWNUM];
-unsigned int colPins[KYPD_COLNUM];
+unsigned int row_pins[ROWNUM];
+unsigned int col_pins[COLNUM];
 unsigned int col[4]={0, 1, 2, 3};
 unsigned int row[4]={4, 5, 6, 7};
-int keyMap[KYPD_COLNUM][KYPD_ROWNUM];
+int key_map[COLNUM][ROWNUM];
 
 
-int  keyTable[4][4] =
+int  key_table[4][4] =
 {
 	{  1,  4,  7,  0},
 	{  2,  5,  8, 15},
@@ -56,7 +46,7 @@ int  keyTable[4][4] =
 	{ 10, 11, 12, 13}
 };
 
-/** @fn setPins
+/** @fn set_pins
  * @brief This function sets the pins for the row and column
  * @details 
  * @warning 
@@ -64,20 +54,19 @@ int  keyTable[4][4] =
  * @param[Out] 
  */
 
-void  setPins(unsigned int*  row, unsigned int* col)
+void set_pins(unsigned int*  row, unsigned int* col)
 {
-	for(int i = 0 ; i < KYPD_COLNUM ; i++)
+	for(int i = 0 ; i < COLNUM ; i++)
 	{
-		colPins[i] = col[i];// set col
+		col_pins[i] = col[i];// set col
 	}
-	for(int j = 0 ; j < KYPD_ROWNUM ; j++) // set row
+	for(int j = 0 ; j < ROWNUM ; j++) // set row
 	{
-		rowPins[j] = row[j];
+		row_pins[j] = row[j];
 	}
-
 }
 
-/** @fn setKeyMap
+/** @fn set_key_map
  * @brief This function maps table in to keymap
  * @details 
  * @warning 
@@ -85,19 +74,18 @@ void  setPins(unsigned int*  row, unsigned int* col)
  * @param[Out] 
  */
 
-void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
+void set_key_map(int table[COLNUM][ROWNUM])
 {
-
-	for(int i = 0 ; i < KYPD_COLNUM ; i++)
+	for(int i = 0 ; i < COLNUM ; i++)
 	{
-		for(int j = 0 ; j < KYPD_ROWNUM ; j++)
+		for(int j = 0 ; j < ROWNUM ; j++)
 		{
-			keyMap[i][j] = table[i][j];
+			key_map[i][j] = table[i][j];
 		}
 	}
 }
 
-/** @fn getKeyAnotherWay
+/** @fn get_key_another_way
  * @brief This function returns the corresponding value in the keymap
  * @details 
  * @warning 
@@ -105,20 +93,20 @@ void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
  * @param[Out] 
  */
 
-int getKeyAnotherWay()
+int get_key_another_way()
 {
 
 	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
 
-	for (int i = 0 ; i < KYPD_COLNUM ; i++)
+	for (int i = 0 ; i < COLNUM ; i++)
 	{
 		write_word(GPIO_DATA_REG, ~(0x1 << (OUTPINS_OFFSET + i) )   );
 
-		for (int j = 0 ; j < KYPD_ROWNUM ; j++)
+		for (int j = 0 ; j < ROWNUM ; j++)
 		{
-			if ( ( read_word(rowPins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
+			if ( ( read_word(row_pins[j]) & (INPINS << INPINS_OFFSET )  ) == 0)
 			{
-				return keyMap[i][j];
+				return key_map[i][j];
 			}
 		}
 		write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
@@ -135,12 +123,12 @@ int getKeyAnotherWay()
  * @param[Out] 
  */
 
-int getKey(int colRow)
+int get_key(int col_row)
 {
-    return keyMap[colRow>>16][0xFFFF & colRow];
+    return key_map[col_row>>16][0xFFFF & col_row];
 }
 
-/** @fn getColRow
+/** @fn get_col_row
  * @brief This function returns the column-row
  * @details Identifies the pressed key by making the corresponding coloumn
    low and reading the row values     
@@ -149,26 +137,24 @@ int getKey(int colRow)
  * @param[Out] 
  */
 
-int getColRow(void)
+int get_col_row(void)
 {
-	int colRow = 0;
-	unsigned long readValue = 0;
+	int col_row = 0;
+	unsigned long read_value = 0;
 
 	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
 
-	for(int i = 0 ; i < KYPD_COLNUM ; i++)
+	for(int i = 0 ; i < COLNUM ; i++)
 	{
 		write_word(GPIO_DATA_REG, ~(0x1 << (/* OUTPINS_OFFSET  +*/ i) )   );
 
-		for(int j = 0 ; j < KYPD_ROWNUM ; j++)
+		for(int j = 0 ; j < ROWNUM ; j++)
 		{
-			readValue =  read_word(GPIO_DATA_REG);
-//			printf("\n The read value is %lx; rowPins: %x", (readValue), rowPins[j]);
+			read_value =  read_word(GPIO_DATA_REG);
 
-			if( ( readValue & (1 << rowPins[j] ) ) == 0 )
+			if( ( read_value & (1 << row_pins[j] ) ) == 0 )
 			{
-	//			printf("\n The read value is %lx; [i:%d; j:%d] rowPins: %d; keyMap=%d", readValue, i, j, rowPins[j], keyMap[i][j]);
-					return keyMap[i][j];
+					return key_map[i][j];
 			}
 		}
 
@@ -188,9 +174,9 @@ int getColRow(void)
 
 void gpio_init()
 {
-	setPins(row, col);
+	set_pins(row, col);
 
-	setKeyMap(keyTable);
+	set_key_map(key_table);
 
 	//Configure direction of GPIO pins (1 ---> Output, 0 --> input)
 	write_word(GPIO_DIRECTION_CNTRL_REG, OUTPINS);
@@ -206,31 +192,19 @@ void gpio_init()
 
 int main()
 {
-	int prevColRow = 0;
+	int prev_col_row = 0;
 	gpio_init(); //Intialization of gpio //
 
 	printf("\nGPIO Init Done");
 	while(1)
 	{
-		colRow = getColRow();
+		col_row = get_col_row();
 
-		if( colRow != -1 )
+		if( col_row != -1 )
 		{
-//			key = getKey(colRow);
-#if 0
-				if(prevColRow != colRow)
-				{
-//			printf("\ncol: %d; row: %d is value: %d", colRow >> 16, (0xFFFF & colRow), key );
-				prevColRow = colRow;
-				printf("\nThe %x Key Pressed", colRow);
-				}
-#else
-				printf("\nThe %x Key Pressed", colRow);
+			log_info("\nThe %x Key Pressed", col_row);
 				delay_loop(600, 2000);
-#endif
 		}
-
-//		delay_loop(100,2000);
 	}
 
 	return 0;
