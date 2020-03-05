@@ -1,4 +1,4 @@
-***************************************************************************
+/***************************************************************************
  * Project           	        		:  shakti devt board
  * Name of the file	     	         	:  qspi_micron.c
  * Brief Description of file            :  Driver file  
