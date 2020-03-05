@@ -95,9 +95,9 @@ void main()
 
 #ifdef BTN_0
 		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x10000000);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		if(read_data == 0x10000000)
 			printf("\n BTN0: HIGH"); 		
 		else
@@ -106,9 +106,9 @@ void main()
 
 #ifdef BTN_1
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x20000000);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		if(read_data == 0x20000000)
 			printf("\n BTN1: HIGH"); 		
 		else
@@ -117,9 +117,9 @@ void main()
 
 #ifdef BTN_2
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x40000000);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		if(read_data == 0x40000000)
 			printf("\n BTN2: HIGH"); 		
 		else
@@ -128,9 +128,9 @@ void main()
 
 #ifdef BTN_3
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x80000000);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 
 		if(read_data == 0x80000000)
 			printf("\n BTN3: HIGH"); 		
@@ -144,9 +144,9 @@ void main()
 
 #ifdef READ_ALL_BTNS	
 
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 
 		switch(read_data)
 		{
