@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  traps.c
- * Brief Description of file            :  source file for first level of trap handling.
- * Name of Author    	                :  Sathya Narayanan N
- * Email ID                             :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: traps.c
+ * Brief Description of file    : source file for first level of trap handling.
+ * Name of Author    	        : Sathya Narayanan N
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,21 +21,15 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
  ***************************************************************************/
-
 #include "traps.h"
 
-/** @fn 
+/** @fn extract_ie_code
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 unsigned int extract_ie_code(unsigned int num)
 {
 	unsigned int exception_code;
@@ -51,17 +45,13 @@ unsigned int extract_ie_code(unsigned int num)
 	return exception_code;
 }
 
-/** @fn 
+/** @fn default_handler
  * @brief 
- *
  * @details 
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 void default_handler(uintptr_t mcause, uintptr_t epc)
 {
 	log_trace("\ndefault_handler entered\n");
@@ -71,18 +61,13 @@ void default_handler(uintptr_t mcause, uintptr_t epc)
 	log_trace("default_handler exited\n");
 }
 
-/** @fn 
+/** @fn handle_trap
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 {
 	unsigned int ie_entry = 0;;

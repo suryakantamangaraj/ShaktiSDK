@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           					:  shakti devt board
- * Name of the file	     				:  w25q32_read.c
- * Created date			        		:  27.02.2020
- * Brief Description of file             :  Performs the windonb flash  spi reading of 0 to 100 numbers.
- * Name of Author    	                :  G Nambirajan, Koteeswaran
- * Email ID                              :  nambirajan2004@gmail.com
+ * Project           					: shakti devt board
+ * Name of the file	     				: w25q32_read.c
+ * Created date			        		: 27.02.2020
+ * Brief Description of file            : Performs the windonb flash  spi reading of 0 to 100 numbers.
+ * Name of Author    	                : G Nambirajan & Koteeswaran
+ * Email ID                             : nambirajan2004@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,18 +20,19 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+***************************************************************************/
 
+/*********************************************
 PIN DETAILS CONNECTION OF WINBOND W25Q32 FLASH
 d1 - spi mosi
 d0 - spi miso
 clk -spi clk
 cs  -spi cs
-***************************************************************************/
-
+**********************************************/
 #include <stdint.h>
 #include "spi.h"
 
-/** @fn main
+/** @fn w25q32
  * @brief 
  * @details 
  * @warning 
@@ -58,6 +59,14 @@ void w25q32()
 	}
 	printf("SPI Read Successr\n");
 }
+
+/** @fn main
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void main()
 {
 	w25q32();

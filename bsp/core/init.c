@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  init.c
- * Brief Description of file            :  source file for system initialization.
- * Name of Author    	                :  Sathya Narayanan N & Abhinav Ramnath
- * Email ID                             :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: init.c
+ * Brief Description of file    : source file for system initialization.
+ * Name of Author    	        : Sathya Narayanan N & Abhinav Ramnath
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,7 +21,6 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
  ****************************************************************************/
-
 #include "traps.h"
 #include "plic_driver.h"
 #include "clint_driver.h"
@@ -55,6 +54,13 @@ char *bss_start=(char *)&__bss_start;
 char *sbss_end=(char *)&__sbss_end;
 char *sbss_start=(char *)&__sbss_start;
 
+/** @fn section_init
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void section_init()
 {
 
@@ -88,12 +94,11 @@ void section_init()
 
 /** @fn trap_init
  * @brief initialize the trap and interrupt callback routines
- * @details   Initialize the trap/interrupt callback routines
- with user defined handler. For others assign default handler.
+ * @details Initialize the trap/interrupt callback routines
+   with user defined handler. For others assign default handler.
  * @param[in]  void
  * @param[Out] void
  */
-
 void trap_init()
 {
 	log_info("trap_init entered \n ");
@@ -155,11 +160,9 @@ void trap_init()
 
 /** @fn init
  * @brief initialize the necessary variables for system start
- * @details    none
  * @param[in]  void
  * @param[Out] void
  */
-
 void init(void)
 {
 #if defined(ARTIX7_35T) || defined(AARDONYX)
