@@ -276,6 +276,9 @@ else
 ifeq ($(PROGRAM),switches)
 filepath := gpio_applns/switches
 else
+ifeq ($(PROGRAM),switch_mode)
+filepath := uart_applns/switch_mode
+else
 ifeq ($(PROGRAM),counter)
 filepath := clint_applns/counter
 else
@@ -298,6 +301,7 @@ endif
 endif
 endif
 endif	
+endif
 endif
 endif
 endif
