@@ -1,4 +1,4 @@
-***************************************************************************
+/***************************************************************************
  * Project           	         		:  shakti devt board
  * Name of the file	     		        :  gpio_spi.c
  * Brief Description of file            :  headear file for spi gpio
