@@ -1,25 +1,25 @@
-/*
- Created by Kotteeswaran
- Email id: kottee.1@gmail.com
+/***********************************************************************************
+ * Project           	  : shakti devt board
+ * Name of the file	      : lm75.c
+ * Name of Author         : Kotteeswaran
+ * Email ID               : kottee.1@gmail.com
 
-   Copyright (C) 2019  IIT Madras. All rights reserved.
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-
+***********************************************************************************/
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
 #include "log.h"
@@ -37,6 +37,13 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #define PRESCALER_COUNT 0x1F
 #define SCLK_COUNT 0x91
 
+/** @fn read_lm75_register
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
 {
 	unsigned char read_buf[4] = {'\0'};
@@ -69,6 +76,13 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
 	return 0;
 }
 
+/** @fn write_lm75_register
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
 {
 	int i = 0, j = 0,  k = 0, status=0;
@@ -84,6 +98,13 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
 	return 0;
 }
 
+/** @fn main
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int main()
 {
 	int timeout;

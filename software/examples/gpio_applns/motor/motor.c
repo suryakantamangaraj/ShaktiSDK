@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  motor.c
- * Created date			        :  26.02.2019
- * Brief Description of file             :  Determines the functioning of stepper motor with the  help of gpio pins.  
- * Name of Author    	                :  Sathya Narayanan N
- * Email ID                              :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: motor.c
+ * Created date			        : 26.02.2019
+ * Brief Description of file    : Determines the functioning of stepper motor with the  help of gpio pins.  
+ * Name of Author    	        : Sathya Narayanan N
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
+***************************************************************************/
 #include <stdio.h>/* Includes definitions of standard input/output functions*/
 #include "gpio.h"/*Incudes the defintions of gpio functions and registers*/
 #include "platform.h"
@@ -29,12 +29,12 @@
 #define MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
 #define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
 
- /** @fn main
+/** @fn main
  * @brief Performs the intilization of the corresponding registers of gpio pins.
  * @details 
  * @warning 
  * @param[in] Registers,conrol word. 
- * @param[Out] 
+ * @param[Out] No output parameter
  */
 void main()
 {

@@ -1,26 +1,25 @@
-/*
- Created by Kotteeswaran
- Email id: kottee.1@gmail.com
+/************************************************************************
+ * Project           			: shakti devt board
+ * Name of the file	     		: Keypad.c 
+ * Name of Author    	        : Kotteeswaran
+ * Email ID                     : kottee.1@gmail.com
+  
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
-   Copyright (C) 2019  IIT Madras. All rights reserved.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-
-
-
+************************************************************************/
 #include "gpio.h"
 #include "platform.h"
 #include "keypad.h"//Includes the definitions of keypad function//
@@ -53,7 +52,6 @@ int  key_table[4][4] =
  * @param[in] 
  * @param[Out] 
  */
-
 void set_pins(unsigned int*  row, unsigned int* col)
 {
 	for(int i = 0 ; i < COLNUM ; i++)
@@ -73,7 +71,6 @@ void set_pins(unsigned int*  row, unsigned int* col)
  * @param[in] 
  * @param[Out] 
  */
-
 void set_key_map(int table[COLNUM][ROWNUM])
 {
 	for(int i = 0 ; i < COLNUM ; i++)
@@ -92,7 +89,6 @@ void set_key_map(int table[COLNUM][ROWNUM])
  * @param[in] 
  * @param[Out] 
  */
-
 int get_key_another_way()
 {
 
@@ -122,7 +118,6 @@ int get_key_another_way()
  * @param[in] 
  * @param[Out] 
  */
-
 int get_key(int col_row)
 {
     return key_map[col_row>>16][0xFFFF & col_row];
@@ -136,7 +131,6 @@ int get_key(int col_row)
  * @param[in] 
  * @param[Out] 
  */
-
 int get_col_row(void)
 {
 	int col_row = 0;
@@ -171,7 +165,6 @@ int get_col_row(void)
  * @param[in] rows,columns
  * @param[Out] NULL
  */
-
 void gpio_init()
 {
 	set_pins(row, col);
@@ -189,7 +182,6 @@ void gpio_init()
  * @param[in] 
  * @param[Out] 
  */
-
 int main()
 {
 	int prev_col_row = 0;

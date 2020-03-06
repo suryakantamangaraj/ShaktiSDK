@@ -1,11 +1,9 @@
 /***************************************************************************
-* 
-* Project           			        :  shakti devt board
-* Name of the file	     		        :  light_blocking.c
-* Created date			                :  20.08.2019
-* Name of Author               		    :  Soutrick Roy Chowdhury
-* Email ID                       	    :  soutrick97@gmail.com
-*
+ * Project           	: shakti devt board
+ * Name of the file	    : light_blocking.c
+ * Created date			: 20.08.2019
+ * Name of Author       : Soutrick Roy Chowdhury
+ * Email ID             : soutrick97@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -23,12 +21,16 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *****************************************************************************/
-
-
 #include "gpio.h"
 #include "platform.h"
 #include <stdio.h>
 
+/** @fn delay_loop
+ * @brief Maintains the required delay to perform an operation  
+ * @warning No warning  
+ * @param[in] Delay  Required(ms)
+ * @param[Out] No output parameter
+ */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main

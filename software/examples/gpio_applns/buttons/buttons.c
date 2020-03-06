@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           		      	:  shakti devt board
- * Name of the file	     	       	:  buttons.c
- * Created date			            :  22.08.2019
- * Brief Description of file        :  Read the value from the switches
- * Name of Author    	            :  Madan Kumar S
- * Email ID                         :  kumarmadan96@gmail.com
+ * Project           		      	: shakti devt board
+ * Name of the file	     	       	: buttons.c
+ * Created date			            : 22.08.2019
+ * Brief Description of file        : Read the value from the switches
+ * Name of Author    	            : Madan Kumar S
+ * Email ID                         : kumarmadan96@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,8 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
-
+***************************************************************************/
 #include <stdio.h>        //includes the definitions of standard input/output functions
 #include "platform.h"
 #include "gpio.h"         // includes definitions of gpio pins and read, write functions
@@ -33,13 +32,11 @@
 //#define READ_ALL_BTNS /*! Read All button values */
 
 /** @fn delay_loop
- * @brief Maintains the required delay to perform an operation.
- * @details 
- * @warning 
+ * @brief Maintains the required delay to perform an operation. 
+ * @warning NO warning
  * @param[in] Delay  Required(ms) 
- * @param[Out] 
+ * @param[Out] No output parameter
  */
-
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 unsigned long read_data = 0;
@@ -49,9 +46,8 @@ unsigned long read_data = 0;
  * @details 
  * @warning 
  * @param[in] Registers,control word
- * @param[Out] 
+ * @param[Out] No output parameter
  */
-
 void main()
 {
 

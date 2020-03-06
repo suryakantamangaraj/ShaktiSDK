@@ -1,13 +1,12 @@
 /***************************************************************************
-* 
-* Project           			        :  shakti devt board
-* Name of the file	     		        :  relay.c
-* Created date			                :  20.08.2019
-* Brief Description of file     	    :  Helps to on and off the relay through gpio pins
-* Name of Author               		    :  Soutrick Roy Chowdhury
-* Email ID                       	    :  soutrick97@gmail.com
-*
-Copyright (C) 2019  IIT Madras. All rights reserved.
+ * Project           			     : shakti devt board
+ * Name of the file	     		     : relay.c
+ * Created date			             : 20.08.2019
+ * Brief Description of file     	 : Helps to on and off the relay through gpio pins
+ * Name of Author                    : Soutrick Roy Chowdhury
+ * Email ID                       	 : soutrick97@gmail.com
+
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -23,16 +22,14 @@ Copyright (C) 2019  IIT Madras. All rights reserved.
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *****************************************************************************/
-
 #include "platform.h"
 #include "gpio.h"
 
 /** @fn delay_loop
- * @brief Maintains the required delay to perform an operation
- * @details 
- * @warning 
- * @param[in] Delay  Required(ms)
- * @param[Out] NULL
+ * @brief Maintains the required delay to perform an operation 
+ * @warning No warning
+ * @param[in] Delay Required(ms)
+ * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
@@ -41,7 +38,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] NULL
+ * @param[Out] No output parameter
  */
 void main()
 {

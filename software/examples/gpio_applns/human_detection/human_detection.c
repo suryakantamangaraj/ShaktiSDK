@@ -1,13 +1,12 @@
 /***************************************************************************
-* 
-* Project           			            :  shakti devt board
-* Name of the file	     		          :  human_detection.c
-* Created date			                  :  20.08.2019
-* Brief Description of file     	    :  Helps to detects the persons around the range of the module with the help of gpio pins
-* Name of Author               		    :  Soutrick Roy Chowdhury
-* Email ID                       	    :  soutrick97@gmail.com
-*
-Copyright (C) 2019  IIT Madras. All rights reserved.
+ * Project           		  : shakti devt board
+ * Name of the file	     	  : human_detection.c
+ * Created date			      : 20.08.2019
+ * Brief Description of file  : Helps to detects the persons around the range of the module with the help of gpio pins
+ * Name of Author             : Soutrick Roy Chowdhury
+ * Email ID                   : soutrick97@gmail.com
+
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -23,12 +22,16 @@ Copyright (C) 2019  IIT Madras. All rights reserved.
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *****************************************************************************/
-
-
 #include <stdio.h>
 #include "gpio.h"
 #include "platform.h"
 
+/** @fn delay_loop
+ * @brief Maintains the required delay to perform an operation  
+ * @warning No warning
+ * @param[in] Delay  Required(ms)
+ * @param[Out] No output parameter
+ */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main
@@ -36,7 +39,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @details Printing the presence of a person near it
  * @warning We have to set the potentiometer correctly to get the correct result
  * @param[in] 
- * @param[Out] NULL
+ * @param[Out] No output parameter
  */
 void main()
 {

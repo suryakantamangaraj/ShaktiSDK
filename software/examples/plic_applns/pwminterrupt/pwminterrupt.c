@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  pwminterrupt.c
- * Created date			        :  26.02.2019
- * Brief Description of file            :  pwm interrupt .
- * Name of Author    	                :  Sathya Narayanan N  & Abhinav Ramnath
- * Email ID                             :  sathya281@gmail.com & abhinavramnath13@gmail.com 
+ * Project           			: shakti devt board
+ * Name of the file	     		: pwminterrupt.c
+ * Created date			        : 26.02.2019
+ * Brief Description of file    : pwm interrupt .
+ * Name of Author    	        : Sathya Narayanan N  & Abhinav Ramnath
+ * Email ID                     : sathya281@gmail.com & abhinavramnath13@gmail.com 
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
+***************************************************************************/
 
 #include "gpio.h"
 #include "uart.h"
@@ -31,18 +31,13 @@
 #include "log.h"
 #include "pwm_driver.h"
 
-/** @fn 
+/** @fn dump_word_memory
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
 	unsigned int i=0;
@@ -57,18 +52,13 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
 	}
 }
 
-/** @fn 
+/** @fn dump_byte_memory
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {
 	unsigned int i=0;
@@ -84,24 +74,26 @@ void dump_byte_memory(unsigned int* start, unsigned int word_length)
 	}
 }
 
-/** @fn 
+/** @fn handle_button_press 
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 unsigned handle_button_press (unsigned num)
 {
 	log_info("button pressed\n");
 	return 0;
 }
 
+/** @fn main 
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int main(void){
 
 	unsigned int int_id = 1;

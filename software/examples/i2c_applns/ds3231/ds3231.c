@@ -1,41 +1,47 @@
-/*
- Created by Kotteeswaran
- Email id: kottee.1@gmail.com
+/****************************************************************************
+ * Project           	  : shakti devt board
+ * Name of the file	      : ds3231.c
+ * Name of Author         : Kotteeswaran
+ * Email ID               : kottee.1@gmail.com
 
-   Copyright (C) 2019  IIT Madras. All rights reserved.
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-
+*******************************************************************************/
 //#include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
 #include "log.h"
 #include "uart.h"
+
 #define UPDATE_TIME 1
-
 #define I2C i2c_instance[1]
-
 #define DS3231_SLAVE_ADDRESS 0XD0
 #define DS3231_REG_OFFSET 0
-
 #define DS3231_DEC_TO_HEX(decimal)  ( ( (decimal / 10 ) << 4) | (decimal % 10) )
 #define DELAY_VALUE 900
 #define PRESCALER_COUNT 0x1F
 #define SCLK_COUNT 0x91
 
+
+/** @fn read_ds3231_registers
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
 {
 	unsigned char read_buf[4] = {'\0'};
@@ -71,6 +77,13 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
 		return 0;
 }
 
+/** @fn  write_ds3231_registers
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
 {
 	int i = 0, j = 0,  k = 0, status=0;
@@ -89,7 +102,13 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 			return 0;
 }
 
-
+/** @fn dayofweek
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int dayofweek(int d, int m, int y)
 {
     static int t[] = { 0, 3, 2, 5, 0, 3,
@@ -99,12 +118,25 @@ int dayofweek(int d, int m, int y)
              y / 400 + t[m - 1] + d) % 7;
 }
 
+/** @fn ds3231_decimal_to_hex
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 unsigned int ds3231_decimal_to_hex(unsigned int decimal)
 {
 	return( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
-
+/** @fn main
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void main()
 {
 		int timeout;

@@ -2,9 +2,8 @@
  * Project           			:  shakti devt board
  * Name of the file	     		:  counter.c
  * Created date			        :  26.02.2019
- * Brief Description of file            : 
- * Name of Author    	                :  Sathya Narayanan N & Raghav
- * Email ID                             :  sathya281@gmail.com
+ * Name of Author    	        :  Sathya Narayanan N & Raghav
+ * Email ID                     :  sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,14 +20,20 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
-
+***************************************************************************/
 #include "uart.h"
 #include "traps.h"
 #include "platform.h"
 #include "clint_driver.h"
 #include "log.h"
 
+/** @fn main
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int main(void){
 
 	uint64_t value = 50000000;

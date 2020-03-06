@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           					:  shakti devt board
- * Name of the file	     				:  spidac.c
- * Created date			        		:  05.02.2020
- * Brief Description of file             :  Performs the Digital to analog operation with spi writing .
- * Name of Author    	                :  G Nambirajan, Koteeswaran
- * Email ID                              :  nambirajan2004@gmail.com
+ * Project           					: shakti devt board
+ * Name of the file	     				: mcp4921_dac.c
+ * Created date			        		: 05.02.2020
+ * Brief Description of file            : Performs the Digital to analog operation with spi writing .
+ * Name of Author    	                : G Nambirajan, Koteeswaran
+ * Email ID                             : nambirajan2004@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -26,6 +26,13 @@
 #include "spi.h"
 #include <stdint.h>
 
+/** @fn spi_dac
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in]  
+ * @param[Out] 
+ */
 void spi_dac()
 {
     configure_spi(SPI1_OFFSET);	
@@ -51,6 +58,13 @@ void spi_dac()
 	}
 } 
 
+/** @fn write_dac_value
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in]  
+ * @param[Out] 
+ */
 int write_dac_value(unsigned dac_value)
 {
 	int* spi_dr1    = (int*) SPI_DR1 ;
@@ -71,6 +85,13 @@ int write_dac_value(unsigned dac_value)
 	return 1;
 }
 
+/** @fn main
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in]  
+ * @param[Out] 
+ */
 void main()
 {
 	spi_dac();
