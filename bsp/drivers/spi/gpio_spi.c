@@ -1,4 +1,4 @@
-***************************************************************************
+/***************************************************************************
  * Project           	         		:  shakti devt board
  * Name of the file	     		        :  gpio_spi.c
  * Brief Description of file            :  gpio_spi.c driver file for gpio
