@@ -1,8 +1,8 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  button_driver.c
-* Created date			        :  22.08.2019
-* Brief Description of file             :  Reads onboard button values from gpio pins.
+* Project           		         	:  shakti devt board
+* Name of the file	     	         	:  button_driver.c
+* Created date			                :  22.08.2019
+* Brief Description of file             : Driver for button
 * Name of Author    	                :  Madan Kumar S
 * Email ID                              :  kumarmadan96@gmail.com
 

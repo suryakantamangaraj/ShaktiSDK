@@ -1,10 +1,26 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  lm75_softi2c.c
-* Created date			        :  20.08.2019
-* Brief Description of file     :  Helps to find out temperature of a surrounding with the help of gpio pins.
-* Name of Author                :  Soutrick Roy Chowdhury.
-* Email ID                      :  soutrick97@gmail.com
+ * Project           			 : shakti devt board
+ * Name of the file	     		 : lm75_softi2c.c
+ * Created date			         : 20.08.2019
+ * Brief Description of file     : Helps to find out temperature of a surrounding with the help of gpio pins.
+ * Name of Author                : Soutrick Roy Chowdhury.
+ * Email ID                      : soutrick97@gmail.com
+
+ Copyright (C) 2019  IIT Madras. All rights reserved.
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 *****************************************************************************/
 #include "gpio_i2c.h"
 
@@ -13,11 +29,11 @@
 #define DELAY_COUNT 200
 
 /** @fn Lm75ReadTemperature
- * @brief Complete function to read value from LM75 sensors
+ * @brief Complete function to read value from LM75 sensors 
  * @details 
- * @warning 
+ * @warning No warning
  * @param[in] 
- * @param[Out] NULL
+ * @param[Out] No output parameter
  */
 unsigned int Lm75ReadTemperature(unsigned long delay)
 {

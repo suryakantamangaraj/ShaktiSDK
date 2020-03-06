@@ -1,42 +1,46 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  rdgpio.c
-* Created date			        :  26.02.2019
-* Brief Description of file             :  Performs the reading operation with the help of gpio pins.
-* Name of Author    	                :  Sathya Narayanan N
-* Email ID                              :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: rdgpio.c
+ * Created date			        : 26.02.2019
+ * Brief Description of file    : Performs the reading operation with the help of gpio pins.
+ * Name of Author    	        : Sathya Narayanan N
+ * Email ID                     : sathya281@gmail.com
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+  Copyright (C) 2019  IIT Madras. All rights reserved.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-
 #include <stdio.h>//includes the definitions of standard input/output functions
 #include "gpio.h" // includes definitions of gpio pins and read, write functions
 #include "platform.h"
 
 /** @fn delay_loop
- * @brief Maintains the required delay to perform an operation
- * @details 
- * @warning 
+ * @brief Maintains the required delay to perform an operation 
+ * @warning No warning
  * @param[in] Delay  Required(ms)
- * @param[Out] 
+ * @param[Out] No output parameter
  */
-
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
+/** @fn readData
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] No output parameter
+ */
 void readData()
 {
 	unsigned long data = 0;
@@ -48,14 +52,14 @@ void readData()
 		delay_loop(3000, 5000);
 	}
 }
+
 /** @fn main
  * @brief 
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] NULL
+ * @param[Out] No output parameter
  */
-
 void main()
 {
     readData(); 

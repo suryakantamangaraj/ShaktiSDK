@@ -1,25 +1,27 @@
 /************************************************************************
- * Project           			:  Shakti development board
- * Name of the file	     		:  Intruder detection.c
- * Created date			        :  28.01.2020
- * Brief Description of file    :  This is a program for Intruder Detection System which uses PIR Sensor to detect any intrusion
- *                                   	    			        	
- Modified to SHakti by Sambhav Jain 
+ * Project           			: Shakti development board
+ * Name of the file	     		: Intruder detection.c
+ * Created date			        : 28.01.2020
+ * Brief Description of file    : This is a program for Intruder Detection System which uses PIR Sensor to detect any intrusion
+ * Modified to Shakti by        : Sambhav Jain  
+ * Email ID                     : sambhav.jv@gmail.com             	    			        	
+ 
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 2.1 of the License, or (at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
- This library is distributed in the hope that it will be useful,
+ This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
- You should have received a copy of the GNU Lesser General Public
- License along with this library; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- ****************************************************************************************/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>
+
+****************************************************************************************/
 
 /***********************************************************
  *		Pin Definitions
@@ -48,16 +50,13 @@
 //		25		-Deactivation Switch	(Input)
 
 /***********************************************************
- *		Include File Definitions
- ************************************************************/
-
+ 		Include File Definitions
+************************************************************/
 #include "gpio.h"
 #include "platform.h"
 #include "intruder_detection.h"  //Includes the definitions//
 
-
 /* global variable definition*/
-
 
 int PIR_presentState = 0;
 int PIR_previousState = 0;
@@ -106,7 +105,6 @@ int  keyTable[4][4] =
  * @param[in] 
  * @param[Out] 
  */
-
 void WriteGPIO(unsigned long GPIO_pin,int GPIO_pin_mode )
 {
 	unsigned long read_data = 0;
@@ -129,7 +127,6 @@ void WriteGPIO(unsigned long GPIO_pin,int GPIO_pin_mode )
  * @param[in] Data Register
  * @param[Out] 
  */
-
 int PIR_ReadState(unsigned long tempReadData)
 {
 	PIR_presentState= ((PIR_IN & tempReadData)>>PIR_OFFSET);  
@@ -157,7 +154,6 @@ int PIR_ReadState(unsigned long tempReadData)
 	}
 }
 
-
 /** @fn panicButtonReadState
  * @brief Reads the State of the Panic Button 
  * @details 
@@ -165,7 +161,6 @@ int PIR_ReadState(unsigned long tempReadData)
  * @param[in] Data Register
  * @param[Out] 
  */
-
 int panicButtonReadState(unsigned long tempReadData)
 {
 	panicPresentState= ((panicButton & tempReadData)>>PANIC_BUTTON_OFFSET);  
@@ -192,7 +187,6 @@ int panicButtonReadState(unsigned long tempReadData)
 	}
 }
 
-
 /** @fn buzzerTone
  * @brief Outputs the Buzzer Tone
  * @details 
@@ -200,7 +194,6 @@ int panicButtonReadState(unsigned long tempReadData)
  * @param[in] 
  * @param[Out] 
  */
-
 void buzzerTone()
 {
 	int i=0;
@@ -215,7 +208,6 @@ void buzzerTone()
 	}
 }
 
-
 /** @fn setPins
  * @brief This function sets the pins for the row and column
  * @details 
@@ -223,7 +215,6 @@ void buzzerTone()
  * @param[in] 
  * @param[Out] 
  */
-
 void  setPins(unsigned int*  row, unsigned int* col)
 {
 	for(int i = 0 ; i < KYPD_COLNUM ; i++)
@@ -244,7 +235,6 @@ void  setPins(unsigned int*  row, unsigned int* col)
  * @param[in] 
  * @param[Out] 
  */
-
 void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
 {
 
@@ -264,7 +254,6 @@ void setKeyMap(int table[KYPD_COLNUM][KYPD_ROWNUM])
  * @param[in] 
  * @param[Out] 
  */
-
 int getKeyAnotherWay()
 {
 	write_word(GPIO_DATA_REG, (0xF << OUTPINS_OFFSET) );
@@ -292,7 +281,6 @@ int getKeyAnotherWay()
  * @param[in] 
  * @param[Out] 
  */
-
 int getKey(int colRow)
 {
 	return keyMap[colRow>>16][0xFFFF & colRow];
@@ -306,7 +294,6 @@ int getKey(int colRow)
  * @param[in] 
  * @param[Out] 
  */
-
 int getColRow(void)
 {
 	int colRow = 0;
@@ -346,7 +333,6 @@ int getColRow(void)
  * @param[in] rows,columns
  * @param[Out] NULL
  */
-
 void gpio_init()
 {
 	setPins(row, col);	
@@ -377,7 +363,6 @@ void gpio_init()
  * @param[in] 
  * @param[Out] 
  */
-
 int main()
 {
 	//Clearing the Data Register

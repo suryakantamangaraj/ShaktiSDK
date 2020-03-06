@@ -1,22 +1,43 @@
-#include"gpio_i2c.h"
+/***************************************************************************
+ * Project           			: shakti devt board
+ * Name of the file	     		: gyroi2c.c 
+ * Name of Author    	        : Kotteeswaran
+ * Email ID                     : kottee.1@gmail.com
+ 
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+******************************************************************************/
+#include"gpio_i2c.h"
 
 #define I2C_WRITE 0
 #define I2C_READ 1
 
-#define MPU6050_SLAVE_ADDRESS 0xD0
-#define MPU_6050_OUTPUT_BEGIN 0x3B
-#define MPU6050_DLPF_CFG 0x20
-#define MPU6050_SMPL_DIV 0x19
-#define MPU6050_ADDRESS   0x68 
-#define DEV_IDENTITY  0X68
-#define DEV_IDENTITY_DATA_REG 0X75
-#define MPU6050_REG_PWR_MGMT 0X6B
-#define MPU6050_RESET         0x80
-#define MPU6050_ACC_SENS_8G         0x10
-#define MPU6050_REG_GYRO_CONFIG      0x1B // Gyroscope Configuration
-#define MPU6050_REG_ACCEL_CONFIG     0x1C // Accelerometer Configuration
-#define MPU6050_GYRO_SENS_500D       0x08
+#define MPU6050_SLAVE_ADDRESS      0xD0
+#define MPU_6050_OUTPUT_BEGIN      0x3B
+#define MPU6050_DLPF_CFG           0x20
+#define MPU6050_SMPL_DIV           0x19
+#define MPU6050_ADDRESS            0x68 
+#define DEV_IDENTITY               0X68
+#define DEV_IDENTITY_DATA_REG      0X75
+#define MPU6050_REG_PWR_MGMT       0X6B
+#define MPU6050_RESET              0x80
+#define MPU6050_ACC_SENS_8G        0x10
+#define MPU6050_REG_GYRO_CONFIG    0x1B // Gyroscope Configuration
+#define MPU6050_REG_ACCEL_CONFIG   0x1C // Accelerometer Configuration
+#define MPU6050_GYRO_SENS_500D     0x08
 
 #define PI 3.141592654
 
@@ -38,9 +59,8 @@ static unsigned char delay = 100;
  * @details 
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] No output parameter
  */
-
 void measuring_value()
 {
 	// read accelerometer data
@@ -71,7 +91,6 @@ void measuring_value()
  * @param[in] 
  * @param[Out] 
  */
-
 int main()
 {
 	I2cInit();//configuring data and clocks as output lines
@@ -123,7 +142,6 @@ int main()
  * @param[in] 
  * @param[Out] 
  */
-
 void calculate_imu_error()
 {
 	int c = 0;

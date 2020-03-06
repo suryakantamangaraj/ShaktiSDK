@@ -153,11 +153,11 @@ else
 ifeq ($(PROGRAM),lm75)
 filepath := i2c_applns/lm75
 else
-ifeq ($(PROGRAM),pcf8591)
-filepath := i2c_applns/pcf8591
-else
 ifeq ($(PROGRAM),ds3231)
 filepath := i2c_applns/ds3231
+else
+ifeq ($(PROGRAM),pcf8591)
+filepath := i2c_applns/pcf8591
 else
 ifeq ($(PROGRAM),btnled)
 filepath := gpio_applns/btnled
@@ -234,17 +234,11 @@ else
 ifeq ($(PROGRAM),soft_i2c)
 filepath := gpio_applns/soft_i2c
 else
-ifeq ($(PROGRAM),ds3231_gpio)
-filepath := gpio_applns/ds3231_gpio
-else
 ifeq ($(PROGRAM),malloc_test)
 filepath := malloc_test/malloc_test
 else
 ifeq ($(PROGRAM),gyro_softi2c)
 filepath := gpio_applns/gyro_softi2c
-else
-ifeq ($(PROGRAM),onewire)
-filepath := gpio_applns/onewire
 else
 ifeq ($(PROGRAM),spiwrite)
 filepath := spi_applns/spiwrite
@@ -299,9 +293,7 @@ endif
 endif
 endif
 endif
-endif
 endif	
-endif
 endif
 endif
 endif
