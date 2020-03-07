@@ -28,9 +28,7 @@ XLEN  ?= 32
 FLAGS ?=
 
 all: create_dir
-	@echo $(PROGRAM)
 	make switch_mode.riscv
-
 
 $(PROGRAM).riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -c $(PROGRAM).S -o ./output/$(PROGRAM).o -march=$(MARCH) -mabi=$(MABI) 
@@ -39,6 +37,4 @@ $(PROGRAM).riscv: create_dir
 
 create_dir:
 	@mkdir -p ./output
-
-
 
