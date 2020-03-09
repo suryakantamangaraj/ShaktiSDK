@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           		      	: shakti devt board
- * Name of the file	     	       	: buttons.c
- * Created date			            : 22.08.2019
- * Brief Description of file        : Read the value from the switches
- * Name of Author    	            : Madan Kumar S
- * Email ID                         : kumarmadan96@gmail.com
+ * Project           			:  shakti devt board
+ * Name of the file	     		:  buttons.c
+ * Created date			        :  22.08.2019
+ * Brief Description of file            :  Read the value from the switches
+ * Name of Author    	                :  Madan Kumar S
+ * Email ID                             :  kumarmadan96@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 

@@ -1,7 +1,7 @@
 /***************************************************************************
 * Project                               :  shakti devt board
 * Name of the file                      :  spi.h
-* Brief Description of file             :  Header to spi 
+* Brief Description of file             :  Header to spi driver
 * Name of Author                        :  Kaustubh Ghormade
 * Email ID                              :  kaustubh4347@gmail.com
 

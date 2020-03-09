@@ -1,10 +1,10 @@
 /***************************************************************************
-* Project           			: shakti devt board
-* Name of the file	     		: rdgpio.c
-* Created date			        : 19.01.2020
-* Brief Description of file     : Performs the reading operation with the help of gpio pins and write in spantionflash.
-* Name of Author    	        : G Nambirajan
-* Email ID                      : nambirajan2004@gmail.com
+* Project           			:  shakti devt board
+* Name of the file	     		:  rdgpio.c
+* Created date			        :  19.01.2020
+* Brief Description of file             :  Performs the reading operation with the help of gpio pins and write in spantionflash.
+* Name of Author    	                :  G Nambirajan
+* Email ID                              :  nambirajan2004@gmail.com
 
   Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -22,10 +22,10 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-#include <stdio.h>  //includes the definitions of standard input/output functions
-#include "gpio.h"   // includes definitions of gpio pins and read, write functions
-#include "platform.h"
 
+#include <stdio.h>//includes the definitions of standard input/output functions
+#include "gpio.h" // includes definitions of gpio pins and read, write functions
+#include "platform.h"
 #define PINMUX_CONF_REG 0x40310
 
 int * pinmux_reg  =   (const int*) PINMUX_CONF_REG;
@@ -45,6 +45,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @param[in] 
  * @param[Out] 
  */
+
 void main()
 {
 	unsigned long readData = 0;

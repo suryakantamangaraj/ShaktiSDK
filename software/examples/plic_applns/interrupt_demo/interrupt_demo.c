@@ -1,8 +1,10 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: interrupt_demo.c  
- * Name of Author    	        : Sathya Narayanan N 
- * Email ID                     : sathya281@gmail.com
+ * Project           			:  shakti devt board
+ * Name of the file	     		:
+ * Created date			        :  
+ * Brief Description of file            :  
+ * Name of Author    	                :  Sathya Narayanan N 
+ * Email ID                             :  sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,6 +22,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
  ***************************************************************************/
+
 #include "gpio.h"
 #include "uart.h"
 #include "traps.h"

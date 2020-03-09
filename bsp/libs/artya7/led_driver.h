@@ -1,7 +1,7 @@
 /***************************************************************************
- * Project           		         	:  shakti devt board
- * Name of the file	                	:  led_driver.h
- * Created date			                :   9.07.2019
+ * Project           		        :  shakti devt board
+ * Name of the file	                :  led_driver.h
+ * Created date			        :   9.07.2019
  * Brief Description of file            :   Header file for leds
  * Name of Author    	                :   Kotteeswaran
  * Email ID                             :  kottee.1@gmail.com

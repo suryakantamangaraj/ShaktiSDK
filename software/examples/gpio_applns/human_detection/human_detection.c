@@ -1,7 +1,7 @@
 /***************************************************************************
- * Project           		  : shakti devt board
- * Name of the file	     	  : human_detection.c
- * Created date			      : 20.08.2019
+ * Project           	      : shakti devt board
+ * Name of the file	      : human_detection.c
+ * Created date		      : 20.08.2019
  * Brief Description of file  : Helps to detects the persons around the range of the module with the help of gpio pins
  * Name of Author             : Soutrick Roy Chowdhury
  * Email ID                   : soutrick97@gmail.com

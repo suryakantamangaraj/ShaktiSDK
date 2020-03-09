@@ -20,6 +20,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *******************************************************************************/
+
 //#include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
 #include "log.h"

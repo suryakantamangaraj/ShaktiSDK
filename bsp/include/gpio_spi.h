@@ -2,7 +2,7 @@
  * Project           	         		:  shakti devt board
  * Name of the file	     		        :  gpio_spi.c
  * Brief Description of file            :  headear file for spi gpio
- * Name of Author    	                :  Kottee @ aditya dubey
+ * Name of Author    	                :  Kottee & Aditya dubey
  * Email ID                             :  kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.

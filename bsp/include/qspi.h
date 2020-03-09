@@ -1,6 +1,6 @@
 /************************************************************************
-* Project           		        	:  shakti devt board
-* Name of the file	     	        	:  qspi.h
+* Project           			:  shakti devt board
+* Name of the file	     		:  qspi.h
 * Brief Description of file             :  Header file for qspi.
 
     Copyright (C) 2019  IIT Madras. All rights reserved.

@@ -61,6 +61,7 @@ static unsigned char delay = 100;
  * @param[in] 
  * @param[Out] No output parameter
  */
+
 void measuring_value()
 {
 	// read accelerometer data
@@ -91,6 +92,7 @@ void measuring_value()
  * @param[in] 
  * @param[Out] 
  */
+
 int main()
 {
 	I2cInit();//configuring data and clocks as output lines
@@ -142,6 +144,7 @@ int main()
  * @param[in] 
  * @param[Out] 
  */
+
 void calculate_imu_error()
 {
 	int c = 0;

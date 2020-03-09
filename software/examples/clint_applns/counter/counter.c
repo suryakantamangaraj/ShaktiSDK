@@ -1,7 +1,7 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  counter.c
- * Created date			        :  26.02.2019
+ * Project           		:  shakti devt board
+ * Name of the file	     	:  counter.c
+ * Created date			:  26.02.2019
  * Name of Author    	        :  Sathya Narayanan N & Raghav
  * Email ID                     :  sathya281@gmail.com
 

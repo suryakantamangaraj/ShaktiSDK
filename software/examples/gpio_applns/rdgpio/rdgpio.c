@@ -1,12 +1,12 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: rdgpio.c
- * Created date			        : 26.02.2019
- * Brief Description of file    : Performs the reading operation with the help of gpio pins.
- * Name of Author    	        : Sathya Narayanan N
- * Email ID                     : sathya281@gmail.com
+* Project           			:  shakti devt board
+* Name of the file	     		:  rdgpio.c
+* Created date			        :  26.02.2019
+* Brief Description of file             :  Performs the reading operation with the help of gpio pins.
+* Name of Author    	                :  Sathya Narayanan N
+* Email ID                              :  sathya281@gmail.com
 
-  Copyright (C) 2019  IIT Madras. All rights reserved.
+    Copyright (C) 2019  IIT Madras. All rights reserved.
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+
 #include <stdio.h>//includes the definitions of standard input/output functions
 #include "gpio.h" // includes definitions of gpio pins and read, write functions
 #include "platform.h"
@@ -32,6 +33,7 @@
  * @param[in] Delay  Required(ms)
  * @param[Out] No output parameter
  */
+
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn readData
@@ -60,6 +62,7 @@ void readData()
  * @param[in] 
  * @param[Out] No output parameter
  */
+
 void main()
 {
     readData(); 

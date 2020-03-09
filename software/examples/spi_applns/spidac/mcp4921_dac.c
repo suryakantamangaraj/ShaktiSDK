@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           					: shakti devt board
- * Name of the file	     				: mcp4921_dac.c
- * Created date			        		: 05.02.2020
- * Brief Description of file            : Performs the Digital to analog operation with spi writing .
- * Name of Author    	                : G Nambirajan, Koteeswaran
- * Email ID                             : nambirajan2004@gmail.com
+ * Project           					:  shakti devt board
+ * Name of the file	     				:  spidac.c
+ * Created date			        		:  05.02.2020
+ * Brief Description of file             :  Performs the Digital to analog operation with spi writing .
+ * Name of Author    	                :  G Nambirajan, Koteeswaran
+ * Email ID                              :  nambirajan2004@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 

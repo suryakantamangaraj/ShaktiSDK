@@ -1,6 +1,7 @@
-#Created by Sathya Narayanan N
-# Email id: sathya281@gmail.com
-	
+
+#Created by Nambirajan G
+# Email id: nambirajan2004@gmail.com
+
 #   Copyright (C) 2019  IIT Madras. All rights reserved.
 
 #This program is free software: you can redistribute it and/or modify
@@ -13,9 +14,8 @@
 #MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
 
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 SHELL := /bin/bash # Use bash syntax
 DC ?=

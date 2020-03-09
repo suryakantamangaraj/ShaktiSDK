@@ -1,8 +1,8 @@
 /***************************************************************************
- * Project           	        		:  shakti devt board
- * Name of the file	            		:  switch_driver.c
- * Created date			                :  22.08.2019
- * Brief Description of file            :  Driver file for switches
+ * Project           			:  shakti devt board
+ * Name of the file	     		:  switch_driver.c
+ * Created date			        :  22.08.2019
+ * Brief Description of file            :  Reads onboard switch values from gpio pins.
  * Name of Author    	                :  Madan Kumar S
  * Email ID                             :  kumarmadan96@gmail.com
 

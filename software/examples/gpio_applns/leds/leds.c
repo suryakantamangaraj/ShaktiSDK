@@ -47,6 +47,7 @@
  * @param[in] Delay  Required(ms)
  * @param[Out] No output parameter
  */
+
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main
@@ -56,6 +57,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @param[in] Registers,control word.
  * @param[Out] No output parameter 
  */
+
 void main()
 {
 	//  write_word(GPIO_DIRECTION_CNTRL_REG, 0x0);

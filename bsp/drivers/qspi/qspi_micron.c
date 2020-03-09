@@ -2,7 +2,7 @@
  * Project           	        		:  shakti devt board
  * Name of the file	     	         	:  qspi_micron.c
  * Brief Description of file            :  Driver file  
- * Name of Author    	                :  visvesh
+ * Name of Author    	                :  Vishvesh
  * Email ID                             :  
 
  Copyright (C) 2019  IIT Madras. All rights reserved.

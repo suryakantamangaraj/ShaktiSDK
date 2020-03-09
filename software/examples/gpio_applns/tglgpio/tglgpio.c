@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: tglgpio.c
- * Created date			        : 26.02.2019
- * Brief Description of file    : Control an led with the help of a button, gpio based.
- * Name of Author    	        : Sathya Narayanan N
- * Email ID                     : sathya281@gmail.com
+* Project           			:  shakti devt board
+* Name of the file	     		:  tglgpio.c
+* Created date			        :  26.02.2019
+* Brief Description of file             :  Control an led with the help of a button, gpio based.
+* Name of Author    	                :  Sathya Narayanan N
+* Email ID                              :  sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -22,6 +22,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+
 #include "platform.h"
 #include "gpio.h" // includes definitions of gpio pins and read, write functions//
 

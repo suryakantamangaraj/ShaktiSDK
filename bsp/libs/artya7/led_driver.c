@@ -1,7 +1,7 @@
 /***************************************************************************
-* Project           		  			:  shakti devt board
-* Name of the file	     	         	:  led_driver.c
-* Created date			                :  9.07.2019
+* Project           			:  shakti devt board
+* Name of the file	     		:  led_driver.c
+* Created date			        :  9.07.2019
 * Brief Description of file             :  Performs the I2C operations using gpio pins.
 * Name of Author    	                :  Kotteeswaran
 * Email ID                              :  kottee.1@gmail.com

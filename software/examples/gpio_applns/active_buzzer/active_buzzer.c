@@ -24,13 +24,8 @@
 #include "platform.h"
 #include "gpio.h"
 
-/** @fn delay_loop
- * @brief Maintains the required delay to perform an operation 
- * @warning No warning
- * @param[in] Delay  Required(ms) 
- * @param[Out] No output parameter
- */
-extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
+
+//extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main
  * @brief Correspondingly making GPIO0 as HIGH and LOW.

@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: tglgpio.c
- * Created date			        : 2.01.2020
- * Brief Description of file    : Control an led with the help of a read from Spansion Flash.
- * Name of Author    	        : G Nambirajan
- * Email ID                     : nambirajan2004@gmail.com
+* Project           			:  shakti devt board
+* Name of the file	     		:  tglgpio.c
+* Created date			        :  2.01.2020
+* Brief Description of file             :  Control an led with the help of a read from Spansion Flash.
+* Name of Author    	                :  G Nambirajan
+* Email ID                              :  nambirajan2004@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -22,6 +22,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+
 #include "gpio.h" // includes definitions of gpio pins and read, write functions//
 #include <stdint.h>
 #include "spi.h"

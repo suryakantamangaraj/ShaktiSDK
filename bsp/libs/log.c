@@ -1,7 +1,7 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  log.c
- * Created date			        :  
+ * Project           		:  shakti devt board
+ * Name of the file	     	:  log.c
+ * Created date			:  
  * Brief Description of file    :   print control for all operation
  * Name of Author    	        :  Sathya Narayanan N & Abhinav ramnath
  * Email ID                     :  sathya281@gmail.com
@@ -27,7 +27,7 @@
 
 /*Use -D compiler flag to set the LOG_LEVEL; default value is 1*/
 #ifndef LOG_LEVEL
-#define LOG_LEVEL 5 
+#define LOG_LEVEL 3 
 #endif
 
 /** @fn void log_trace(const char*fmt, ...);

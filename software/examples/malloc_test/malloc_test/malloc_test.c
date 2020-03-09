@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project               	        : shakti devt board
- * Name of the file	                : malloc_test.c
+ * Project               	    : shakti devt board
+ * Name of the file	            : malloc_test.c
  * Brief Description of file        : test file for malloc.
  * Name of Author    	            : Abhinav Ramnath
  * Email ID                         : abhinavramnath13@gmail.com
