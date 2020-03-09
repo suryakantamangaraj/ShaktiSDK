@@ -1,11 +1,20 @@
 #start in m mode, jump to S mode. access M mode code. Trap happens. handle trap in M mode. jump to mepc
 
+#if __riscv_xlen == 64
+#define LREG ld
+#define SREG sd
+#define REGBYTES 8
+#else
+#define LREG lw
+#define SREG sw
+#define REGBYTES 4
+#endif
+
+#ifdef ARTIX7_100T
 _start:	
 	li sp, 0x80001000
 	la t0, trap_entry
 	csrw mtvec, t0
-
-       
 	li      t0, 0x1800
 	csrrc   zero,mstatus, t0 
 	li      t0, 0x0800
@@ -22,7 +31,7 @@ s_mode_begin:
 
 trap_handler:
 	csrr t0,mcause
-	la t3, 0x80000
+	li t3, 0x80000000
 	and t0,t0,t3
 	beqz t0, exception_handler
 1:      ret
@@ -117,4 +126,4 @@ _data1:
 .word 	0
 .word 	0
 .word 	0
-
+#endif
