@@ -1,24 +1,24 @@
 /***************************************************************************
-* Project               	    		:  shakti devt board
-* Name of the file	            		:  pwm_driver.c
-* Brief Description of file                     :  PWM Driver Code.
-* Name of Author    	                        :  Abhinav Ramnath
-* Email ID                                      :  abhinavramnath13@gmail.com
+ * Project               	    		: shakti devt board
+ * Name of the file	            		: pwm_driver.c
+ * Brief Description of file            : PWM Driver Code.
+ * Name of Author    	                : Abhinav Ramnath
+ * Email ID                             : abhinavramnath13@gmail.com
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+  Copyright (C) 2019  IIT Madras. All rights reserved.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
 
@@ -38,7 +38,6 @@
               value - value to be set between 0x0000 to 0xffff.
  * @param[Out] returns 1 on success, 0 on failure.
  */
-
 int set_pwm_period_register(int module_number, int value)
 {
 	if (value > PERIOD_REGISTER_MAX) {
@@ -62,7 +61,6 @@ int set_pwm_period_register(int module_number, int value)
  *            value - value to be set between 0x0000 to 0xffff.
  * @param[Out] returns 1 on success, 0 on failure.
  */
-
 int set_pwm_duty_register(int module_number, int value)
 {
 	volatile short* duty_value;
@@ -87,7 +85,6 @@ int set_pwm_duty_register(int module_number, int value)
  *            value - value to be set between 0x0000 to 0xff.
  * @param[Out] returns 1 on success, 0 on failure.
  */
-
 int set_pwm_control_register(int module_number, int value)
 {
 	volatile char* control_value;
@@ -111,7 +108,6 @@ int set_pwm_control_register(int module_number, int value)
  * @param[in] module_number- specifies the pwm module to be selected
  * @param[Out] returns 1 if running in continuous mode, 0 if not.
  */
-
 int pwm_check_continuous_mode(int module_number)
 {
 	volatile char* control_value;
@@ -131,7 +127,6 @@ int pwm_check_continuous_mode(int module_number)
  *            value - value to be set between 0x0000 to 0xffff.
  * @param[Out] returns 1 on success, 0 on failure.
  */
-
 int set_pwm_clock_register(int module_number, int value)
 {
 	volatile short* clock_value;
@@ -153,7 +148,6 @@ int set_pwm_clock_register(int module_number, int value)
  * @param[in] module_number- specifies the pwm module to be selected
  * @param[Out] returns nothing.
  */
-
 void pwm_clear_registers(int module_number)
 {
 	set_pwm_period_register(module_number, 0);
@@ -170,7 +164,6 @@ void pwm_clear_registers(int module_number)
  * @param[in] takes no input
  * @param[Out] returns nothing.
  */
-
 void pwm_init()
 {
 	int i;
@@ -191,7 +184,6 @@ void pwm_init()
  *                2-Timer Mode run continuously.
  * @param[Out] returns value to be set in the control register.
  */
-
 int configure_control_register_mode(int mode)
 {
 	int value = 0x0;
@@ -228,7 +220,6 @@ int configure_control_register_mode(int mode)
  *                  2-Timer Mode run contin
  * @param[Out] returns nothing.
  */
-
 void pwm_start(int module_number, int mode)
 {
 	int control = configure_control_register_mode(mode);
@@ -253,7 +244,6 @@ void pwm_start(int module_number, int mode)
  *                  false or 0 - Internal Clock
  * @param[Out] returns nothing.
  */
-
 void pwm_use_external_clock(int module_number, bool value)
 {
 	unsigned char* control_value;
@@ -271,7 +261,6 @@ void pwm_use_external_clock(int module_number, bool value)
             clock_divisor-  value of clock divisor to be used to divide base clock speed of 50MHz.
  * @param[Out] returns nothing.
  */
-
 void pwm_set_clock(int module_number, int clock_divisor)
 {
 	if (set_pwm_clock_register(module_number, clock_divisor) == 0)
@@ -287,7 +276,6 @@ void pwm_set_clock(int module_number, int clock_divisor)
  *            clock_divisor-  value of duty cycles to be used to decide how many period cycles the pwm signal is set to 1.
  * @param[Out] returns nothing.
  */
-
 void pwm_set_duty_cycle(int module_number, int duty)
 {
 	if (set_pwm_duty_register(module_number, duty) == 0) {
@@ -302,7 +290,6 @@ void pwm_set_duty_cycle(int module_number, int duty)
  *            clock_divisor-  value of period cycles which is used to further divide the frequency into fixed period cycles.
  * @param[Out] returns nothing.
  */
-
 void pwm_set_periodic_cycle(int module_number, int period)
 {
 	if(set_pwm_period_register(module_number, period) == 0) {
@@ -320,7 +307,6 @@ void pwm_set_periodic_cycle(int module_number, int period)
  *              external_clock   - value of external clock selector. It specifies if external clock is to be used.
  * @param[Out] returns nothing.
  */
-
 void pwm_configure(int module_number,int clock_divisor, int period, int duty, bool external_clock)
 {
 	pwm_set_periodic_cycle(module_number, period);

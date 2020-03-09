@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  plic_driver.c
- * Brief Description of file            :  source file for plic.
- * Name of Author    	                :  Sathya Narayanan N
- * Email ID                             :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: plic_driver.c
+ * Brief Description of file    : source file for plic.
+ * Name of Author    	        : Sathya Narayanan N
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -34,18 +34,13 @@
 
 interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
 
-/** @fn interrupt_complete();
+/** @fn interrupt_complete
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] unsigned int
- * @param[Out] none
+ * @param[Out] No output parameter
  */
-
 void interrupt_complete(unsigned int interrupt_id)
 {
 	log_trace("\ninterrupt_complete entered\n");
@@ -70,18 +65,13 @@ void interrupt_complete(unsigned int interrupt_id)
 	log_trace("interrupt_complete exited\n");
 }
 
-/** @fn  interrupt_claim_request();
+/** @fn  interrupt_claim_request
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] no input parameters
  * @param[Out] unsigned int
  */
-
 unsigned int interrupt_claim_request()
 {
 	unsigned int *interrupt_claim_address = NULL;
@@ -108,18 +98,13 @@ unsigned int interrupt_claim_request()
 	return interrupt_id;
 }
 
-/** @fn  mach_plic_handler();
+/** @fn mach_plic_handler
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] unsigned int ptr
  * @param[Out] no output parameters
  */
-
 void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
 {
 	unsigned int  interrupt_id;
@@ -161,14 +146,10 @@ void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
 	log_trace("\nmach_plic_handler exited\n");
 }
 
-/** @fn  int isr_default();
+/** @fn  int isr_default
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] unsigned int
  * @param[Out] unsigned int
  */
@@ -196,18 +177,13 @@ unsigned int isr_default(unsigned int interrupt_id)
 	return 0;
 }
 
-/** @fn interrupt_enable();
+/** @fn interrupt_enable
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] unsigned int
  * @param[Out] no ouput parameters
  */
-
 void interrupt_enable(unsigned int interrupt_id)
 {
 	uint8_t *interrupt_enable_addr;
@@ -242,18 +218,13 @@ void interrupt_enable(unsigned int interrupt_id)
 	log_trace("\ninterrupt_enable exited \n");
 }
 
-/** @fn interrupt_disable();
+/** @fn interrupt_disable
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
-
 void interrupt_disable(unsigned int interrupt_id)
 {
 	uint8_t *interrupt_disable_addr = 0;
@@ -291,17 +262,13 @@ void interrupt_disable(unsigned int interrupt_id)
 	log_trace("interrupt_disable exited\n");
 }
 
-/** @fn set_interrupt_threshold()
+/** @fn set_interrupt_threshold
  * @brief set priority threshold for all interrupts
- *
  * @details
- *
  * @warning
- *
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
-
 void set_interrupt_threshold(unsigned int priority_value)
 {
 	log_trace("\nset interrupt_threshold entered\n");
@@ -318,18 +285,13 @@ void set_interrupt_threshold(unsigned int priority_value)
 	log_trace("set interrupt_threshold exited\n");
 }
 
-/** @fn set_interrupt_priority();
+/** @fn set_interrupt_priority
  * @brief set priority for an interrupt source
- *
  * @details 
- * 
- *
  * @warning 
- *
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
-
 void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
 {
 	log_trace("\n set interrupt priority entered %x\n", priority_value);
@@ -357,6 +319,13 @@ void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
 	log_trace("set interrupt priority exited\n");
 }
 
+/** @fn configure_interrupt_pin
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void configure_interrupt_pin(unsigned int id)
 {
 	log_trace("\nconfigure interrupt pin entered\n");
@@ -383,18 +352,13 @@ void configure_interrupt_pin(unsigned int id)
 	log_trace("configure interrupt pin exited\n");
 }
 
-/** @fn plic_init();
- * @brief 
- *
+/** @fn plic_init
+ * @brief
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] no input parameters
  * @param[Out] no output parameters
  */
-
 void plic_init()
 {
 	unsigned int int_id = 0;
@@ -465,17 +429,12 @@ void plic_init()
 
 /** @fn configure_interrupt 
  * @brief configure the interrupt pin and enable bit
- *
  * @details 
- *  
- *
  * @warning Here it is assumed, to have a one to one mapping
  *          between interrupt enable bit and interrupt pin
- *
  * @param[in] 
  * @param[Out] 
  */
-
 void configure_interrupt(unsigned int int_id)
 {
 	log_trace("\nconfigure_interrupt entered \n");

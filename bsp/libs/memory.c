@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  btnled.c
- * Created date			        :  26.02.2019
- * Brief Description of file             :  Controls the led operation with help of button,gpio based.
- * Name of Author    	                :  Sathya Narayanan N & Raghav
- * Email ID                              :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: memory.c
+ * Created date			        : 26.02.2019
+ * Name of Author    	        : Sathya Narayanan N 
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -23,18 +22,13 @@
 
  ***************************************************************************/
 
-/** @fn 
+/** @fn dump_word_memory
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
 	unsigned int i=0;
@@ -49,18 +43,13 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
 	}
 }
 
-/** @fn 
+/** @fn dump_byte_memory
  * @brief 
- *
  * @details 
- *  
- *
  * @warning 
- *
  * @param[in] 
  * @param[Out] 
  */
-
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {
 	unsigned int i=0;

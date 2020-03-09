@@ -2,7 +2,7 @@
  * Project           	        		:  shakti devt board
  * Name of the file	     	         	:  qspi_micron.c
  * Brief Description of file            :  Driver file  
- * Name of Author    	                :  Vishvesh
+ * Name of Author    	                :  visvesh
  * Email ID                             :  
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -45,36 +45,85 @@ int* lprt     =      (const int*) LPRT;
 int* startmm  =      (const int*) STARTMM;
 int* endmm    =      (const int*) ENDMM;
 
+/** @fn set_qspi_shakti32
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void set_qspi_shakti32(int* addr, int val)
 {
     *addr = val;
 }
 
+/** @fn set_qspi_shakti16
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void set_qspi_shakti16(int16_t* addr, int16_t val)
 {
     *addr = val;
 }
 
+/** @fn set_qspi_shakti8
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void set_qspi_shakti8(char* addr, char val)
 {
     *addr= val;
 }
 
+/** @fn get_qspi_shakti
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int get_qspi_shakti(int* addr)
 {
  return *addr;
 }
 
+/** @fn qspi_init
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode){
     int int_vector = enable_interrupts? (CR_TOIE|CR_SMIE|CR_FTIE|CR_TCIE|CR_TEIE) : 0; 
     set_qspi_shakti32(dcr,(DCR_FSIZE(fsize)|DCR_CSHT(csht)|DCR_CKMODE(ck_mode))); 
     set_qspi_shakti32(cr,(CR_PRESCALER(prescaler)|int_vector|CR_FTHRES(fthreshold)|CR_EN));
 }
 
+/** @fn reset_interrupt_flags
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void reset_interrupt_flags(){
     set_qspi_shakti32(fcr,(FCR_CTOF|FCR_CSMF|FCR_CTCF|FCR_CTEF)); //Resetting all the flags
 }
 
+/** @fn wait_for_tcf
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int wait_for_tcf(int status){
     int timeout = DEF_TIMEOUT; 
 
@@ -93,6 +142,14 @@ int wait_for_tcf(int status){
     }
     return 0;
 }
+
+/** @fn check_fail_bit
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int check_fail_bit(){
   if(fail_bit){
         fail_bit = 0;
@@ -104,6 +161,13 @@ int check_fail_bit(){
     }
 }
 
+/** @fn pageProgramSingleSPI
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address){
     if(micron_write_enable(status)){
         printf("Panic: Write Enable Command Failed to execute");
@@ -130,6 +194,13 @@ int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int add
     return wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
 }
 
+/** @fn pageProgramQuadSPI
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address){
     if(micron_write_enable(status)){
         printf("Panic: Write Enable Command Failed to execute");
@@ -150,6 +221,14 @@ int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int addre
     reset_interrupt_flags();
     return wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
 }
+
+/** @fn flashIdentificationDevice
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashIdentificationDevice(){
 	log_debug("\tReading the ID register and discovering the Flash Device\n");
 	set_qspi_shakti32(dlr,4);
@@ -170,6 +249,13 @@ int flashIdentificationDevice(){
     }
 }
 
+/** @fn flashMemInit
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashMemInit(){   //Supposedly a set of routines to check if the memory/interface or whatever is proper
 	int ret = flashIdentificationDevice();
 	if(ret==-1){
@@ -181,6 +267,13 @@ int flashMemInit(){   //Supposedly a set of routines to check if the memory/inte
 	//to fill in code
 }
 
+/** @fn flashReadstatusRegister
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashReadStatusRegister(){
 //    printf("\tReading the Status bits of the Flash\n");
     set_qspi_shakti32(dlr,4);
@@ -201,10 +294,24 @@ int flashReadStatusRegister(){
     	return value;
 }
 
+/** @fn flashReadFlagRegister
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashReadFlagRegister(){
 	return 0;
 }
 
+/** @fn flashWriteEnable
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashWriteEnable(){
     printf("\tWrite Enable\n");
     set_qspi_shakti32(ccr,(CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x06)));
@@ -213,6 +320,14 @@ int flashWriteEnable(){
     return ret; 
 }
 
+
+/** @fn flashEnable4ByteAddressingMode
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashEnable4ByteAddressingMode(){  //Enable 4-byte addressing Mode and read the status to verify that it has happened correctly
 
     if(flashWriteEnable()){
@@ -235,7 +350,13 @@ int flashEnable4ByteAddressingMode(){  //Enable 4-byte addressing Mode and read 
         printf("\t 4-byte Addressing mode not Enabled\n");
 }
 
-
+/** @fn flashReadSingleSPI
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
     set_qspi_shakti32(dlr,data_words);
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DCYC(dummy_cycles)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_ADSIZE(adsize)|CCR_INSTRUCTION(instruction)));
@@ -253,6 +374,13 @@ int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int 
     return value;
 }
 
+/** @fn flashReadDualSPI
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashReadDualSPI(int address, int data_length){
     set_qspi_shakti32(dlr,data_length); //DLR
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBB)));
@@ -271,7 +399,13 @@ int flashReadDualSPI(int address, int data_length){
     return value;
 }
 
-
+/** @fn flashReadQuadSPI
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
      set_qspi_shakti32(dlr,data_words);
      set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(QUAD)|CCR_DCYC(dummy_cycles)|CCR_ADSIZE(adsize)|CCR_ADMODE(QUAD)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(instruction)));
@@ -291,6 +425,13 @@ int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int da
      return value_1;
  }
 
+/** @fn flashSingleSPIXip 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashSingleSPIXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(7)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0C)));
     set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0x00)|DCR_CKMODE(1)));
@@ -309,6 +450,13 @@ int flashSingleSPIXip(int addr, int* dest_addr){
 	return 0;
 }
 
+/** @fn flashSingleSPIDDRXip 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashSingleSPIDDRXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(15)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0E)));
     set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0x00)|DCR_CKMODE(1)));
@@ -326,6 +474,13 @@ int flashSingleSPIDDRXip(int addr, int* dest_addr){
 	return 0;
 }
 
+/** @fn flashDualSPIXip 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashDualSPIXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBB)));
     set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1)));
@@ -344,6 +499,13 @@ int flashDualSPIXip(int addr, int* dest_addr){
 	return 0;
 }
 
+/** @fn flashDualSPIDDRXip
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashDualSPIDDRXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(6)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)));
     set_qspi_shakti32(dcr,(DCR_FSIZE(27)|DCR_MODE_BYTE(0xA0)|DCR_CKMODE(1)));
@@ -361,6 +523,13 @@ int flashDualSPIDDRXip(int addr, int* dest_addr){
 	return 0;
 }
 
+/** @fn flashQuadSPIXip
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashQuadSPIXip(int addr, int* dest_addr){
     if(flashWriteVolatileConfigReg(0x40404040)){
         printf("\t Volatile Configuration Register not Set -- Diagnose\n");
@@ -385,6 +554,13 @@ int flashQuadSPIXip(int addr, int* dest_addr){
 	return 0;
 }
 
+/** @fn flashQuadSPIDDRXip 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashQuadSPIDDRXip(int addr, int* dest_addr){
     if(flashWriteVolatileConfigReg(0x40404040)){
         printf("\t Volatile Configuration Register not Set -- Diagnose\n");
@@ -409,8 +585,13 @@ int flashQuadSPIDDRXip(int addr, int* dest_addr){
 	return 0;
 }
 
-
-
+/** @fn flashWriteVolatileConfigReg 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flashWriteVolatileConfigReg(int value){
     printf("\t Setting Volatile Configuration Register with the Value: %08x\n",value);
 	if(micron_write_enable(status)){
@@ -431,6 +612,13 @@ int flashWriteVolatileConfigReg(int value){
     return ret;
 }
 
+/** @fn flash_Write_disable
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int flash_Write_disable(){
     printf("\tWrite disable\n");
     set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x04)));
@@ -439,8 +627,14 @@ int flash_Write_disable(){
 	reset_interrupt_flags();
 	return wait_for_wip();
 }
-	
 
+/** @fn eraseSector 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int eraseSector(int command, int address){
     if(micron_write_enable(status)){
         printf("Panic: Write Enable Command Failed to execute");
@@ -455,7 +649,13 @@ int eraseSector(int command, int address){
     return wait_for_wip(); //For sector erase maybe estat should be checked
 }
 
-
+/** @fn wait_for_wip
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int wait_for_wip(){
     int status1;
     do{
@@ -473,8 +673,13 @@ int wait_for_wip(){
     return 0;
 }	
 
-
-
+/** @fn micron_write_enable
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int micron_write_enable(int status){
 //    printf("\tWrite Enable\n");
     set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x06)));
@@ -483,6 +688,13 @@ int micron_write_enable(int status){
     return ret;
 }
 
+/** @fn micron_volatile_write_enable 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int micron_volatile_write_enable(int status){
     printf("\tVolatile Write Enable\n");
     set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x50)));
@@ -491,6 +703,13 @@ int micron_volatile_write_enable(int status){
     return ret;
 }
 
+/** @fn micron_enable_4byte_addressing 
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int micron_enable_4byte_addressing(int status){
     printf("\t Enable 4 byte address \n");
     set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xB7)));
@@ -499,6 +718,13 @@ int micron_enable_4byte_addressing(int status){
     return ret;
 }
 
+/** @fn micron_configure_xip_volatile
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int micron_configure_xip_volatile(int status, int value){
     log_debug("\tWrite Volatile Configuration Register\n");
     set_qspi_shakti32(dlr,DL(1));
@@ -511,6 +737,13 @@ int micron_configure_xip_volatile(int status, int value){
     return ret;
 }
 
+/** @fn micron_disable_xip_volatile
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int micron_disable_xip_volatile(int status, int value){
     log_debug("\tWrite Volatile Configuration Register to exit XIP\n");
     set_qspi_shakti32(cr,(CR_PRESCALER(0x3)|CR_TOIE|CR_TCIE|CR_TEIE|CR_SMIE|CR_FTIE|CR_ABORT|CR_EN));
@@ -526,6 +759,13 @@ int micron_disable_xip_volatile(int status, int value){
     return ret;
 }
 
+/** @fn micron_read_id_cmd
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int micron_read_id_cmd(int status, int value){
     log_debug("\tRead ID Command to see if the Protocol is Proper\n");
     set_qspi_shakti32(dlr,4);
@@ -536,6 +776,13 @@ int micron_read_id_cmd(int status, int value){
     return ret;
 }
 
+/** @fn micron_read_configuration_register
+ * @brief 
+ * @details
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int micron_read_configuration_register(int status, int value){
     printf("\tRead ID Command to see if the Protocol is Proper\n");
     set_qspi_shakti32(dlr,4);

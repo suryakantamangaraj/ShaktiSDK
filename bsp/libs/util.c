@@ -1,50 +1,45 @@
 /*******************************************************************************
+ * Project               	   : shakti devt board
+ * Name of the file	           : util.c
+ * Brief Description of file   : src file for util
+ * Name of Author    	       : Sathya Narayanan N
+ * Email ID                    : sathya281@gmail.com
 
-utll.c - src file for util
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
-Created by Sathya Narayanan N
-Email id: sathya281@gmail.com
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *********************************************************************************/
 
 /** @fn  waitfor
- * @brief stall the process fro given time
- * @details 
- * @warning None
+ * @brief stall the process fro given time 
+ * @warning No warning
  * @param[in] unsigned int
- * @param[Out] -
+ * @param[Out] No output parameter
  */
-
 void waitfor(unsigned int secs) 
 {
 	unsigned int time = 0;
 	while (time++ < secs);
 }
 
-
 /** @fn delay
- * @brief   sleeps for number seconds
- * @details 
+ * @brief  sleeps for number seconds 
  * @warning 
  * @param[in] number of seconds 
  * @param[Out] void
  */
-
 void delay(unsigned long seconds)
 {
     unsigned long cntr1 = seconds *1000;
@@ -55,7 +50,6 @@ void delay(unsigned long seconds)
     }
 }
 
-
 /** @fn pow_10
  * @brief 
  * @details 
@@ -63,7 +57,6 @@ void delay(unsigned long seconds)
  * @param[in] 
  * @param[Out] 
  */
-
 float pow_10(unsigned int y)
 {
 	unsigned int x;
@@ -84,7 +77,6 @@ float pow_10(unsigned int y)
  * @param[in] 
  * @param[Out] 
  */
-
 void reverse(char *str, int len) 
 { 
   int i=0, j=len-1, temp; 
@@ -97,14 +89,13 @@ void reverse(char *str, int len)
   } 
 } 
 
-/** @fn inttoStr 
+/** @fn intToStr 
  * @brief 
  * @details 
  * @warning 
  * @param[in] 
  * @param[Out] 
  */
-
 int intToStr(int x, char str[], int d) 
 { 
   int i = 0; 
@@ -127,11 +118,10 @@ int intToStr(int x, char str[], int d)
  * @details Split floating number into fpart and ipart
  *          Finally merge it into one float number
  * @param[in] floating point number - n
- *		float in string - res
- *		precision - afterpoint
+ *		      float in string - res
+ *		      precision - afterpoint
  * @param[Out] 
  */
-
 void ftoa(float n, char *res, int afterpoint) 
 { 
   int i=0;
@@ -200,7 +190,6 @@ void ftoa(float n, char *res, int afterpoint)
  * @param[in] 
  * @param[Out] 
  */
-
 void delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
     unsigned long tmpCntr = cntr2;
@@ -218,7 +207,6 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
  * @param[in] int*
  * @param[Out] int
  */
-
 long int read_word(int *addr)
 {
 //	log_info("addr = %x data = %x\n", addr, *addr);
@@ -232,7 +220,6 @@ long int read_word(int *addr)
  * @param[in] int*
  * @param[Out] int*
  */
-
 void write_word(int *addr, unsigned long val)
 {
 	*addr = val;

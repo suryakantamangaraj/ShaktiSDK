@@ -1,30 +1,30 @@
-/*
-    uart.c - src  file for uart
+/****************************************************************************
+ * Project                               : shakti devt board
+ * Name of the file                      : uart.c
+ * Brief Description of file             : src  file for uart
+ * Name of Author                        : Niketan Shahapur
+ * Email ID                              : <niketanshahpur@gmail.com> 
+    
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
-    Created by Niketan Shahapur <niketanshahpur@gmail.com>
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+*****************************************************************************/
 
 #include "uart.h"
 
 #include "gpio.h"
-
-
-
 
 uart_struct *uart_instance[MAX_UART_COUNT];
 
@@ -33,8 +33,6 @@ uart_struct *uart_instance[MAX_UART_COUNT];
 #define RTS GPIO4
 #define USE_INTERRUPT 1
 #define UART_DRIVERS 1
-
-
 
 unsigned char uart0_complete = 0;
 unsigned char uart1_complete = 0;
@@ -52,7 +50,7 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
 uart_struct *uart_instance[MAX_UART_COUNT];
 
 /**
- * @fn init_uart()
+ * @fn init_uart
  * @brief 
  * @details 
  * @warning 
@@ -384,7 +382,6 @@ unsigned char uart2_isr()
 
 #else
 
-
 #define UART1_BASE_ADDRESS 0x11300
 #define BASE_ADDR ((volatile unsigned int *) UART1_BASE_ADDRESS) /* 32 bits */
 #define STATUS_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0xc)) /* 8 bits */
@@ -397,7 +394,7 @@ unsigned char uart2_isr()
  * @brief 
  * @details 
  * @warning 
- * @param[in] none
+ * @param[in] no input parameter
  * @param[Out] char
  */
  

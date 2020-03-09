@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           		:  shakti devt board
- * Name of the file	     	:  log.c
- * Created date			:  
- * Brief Description of file    :   print control for all operation
- * Name of Author    	        :  Sathya Narayanan N & Abhinav ramnath
- * Email ID                     :  sathya281@gmail.com
+ * Project           		    : shakti devt board
+ * Name of the file	     	    : log.c  
+ * Brief Description of file    : print control for all operation
+ * Name of Author    	        : Sathya Narayanan N & Abhinav ramnath
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -30,7 +29,7 @@
 #define LOG_LEVEL 3 
 #endif
 
-/** @fn void log_trace(const char*fmt, ...);
+/** @fn log_trace
  * @brief Function to print trace logs
  * @details This function print trace logs if the LOG_LEVEL allows trace logs
  * @param[in] printf formatted arguments with format specifiers
@@ -48,7 +47,7 @@ void log_trace(const char* fmt, ...)
 	}
 }
 
-/** @fn void log_info(const char*fmt, ...);
+/** @fn log_info
  * @brief Function to print info logs
  * @details This function print info logs if the LOG_LEVEL allows info logs
  * @param[in] printf formatted arguments with format specifiers
@@ -66,7 +65,7 @@ void log_info(const char* fmt, ...)
 	}
 }
 
-/** @fn void log_debug(const char*fmt, ...);
+/** @fn log_debug
  * @brief Function to print debug logs
  * @details This function print debug logs if the LOG_LEVEL allows debug logs
  * @param[in] printf formatted arguments with format specifiers
@@ -84,7 +83,7 @@ void log_debug(const char* fmt, ...)
 	}
 }
 
-/** @fn void log_warn(const char*fmt, ...);
+/** @fn log_warn
  * @brief Function to print warn logs
  * @details This function print trace warn if the LOG_LEVEL allows warn logs
  * @param[in] printf formatted arguments with format specifiers
@@ -102,7 +101,7 @@ void log_warn(const char* fmt, ...)
 	}
 }
 
-/** @fn void log_error(const char*fmt, ...);
+/** @fn log_error
  * @brief Function to print error logs
  * @details This function print error logs if the LOG_LEVEL allows error logs
  * @param[in] printf formatted arguments with format specifiers
@@ -120,7 +119,7 @@ void log_error(const char* fmt, ...)
 	}
 }
 
-/** @fn void log_fatal(const char*fmt, ...);
+/** @fn log_fatal
  * @brief Function to print fatal logs
  * @details This function print fatal logs if the LOG_LEVEL allows fatal logs
  * @param[in] printf formatted arguments with format specifiers

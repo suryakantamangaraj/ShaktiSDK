@@ -1,10 +1,10 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  switch_driver.c
- * Created date			        :  22.08.2019
- * Brief Description of file            :  Reads onboard switch values from gpio pins.
- * Name of Author    	                :  Madan Kumar S
- * Email ID                             :  kumarmadan96@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: switch_driver.c
+ * Created date			        : 22.08.2019
+ * Brief Description of file    : Reads onboard switch values from gpio pins.
+ * Name of Author    	        : Madan Kumar S
+ * Email ID                     : kumarmadan96@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -29,13 +29,19 @@
 #include "gpio.h"
 #include "switch_driver.h"
 
+/** @fn delay_loop
+ * @brief Maintains the required delay to perform an operation
+ * @warning No warning
+ * @param[in] Delay  Required(ms)
+ * @param[Out] No output parameter
+ */
 extern void delay_loop(unsigned long , unsigned long );
 
 /** @fn static void configure_switch()
  * @brief Function for configure Individual Switch pins as input.
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  each SW as input pin.
- * @warning Nil.
+ * @warning No warning
  * @param[in] Pin that needs to be configured as SW.
  * @param[Out] No output parameters.
  */
@@ -50,7 +56,7 @@ void configure_switch(unsigned long pinCntrl)
  * @brief Function for configure All SWs as input.
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  *          all SWs as input pin.
- * @warning Nil.
+ * @warning No warning
  * @param[in]
  * @param[Out] No output parameters.
  */
