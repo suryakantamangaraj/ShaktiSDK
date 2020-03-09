@@ -26,13 +26,13 @@
 #include "log.h"
 #include "defines.h"
 
-uint64_t*  mtime   = 0x0200bff8;
+uint64_t* mtime    = 0x0200bff8;
 uint64_t* mtimecmp = 0x02004000;
 
 /** @fn mtime_low
- * @brief 
- * @details 
- * @warning 
+ * @brief return the lower 32bit of mtime.
+ * @details return the lower half of mtime. And this is needed mostly in dealing mtime in 32 bit machines.
+ * @warning none
  * @param[in] No input parameter
  * @param[Out] long
  */
@@ -46,9 +46,9 @@ Get each 32 bit and append for full timer value
 */
 
 /** @fn  mtime_high
- * @brief 
- * @details 
- * @warning 
+ * @brief return the upper 32 bit of mtime
+ * @details return the upper 32 bit of mtime register. This is very useful incase of 32 bit core. Incase of 64 bit core this has to be appended with lower 32 bits adn sent.
+ * @warning none
  * @param[in] No input parameter
  * @param[Out] unsigned 32bit int
  */
@@ -58,8 +58,8 @@ static uint32_t mtime_high(void)
 }
 
 /** @fn  get_timer_value
- * @brief 
- * @details 
+ * @brief return the mtime value for a 32 bit or 64 bit machine
+ * @details return the mtime value based on the __riscv_xlen. Incase of 64 bit, this joins the upper and lower 32 bits of mtime and return
  * @warning 
  * @param[in] No input parameter
  * @param[Out] unsigned 64bit int
@@ -72,15 +72,14 @@ uint64_t get_timer_value()
 #else
   return mtime_low();
 #endif
-
 }
 
 /** @fn configure_counter
- * @brief 
- * @details 
- * @warning 
- * @param[in] 
- * @param[Out] 
+ * @brief sets up the timer
+ * @details sets the mtimecmp to current mtime + delta
+ * @warning none
+ * @param[in] delta value after which interrupt happens
+ * @param[Out] none
  */
 void configure_counter( uint64_t value)
 {
@@ -90,9 +89,9 @@ void configure_counter( uint64_t value)
 }
 
 /** @fn  mach_clint_handler
- * @brief
- * @details
- * @warning
+ * @brief handler for machine timer interrupt
+ * @details handler for machine timer interrupt. This handles the timer interrupt and sets mtimecmp to clear timer interrupt.
+ * @warning none
  * @param[in] unsigned int ptr
  * @param[Out] no output parameters
  */
@@ -102,14 +101,14 @@ void mach_clint_handler(uintptr_t int_id, uintptr_t epc)
 
 	log_trace("\nmach_clint_handler entered\n");
 
-	log_info("mtimecmp value = %x\n", *mtimecmp);
-	log_info("mtime value = %x\n", *mtime);
-
-	*mtimecmp = (uint64_t) -1;
+	log_debug("mtimecmp value = %x\n", *mtimecmp);
+	log_debug("mtime value = %x\n", *mtime);
+  printf("Timer interrupt handled\n");
+	
+  *mtimecmp = (uint64_t) -1;
 
 	log_info("mtimecmp value = %x\n", *mtimecmp);
 	log_info("mtime value = %x\n", *((uint32_t *)(0x0200bffc)));
 
 	log_trace("mach_clint_handler exited\n");
 }
-
