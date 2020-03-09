@@ -96,12 +96,6 @@ typedef void (*plic_fptr_t) (unsigned int);
 plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
 /*
-   Global variable declaration
- */
-
-//extern interrupt_data_t *hart0_interrupt_matrix;
-
-/*
    Function prototypes
  */
 
