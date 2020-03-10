@@ -1,11 +1,8 @@
 ## Guide
 
-  * [SHATI-SDK User manual](#information)
-  * [PLIC user manual](#setting-up-the-shakti-sdk)
-  * [Boot user manual](#contents-of-shakti-sdk)
-  * [Compiler user manual](#developing-applications)
-  * [Dynamic memory allocation manual](#logging-issue)
-  * [Public release](#public-release)
+  * [SHATI-SDK User manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/user_manual.pdf)
+  * [PLIC user manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/plic_user_manual.pdf)
+  * [Boot user manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/boot_manual.pdf)
   
 ## Logging Issue 
 
