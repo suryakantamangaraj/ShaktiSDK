@@ -2,7 +2,7 @@
 
   * [SHATI-SDK User manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/user_manual.pdf)
   * [PLIC - user manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/plic_user_manual.pdf)
-  * [Boot - user manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/boot_manual.pdf)
+  * [Boot - manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/boot_manual.pdf)
   * [Public release](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/inaug1.jpg)
   
 ## Logging Issue 
