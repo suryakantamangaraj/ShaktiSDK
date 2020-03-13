@@ -3,7 +3,7 @@
   * [SHATI-SDK User manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/user_manual.pdf)
   * [PLIC - user manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/plic_user_manual.pdf)
   * [Boot - user manual](https://gitlab.com/shaktiproject/software/shakti-sdk/-/blob/master/doc/boot_manual.pdf)
-  * [Public release](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/raw/master/doc/images/inaug1.jpg)
+  * [Public release](https://gitlab.com/shaktiproject/software/shakti-sdk/raw/master/doc/images/inaug1.jpg)
   
 ## Logging Issue 
 
@@ -17,4 +17,4 @@ Please follow the below steps to create an issue.
 - Click on 'choose template', a list of available templates will be displayed, Select template "Bug".
 - Once the template is selected, Please fill all the fields in the description textbox.
 
-**Note**: Check [`docs`](https://gitlab.com/shaktiproject/software/shakti-sdk-dev/tree/master/doc) for further information and check [Logging Issue](#logging-issue) section for any clarification.
+**Note**: Check [`docs`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/doc) for further information and check [Logging Issue](#logging-issue) section for any clarification.
