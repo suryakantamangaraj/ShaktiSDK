@@ -16,5 +16,3 @@ Please follow the below steps to create an issue.
 - After clicking on New Issue you will get an option to select a template.
 - Click on 'choose template', a list of available templates will be displayed, Select template "Bug".
 - Once the template is selected, Please fill all the fields in the description textbox.
-
-**Note**: Check [`docs`](https://gitlab.com/shaktiproject/software/shakti-sdk/tree/master/doc) for further information and check [Logging Issue](#logging-issue) section for any clarification.
