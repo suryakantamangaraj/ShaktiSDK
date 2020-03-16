@@ -240,6 +240,9 @@ else
 ifeq ($(PROGRAM),gyro_softi2c)
 filepath := gpio_applns/gyro_softi2c
 else
+ifeq ($(PROGRAM),buttons)
+filepath := gpio_applns/buttons
+else
 ifeq ($(PROGRAM),spiwrite)
 filepath := spi_applns/spiwrite
 else
@@ -333,7 +336,7 @@ endif
 endif
 endif
 endif
-
+endif
 upload: path do
 path:
 FILEPATH:='"$(GENLIB)$(filepath)"'
