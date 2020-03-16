@@ -237,8 +237,8 @@ else
 ifeq ($(PROGRAM),malloc_test)
 filepath := malloc_test/malloc_test
 else
-ifeq ($(PROGRAM),gyro_softi2c)
-filepath := gpio_applns/gyro_softi2c
+ifeq ($(PROGRAM),gyroi2c)
+filepath := gpio_applns/gyroi2c
 else
 ifeq ($(PROGRAM),buttons)
 filepath := gpio_applns/buttons
