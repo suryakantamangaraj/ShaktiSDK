@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  plic_driver.c
- * Brief Description of file            :  source file for plic.
- * Name of Author    	                :  Sathya Narayanan N
- * Email ID                             :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: plic_driver.c
+ * Brief Description of file    : source file for plic.
+ * Name of Author    	        : Sathya Narayanan N
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -34,16 +34,12 @@
 
 interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
 
-/** @fn interrupt_complete();
- * @brief 
- *
- * @details 
- *  
- *
- * @warning 
- *
+/** @fn interrupt_complete
+ * @brief write the int_id to complete register
+ * @details Signals completion of interrupt. From s/w side the interrupt claim/complete 	                register is written with the interrupt id.
+ * @warning none
  * @param[in] unsigned int
- * @param[Out] none
+ * @param[Out] No output parameter
  */
 
 void interrupt_complete(unsigned int interrupt_id)
@@ -70,18 +66,13 @@ void interrupt_complete(unsigned int interrupt_id)
 	log_trace("interrupt_complete exited\n");
 }
 
-/** @fn  interrupt_claim_request();
- * @brief 
- *
- * @details 
- *  
- *
- * @warning 
- *
+/** @fn  interrupt_claim_request
+ * @brief know the id of the interrupt
+ * @details read the interrupt claim register to know the interrupt id of the highest priority pending interrupt 
+ * @warning none
  * @param[in] no input parameters
  * @param[Out] unsigned int
  */
-
 unsigned int interrupt_claim_request()
 {
 	unsigned int *interrupt_claim_address = NULL;
@@ -108,18 +99,13 @@ unsigned int interrupt_claim_request()
 	return interrupt_id;
 }
 
-/** @fn  mach_plic_handler();
- * @brief 
- *
- * @details 
- *  
- *
- * @warning 
- *
+/** @fn mach_plic_handler
+ * @brief handle machine mode plic interrupts
+ * @details find the int id that caused of interrupt, process it and complete the interrupt.
+ * @warning none
  * @param[in] unsigned int ptr
  * @param[Out] no output parameters
  */
-
 void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
 {
 	unsigned int  interrupt_id;
@@ -161,14 +147,10 @@ void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
 	log_trace("\nmach_plic_handler exited\n");
 }
 
-/** @fn  int isr_default();
- * @brief 
- *
- * @details 
- *  
- *
- * @warning 
- *
+/** @fn  int isr_default
+ * @brief default interrupt service routine
+ * @details Default isr. Use it when you dont know what to do with interrupts
+ * @warning none
  * @param[in] unsigned int
  * @param[Out] unsigned int
  */
@@ -196,18 +178,13 @@ unsigned int isr_default(unsigned int interrupt_id)
 	return 0;
 }
 
-/** @fn interrupt_enable();
- * @brief 
- *
- * @details 
- *  
- *
- * @warning 
- *
+/** @fn interrupt_enable
+ * @brief enable the interrupt
+ * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
+ * @warning none
  * @param[in] unsigned int
  * @param[Out] no ouput parameters
  */
-
 void interrupt_enable(unsigned int interrupt_id)
 {
 	uint8_t *interrupt_enable_addr;
@@ -242,18 +219,13 @@ void interrupt_enable(unsigned int interrupt_id)
 	log_trace("\ninterrupt_enable exited \n");
 }
 
-/** @fn interrupt_disable();
- * @brief 
- *
- * @details 
- *  
- *
- * @warning 
- *
+/** @fn interrupt_disable
+ * @brief disable an interrupt
+ * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
+ * @warning none
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
-
 void interrupt_disable(unsigned int interrupt_id)
 {
 	uint8_t *interrupt_disable_addr = 0;
@@ -291,17 +263,13 @@ void interrupt_disable(unsigned int interrupt_id)
 	log_trace("interrupt_disable exited\n");
 }
 
-/** @fn set_interrupt_threshold()
+/** @fn set_interrupt_threshold
  * @brief set priority threshold for all interrupts
- *
- * @details
- *
- * @warning
- *
+ * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is ignored.
+ * @warning none
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
-
 void set_interrupt_threshold(unsigned int priority_value)
 {
 	log_trace("\nset interrupt_threshold entered\n");
@@ -318,18 +286,13 @@ void set_interrupt_threshold(unsigned int priority_value)
 	log_trace("set interrupt_threshold exited\n");
 }
 
-/** @fn set_interrupt_priority();
+/** @fn set_interrupt_priority
  * @brief set priority for an interrupt source
- *
- * @details 
- * 
- *
- * @warning 
- *
+ * @details set priority for each interrupt. This is a 4 byte field.
+ * @warning none
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
-
 void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
 {
 	log_trace("\n set interrupt priority entered %x\n", priority_value);
@@ -357,44 +320,37 @@ void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
 	log_trace("set interrupt priority exited\n");
 }
 
+/** @fn configure_interrupt_pin
+ * @brief configure a gpio pin for each interrupt
+ * @details enable the corresponding gpio pin for a interrupt as read.
+ * @warning none
+ * @param[in] 
+ * @param[Out] 
+ */
 void configure_interrupt_pin(unsigned int id)
 {
 	log_trace("\nconfigure interrupt pin entered\n");
 
 	unsigned int read_data, pin;
 
-//	pin = id - PLIC_GPIO_OFFSET;
-//	log_info("pin = %x\n", pin);
-
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
 
 	log_debug("GPIO DIRECTION REGISTER VALUE = %x\n", read_data);
 
-//	pin = (0x1 << (pin));
-//	log_info("pin = %x\n", pin);
-
-	/*interrrupt id 10 mapped to GPIO 5*/
-
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
-//	write_word(GPIO_DIRECTION_CNTRL_REG, ((~(pin)) & read_data));
 
 	log_debug("Data written to GPIO DIRECTION CTRL REG = %x\n", read_word(GPIO_DIRECTION_CNTRL_REG));
 
 	log_trace("configure interrupt pin exited\n");
 }
 
-/** @fn plic_init();
- * @brief 
- *
- * @details 
- *  
- *
- * @warning 
- *
+/** @fn plic_init
+ * @brief intitializes the plic module
+ * @details intitializes the registers to default values. sets up the plic meta data table. assigns the plic handler to  mcause_interrupt_table.,By default interrupts are disabled.
+ * @warning none
  * @param[in] no input parameters
  * @param[Out] no output parameters
  */
-
 void plic_init()
 {
 	unsigned int int_id = 0;
@@ -465,17 +421,12 @@ void plic_init()
 
 /** @fn configure_interrupt 
  * @brief configure the interrupt pin and enable bit
- *
- * @details 
- *  
- *
+ * @details enables the interrupt and corresponding physical pin. Needs to be called in every interrupt trigger and handling flow
  * @warning Here it is assumed, to have a one to one mapping
  *          between interrupt enable bit and interrupt pin
- *
- * @param[in] 
- * @param[Out] 
+ * @param[in] interrupt id
+ * @param[Out] none
  */
-
 void configure_interrupt(unsigned int int_id)
 {
 	log_trace("\nconfigure_interrupt entered \n");
@@ -488,5 +439,3 @@ void configure_interrupt(unsigned int int_id)
 
 	log_trace("configure_interrupt exited \n");
 }
-
-

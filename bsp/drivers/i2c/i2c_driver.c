@@ -1,35 +1,32 @@
-/*
- Created by Kotteeswaran
- Email id: kottee.1@gmail.com
+/**************************************************************************
+ * Project           			: shakti devt board
+ * Name of the file	     		: i2c_driver.c
+ * Brief Description of file    : Demonstartes the working of i2c protocol.
+ * Name of Author               : Kotteeswaran
+ * Email id                     : kottee.1@gmail.com
+  
+  Copyright (C) 2019  IIT Madras. All rights reserved.
 
-   Copyright (C) 2019  IIT Madras. All rights reserved.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
-/***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  i2c_driver.c
- * Created date			        :
- * Brief Description of file     :  Demonstartes the working of i2c protocol.
- */
+***************************************************************************/
 
 /* Enable these bits only when corresponding interrupt is needed.*/
 
 #include "i2c.h"//Includes the definitions of i2c communication protocol//
 #include "log.h"
 #include "utils.h"
-
 
 /* Enable these bits only when corresponding interrupt is needed.*/
 
@@ -47,7 +44,6 @@ i2c_struct *i2c_instance[MAX_I2C_COUNT];
  * @param[in] No input parameters.
  * @param[Out] 
  */
-
 i2c_init()
 {
 	for(int i=0; i< MAX_I2C_COUNT; i++)
@@ -56,22 +52,17 @@ i2c_init()
 	}
 }
 
-/** @fn static void init_i2c(unsigned char prescale_div, unsigned char
- *             scl_div)
+/** @fn config_i2c
  * @brief This routine configures the serial clock frequency count and
  * prescaler count.
- *
  * @details There are 4 registers which are configurable. This function
  *  writes into the register based on the passed address. he serial clock count
  *  and prescalar count decides the frequency (sck) that needs to be used for
  *  the I2C serial communication. Then resets status register.
- *
  * @warning Nil.
- *
  * @param[in] prescale_div, scl_div.
  * @param[Out] No output parameters.
  */
-
 int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned char scl_div)
 {
 	unsigned char temp = 0;
@@ -150,7 +141,14 @@ int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned c
 	return 0;
 }
 
-
+/**
+ * @fn wait_till_I2C_bus_free
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
 {
 	log_debug("\tCheck for I2C Bus Busy to be free.\n");
@@ -172,6 +170,14 @@ int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
 	return 0;
 }
 
+/**
+ * @fn wait_till_txrx_operation_completes
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
 {
 
@@ -192,6 +198,14 @@ int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
 	return 0;
 }
 
+/**
+ * @fn sendbytes
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, int eni)
 {
 	int wrcount, status, timeout;
@@ -226,6 +240,14 @@ int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, i
 	return wrcount;
 }
 
+/**
+ * @fn readbytes
+ * @brief 
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
 {
 	int i, status;
@@ -269,13 +291,14 @@ int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
 	return i-1; //excluding the dummy read
 }
 
-
-/************************************************************************
- * Brief Description     : Performs the intilization of i2c slave.
- * Parameters            : slave address.
- * Return                : int.
- *************************************************************************/
-
+/**
+ * @fn i2c_send_slave_address
+ * @brief  Performs the intilization of i2c slave.
+ * @details 
+ * @warning 
+ * @param[in] slave address.
+ * @param[Out] int
+ */
 int i2c_send_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
 {
 	int timeout;
@@ -338,12 +361,14 @@ int i2c_send_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress
 	return I2C_SUCCESS;
 }
 
-/************************************************************************
- * Brief Description     : It does the reading or writing from the address specified .
- * Parameters            : starting address.
- * Return                : int.
- *************************************************************************/
-
+/**
+ * @fn i2c_write_data
+ * @brief It does the reading or writing from the address specified .
+ * @details 
+ * @warning 
+ * @param[in] starting address.
+ * @param[Out] int
+ */
 int i2c_write_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay)
 {
 	int timeout;
@@ -377,14 +402,14 @@ int i2c_write_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned 
 	return I2C_SUCCESS;
 }
 
-
-
-
-/************************************************************************
- * Brief Description     : It does the reading or writing from the address specified .
- * Parameters            : starting address.
- * Return                : int.
- *************************************************************************/
+/**
+ * @fn i2c_read_data
+ * @brief It does the reading or writing from the address specified .
+ * @details 
+ * @warning 
+ * @param[in] starting address.
+ * @param[Out] int
+ */
 //#define READ_INTERRUPT 1
 int i2c_read_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned char delay)
 {
@@ -411,12 +436,14 @@ int i2c_read_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned 
 	return I2C_SUCCESS;
 }
 
-/************************************************************************
- * Brief Description     : Performs the intilization of i2c slave.
- * Parameters            : slave address.
- * Return                : int.
- *************************************************************************/
-
+/**
+ * @fn i2c_send_interrupt_slave_address
+ * @brief  Performs the intilization of i2c slave.
+ * @details 
+ * @warning 
+ * @param[in] slave address.
+ * @param[Out] int
+ */
 int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
 {
 	int timeout;
@@ -476,8 +503,14 @@ int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char sl
 	return I2C_SUCCESS;
 }
 
-
-
+/**
+ * @fn i2c_read_interrupt_data
+ * @brief  
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned char delay, 
 		unsigned char last)
 {
@@ -523,6 +556,14 @@ int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data,
 }
 
 
+/**
+ * @fn i2c_write_interrupt_data
+ * @brief  
+ * @details 
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 int i2c_write_interrupt_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay, unsigned char last)
 {
 	int timeout;

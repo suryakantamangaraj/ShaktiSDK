@@ -1,37 +1,44 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  gpio_i2c.c
-* Created date			        :  9.07.2019
-* Brief Description of file             :  Performs the I2C operations using gpio pins.
-* Name of Author    	                :  Kotteeswaran
-* Email ID                              :  kottee.1@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: gpio_i2c.c
+ * Created date			        : 9.07.2019
+ * Brief Description of file    : Performs the I2C operations using gpio pins.
+ * Name of Author    	        : Kotteeswaran
+ * Email ID                     : kottee.1@gmail.com
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
 #include "platform.h"
 #include "gpio.h"
 #include "gpio_i2c.h"
+
+/** @fn delay_loop
+ * @brief Maintains the required delay to perform an operation
+ * @warning No warning
+ * @param[in] Delay  Required(ms)
+ * @param[Out] No output parameter
+ */
 extern void delay_loop(unsigned long , unsigned long);
 
 //If inout control = 1, output else input
-/** @fn static void SetSCLAsOutput()
+/** @fn SetSCLAsOutput
  * @brief Function for configure GPIO 0 as SCL output.
  * @details This function will be called to make the scl line (defined by I2C_SCL)
-    macro as output.
+            macro as output.
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param[in] No input parameters.
  * @param[Out] No output parameters.
@@ -99,7 +106,7 @@ static void start(unsigned char delay)
 	printf("\n\tI2C: I2C Start condition sent\n");
 }
 
-/** @fn static void stop(unsigned char delay)
+/** @fn  stop
  * @brief Sending stop condition for the I2C.
  * @details Stop condition is making SDA high when clock is high.
  * @warning This bit value can be changed as per I2C_SCL macro.
@@ -125,7 +132,7 @@ static void stop(unsigned char delay)
 
 }
 
-/** @fn static void I2cWriteByte(unsigned char i, unsigned char delay)
+/** @fn I2cWriteByte
  * @brief Writes a byte to the I2C device.
  * @details Data is put on the SDA Line bit by bit and then makes the
    SCL from low to high to write..
@@ -165,7 +172,7 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
 	}
 }
 
-/** @fn static unsigned char I2cReadByte(unsigned char delay)
+/** @fn I2cReadByte
  * @brief Reads a byte from the I2C device.
  * @details Clock line is made low to high and the slave puts the Data
    bit on the SDA line and master stores the value to form a byte.
@@ -208,7 +215,7 @@ unsigned char I2cReadByte(unsigned char delay)
 	return readData;
 }
 
-/** @fn static unsigned char ReadAckForWrite(unsigned char delay)
+/** @fn ReadAckForWrite
  * @brief After the write operation is done the slave will send Ack
    if there is slave.
  * @details Clock line is made low to high and the slave puts the Data
@@ -216,7 +223,7 @@ unsigned char I2cReadByte(unsigned char delay)
  * @warning The code will be in while loop if the slave is not
    responding.
  * @param[in] delay.
- * @param[Out] NULL.
+ * @param[Out] No output parameter
  */
 void ReadAckForWrite(unsigned char delay)
 {
@@ -240,7 +247,7 @@ void ReadAckForWrite(unsigned char delay)
 
 }
 
-/** @fn  void SendAckForRead(unsigned char delay)
+/** @fn SendAckForRead
  * @brief After the READ operation is done the master will send Ack
    to slave.
  * @details The ack is sent by setting the SDA line low and then one SCL
@@ -248,7 +255,7 @@ void ReadAckForWrite(unsigned char delay)
  * @warning The code will be in while loop if the slave is not
    responding.
  * @param[in] delay.
- * @param[Out] NULL.
+ * @param[Out] No output parameter
  */
 void SendAckForRead(unsigned char delay)
 {
@@ -272,7 +279,7 @@ void SendAckForRead(unsigned char delay)
   SetSdaDirection(GPIOD_IS_IN);
 }
 
-/** @fn void SendNackForRead(unsigned char delay)
+/** @fn SendNackForRead
  * @brief After the READ operation is done the master will send Nack
    to slave if it wants to terminates the I2C communication.
  * @details The ack is sent by setting the SDA line high and then one SCL
@@ -280,7 +287,7 @@ void SendAckForRead(unsigned char delay)
  * @warning The code will be in while loop if the slave is not
    responding.
  * @param[in] delay.
- * @param[Out] NULL.
+ * @param[Out] No output parameter.
  */
 void SendNackForRead(unsigned char delay)
  {
@@ -304,14 +311,14 @@ void SendNackForRead(unsigned char delay)
   SetSdaDirection(GPIOD_IS_IN);
  }
 
-/** @fn static void I2cInit()
+/** @fn I2cInit
  * @brief Configuring the SDA and SCL as OUTPUTS so that Start, Slave address
    ,and register address or register value that needs to be writen.
  * @details I2C master Inits makes the master ready for either read or write
    operation.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] Null.
- * @param[Out] Null.
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void I2cInit()
 {
@@ -320,7 +327,7 @@ void I2cInit()
   printf("Initialization successfully done");
 }
 
-/** @fn static void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWRCntrl)
+/** @fn I2cSendSlaveAddress
  * @brief Sends the slave address to the I2C device and check for acknowledge
    from the slave.
  * @details The master has to send the slave address along with read or write
@@ -329,7 +336,7 @@ void I2cInit()
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param[in] Slave Address.
  * @param[in] Read / Write Control (0 --> Write, 1 --> Read).
- * @param[Out] NULL.
+ * @param[Out] No output parameter
  */
 void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned char delay)
 {
@@ -355,14 +362,14 @@ void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, un
     ReadAckForWrite(delay);
 }
 
-/** @fn static void I2cWriteData(unsigned char writeData)
+/** @fn I2cWriteData
  * @brief Complete function to write a byte in to the I2C slave device.
  * @details When writing a byte, the master has to send the data first and then
    it needs to wait for acknowledge from the slave.
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param[in] : Data that needs to be written (can be either register address,
    or register value).
- * @param[Out] NULL.
+ * @param[Out] No output parameter
  */
 void I2cWriteData(unsigned char writeData, unsigned char delay)
 {
@@ -378,7 +385,7 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
   ReadAckForWrite(delay);
 }
 
-/** @fn static unsigned char I2cReadDataAck(unsigned char delay)
+/** @fn I2cReadDataAck
  * @brief Sends ack for the read byte.
  * @details Ack is sent to the slave so that it can make sure the data is read,
    by the master so that slave can send next data.
@@ -398,7 +405,7 @@ unsigned char I2cReadDataAck(unsigned char delay)
   return readData;
 }
 
-/** @fn static unsigned char I2cReadDataNack(unsigned char delay)
+/** @fn I2cReadDataNack
  * @brief Reads a byte from the I2C device.
  * @details Whenever the master wants to read register or memory from a device,
    the master can perform this action and respond with Nack to terminate the
@@ -419,7 +426,7 @@ unsigned char I2cReadDataNack(unsigned char delay)
     return readData;
 }
 
-/** @fn static void start(unsigned char delay)
+/** @fn I2cStart
  * @brief Sending start condition for the I2C.
  * @details Start condition is making SDA low when clock is high.
  * @warning This bit value can be changed as per I2C_SCL macro.
@@ -432,7 +439,7 @@ void I2cStart(unsigned char delay)
   start(delay);
 }
 
-/** @fn static void stop(unsigned char delay)
+/** @fn I2cStop
  * @brief Sending stop condition for the I2C.
  * @details Stop condition is making SDA high when clock is high.
  * @warning This bit value can be changed as per I2C_SCL macro.
@@ -450,7 +457,7 @@ void I2cStop(unsigned char delay)
  * @details 
  * @warning 
  * @param[in] slave address, register address, data to be written
- * @param[Out] NULL
+ * @param[Out] No output parameter
  */
 void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsigned char data, unsigned char delay )
 {

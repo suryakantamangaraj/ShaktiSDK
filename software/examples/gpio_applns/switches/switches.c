@@ -92,9 +92,9 @@ void main()
 
 #ifdef SW_0
 		read_data = read_word(GPIO_DATA_REG); /* Copies the GPIO_DATA_REG Register contents */
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x01000000);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		if(read_data == 0x01000000)
 			printf("\n SW0: HIGH"); 		
 		else
@@ -103,9 +103,9 @@ void main()
 
 #ifdef SW_1
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x02000000);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		if(read_data == 0x02000000)
 			printf("\n SW1: HIGH"); 		
 		else
@@ -114,9 +114,9 @@ void main()
 
 #ifdef SW_2
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = (read_data & 0x04000000);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		if(read_data == 0x04000000)
 			printf("\n SW2: HIGH"); 		
 		else
@@ -125,8 +125,8 @@ void main()
 
 #ifdef SW_3
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		if(read_data == 0x08000000)
 			printf("\n SW3: HIGH"); 		
 		else
@@ -139,9 +139,9 @@ void main()
 
 #ifdef READ_ALL_SWITCHES	
 
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 		read_data = read_word(GPIO_DATA_REG);
-		printf("\n Read Data is :0x%08x", read_data);
+		printf("\n Read Data is :0x%x", read_data);
 
 		switch(read_data)
 		{

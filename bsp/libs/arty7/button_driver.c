@@ -1,25 +1,25 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  button_driver.c
-* Created date			        :  22.08.2019
-* Brief Description of file             :  Reads onboard button values from gpio pins.
-* Name of Author    	                :  Madan Kumar S
-* Email ID                              :  kumarmadan96@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: button_driver.c
+ * Created date			        : 22.08.2019
+ * Brief Description of file    : Reads onboard button values from gpio pins.
+ * Name of Author    	        : Madan Kumar S
+ * Email ID                     : kumarmadan96@gmail.com
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+  Copyright (C) 2019  IIT Madras. All rights reserved.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
 
@@ -29,6 +29,12 @@
 #include "gpio.h"
 #include "button_driver.h"
 
+/** @fn delay_loop
+ * @brief Maintains the required delay to perform an operation
+ * @warning No warning
+ * @param[in] Delay  Required(ms)
+ * @param[Out] No output parameter
+ */
 extern void delay_loop(unsigned long , unsigned long );
 
 /*

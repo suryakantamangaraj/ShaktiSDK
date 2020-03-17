@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           			:  shakti devt board
  * Name of the file	     		:  printf.c
- * Created date			        : 
  * Brief Description of file    :  Print based command and control by uart
  * Name of Author    	        :  Sathya Narayanan N & Balaji venkat
  * Email ID                     :  sathya281@gmail.com
@@ -21,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
+***************************************************************************/
 #include <stdint.h>
 #include <stdarg.h>
 #include "utils.h"
@@ -34,7 +33,6 @@
  * @param[in]
  * @param[Out]
  */
-
 size_t strnlen(const char *s, size_t n)
 {
 	const char *p = s;
@@ -52,7 +50,6 @@ size_t strnlen(const char *s, size_t n)
  * @param[in]
  * @param[Out]
  */
-
 static inline void itoa (unsigned long long int number, unsigned base)
 {
 	unsigned int size = 0;
