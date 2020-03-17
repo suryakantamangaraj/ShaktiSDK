@@ -18,7 +18,7 @@
 
 SHELL := /bin/bash # Use bash syntax
 DC ?=
-PROGRAM ?=int
+PROGRAM ?=asm_int
 #default target board
 TARGET ?= artix7_35t
 DEBUG ?=
@@ -28,7 +28,7 @@ XLEN  ?= 32
 FLAGS ?=
 
 all: create_dir
-	make int.riscv
+	make asm_int.riscv
 
 $(PROGRAM).riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -c $(PROGRAM).S -o ./output/$(PROGRAM).o -march=$(MARCH) -mabi=$(MABI) 
