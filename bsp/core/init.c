@@ -31,9 +31,7 @@
 #include "defines.h"
 #include "uart.h"
 
-
 extern void trap_entry();
-
 extern uart_struct *uart_instance[MAX_UART_COUNT];
 
 extern char _stack_end[];
@@ -55,17 +53,14 @@ char *sbss_end=(char *)&__sbss_end;
 char *sbss_start=(char *)&__sbss_start;
 
 /** @fn section_init
- * @brief 
- * @details 
- * @warning 
- * @param[in] 
- * @param[Out] 
+ * @brief resets the different sections
+ * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
+ * @warning takes long time. so the caller is diabled as of now
+ * @param[in] none
+ * @param[Out] none
  */
 void section_init()
 {
-
-	int i;
-
 	while(bss_start<=bss_end)
 	{
 		*bss_start=0x0;
@@ -89,7 +84,6 @@ void section_init()
 		*stack_end=0x0;
 		stack_end--;
 	}
-
 }
 
 /** @fn trap_init
