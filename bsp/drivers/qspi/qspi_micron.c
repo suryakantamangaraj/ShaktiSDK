@@ -298,8 +298,8 @@ int flashReadStatusRegister(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter 
+ * @param[Out] int
  */
 int flashReadFlagRegister(){
 	return 0;
@@ -309,8 +309,8 @@ int flashReadFlagRegister(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int flashWriteEnable(){
     printf("\tWrite Enable\n");
@@ -325,8 +325,8 @@ int flashWriteEnable(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int flashEnable4ByteAddressingMode(){  //Enable 4-byte addressing Mode and read the status to verify that it has happened correctly
 
@@ -354,8 +354,8 @@ int flashEnable4ByteAddressingMode(){  //Enable 4-byte addressing Mode and read 
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
     set_qspi_shakti32(dlr,data_words);
@@ -378,8 +378,8 @@ int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int 
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashReadDualSPI(int address, int data_length){
     set_qspi_shakti32(dlr,data_length); //DLR
@@ -403,8 +403,8 @@ int flashReadDualSPI(int address, int data_length){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
      set_qspi_shakti32(dlr,data_words);
@@ -429,8 +429,8 @@ int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int da
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashSingleSPIXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(7)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0C)));
@@ -454,8 +454,8 @@ int flashSingleSPIXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashSingleSPIDDRXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(SINGLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(15)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(SINGLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x0E)));
@@ -527,8 +527,8 @@ int flashDualSPIDDRXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashQuadSPIXip(int addr, int* dest_addr){
     if(flashWriteVolatileConfigReg(0x40404040)){
@@ -558,8 +558,8 @@ int flashQuadSPIXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashQuadSPIDDRXip(int addr, int* dest_addr){
     if(flashWriteVolatileConfigReg(0x40404040)){
@@ -589,8 +589,8 @@ int flashQuadSPIDDRXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashWriteVolatileConfigReg(int value){
     printf("\t Setting Volatile Configuration Register with the Value: %08x\n",value);
@@ -616,9 +616,10 @@ int flashWriteVolatileConfigReg(int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No iput parameter
+ * @param[Out] int
  */
+ 
 int flash_Write_disable(){
     printf("\tWrite disable\n");
     set_qspi_shakti32(ccr,(CCR_ADSIZE(FOURBYTE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0x04)));
