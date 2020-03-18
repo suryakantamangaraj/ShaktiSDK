@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project                               : shakti devt board
  * Name of the file                      : spi_driver.c
- * Brief Description of file             : Driver to control the spi device.
+ * Brief Description of file             : driver file for SPI based flash W25Q32
  * Name of Author                        : Kaustubh Ghormade
  * Email ID                              : kaustubh4347@gmail.com
 

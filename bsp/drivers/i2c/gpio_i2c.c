@@ -57,7 +57,7 @@ static void SetSCLAsOutput()
  * @details This function will be called to make the scl line (defined by I2C_SCL)
    macro as output.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] No input parameters.
+ * @param[in] int.
  * @param[Out] No output parameters.
  */
 static void SetSdaDirection(int inOutCntrl)

@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           	        		:  shakti devt board
  * Name of the file	     	         	:  qspi_micron.c
- * Brief Description of file            :  Driver file  
+ * Brief Description of file            :  source file for qspi_micron  
  * Name of Author    	                :  visvesh
  * Email ID                             :  
 
@@ -49,8 +49,8 @@ int* endmm    =      (const int*) ENDMM;
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] No output parameter
  */
 void set_qspi_shakti32(int* addr, int val)
 {
@@ -62,7 +62,7 @@ void set_qspi_shakti32(int* addr, int val)
  * @details
  * @warning 
  * @param[in] 
- * @param[Out] 
+ * @param[Out] No output parameter
  */
 void set_qspi_shakti16(int16_t* addr, int16_t val)
 {
@@ -73,8 +73,8 @@ void set_qspi_shakti16(int16_t* addr, int16_t val)
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] char
+ * @param[Out] No output parameter
  */
 void set_qspi_shakti8(char* addr, char val)
 {
@@ -85,8 +85,8 @@ void set_qspi_shakti8(char* addr, char val)
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int   
+ * @param[Out] int
  */
 int get_qspi_shakti(int* addr)
 {
@@ -97,8 +97,8 @@ int get_qspi_shakti(int* addr)
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] No output parameter
  */
 void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode){
     int int_vector = enable_interrupts? (CR_TOIE|CR_SMIE|CR_FTIE|CR_TCIE|CR_TEIE) : 0; 
@@ -110,8 +110,8 @@ void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int ft
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void reset_interrupt_flags(){
     set_qspi_shakti32(fcr,(FCR_CTOF|FCR_CSMF|FCR_CTCF|FCR_CTEF)); //Resetting all the flags
@@ -121,8 +121,8 @@ void reset_interrupt_flags(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int wait_for_tcf(int status){
     int timeout = DEF_TIMEOUT; 
@@ -147,8 +147,8 @@ int wait_for_tcf(int status){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int check_fail_bit(){
   if(fail_bit){
@@ -165,8 +165,8 @@ int check_fail_bit(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address){
     if(micron_write_enable(status)){
@@ -198,8 +198,8 @@ int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int add
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address){
     if(micron_write_enable(status)){
@@ -226,8 +226,8 @@ int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int addre
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int flashIdentificationDevice(){
 	log_debug("\tReading the ID register and discovering the Flash Device\n");
@@ -253,8 +253,8 @@ int flashIdentificationDevice(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int flashMemInit(){   //Supposedly a set of routines to check if the memory/interface or whatever is proper
 	int ret = flashIdentificationDevice();
@@ -271,8 +271,8 @@ int flashMemInit(){   //Supposedly a set of routines to check if the memory/inte
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int flashReadStatusRegister(){
 //    printf("\tReading the Status bits of the Flash\n");

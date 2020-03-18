@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           	         		:  shakti devt board
  * Name of the file	     		        :  gpio_spi.c
- * Brief Description of file            :  gpio_spi.c driver file for gpio
+ * Brief Description of file            :  driver file for using gpio pins as SPI
  * Name of Author    	                :  Kottee @ aditya dubey
  * Email ID                             :  kottee.1@gmail.com
 
@@ -29,8 +29,8 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned char
+ * @param[Out] No output parameter
  */
 // at starting  edge sending
 static void writebyte(unsigned char writeData, unsigned char delay)
@@ -75,8 +75,8 @@ static void writebyte(unsigned char writeData, unsigned char delay)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned char
+ * @param[Out] unsigned char
  */
 //reading at rising edge reading 
 unsigned char readbyte(unsigned char delay)
@@ -119,8 +119,8 @@ unsigned char readbyte(unsigned char delay)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int config()
 {
