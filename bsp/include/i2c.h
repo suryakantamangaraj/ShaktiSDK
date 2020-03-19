@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *****************************************************************************/
 /**
  * @file i2c.h
@@ -36,8 +35,6 @@
 #define ETIMEDOUT -80
 #define ENXIO -82
 #define EREMOTEIO -81
-
-
 
 #define I2C_SUCCESS 0
 #define EAXI_ERROR -1
@@ -74,8 +71,6 @@
 
 #define I2C_READ 1
 #define I2C_WRITE 0
-
-
 
 /*
 `define     S2             8'h00

@@ -1,8 +1,7 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: gpio_i2c.h
- * Created date			        : 9.07.2019
- * Brief Description of file    : Header file the I2C operations using gpio pins.
+ * Brief Description of file    : Header file of the I2C operations using gpio pins.
  * Name of Author    	        : Kotteeswaran
  * Email ID                     : kottee.1@gmail.com
 
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 /**
@@ -35,7 +33,9 @@
 #include "platform.h"
 #include "gpio.h"
 
-#define I2C_SCL GPIO0
+/* This code uses GPIO pins 0 & 1 and any GPIO pin can be used or
+add a method to set the GPIO pins that are to be used  */
+#define I2C_SCL GPIO0 
 #define I2C_SDA GPIO1
 #define GPIOD_IS_IN 0
 #define GPIOD_IS_OUT 1
