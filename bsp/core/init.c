@@ -159,7 +159,7 @@ void trap_init()
  */
 void init(void)
 {
-#if defined(ARTIX7_35T) || defined(AARDONYX)
+
 	uart_init();
 	
 	log_info("init entered \n ");
@@ -175,7 +175,7 @@ void init(void)
 
 //	section_init();
 	trap_init();
-#endif
+
 	main();
 
 	log_info("init exited\n");

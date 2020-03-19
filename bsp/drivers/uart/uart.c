@@ -2,8 +2,8 @@
  * Project                               : shakti devt board
  * Name of the file                      : uart.c
  * Brief Description of file             : src  file for uart
- * Name of Author                        : Niketan Shahapur
- * Email ID                              : <niketanshahpur@gmail.com> 
+ * Name of Author                        : Kotteeswaran and Niketan Shahapur
+ * Email ID                              : <kottee.1@gmail.com>  <niketanshahpur@gmail.com> 
     
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -23,12 +23,9 @@
 *****************************************************************************/
 
 #include "uart.h"
-
 #include "gpio.h"
 
 uart_struct *uart_instance[MAX_UART_COUNT];
-
-#if defined(ARTIX7_35T) || defined(AARDONYX)
 
 #define RTS GPIO4
 #define USE_INTERRUPT 1
@@ -127,7 +124,6 @@ void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt
 {
 	uart_instance->ien = interrupt; 
 }
-
 
 #ifdef USE_RX_THRESHOLD
 /**
@@ -376,53 +372,4 @@ unsigned char uart2_isr()
 		write_uart_character(uart_instance[2], read_value);
 	}
 }
-
-
-#endif
-
-#else
-
-#define UART1_BASE_ADDRESS 0x11300
-#define BASE_ADDR ((volatile unsigned int *) UART1_BASE_ADDRESS) /* 32 bits */
-#define STATUS_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0xc)) /* 8 bits */
-#define WRITE_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x4)) /* 8 bits */
-#define READ_REG ((volatile unsigned char *)(UART1_BASE_ADDRESS + 0x8)) /* 8 bits */
-#define RECV_NOT_EMPTY 0x8
-#define TRANS_NOT_FULL 0x2
-
-/** @fn  getchar( )
- * @brief 
- * @details 
- * @warning 
- * @param[in] no input parameter
- * @param[Out] char
- */
- 
-#undef getchar
-int getchar()
-{
-  char *ch;
-	while((*STATUS_REG & RECV_NOT_EMPTY) == 0);
-  ch = READ_REG;
-  return *ch;
-}
-
-
-/** @fn  putchar(int ch)
- * @brief 
- * @details 
- * @warning 
- * @param[in] char
- * @param[Out] int
- */
-
-#undef putchar
-int putchar(int ch)
-{
-  unsigned char c = ch;
-	while((*STATUS_REG & TRANS_NOT_FULL) == 0);
-	*WRITE_REG = c;
-	return 0;
-}
-
 #endif

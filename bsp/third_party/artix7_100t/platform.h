@@ -31,7 +31,7 @@ Email id: sathya281@gmail.com
 #define CLINT_BASE 0x020000000
 #define MTIME      CLINT_BASE + 0xBFF8
 #define MTIMECMP   CLINT_BASE + 0x4000
-#define CLOCK_FREQUENCY 50000000
+#define CLOCK_FREQUENCY 20000000
 
 #define MCAUSE_INT         0x80000000
 #define MCAUSE_CAUSE       0x7FFFFFFF
@@ -73,7 +73,7 @@ Email id: sathya281@gmail.com
 #define MAX_I2C_COUNT 1
 
 /*! Programmable Logic Interrupt Interface */
-#define PLIC_BASE_ADDRESS 0x020D0000 /*! PLIC Interface Start */
+#define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
 #define PLIC_INTERRUPT_1   1
 #define PLIC_INTERRUPT_2   2
 #define PLIC_INTERRUPT_3   3
@@ -91,13 +91,11 @@ Email id: sathya281@gmail.com
 #define PLIC_INTERRUPT_15  15
 #define PLIC_INTERRUPT_16  16
 #define PLIC_INTERRUPT_26  26
-#define PLIC_INTERRUPT_25  25
-#define PLIC_INTERRUPT_27  27
 
-#define PLIC_MAX_INTERRUPT_SRC 28
+#define PLIC_MAX_INTERRUPT_SRC 26
 
 /*!General Purpose Input / Output */
-#define GPIO_START 0x02100000 //GPIO Start Address */
+#define GPIO_START 0x020D0000 //GPIO Start Address */
 #define GPIO_OFFSET 0x08 /*!Generic offset used to access GPIO registers*/
 
 /*
@@ -137,6 +135,6 @@ Email id: sathya281@gmail.com
 #define GPIO30 (1 << 30)
 #define GPIO31 (1 << 31)
 #define GPIO_COUNT  0x20
-#define PLIC_GPIO_OFFSET 0
+//#define PLIC_GPIO_OFFSET 0
 
 #endif
