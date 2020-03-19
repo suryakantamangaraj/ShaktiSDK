@@ -114,6 +114,9 @@ else
 ifeq ($(PROGRAM),hello)
 filepath := uart_applns/hello
 else
+ifeq ($(PROGRAM),asm_int)
+filepath := uart_applns/asm_int
+else
 ifeq ($(PROGRAM),csr_test)
 filepath := uart_applns/csr_test
 else
@@ -279,7 +282,9 @@ else
 ifeq ($(PROGRAM),counter)
 filepath := clint_applns/counter
 else
-	@echo "Entry for $(PROGRAM) not present"
+	echo "Entry for $(PROGRAM) not present"
+endif
+endif
 endif
 endif
 endif
@@ -336,7 +341,7 @@ endif
 endif
 endif
 endif
-endif
+
 upload: path do
 path:
 FILEPATH:='"$(GENLIB)$(filepath)"'
