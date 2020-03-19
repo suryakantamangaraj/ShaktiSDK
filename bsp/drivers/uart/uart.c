@@ -50,12 +50,12 @@ unsigned char u2_rcv_char[UARTX_BUFFER_SIZE] = {'\0'};
 uart_struct *uart_instance[MAX_UART_COUNT];
 
 /**
- * @fn init_uart
+ * @fn uart_init
  * @brief 
  * @details 
  * @warning 
  * @param[in] No input parameters.
- * @param[Out] 
+ * @param[Out] No ouput parameter 
  */
 uart_init()
 {
@@ -66,7 +66,7 @@ uart_init()
 }
 
 /**
- * @fn int getchar()
+ * @fn getchar()
  * @brief Function to read a single character from the standard input device.
  * @details This function will be called to write a single character from the stdin.
  * @warning 
@@ -81,13 +81,13 @@ int getchar()
 }
 
 /**
- * @fn int putchar(int ch)
+ * @fn int putchar
  * @brief Function to write a single character to the standard output device.
  * @details This function will be called to print a single character to the stdout by passing 
  * character as an integer.
  * @warning 
  * @param[in] character as int.
- * @param[Out] No output parameters.
+ * @param[Out] int
  */
 #undef putchar
 int putchar(int ch)
@@ -99,7 +99,7 @@ int putchar(int ch)
 }
 
 /**
- * @fn void set_baud_rate(uart_struct * UART, unsigned int baudrate)
+ * @fn set_baud_rate
  * @brief Function to initialize a specific UART with the baudrate.
  * @details This function will be called to initialize a specific UART by passing baudrate value
  * which in turn used to calculate the baud_count to set the baudrate.
@@ -115,7 +115,7 @@ void set_baud_rate(uart_struct *uart_instance, unsigned int baudrate)
 }
 
 /**
- * @fn void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt) 
+ * @fn enable_uart_interrupts 
  * @brief Function to enable the interrupts of a perticular uart_instance.
  * @details This function will be called to enable the interrupts of a specific uart_instance by passing
  * the interrupt's values.
@@ -131,7 +131,7 @@ void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt
 
 #ifdef USE_RX_THRESHOLD
 /**
- * @fn void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold)
+ * @fn set_uart_rx_threshold
  * @brief Funtion to set the threshold value of the Rx FIFO.
  * @details This function will be called to set the threshold value of the Rx FIFO of a specific uart_instance
  * by passing the threshold value.
@@ -146,7 +146,7 @@ void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshol
 #endif
 
 /**
- * @fn uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character)
+ * @fn uint32_t write_uart_character
  * @brief Function to write a single character to a specific uart_instance. 
  * @details This function will be called to write a character to a specific uart_instance by passing the
  * character.
@@ -162,7 +162,7 @@ uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character
 }
 
 /**
- * @fn uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string)
+ * @fn write_uart_string
  * @brief Function to write a string to a specific uart_instance.
  * @details This function will be called to write a string to a specific uart_instance by passing the
  * string.
@@ -183,7 +183,7 @@ uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string)
 }
 
 /**
- * @fn uint8_t read_uart_character(uart_instance_TypeDef * uart_instance, char * prn_character)
+ * @fn read_uart_character
  * @brief Function to read a character from a specific uart_instance.
  * @details This function will be called to read a character from a specific uart_instance by passing the
  * character pointer to store the character.
@@ -201,7 +201,7 @@ uint8_t read_uart_character(uart_struct * uart_instance, char * prn_character)
 }
 
 /**
- * @fn uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string)
+ * @fn  read_uart_string
  * @brief Function to read a string from a specific uart_instance.
  * @details This function will be called to read a string, one character at a time from a 
  * specific uart_instance by passing the array in which to store the string by reference using pointers.
@@ -228,7 +228,7 @@ uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string)
 }
 
 /**
- * @fn void flush_uart((uart_struct * uart_instance)
+ * @fn flush_uart
  * @brief Function to flush the UART fifo queue.
  * @details This function will be called to flush the previous values stored in the UART fifo queue by
  * passing UART number for different offset addresses.
@@ -246,7 +246,7 @@ void flush_uart(uart_struct * uart_instance)
 }
 
 /**
- * @fn unsigned char uart0_isr()
+ * @fn unsigned char uart0_isr
  * @brief Function to offer interrupt service routine for uart_instance[0].
  * @details This function will be called to offer interrupt service routine for UART0 to read the
  * array of characters by handling interrupts such as RX_threshold, Rx_full, and RX_not_empty
@@ -290,7 +290,7 @@ unsigned char uart0_isr()
 }
 
 /**
- * @fn unsigned char uart1_isr()
+ * @fn  uart1_isr
  * @brief Function to offer interrupt service routine for uart_instance[1].
  * @details This function will be called to offer interrupt service routine for uart_instance[1] to read the
  * array of characters by handling interrupts such as RX_threshold, Rx_full, and RX_not_empty
@@ -334,7 +334,7 @@ unsigned char uart1_isr()
 }
 
 /**
- * @fn unsigned char uart2_isr()
+ * @fn  uart2_isr
  * @brief Function to offer interrupt service routine for UART2.
  * @details This function will be called to offer interrupt service routine for UART2 to read the
  * array of characters by handling interrupts such as RX_threshold, Rx_full, and RX_not_empty
@@ -390,7 +390,7 @@ unsigned char uart2_isr()
 #define RECV_NOT_EMPTY 0x8
 #define TRANS_NOT_FULL 0x2
 
-/** @fn int getchar( )
+/** @fn  getchar( )
  * @brief 
  * @details 
  * @warning 
@@ -408,7 +408,7 @@ int getchar()
 }
 
 
-/** @fn int putchar(int ch)
+/** @fn  putchar(int ch)
  * @brief 
  * @details 
  * @warning 

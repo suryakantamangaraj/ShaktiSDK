@@ -29,10 +29,10 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long
  * @param[Out] No output parameter
  */
-extern void delay_loop(unsigned long , unsigned long);
+extern void delay_loop(unsigned long , unsigned long );
 
 //If inout control = 1, output else input
 /** @fn SetSCLAsOutput
@@ -57,7 +57,7 @@ static void SetSCLAsOutput()
  * @details This function will be called to make the scl line (defined by I2C_SCL)
    macro as output.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] No input parameters.
+ * @param[in] int.
  * @param[Out] No output parameters.
  */
 static void SetSdaDirection(int inOutCntrl)

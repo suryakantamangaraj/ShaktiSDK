@@ -1,10 +1,10 @@
 /***************************************************************************
-* Project           			: shakti devt board
-* Name of the file	     		: clint_driver.c
-* Created date			        : 26.02.2019
-* Brief Description of file     : source file for clint.
+* Project           			    : shakti devt board
+* Name of the file	     		  : clint_driver.c
+* Created date			          : 26.02.2019
+* Brief Description of file   : source file for clint.
 * Name of Author    	        : Sathya Narayanan N
-* Email ID                      : sathya281@gmail.com
+* Email ID                    : sathya281@gmail.com
 
     Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -34,7 +34,7 @@ uint64_t* mtimecmp = 0x02004000;
  * @details return the lower half of mtime. And this is needed mostly in dealing mtime in 32 bit machines.
  * @warning none
  * @param[in] No input parameter
- * @param[Out] long
+ * @param[Out] unsigned long
  */
 static unsigned long mtime_low( )
 {
@@ -77,9 +77,9 @@ uint64_t get_timer_value()
 /** @fn configure_counter
  * @brief sets up the timer
  * @details sets the mtimecmp to current mtime + delta
- * @warning none
+ * @warning No warning
  * @param[in] delta value after which interrupt happens
- * @param[Out] none
+ * @param[Out] No output parameter
  */
 void configure_counter( uint64_t value)
 {
@@ -91,7 +91,7 @@ void configure_counter( uint64_t value)
 /** @fn  mach_clint_handler
  * @brief handler for machine timer interrupt
  * @details handler for machine timer interrupt. This handles the timer interrupt and sets mtimecmp to clear timer interrupt.
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int ptr
  * @param[Out] no output parameters
  */

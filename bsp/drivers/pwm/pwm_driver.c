@@ -31,7 +31,7 @@
 #define CLOCK_REGISTER_MAX      0x0000FFFF
 #define CONTROL_REGISTER_MAX    0x000000FF
 
-/** @fn int set_pwm_period_register(int module_number, int value)
+/** @fn  set_pwm_period_register
  * @brief Function to set the period register of the selected pwm module
  * @details This function will be called to set the value of the period register for the selected module 
  * @param[in] module_number- specifies the pwm module to be selected
@@ -54,7 +54,7 @@ int set_pwm_period_register(int module_number, int value)
 	return 1;
 }
 
-/** @fn int set_pwm_duty_register(int module_number, int value)
+/** @fn  set_pwm_duty_register
  * @brief Function to set the duty register of the selected pwm module
  * @details This function will be called to set the value of the duty register for the selected module
  * @param[in] module_number- specifies the pwm module to be selected
@@ -78,7 +78,7 @@ int set_pwm_duty_register(int module_number, int value)
 	return 1;
 }
 
-/** @fn int set_pwm_control_register(int module_number, int value)
+/** @fn  set_pwm_control_register
  * @brief Function to set the control register of the selected pwm module
  * @details This function will be called to set the value of the control register for the selected module
  * @param[in] module_number- specifies the pwm module to be selected
@@ -102,7 +102,7 @@ int set_pwm_control_register(int module_number, int value)
 	return 1;
 }
 
-/** @fn int pwm_check_continuous_mode(int module_number)
+/** @fn  pwm_check_continuous_mode
  * @brief Function to check if continuous mode is set for current pwm module. (This function helps in handling interrupts using plic).
  * @details This function will be called to check if continuous mode is set for current pwm module
  * @param[in] module_number- specifies the pwm module to be selected
@@ -120,7 +120,7 @@ int pwm_check_continuous_mode(int module_number)
 		return 0;
 }
 
-/** @fn int set_pwm_clock_register(int module_number, int value)
+/** @fn  set_pwm_clock_register
  * @brief Function to set the clock register of the selected pwm module
  * @details This function will be called to set the value of the clock register(clock divisor) for the selected module
  * @param[in] module_number- specifies the pwm module to be selected
@@ -142,7 +142,7 @@ int set_pwm_clock_register(int module_number, int value)
 	return 1;
 }
 
-/** @fn void pwm_clear_registers(int module_number)
+/** @fn pwm_clear_registers
  * @brief Function to clear all registers in a specific pwm module
  * @details This function will be called to clear all registers in a specific pwm module
  * @param[in] module_number- specifies the pwm module to be selected
@@ -158,7 +158,7 @@ void pwm_clear_registers(int module_number)
 	log_info("\n All registers of module number %d cleared", module_number);
 }
 
-/** @fn void pwm_init()
+/** @fn  pwm_init
  * @brief Function to initialize all pwm modules
  * @details This function will be called to initialize all pwm modules
  * @param[in] takes no input
@@ -175,7 +175,7 @@ void pwm_init()
 	log_info("\n All Register values of all modules cleared");
 }
 
-/** @fn int configure_control_register_mode(int mode)
+/** @fn  configure_control_register_mode
  * @brief Function to set value of control register based on mode selected 
  * @details This function will set value of control register based on mode selected
  * @param[in] mode- 
@@ -210,7 +210,7 @@ int configure_control_register_mode(int mode)
 	return value;
 }
 
-/** @fn void pwm_start(int module_number,int mode)
+/** @fn  pwm_start
  * @brief Function to start a pwm module with a specific mode
  * @details This function will start a pwm module with a specific mode
  * @param[in] module_number-  the pwm module to be selected
@@ -218,7 +218,7 @@ int configure_control_register_mode(int mode)
  *                  0-PWM Mode
  *                  1-Timer Mode run once
  *                  2-Timer Mode run contin
- * @param[Out] returns nothing.
+ * @param[Out] No output parameter
  */
 void pwm_start(int module_number, int mode)
 {
@@ -235,14 +235,14 @@ void pwm_start(int module_number, int mode)
 	}
 }
 
-/** @fn void pwm_use_external_clock(int module_number,bool value)
+/** @fn pwm_use_external_clock
  * @brief Function to set use of external clock
  * @details This function will set clock to external clock if set to true
  * @param[in] module_number-  the pwm module to be selected
  *            value - 
  *		    true or 1  - External Clock 
  *                  false or 0 - Internal Clock
- * @param[Out] returns nothing.
+ * @param[Out] No output parameter
  */
 void pwm_use_external_clock(int module_number, bool value)
 {
@@ -254,12 +254,12 @@ void pwm_use_external_clock(int module_number, bool value)
 	control_value -= CLOCK_SELECTOR;	
 }
 
-/** @fn void pwm_set_clock(int module_number,int clock_divisor)
+/** @fn pwm_set_clock
  * @brief Function to set the clock divisor value of a specific pwm module
  * @details This function will set the clock divisor value of a specific pwm module
  * @param[in] module_number-  the pwm module to be selected
             clock_divisor-  value of clock divisor to be used to divide base clock speed of 50MHz.
- * @param[Out] returns nothing.
+ * @param[Out] No output parameter
  */
 void pwm_set_clock(int module_number, int clock_divisor)
 {
@@ -269,12 +269,12 @@ void pwm_set_clock(int module_number, int clock_divisor)
 	}
 }
 
-/** @fn void pwm_set_duty_cycle(int module_number,int duty)
- * @brief Function to set the duty cycle value of a specific pwm module 
+/** @fn  pwm_set_duty_cycle
+* @brief Function to set the duty cycle value of a specific pwm module 
  * @details This function will set the duty cycles value of a specific pwm module
  * @param[in] module_number-  the pwm module to be selected
  *            clock_divisor-  value of duty cycles to be used to decide how many period cycles the pwm signal is set to 1.
- * @param[Out] returns nothing.
+ * @param[Out] No output parameter
  */
 void pwm_set_duty_cycle(int module_number, int duty)
 {
@@ -283,12 +283,12 @@ void pwm_set_duty_cycle(int module_number, int duty)
 	}
 }
 
-/** @fn void pwm_set_periodic_cycle(int module_number,int period)
+/** @fn pwm_set_periodic_cycle
  * @brief Function to set the period cycles value of a specific pwm module
  * @details This function will set the period cycles value of a specific pwm module
  * @param[in] module_number-  the pwm module to be selected
  *            clock_divisor-  value of period cycles which is used to further divide the frequency into fixed period cycles.
- * @param[Out] returns nothing.
+ * @param[Out] No output parameter
  */
 void pwm_set_periodic_cycle(int module_number, int period)
 {
@@ -297,7 +297,7 @@ void pwm_set_periodic_cycle(int module_number, int period)
 	}
 }
 
-/** @fn void pwm_configure(int module_number,int clock_divisor, int period, int duty, bool external_clock)
+/** @fn  pwm_configure
  * @brief Function to configure the pwm module with all the values required like clock divisor, period, duty cycle, and the use of external clock
  * @details This function configure the pwm module
  * @param[in] module_number-  the pwm module to be selected
@@ -305,7 +305,7 @@ void pwm_set_periodic_cycle(int module_number, int period)
  *              period 	      	 - value of periodic cycle to be used. the signal resets after every count of the periodic cycle
  *              duty_cycle	 - value of duty cycle. It specifies how many cycles the signal is active out of the periodic cycle
  *              external_clock   - value of external clock selector. It specifies if external clock is to be used.
- * @param[Out] returns nothing.
+ * @param[Out] No output parameter
  */
 void pwm_configure(int module_number,int clock_divisor, int period, int duty, bool external_clock)
 {
@@ -316,11 +316,11 @@ void pwm_configure(int module_number,int clock_divisor, int period, int duty, bo
 	log_info("PWM %d succesfully configured",module_number);
 }
 
-/** @fn void pwm_stop(int module_number)
+/** @fn  pwm_stop
  * @brief Function to stop a specific pwm module
  * @details This function will stop a specific pwm module
  * @param[in] module_number-  the pwm module to be selected
- * @param[Out] returns nothing.
+ * @param[out] No output parameter 
  */
 void pwm_stop(int module_number)
 {
@@ -328,11 +328,11 @@ void pwm_stop(int module_number)
 	log_info("\n PWM module number %d has been stopped", module_number);
 }
 
-/** @fn show_register_values(int module_number)
+/** @fn show_register_values
  * @brief Function to print the values of all the registers of a specific pwm module
  * @details This function will print the values of all the registers of a specific pwm module
  * @param[in] module_number-  the pwm module to be selected
- * @param[Out] returns nothing.
+ * @param[Out] No output parameter
  */
 void show_register_values(int module_number)
 {
