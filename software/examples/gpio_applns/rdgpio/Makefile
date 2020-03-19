@@ -37,7 +37,7 @@ rdgpio.riscv: create_dir
 	 
 	@echo -e $(BSP)
 	 
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c ./rdgpio.c -o ./output/rdgpio.o -march=$(MARCH) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c ./rdgpio.c -o ./output/rdgpio.o -march=$(MARCH) -lm -lgcc -mabi=$(MABI)
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/rdgpio.o  -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 

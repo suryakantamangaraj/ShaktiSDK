@@ -55,8 +55,8 @@ else
 ifeq ($(TARGET),artix7_100t)
 	@$(eval XLEN = 64)
 	@$(eval FLAGS= -D ARTIX7_100T)
-	@$(eval MARCH=rv64imafdc)
-	@$(eval MABI=lp64d)
+	@$(eval MARCH=rv64imac)
+	@$(eval MABI=lp64)
 	@$(eval INTERFACE=$(bspboard)/ftdi)
 	@$(eval DC =$(FLAGS) $(D) )
 else

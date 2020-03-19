@@ -62,7 +62,6 @@ typedef struct
 } uart_struct;
 
 
-#if defined(ARTIX7_35T) || defined(AARDONYX)
 
 #define STS_RX_THRESHOLD	0x1 << 8
 #define BREAK_ERROR	1 << 7
@@ -117,7 +116,7 @@ unsigned char uart0_isr();
 unsigned char uart1_isr();
 unsigned char uart2_isr();
 
-#else
+
 
 /*! UART Baud Rate Configuration Registers sets the uart clock rate */
 #define UART_BAUDRATE_CFG_REGISTER 0
@@ -134,5 +133,5 @@ int is_empty();
 int getchar();
 
 
-#endif
+
 #endif

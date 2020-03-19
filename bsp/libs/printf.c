@@ -154,7 +154,7 @@ void _printf_(const char *fmt, va_list ap)
 					itoa( num, base);
 
 					break;
-
+ #if defined(ARTIX7_35T) || defined(AARDONYX) 
 				case 'f':
 					float_num =  va_arg(ap, double);
 
@@ -166,6 +166,7 @@ void _printf_(const char *fmt, va_list ap)
 						if(i > 29) break;
 					}
 					break;
+#endif
 
 					// unsigned decimal
 				case 'u':
