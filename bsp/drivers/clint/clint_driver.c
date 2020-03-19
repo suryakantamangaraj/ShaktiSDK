@@ -77,7 +77,7 @@ uint64_t get_timer_value()
 /** @fn configure_counter
  * @brief sets up the timer
  * @details sets the mtimecmp to current mtime + delta
- * @warning none
+ * @warning No warning
  * @param[in] delta value after which interrupt happens
  * @param[Out] No output parameter
  */
@@ -91,7 +91,7 @@ void configure_counter( uint64_t value)
 /** @fn  mach_clint_handler
  * @brief handler for machine timer interrupt
  * @details handler for machine timer interrupt. This handles the timer interrupt and sets mtimecmp to clear timer interrupt.
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int ptr
  * @param[Out] no output parameters
  */

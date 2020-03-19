@@ -32,7 +32,7 @@
  * @param[in] unsigned long
  * @param[Out] No output parameter
  */
-extern void delay_loop(unsigned long , unsigned long);
+extern void delay_loop(unsigned long , unsigned long );
 
 //If inout control = 1, output else input
 /** @fn SetSCLAsOutput

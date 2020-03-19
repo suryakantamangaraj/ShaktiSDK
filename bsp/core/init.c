@@ -154,8 +154,8 @@ void trap_init()
 
 /** @fn init
  * @brief initialize the necessary variables for system start
- * @param[in]  void
- * @param[Out] void
+ * @param[in]  No input parameter
+ * @param[Out] No output parameter
  */
 void init(void)
 {

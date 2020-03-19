@@ -41,8 +41,8 @@ i2c_struct *i2c_instance[MAX_I2C_COUNT];
  * @brief 
  * @details 
  * @warning 
- * @param[in] No input parameters.
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter 
  */
 i2c_init()
 {
