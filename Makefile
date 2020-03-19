@@ -82,13 +82,13 @@ BOARD_DIR := $(shell ls ./bsp/third_party)
 #Each C file corresponds to a appln. Each appln has a label in makefile
 #that corresponds to each C file.
 
-GPIO_DIR := $(shell cd ./software/examples/gpio_applns/ && ls -d * | grep -v Makefile )
-UART_DIR := $(shell cd ./software/examples/uart_applns/ && ls -d * | grep -v Makefile )
-I2C_DIR := $(shell cd software/examples/i2c_applns/ && ls -d * | grep -v Makefile )
-PWM_DIR := $(shell cd software/examples/pwm_applns/ && ls -d * | grep -v Makefile )
-SPI_DIR := $(shell cd software/examples/spi_applns/ && ls -d * | grep -v Makefile )
-PLIC_DIR := $(shell cd software/examples/plic_applns/ && ls -d * | grep -v Makefile )
-APP_DIR := $(GPIO_DIR) $(UART_DIR) $(I2C_DIR) $(SPI_DIR) $(PWM_DIR) $(PLIC_DIR)
+GPIO_APPS := $(shell cd ./software/examples/gpio_applns/ && ls -d * | grep -v Makefile )
+UART_APPS := $(shell cd ./software/examples/uart_applns/ && ls -d * | grep -v Makefile )
+I2C_APPS := $(shell cd software/examples/i2c_applns/ && ls -d * | grep -v Makefile )
+PWM_APPS := $(shell cd software/examples/pwm_applns/ && ls -d * | grep -v Makefile )
+SPI_APPS := $(shell cd software/examples/spi_applns/ && ls -d * | grep -v Makefile )
+PLIC_APPS := $(shell cd software/examples/plic_applns/ && ls -d * | grep -v Makefile )
+APP_DIR := $(GPIO_APPS) $(UART_APPS) $(I2C_APPS) $(SPI_APPS) $(PWM_APPS) $(PLIC_APPS)
 
 
 #bsp board specific files path
