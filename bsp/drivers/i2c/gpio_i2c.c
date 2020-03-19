@@ -29,7 +29,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long , unsigned long);

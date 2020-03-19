@@ -146,8 +146,8 @@ int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned c
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] i2c_struct * i2c_instance
+ * @param[Out] int
  */
 int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
 {
@@ -175,8 +175,8 @@ int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int 
  */
 int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
 {
@@ -203,8 +203,8 @@ int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int, const char
+ * @param[Out] int
  */
 int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, int eni)
 {
@@ -245,8 +245,8 @@ int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, i
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
 {
@@ -508,8 +508,8 @@ int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char sl
  * @brief  
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned char
+ * @param[Out] int
  */
 int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned char delay, 
 		unsigned char last)
@@ -561,8 +561,8 @@ int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data,
  * @brief  
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned char
+ * @param[Out] int
  */
 int i2c_write_interrupt_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay, unsigned char last)
 {

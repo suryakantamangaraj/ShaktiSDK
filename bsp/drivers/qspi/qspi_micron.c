@@ -478,8 +478,8 @@ int flashSingleSPIDDRXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashDualSPIXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(3)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBB)));
@@ -503,8 +503,8 @@ int flashDualSPIXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int flashDualSPIDDRXip(int addr, int* dest_addr){
     set_qspi_shakti32(ccr,(CCR_DDRM|CCR_FMODE(CCR_FMODE_INDRD)|CCR_DMODE(DOUBLE)|CCR_DUMMY_CONFIRMATION|CCR_DCYC(6)|CCR_ADSIZE(FOURBYTE)|CCR_ADMODE(DOUBLE)|CCR_IMODE(SINGLE)|CCR_INSTRUCTION(0xBE)));
@@ -633,8 +633,8 @@ int flash_Write_disable(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int eraseSector(int command, int address){
     if(micron_write_enable(status)){
@@ -654,8 +654,8 @@ int eraseSector(int command, int address){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int wait_for_wip(){
     int status1;
@@ -678,8 +678,8 @@ int wait_for_wip(){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int micron_write_enable(int status){
 //    printf("\tWrite Enable\n");
@@ -693,8 +693,8 @@ int micron_write_enable(int status){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int micron_volatile_write_enable(int status){
     printf("\tVolatile Write Enable\n");
@@ -708,8 +708,8 @@ int micron_volatile_write_enable(int status){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int micron_enable_4byte_addressing(int status){
     printf("\t Enable 4 byte address \n");
@@ -723,8 +723,8 @@ int micron_enable_4byte_addressing(int status){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int micron_configure_xip_volatile(int status, int value){
     log_debug("\tWrite Volatile Configuration Register\n");
@@ -742,8 +742,8 @@ int micron_configure_xip_volatile(int status, int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int micron_disable_xip_volatile(int status, int value){
     log_debug("\tWrite Volatile Configuration Register to exit XIP\n");
@@ -764,8 +764,8 @@ int micron_disable_xip_volatile(int status, int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int micron_read_id_cmd(int status, int value){
     log_debug("\tRead ID Command to see if the Protocol is Proper\n");
@@ -781,8 +781,8 @@ int micron_read_id_cmd(int status, int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int micron_read_configuration_register(int status, int value){
     printf("\tRead ID Command to see if the Protocol is Proper\n");

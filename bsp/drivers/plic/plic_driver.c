@@ -68,7 +68,7 @@ void interrupt_complete(unsigned int interrupt_id)
 
 /** @fn  interrupt_claim_request
  * @brief know the id of the interrupt
- * @details read the interrupt claim register to know the interrupt id of the highest priority pending interrupt 
+ * @details read the interrupt claim register to know the interrupt id of the highest priority pending           * interrupt 
  * @warning none
  * @param[in] no input parameters
  * @param[Out] unsigned int
@@ -265,7 +265,7 @@ void interrupt_disable(unsigned int interrupt_id)
 
 /** @fn set_interrupt_threshold
  * @brief set priority threshold for all interrupts
- * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is ignored.
+ * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is  * ignored.
  * @warning none
  * @param[in] unsigned int
  * @param[Out] no output parameters
@@ -324,8 +324,8 @@ void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
  * @brief configure a gpio pin for each interrupt
  * @details enable the corresponding gpio pin for a interrupt as read.
  * @warning none
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int
+ * @param[Out] No output parameter
  */
 void configure_interrupt_pin(unsigned int id)
 {
@@ -425,7 +425,7 @@ void plic_init()
  * @warning Here it is assumed, to have a one to one mapping
  *          between interrupt enable bit and interrupt pin
  * @param[in] interrupt id
- * @param[Out] none
+ * @param[Out] No output parameter
  */
 void configure_interrupt(unsigned int int_id)
 {

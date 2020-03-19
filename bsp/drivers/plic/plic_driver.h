@@ -1,9 +1,9 @@
 /***************************************************************************
-* Project           			:  shakti devt board
+* Project           			  :  shakti devt board
 * Name of the file	     		:  plic_driver.h
-* Brief Description of file             :  Header file for plic driver.
-* Name of Author    	                :  Sathya Narayanan N
-* Email ID                              :  sathya281@gmail.com
+* Brief Description of file :  Header file for plic driver.
+* Name of Author    	      :  Sathya Narayanan N
+* Email ID                  :  sathya281@gmail.com
 
     Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -27,13 +27,9 @@
 #include "platform.h"
 #include "traps.h"
 
-/*
-   Macros
- */
+/* Macros */
 
-/*
-   Offsets for different registers in plic
- */
+/* Offsets for different registers in plic */
 
 #define PLIC_PRIORITY_OFFSET            0x0000UL
 #define PLIC_PENDING_OFFSET             0x1000UL
@@ -63,9 +59,7 @@
 
 #define PLIC_PENDING_SHIFT_PER_SOURCE   0
 
-/*
-   Enumerators
- */
+/*  Enumerators */
 
 typedef enum
 {
@@ -75,9 +69,7 @@ typedef enum
 	MASKED
 }interrupt_status_e;
 
-/*
-   Structures and Unions
- */
+/* Structures and Unions */
 
 typedef struct
 {
@@ -95,14 +87,18 @@ typedef struct
 typedef void (*plic_fptr_t) (unsigned int);
 plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
-/*
-   Function prototypes
- */
+/* Function prototypes */
 
+void interrupt_complete(unsigned int interrupt_id);
+unsigned int interrupt_claim_request();
+unsigned int isr_default(unsigned int interrupt_id);
+void interrupt_enable(unsigned int interrupt_id);
 void mach_plic_handler(uintptr_t int_id, uintptr_t epc);
-
+void interrupt_disable(unsigned int interrupt_id);
+void set_interrupt_threshold(unsigned int priority_value);
+void set_interrupt_priority(unsigned int priority_value, unsigned int int_id);
 void configure_interrupt_pin(unsigned int pin);
-
+void plic_init();
 void configure_interrupt(unsigned int int_id);
 
 #endif
