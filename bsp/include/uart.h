@@ -22,7 +22,6 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ************************************************************************/
-
 /**
  * @file uart.h
  * @project shakti devt board
@@ -61,8 +60,6 @@ typedef struct
 #endif	
 } uart_struct;
 
-
-
 #define STS_RX_THRESHOLD	0x1 << 8
 #define BREAK_ERROR	1 << 7
 #define FRAME_ERROR	1 << 6
@@ -83,12 +80,8 @@ typedef struct
 #define ENABLE_RX_NOT_EMPTY 	1 << 2
 #define ENABLE_TX_FULL 		1 << 1
 #define ENABLE_TX_EMPTY 	1 << 0
-
 #define UARTX_BUFFER_SIZE 10000
 
-//#define UART0            ((uart_struct   *) UART0_START )
-//#define UART1            ((uart_struct   *) UART1_START )
-//#define UART2            ((uart_struct   *) UART2_START )
 
 extern uart_struct *uart_instance[MAX_UART_COUNT];
 extern unsigned char uart0_complete;
@@ -117,13 +110,6 @@ unsigned char uart1_isr();
 unsigned char uart2_isr();
 
 
-
-/*! UART Baud Rate Configuration Registers sets the uart clock rate */
-#define UART_BAUDRATE_CFG_REGISTER 0
-#define UART_DATA_TX_REGISTER 4
-#define UART_DATA_RX_REGISTER 8
-#define UART_STS_REGISTER 0x0C
-
 #undef putchar
 int putchar(int ch);
 
@@ -131,7 +117,5 @@ int is_empty();
 
 #undef getchar
 int getchar();
-
-
 
 #endif
