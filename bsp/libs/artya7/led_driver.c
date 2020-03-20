@@ -1,7 +1,6 @@
 /***************************************************************************
 * Project           			: shakti devt board
 * Name of the file	     		: led_driver.c
-* Created date			        : 9.07.2019
 * Brief Description of file     : Performs the I2C operations using gpio pins.
 * Name of Author    	        : Kotteeswaran
 * Email ID                      : kottee.1@gmail.com
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
@@ -74,7 +72,7 @@ void configure_rgb_ledx(unsigned char led_no)
  * @details This function configures GPIO pins mapped to 
  *          Normal LEDs as output pins.
  * @warning No warning
- * @param[in]
+ * @param[in] No input parameter
  * @param[Out] No output parameters.
  */
 void configure_normal_leds()
@@ -91,7 +89,7 @@ void configure_normal_leds()
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
  *          gpio pins mapped to both RGB LEDs as output pins.
  * @warning No warning
- * @param[in]
+ * @param[in] No input parameter
  * @param[Out] No output parameters.
  */
 void configure_rgb_leds()
@@ -107,7 +105,7 @@ void configure_rgb_leds()
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
  *          all GPIO pins mapped to all the LEDs as output pins.
  * @warning No warning
- * @param[in]
+ * @param[in] No input parameters
  * @param[Out] No output parameters.
  */
 void configure_all_leds()

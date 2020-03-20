@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project                               :  shakti devt board
- * Name of the file                      :  spi.h
- * Brief Description of file             :  Header to spi driver
- * Name of Author                        :  Kaustubh Ghormade
- * Email ID                              :  kaustubh4347@gmail.com
+ * Project                           : shakti devt board
+ * Name of the file                  : spi.h
+ * Brief Description of file         : Header to spi driver
+ * Name of Author                    : Kaustubh Ghormade
+ * Email ID                          : kaustubh4347@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 /**

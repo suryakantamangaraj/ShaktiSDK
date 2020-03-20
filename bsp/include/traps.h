@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project                               : shakti devt board
- * Name of the file                      : traps.h
- * Brief Description of file             : Header file for handling traps
- * Name of Author                        : Sathya Narayanan N
- * Email ID                              : sathya281@gmail.com
+ * Project                          : shakti devt board
+ * Name of the file                 : traps.h
+ * Brief Description of file        : Header file for handling traps
+ * Name of Author                   : Sathya Narayanan N
+ * Email ID                         : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,6 @@
 
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *******************************************************************************/
 /**
  * @file traps.h
@@ -75,10 +74,7 @@
 #define MAX_MCAUSE_VALUE               32
 
 
-/*
-   Interrupts
- */
-
+/*  Interrupts */
 #define MAX_INTERRUPT_VALUE            16
 
 #define USER_SW_INTERRUPT               0

@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           	        		:  shakti devt board
- * Name of the file	     	         	:  qspi_micron.c
- * Brief Description of file            :  source file for qspi_micron  
- * Name of Author    	                :  visvesh
- * Email ID                             :  
+ * Project           	        : shakti devt board
+ * Name of the file	     	    : qspi_micron.c
+ * Brief Description of file    : source file for qspi_micron  
+ * Name of Author    	        : visvesh
+ * Email ID                     : vishu.vivek@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ****************************************************************************/
 
 #include "qspi.h"

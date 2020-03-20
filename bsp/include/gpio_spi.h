@@ -1,9 +1,9 @@
-/***************************************************************************
- * Project           	         		: shakti devt board
- * Name of the file	     		        : gpio_spi.h
- * Brief Description of file            : header file for spi gpio
- * Name of Author    	                : Kottee & Aditya dubey
- * Email ID                             : kottee.1@gmail.com
+/**********************************************************************
+ * Project           	        : shakti devt board
+ * Name of the file	     		: gpio_spi.h
+ * Brief Description of file    : header file for spi gpio
+ * Name of Author    	        : Kottee & Aditya dubey
+ * Email ID                     : kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,7 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- ****************************************************************************/
+ **************************************************************************/
 
 /**
  * @file  gpio_spi.h

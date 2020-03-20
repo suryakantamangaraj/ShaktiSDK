@@ -1,8 +1,8 @@
 /*******************************************************************************
- * Project               	   : shakti devt board
+ * Project               	     : shakti devt board
  * Name of the file	           : util.c
  * Brief Description of file   : src file for util
- * Name of Author    	       : Sathya Narayanan N
+ * Name of Author    	         : Sathya Narayanan N
  * Email ID                    : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *********************************************************************************/
 
 /** @fn  waitfor

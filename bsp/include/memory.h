@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: memory.h
- * Brief Description of file    : dumps values at memory mapped locations, useful for debugging  
+ * Brief Description of file    : dumps values at memory mapped locations,useful for debugging  
  * Name of Author    	        : Sathya Narayanan N 
  * Email ID                     : sathya281@gmail.com
 

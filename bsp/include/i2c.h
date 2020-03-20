@@ -1,9 +1,9 @@
 /**************************************************************************
- * Project           	         		: shakti devt board
- * Name of the file	     		        : i2c.h
- * Brief Description of file            : header file for i2c
- * Name of Author    	                : Kotteeswaran 
- * Email ID                             : kottee.1@gmail.com
+ * Project           	         : shakti devt board
+ * Name of the file	     		 : i2c.h
+ * Brief Description of file     : header file for i2c
+ * Name of Author    	         : Kotteeswaran 
+ * Email ID                      : kottee.1@gmail.com
  
  Copyright (C) 2019  IIT Madras. All rights reserved.
 

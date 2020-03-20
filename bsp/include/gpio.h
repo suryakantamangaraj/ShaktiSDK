@@ -44,7 +44,7 @@ long int read_word(int *addr);
 /**
  * @brief  writes a value to an address
  * @parameters int*
- * @return int
+ * @return No output parameter
  */
 void write_word(int *addr, unsigned long val);
 

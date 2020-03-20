@@ -19,12 +19,11 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *****************************************************************************/
 /**
  * @file pinmux.h
  * @project shakti devt board
- * @brief store pinmuc configurations
+ * @brief store pinmux configurations
  */
 
 #ifndef PINMUX_H

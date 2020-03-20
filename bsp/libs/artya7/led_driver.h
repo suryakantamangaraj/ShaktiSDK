@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           		        :  shakti devt board
- * Name of the file	                :  led_driver.h
- * Created date			        :   9.07.2019
- * Brief Description of file            :   Header file for leds
- * Name of Author    	                :   Kotteeswaran
- * Email ID                             :  kottee.1@gmail.com
+ * Project           		        : shakti devt board
+ * Name of the file	                : led_driver.h
+ * Brief Description of file        : Header file for leds
+ * Name of Author    	            : Kotteeswaran
+ * Email ID                         : kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,14 +19,12 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ***************************************************************************/
  /**
  * @file led_driver.h
- * @project 
- * @brief  All the definitions are very specific to ARTY A7 (35T & 100T) boards
+ * @project shakti devt board
+ * @brief Header file for leds
  */
- 
 #ifndef LED_DRIVER_H
 #define LED_DRIVER_H
 

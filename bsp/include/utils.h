@@ -1,7 +1,7 @@
 /****************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: utils.h
- * Brief Description of file    : Header file for handling traps
+ * Brief Description of file    : Header file for utils
  * Name of Author    	        : Sathya Narayanan N
  * Email ID                     : sathya281@gmail.com
 
@@ -19,12 +19,11 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *******************************************************************************/
 /**
  * @file utils.h
  * @project shakti devt board
- * @brief header file for handling traps  
+ * @brief header file for utils
  */
 
 #ifndef UTIL_H
@@ -32,10 +31,16 @@
 #include <stdio.h>
 #include <stdint.h>
 
+/* function prototype */
 void waitfor(unsigned int secs);
-
+void delay(unsigned long seconds);
+float pow_10(unsigned int y);
+void reverse(char *str, int len);
+int intToStr(int x, char str[], int d);
 void ftoa( float, char *, unsigned);
-
+void delay_loop(unsigned long cntr1, unsigned long cntr2);
+long int read_word(int *addr);
+void write_word(int *addr, unsigned long val);
 size_t strnlen(const char *s, size_t n);
 
 #endif
