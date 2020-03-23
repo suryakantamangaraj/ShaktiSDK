@@ -1,9 +1,9 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: passive_buzzer.c
- * Created date			        : 20.08.2019
- * Name of Author                : Soutrick Roy Chowdhury
- * Email ID                      : soutrick97@gmail.com
+ * Brief Description of file    :
+ * Name of Author               : Soutrick Roy Chowdhury
+ * Email ID                     : soutrick97@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -28,7 +28,7 @@
 /** @fn delay_loop
 * @brief Maintains the required delay to perform an operation  
 * @warning No warning  
-* @param[in] Delay Required(ms)
+* @param[in] unsigned long, unsigned long
 * @param[Out] No output parameter
 */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
@@ -38,9 +38,9 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  *        but the devices that controls the buzzer has to provide it with an oscillating
  *        electronic signal at a desired frequency. The supplied frequency will determine 
  *        the tone. Supplying just a fixed voltage will generate no sound, except perhaps
- *        a slight "tick" at the point when the power source is connected or disconnected from the buzzer.
- * @param[in]  
- * @param[Out] 
+ *        a slight "tick" at the point when the power source is connected or disconnected from the    *        buzzer.
+ * @param[in]  No input parameter
+ * @param[Out] No output parameter
  */
 void main()
 {

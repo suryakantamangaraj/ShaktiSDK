@@ -28,7 +28,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation  
  * @warning No warning  
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
@@ -37,8 +37,8 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @brief Gives output as HIGH when partition is introduced and LOW when partition is removed       with the help of gpio pins 
  * @details    
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void main()
 {   
