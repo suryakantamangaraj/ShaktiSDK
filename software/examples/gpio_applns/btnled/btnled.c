@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: btnled.c
- * Created date			        : 26.02.2019
  * Brief Description of file    : Controls the led operation with help of button,gpio based.
  * Name of Author    	        : Sathya Narayanan N & Raghav
  * Email ID                     : sathya281@gmail.com

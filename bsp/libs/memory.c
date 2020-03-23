@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: memory.c
- * Created date			        : 26.02.2019
  * Name of Author    	        : Sathya Narayanan N 
  * Email ID                     : sathya281@gmail.com
 
@@ -19,15 +18,14 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ***************************************************************************/
 
 /** @fn dump_word_memory
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int* ,unsigned int
+ * @param[Out] No output parameter
  */
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
@@ -47,8 +45,8 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int*, unsigned int
+ * @param[Out] No output parameter
  */
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {

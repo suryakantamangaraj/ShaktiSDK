@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ***************************************************************************/
 #include "pwm_driver.h"
 #include "plic_driver.h"
@@ -37,11 +36,10 @@ interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
 /** @fn interrupt_complete
  * @brief write the int_id to complete register
  * @details Signals completion of interrupt. From s/w side the interrupt claim/complete 	                register is written with the interrupt id.
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int
  * @param[Out] No output parameter
  */
-
 void interrupt_complete(unsigned int interrupt_id)
 {
 	log_trace("\ninterrupt_complete entered\n");
@@ -68,8 +66,8 @@ void interrupt_complete(unsigned int interrupt_id)
 
 /** @fn  interrupt_claim_request
  * @brief know the id of the interrupt
- * @details read the interrupt claim register to know the interrupt id of the highest priority pending           * interrupt 
- * @warning none
+ * @details read the interrupt claim register to know the interrupt id of the highest priority        *          pending interrupt 
+ * @warning No warning
  * @param[in] no input parameters
  * @param[Out] unsigned int
  */
@@ -102,9 +100,9 @@ unsigned int interrupt_claim_request()
 /** @fn mach_plic_handler
  * @brief handle machine mode plic interrupts
  * @details find the int id that caused of interrupt, process it and complete the interrupt.
- * @warning none
- * @param[in] unsigned int ptr
- * @param[Out] no output parameters
+ * @warning No warning
+ * @param[in] unsigned int ptr, unsigned int ptr
+ * @param[Out] No output parameter
  */
 void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
 {
@@ -150,11 +148,10 @@ void mach_plic_handler(uintptr_t int_id, uintptr_t epc)
 /** @fn  int isr_default
  * @brief default interrupt service routine
  * @details Default isr. Use it when you dont know what to do with interrupts
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int
  * @param[Out] unsigned int
  */
-
 unsigned int isr_default(unsigned int interrupt_id)
 {
 	log_trace("\nisr_default entered\n");
@@ -181,7 +178,7 @@ unsigned int isr_default(unsigned int interrupt_id)
 /** @fn interrupt_enable
  * @brief enable the interrupt
  * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int
  * @param[Out] no ouput parameters
  */
@@ -222,7 +219,7 @@ void interrupt_enable(unsigned int interrupt_id)
 /** @fn interrupt_disable
  * @brief disable an interrupt
  * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
@@ -266,7 +263,7 @@ void interrupt_disable(unsigned int interrupt_id)
 /** @fn set_interrupt_threshold
  * @brief set priority threshold for all interrupts
  * @details set a threshold on interrrupt priority. Any interruptthat has lesser priority than the threshold is  * ignored.
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int
  * @param[Out] no output parameters
  */
@@ -289,8 +286,8 @@ void set_interrupt_threshold(unsigned int priority_value)
 /** @fn set_interrupt_priority
  * @brief set priority for an interrupt source
  * @details set priority for each interrupt. This is a 4 byte field.
- * @warning none
- * @param[in] unsigned int
+ * @warning No warning
+ * @param[in] unsigned int, unsigned int
  * @param[Out] no output parameters
  */
 void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
@@ -323,7 +320,7 @@ void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
 /** @fn configure_interrupt_pin
  * @brief configure a gpio pin for each interrupt
  * @details enable the corresponding gpio pin for a interrupt as read.
- * @warning none
+ * @warning No warning
  * @param[in] unsigned int
  * @param[Out] No output parameter
  */
@@ -347,7 +344,7 @@ void configure_interrupt_pin(unsigned int id)
 /** @fn plic_init
  * @brief intitializes the plic module
  * @details intitializes the registers to default values. sets up the plic meta data table. assigns the plic handler to  mcause_interrupt_table.,By default interrupts are disabled.
- * @warning none
+ * @warning No warning
  * @param[in] no input parameters
  * @param[Out] no output parameters
  */
@@ -421,10 +418,10 @@ void plic_init()
 
 /** @fn configure_interrupt 
  * @brief configure the interrupt pin and enable bit
- * @details enables the interrupt and corresponding physical pin. Needs to be called in every interrupt trigger and handling flow
+ * @details enables the interrupt and corresponding physical pin. Needs to be called in every         *          interrupt trigger and handling flow
  * @warning Here it is assumed, to have a one to one mapping
  *          between interrupt enable bit and interrupt pin
- * @param[in] interrupt id
+ * @param[in] unsigned int 
  * @param[Out] No output parameter
  */
 void configure_interrupt(unsigned int int_id)

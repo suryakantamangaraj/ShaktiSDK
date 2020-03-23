@@ -1,6 +1,7 @@
 /************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: Keypad.c 
+ * Brief Description of file    :
  * Name of Author    	        : Kotteeswaran
  * Email ID                     : kottee.1@gmail.com
   
@@ -49,8 +50,8 @@ int  key_table[4][4] =
  * @brief This function sets the pins for the row and column
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int*, unsigned int*
+ * @param[Out] No output parameter
  */
 void set_pins(unsigned int*  row, unsigned int* col)
 {
@@ -68,8 +69,8 @@ void set_pins(unsigned int*  row, unsigned int* col)
  * @brief This function maps table in to keymap
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] No output parameter
  */
 void set_key_map(int table[COLNUM][ROWNUM])
 {
@@ -86,8 +87,8 @@ void set_key_map(int table[COLNUM][ROWNUM])
  * @brief This function returns the corresponding value in the keymap
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int get_key_another_way()
 {
@@ -115,8 +116,8 @@ int get_key_another_way()
  * @brief This function returns the corresponding value in the keymap
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int
+ * @param[Out] int
  */
 int get_key(int col_row)
 {
@@ -128,8 +129,8 @@ int get_key(int col_row)
  * @details Identifies the pressed key by making the corresponding coloumn
    low and reading the row values     
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No output parameter
+ * @param[Out] int
  */
 int get_col_row(void)
 {
@@ -162,8 +163,8 @@ int get_col_row(void)
  * @brief This maps the keypad from pins
  * @details    
  * @warning 
- * @param[in] rows,columns
- * @param[Out] NULL
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void gpio_init()
 {
@@ -179,8 +180,8 @@ void gpio_init()
  * @brief 
  * @details    
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int main()
 {

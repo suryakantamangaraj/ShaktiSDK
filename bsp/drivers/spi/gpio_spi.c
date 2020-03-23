@@ -19,8 +19,8 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ****************************************************************************/
+
 #include "platform.h"
 #include "gpio.h"
 #include "gpio_spi.h"
@@ -29,7 +29,7 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] unsigned char
+ * @param[in] unsigned char, unsigned char
  * @param[Out] No output parameter
  */
 // at starting  edge sending

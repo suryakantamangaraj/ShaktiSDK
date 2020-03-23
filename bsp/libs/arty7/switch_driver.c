@@ -30,7 +30,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] unsigned long
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long , unsigned long );
@@ -40,7 +40,7 @@ extern void delay_loop(unsigned long , unsigned long );
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  each SW as input pin.
  * @warning No warning
- * @param[in] Pin that needs to be configured as SW.
+ * @param[in] unsigned long (Pin that needs to be configured as SW.)
  * @param[Out] No output parameters.
  */
 void configure_switch(unsigned long pinCntrl)

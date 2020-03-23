@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           		:  shakti devt board
- * Name of the file	     	:  counter.c
- * Created date			:  26.02.2019
- * Name of Author    	        :  Sathya Narayanan N & Raghav
- * Email ID                     :  sathya281@gmail.com
+ * Project           		   : shakti devt board
+ * Name of the file	     	   : counter.c
+ * Brief Description of file   : source file for mtime counter
+ * Name of Author    	       : Sathya Narayanan N & Raghav
+ * Email ID                    : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -31,8 +31,8 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int main(void){
 

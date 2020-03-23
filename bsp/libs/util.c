@@ -36,8 +36,8 @@ void waitfor(unsigned int secs)
 /** @fn delay
  * @brief  sleeps for number seconds 
  * @warning 
- * @param[in] number of seconds 
- * @param[Out] void
+ * @param[in] unsigned long (number of seconds) 
+ * @param[Out] No output parameter
  */
 void delay(unsigned long seconds)
 {
@@ -53,7 +53,7 @@ void delay(unsigned long seconds)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
+ * @param[in] unsigned int
  * @param[Out] 
  */
  #if defined(ARTIX7_35T) || defined(AARDONYX) 
@@ -74,8 +74,8 @@ float pow_10(unsigned int y)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] char, int
+ * @param[Out] No output parameter
  */
 void reverse(char *str, int len) 
 { 
@@ -93,8 +93,8 @@ void reverse(char *str, int len)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] int, char, int
+ * @param[Out] int
  */
 int intToStr(int x, char str[], int d) 
 { 
@@ -117,10 +117,10 @@ int intToStr(int x, char str[], int d)
  * @brief converts float to string 
  * @details Split floating number into fpart and ipart
  *          Finally merge it into one float number
- * @param[in] floating point number - n
- *		      float in string - res
- *		      precision - afterpoint
- * @param[Out] 
+ * @param[in] float (floating point number - n)
+ *		        char (float in string - res)
+ *		        int (precision - afterpoint)
+ * @param[Out]  No output parameter
  */
  #if defined(ARTIX7_35T) || defined(AARDONYX) 
 void ftoa(float n, char *res, int afterpoint) 
@@ -188,8 +188,8 @@ void ftoa(float n, char *res, int afterpoint)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned long , unsigned long
+ * @param[Out] No output parameter
  */
 void delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
@@ -206,7 +206,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
  * @details
  * @warning
  * @param[in] int*
- * @param[Out] int
+ * @param[Out] long int
  */
 long int read_word(int *addr)
 {
@@ -218,8 +218,8 @@ long int read_word(int *addr)
  * @brief  writes a value to an address
  * @details
  * @warning
- * @param[in] int*
- * @param[Out] int*
+ * @param[in] int* ,unsigned long
+ * @param[Out] No output parameter
  */
 void write_word(int *addr, unsigned long val)
 {

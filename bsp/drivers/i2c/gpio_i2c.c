@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: gpio_i2c.c
- * Created date			        : 9.07.2019
  * Brief Description of file    : Performs the I2C operations using gpio pins.
  * Name of Author    	        : Kotteeswaran
  * Email ID                     : kottee.1@gmail.com
@@ -20,8 +19,8 @@
 
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
+
 #include "platform.h"
 #include "gpio.h"
 #include "gpio_i2c.h"
@@ -29,7 +28,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] unsigned long
+ * @param[in] unsigned long ,unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long , unsigned long );
@@ -79,7 +78,7 @@ static void SetSdaDirection(int inOutCntrl)
  * @brief Sending start condition for the I2C.
  * @details Start condition is making SDA low when clock is high.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] delay.
+ * @param[in] unsigned char
  * @param[Out] No output parameters.
  */
 static void start(unsigned char delay)
@@ -110,7 +109,7 @@ static void start(unsigned char delay)
  * @brief Sending stop condition for the I2C.
  * @details Stop condition is making SDA high when clock is high.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] delay.
+ * @param[in] unsigned char
  * @param[Out] No output parameters.
  */
 static void stop(unsigned char delay)
@@ -138,7 +137,7 @@ static void stop(unsigned char delay)
    SCL from low to high to write..
  * @warning This bit value can be changed as per I2C_SCL macro.
  * @param[in] writeData --> Value that needs to be written.
- * @param[in] delay.
+ * @param[in] unsigned char ,unsigned char
  * @param[Out] No output parameters.
  */
 void I2cWriteByte(unsigned char writeData, unsigned char delay)
@@ -177,8 +176,8 @@ void I2cWriteByte(unsigned char writeData, unsigned char delay)
  * @details Clock line is made low to high and the slave puts the Data
    bit on the SDA line and master stores the value to form a byte.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] delay.
- * @param[Out] returns the value of readData .
+ * @param[in] unsigned char
+ * @param[Out] unsigned char (returns the value of readData) .
  */
 unsigned char I2cReadByte(unsigned char delay)
 {
@@ -222,7 +221,7 @@ unsigned char I2cReadByte(unsigned char delay)
    bit on the SDA line and master stores the value to form a byte.
  * @warning The code will be in while loop if the slave is not
    responding.
- * @param[in] delay.
+ * @param[in] unsigned char
  * @param[Out] No output parameter
  */
 void ReadAckForWrite(unsigned char delay)
@@ -254,7 +253,7 @@ void ReadAckForWrite(unsigned char delay)
    transition..
  * @warning The code will be in while loop if the slave is not
    responding.
- * @param[in] delay.
+ * @param[in] unsigned char
  * @param[Out] No output parameter
  */
 void SendAckForRead(unsigned char delay)
@@ -286,7 +285,7 @@ void SendAckForRead(unsigned char delay)
    transition..
  * @warning The code will be in while loop if the slave is not
    responding.
- * @param[in] delay.
+ * @param[in] unsigned char
  * @param[Out] No output parameter.
  */
 void SendNackForRead(unsigned char delay)
@@ -367,8 +366,7 @@ void I2cSendSlaveAddress(unsigned char slaveAddress, unsigned char rdWrCntrl, un
  * @details When writing a byte, the master has to send the data first and then
    it needs to wait for acknowledge from the slave.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] : Data that needs to be written (can be either register address,
-   or register value).
+ * @param[in] : unsigned char , unsigned char (Data that needs to be written (can be either register  *              address,or register value) ).
  * @param[Out] No output parameter
  */
 void I2cWriteData(unsigned char writeData, unsigned char delay)
@@ -390,8 +388,8 @@ void I2cWriteData(unsigned char writeData, unsigned char delay)
  * @details Ack is sent to the slave so that it can make sure the data is read,
    by the master so that slave can send next data.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] delay.
- * @param[Out] returns the value of readData .
+ * @param[in] unsigned char
+ * @param[Out] unsigned char (returns the value of readData )
  */
 unsigned char I2cReadDataAck(unsigned char delay)
 {
@@ -411,8 +409,8 @@ unsigned char I2cReadDataAck(unsigned char delay)
    the master can perform this action and respond with Nack to terminate the
    transfer.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] delay.
- * @param[Out] returns the value of readData .
+ * @param[in] unsigned char
+ * @param[Out] unsigned char ( returns the value of readData )
  */
 unsigned char I2cReadDataNack(unsigned char delay)
 {
@@ -430,7 +428,7 @@ unsigned char I2cReadDataNack(unsigned char delay)
  * @brief Sending start condition for the I2C.
  * @details Start condition is making SDA low when clock is high.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] delay.
+ * @param[in] unsigned char
  * @param[Out] No output parameters.
  */
 void I2cStart(unsigned char delay)
@@ -443,7 +441,7 @@ void I2cStart(unsigned char delay)
  * @brief Sending stop condition for the I2C.
  * @details Stop condition is making SDA high when clock is high.
  * @warning This bit value can be changed as per I2C_SCL macro.
- * @param[in] delay.
+ * @param[in] unsigned char 
  * @param[Out] No output parameters.
  */
 void I2cStop(unsigned char delay)
@@ -456,7 +454,7 @@ void I2cStop(unsigned char delay)
  * @brief To write one byte of data into a particular register of a partivular slave
  * @details 
  * @warning 
- * @param[in] slave address, register address, data to be written
+ * @param[in] unsigned char ,unsigned char , unsigned char, unsigned char(slave address, register     *             address, data to be written )
  * @param[Out] No output parameter
  */
 void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsigned char data, unsigned char delay )
@@ -471,8 +469,8 @@ void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsig
  * @brief To read one byte of data from a particular register of a partivular slave
  * @details 
  * @warning 
- * @param[in] slave address, register address
- * @param[Out] readdata
+ * @param[in] unsigned char ,unsigned char,unsigned char (slave address, register address)
+ * @param[Out] int (readdata)
  */
 int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigned char delay)
 {
@@ -489,8 +487,8 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
  * @brief To burst read (i.e read multiple bytes byte of data)
  * @details 
  * @warning 
- * @param[in] readbuf to store read data, count to tell how many bytes to read , last
- * @param[Out] No. of values(bytes) read
+ * @param[in] char, int, int, unsigned char (readbuf to store read data, count to tell how many       *             bytes to read , last )
+ * @param[Out] int ( No. of values(bytes) read)
  */
 int I2c_shakti_readbytes(char *buf, int count, int last, unsigned char delay)
 {

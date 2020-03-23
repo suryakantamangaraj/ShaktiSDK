@@ -30,7 +30,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] unsigned long
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long , unsigned long );
@@ -41,7 +41,7 @@ extern void delay_loop(unsigned long , unsigned long );
  * @details 4 GPIO pins are mapped to 4 Buttons. This function configures
  *          each BTN as input pin.
  * @warning No warning
- * @param[in] Pin that needs to be configured as BTN.
+ * @param[in] unsigned long (Pin that needs to be configured as BTN.)
  * @param[Out] No output parameters.
  */
 void configure_btn(unsigned long pinCntrl)

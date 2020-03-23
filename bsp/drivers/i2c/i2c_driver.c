@@ -19,7 +19,6 @@
 
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 /* Enable these bits only when corresponding interrupt is needed.*/
@@ -60,8 +59,8 @@ i2c_init()
  *  and prescalar count decides the frequency (sck) that needs to be used for
  *  the I2C serial communication. Then resets status register.
  * @warning Nil.
- * @param[in] prescale_div, scl_div.
- * @param[Out] No output parameters.
+ * @param[in] i2c_struct*, unsigned char , unsigned char 
+ * @param[Out] int
  */
 int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned char scl_div)
 {
@@ -146,7 +145,7 @@ int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned c
  * @brief 
  * @details 
  * @warning 
- * @param[in] i2c_struct * i2c_instance
+ * @param[in] i2c_struct*
  * @param[Out] int
  */
 int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
@@ -175,7 +174,7 @@ int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
  * @brief 
  * @details 
  * @warning 
- * @param[in] int
+ * @param[in] i2c_struct* ,int
  * @param[Out] int 
  */
 int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
@@ -203,7 +202,7 @@ int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
  * @brief 
  * @details 
  * @warning 
- * @param[in] int, const char
+ * @param[in] i2c_struct*, const char, int, int ,int
  * @param[Out] int
  */
 int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, int eni)
@@ -245,7 +244,7 @@ int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, i
  * @brief 
  * @details 
  * @warning 
- * @param[in] int
+ * @param[in] i2c_struct*, char, int, int
  * @param[Out] int
  */
 int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
@@ -296,7 +295,7 @@ int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
  * @brief  Performs the intilization of i2c slave.
  * @details 
  * @warning 
- * @param[in] slave address.
+ * @param[in] i2c_struct*, unsigned char, unsigned char, unsigned long
  * @param[Out] int
  */
 int i2c_send_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
@@ -366,7 +365,7 @@ int i2c_send_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress
  * @brief It does the reading or writing from the address specified .
  * @details 
  * @warning 
- * @param[in] starting address.
+ * @param[in] i2c_struct*, unsigned char,unsigned char
  * @param[Out] int
  */
 int i2c_write_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay)
@@ -407,7 +406,7 @@ int i2c_write_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned 
  * @brief It does the reading or writing from the address specified .
  * @details 
  * @warning 
- * @param[in] starting address.
+ * @param[in] i2c_struct*,unsigned char,unsigned char
  * @param[Out] int
  */
 //#define READ_INTERRUPT 1
@@ -441,7 +440,7 @@ int i2c_read_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned 
  * @brief  Performs the intilization of i2c slave.
  * @details 
  * @warning 
- * @param[in] slave address.
+ * @param[in] i2c_struct*,unsigned char,unsigned char,unsigned long
  * @param[Out] int
  */
 int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
@@ -508,7 +507,7 @@ int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char sl
  * @brief  
  * @details 
  * @warning 
- * @param[in] unsigned char
+ * @param[in] i2c_struct, unsigned char, unsigned char, unsigned char 
  * @param[Out] int
  */
 int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned char delay, 
@@ -561,7 +560,7 @@ int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data,
  * @brief  
  * @details 
  * @warning 
- * @param[in] unsigned char
+ * @param[in] i2c_struct*, unsigned char, unsigned char,unsigned char
  * @param[Out] int
  */
 int i2c_write_interrupt_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay, unsigned char last)

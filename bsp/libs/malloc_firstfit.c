@@ -1,9 +1,9 @@
 /***************************************************************************
 * Project               	    		: shakti devt board
-* Name of the file	            		: malloc_firstfit.c
-* Brief Description of file             : Malloc using First-fit algorithm code.
-* Name of Author    	                : Abhinav Ramnath
-* Email ID                              : abhinavramnath13@gmail.com
+* Name of the file	            	: malloc_firstfit.c
+* Brief Description of file       : Malloc using First-fit algorithm code.
+* Name of Author    	            : Abhinav Ramnath
+* Email ID                        : abhinavramnath13@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 #include<unistd.h>
 #include<sys/types.h>
@@ -62,6 +61,12 @@ return NULL;
 }
 
 //We search for free blocks
+/** @fn  
+ * @brief  
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 struct Header *find_free_block(struct Header **last, size_t size) {
 log_info("\nfind free");  
 struct Header *current = global_base;
@@ -82,6 +87,12 @@ log_info("\n After Loop %d %d %x %x",current->size,size,current,*last);
 }
 
 //Creating a new block
+/** @fn  
+ * @brief  
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 struct Header* request_heap()
 {
 struct Header *block;
@@ -104,6 +115,12 @@ struct Header *block;
 }
 
 //malloc function to allocate space
+/** @fn  
+ * @brief  
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void *malloc(size_t size) {
   struct Header *block;
 
@@ -154,6 +171,12 @@ struct Header *get_block_ptr(void *ptr) {
 }
 
 //free to free the memory allocated by malloc
+/** @fn  
+ * @brief  
+ * @warning 
+ * @param[in] 
+ * @param[Out] 
+ */
 void free(void *ptr) {
   if (!ptr) {
     log_error("\n Wrong value passed to free");

@@ -49,7 +49,7 @@ unsigned int extract_ie_code(unsigned int num)
  * @brief 
  * @details 
  * @warning 
- * @param[in] unsigned int ptr
+ * @param[in] unsigned int ptr ,unsigned int ptr
  * @param[Out] No output parameter
  */
 void default_handler(uintptr_t mcause, uintptr_t epc)
@@ -65,7 +65,7 @@ void default_handler(uintptr_t mcause, uintptr_t epc)
  * @brief 
  * @details 
  * @warning 
- * @param[in] unsigned int ptr
+ * @param[in] unsigned int ptr, unsigned int ptr
  * @param[Out] unsigned int ptr
  */
 uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)

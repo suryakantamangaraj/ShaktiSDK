@@ -1,8 +1,8 @@
 /***************************************************************************
- * Project               	   : shakti devt board
+ * Project               	     : shakti devt board
  * Name of the file	           : sys_brk.c
  * Brief Description of file   : System BRK
- * Name of Author    	       : Abhinav Ramnath
+ * Name of Author    	         : Abhinav Ramnath
  * Email ID                    : abhinavramnath13@gmail.com
 
   Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -19,7 +19,6 @@
 
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 #include "platform.h"
@@ -32,6 +31,12 @@ char *end_of_heap=(char *)&_heap_end;
  * sbrk -- changes heap size size. Get nbytes more
  *         RAM. We just increment a pointer in what's
  *         left of memory on the board.
+ */
+ /** @fn  m_sbrk
+ * @brief  
+ * @warning 
+ * @param[in] 
+ * @param[Out] char 
  */
 char * m_sbrk (nbytes)
      int nbytes;
