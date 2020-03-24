@@ -1,9 +1,9 @@
 /***************************************************************************
-* Project               	    		:  shakti devt board
-* Name of the file	            		:  pwmmotor.c
-* Brief Description of file             :  example file for pwm motor.
-* Name of Author    	                :  Abhinav Ramnath
-* Email ID                              :  abhinavramnath13@gmail.com
+* Project               	        :  shakti devt board
+* Name of the file	                :  pwmmotor.c
+* Brief Description of file         :  example file for pwm motor.
+* Name of Author    	            :  Abhinav Ramnath
+* Email ID                          :  abhinavramnath13@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -24,12 +24,12 @@
 
 #include "pwm_driver.h"
 
-/** @fn main()
+/** @fn main
  * @brief main function that runs the code
  * @details runs the code
  * @warning No warning
  * @param[in] No input parameter 
- * @param[Out] No output parameter
+ * @param[Out] int
  */
 int main()
 {

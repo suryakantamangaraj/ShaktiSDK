@@ -1,8 +1,7 @@
 /***************************************************************************
 * Project           			:  shakti devt board
 * Name of the file	     		:  hello.c
-* Created date			        :  26.02.2019
-* Brief Description of file     :  Does the printing of hello with the help of uart communication protocol.
+* Brief Description of file     :  Does the printing of hello with the help of uart communication                                       protocol.
 * Name of Author    	        :  Sathya Narayanan N
 * Email ID                      :  sathya281@gmail.com
 

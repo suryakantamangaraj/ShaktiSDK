@@ -1,10 +1,9 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  tglgpio.c
-* Created date			        :  26.02.2019
-* Brief Description of file             :  Control an led with the help of a button, gpio based.
-* Name of Author    	                :  Sathya Narayanan N
-* Email ID                              :  sathya281@gmail.com
+* Project           			: shakti devt board
+* Name of the file	     		: tglgpio.c
+* Brief Description of file     : Control an led with the help of a button, gpio based.
+* Name of Author    	        : Sathya Narayanan N
+* Email ID                      : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -29,17 +28,16 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main
  * @brief 
- * @details 
  * @warning No warning
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */ 
 void main()
 {
@@ -49,7 +47,6 @@ void main()
 
 /** @fn tglgpio
  * @brief Performs the toggling operation  with the help of button.
- * @details 
  * @warning No warning
  * @param[in] Registers,control word
  * @param[Out] No output parameter

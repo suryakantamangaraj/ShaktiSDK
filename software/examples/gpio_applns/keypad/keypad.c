@@ -1,7 +1,7 @@
 /************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: Keypad.c 
- * Brief Description of file    :
+ * Brief Description of file    : reads and prints pressed key in 4x4 keypad
  * Name of Author    	        : Kotteeswaran
  * Email ID                     : kottee.1@gmail.com
   

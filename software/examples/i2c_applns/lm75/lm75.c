@@ -1,8 +1,9 @@
 /***********************************************************************************
- * Project           	  : shakti devt board
- * Name of the file	      : lm75.c
- * Name of Author         : Kotteeswaran
- * Email ID               : kottee.1@gmail.com
+ * Project           	      : shakti devt board
+ * Name of the file	          : lm75.c
+ * Brief Description of file  : reads current room temperature over i2c interface
+ * Name of Author             : Kotteeswaran
+ * Email ID                   : kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -18,7 +19,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***********************************************************************************/
 
 #include <stdint.h>//Includes the definitions of standard input/output functions//
@@ -42,8 +42,8 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned long
+ * @param[Out] int
  */
 int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned long delay)
 {
@@ -81,8 +81,8 @@ int read_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsig
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned long
+ * @param[Out] int
  */
 int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int write_value, unsigned long delay)
 {
@@ -103,8 +103,8 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int main()
 {

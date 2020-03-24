@@ -1,8 +1,9 @@
-/***********************************************************************************
- * Project           	  : shakti devt board
- * Name of the file	      : pcf8591.c
- * Name of Author         : Kotteeswaran
- * Email ID               : kottee.1@gmail.com
+/*************************************************************************
+ * Project           	       : shakti devt board
+ * Name of the file	           : pcf8591.c
+ * Brief Description of file   :
+ * Name of Author              : Kotteeswaran
+ * Email ID                    : kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -18,8 +19,7 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-***********************************************************************************/
+***************************************************************************/
 
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
@@ -40,8 +40,8 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned char, unsigned long
+ * @param[Out] int
  */
 int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
 {
@@ -80,8 +80,8 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned char, unsigned long
+ * @param[Out] int
  */
 int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
 {
@@ -102,8 +102,8 @@ int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int main()
 {

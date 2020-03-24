@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           	: shakti devt board
- * Name of the file	    : light_blocking.c
- * Created date			: 20.08.2019
- * Name of Author       : Soutrick Roy Chowdhury
- * Email ID             : soutrick97@gmail.com
+ * Project           	      : shakti devt board
+ * Name of the file	          : light_blocking.c
+ * Brief Description of file  :
+ * Name of Author             : Soutrick Roy Chowdhury
+ * Email ID                   : soutrick97@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 

@@ -27,11 +27,11 @@
 
 int *pinmux_reg = (const int*) PINMUX_CONF_REG;
 
-/** @fn main()
+/** @fn main
  * @brief main function that runs the code
  * @warning No warning
  * @param[in] NO input parameter
- * @param[Out] 0
+ * @param[Out] int
  */
 int main()
 {

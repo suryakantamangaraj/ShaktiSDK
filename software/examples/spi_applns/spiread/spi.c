@@ -19,8 +19,8 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
+
 #include <stdint.h>
 #include "spi.h"
 
@@ -28,8 +28,8 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter 
+ * @param[Out] No output parameter
  */
 void main(){
 

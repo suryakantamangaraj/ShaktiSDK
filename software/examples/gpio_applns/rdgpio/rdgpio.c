@@ -1,9 +1,9 @@
 /***************************************************************************
-* Project           			   : shakti devt board
-* Name of the file	     		 : rdgpio.c
-* Brief Description of file  : Performs the reading operation with the help of gpio pins.
+* Project           		   : shakti devt board
+* Name of the file	     	   : rdgpio.c
+* Brief Description of file    : Performs the reading operation with the help of gpio pins.
 * Name of Author    	       : Sathya Narayanan N
-* Email ID                   : sathya281@gmail.com
+* Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 #include <stdio.h>//includes the definitions of standard input/output functions
