@@ -1,9 +1,9 @@
 /***************************************************************************
-* Project           			    : shakti devt board
-* Name of the file	     		  : clint_driver.c
-* Brief Description of file   : source file for clint.
+* Project           			: shakti devt board
+* Name of the file	     		: clint_driver.c
+* Brief Description of file     : source file for clint.
 * Name of Author    	        : Sathya Narayanan N
-* Email ID                    : sathya281@gmail.com
+* Email ID                      : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,6 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
+
 #include "clint_driver.h"
 #include "log.h"
 #include "defines.h"

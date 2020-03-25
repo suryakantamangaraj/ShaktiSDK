@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           	      : shakti devt board
  * Name of the file	          : light_blocking.c
- * Brief Description of file  :
+ * Brief Description of file  : Photo Interrupter key module will trigger a signal when light                                        between the sensor's gap is blocked.
  * Name of Author             : Soutrick Roy Chowdhury
  * Email ID                   : soutrick97@gmail.com
 

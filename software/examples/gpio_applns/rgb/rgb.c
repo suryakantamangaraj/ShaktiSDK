@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           			 : shakti devt board
  * Name of the file	     		 : rgb.c
- * Brief Description of file     :
+ * Brief Description of file     : It will blink red, green and blue light after a specified delay.
  * Name of Author                : Soutrick Roy Chowdhury
  * Email ID                      : soutrick97@gmail.com
 

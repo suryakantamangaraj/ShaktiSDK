@@ -1,9 +1,9 @@
 /***************************************************************************
-* Project           			  :  shakti devt board
-* Name of the file	     		:  plic_driver.h
-* Brief Description of file :  Header file for plic driver.
-* Name of Author    	      :  Sathya Narayanan N
-* Email ID                  :  sathya281@gmail.com
+* Project           		   :  shakti devt board
+* Name of the file	     	   :  plic_driver.h
+* Brief Description of file    :  Header file for plic driver.
+* Name of Author    	       :  Sathya Narayanan N
+* Email ID                     :  sathya281@gmail.com
 
 Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,6 +20,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
+/**
+ * @file plic_driver.h
+ * @project shakti devt board
+ * @brief  Header file for plic driver
+ */
 
 #ifndef PLIC_DRIVER_H
 #define PLIC_DRIVER_H

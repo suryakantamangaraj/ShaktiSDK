@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: passive_buzzer.c
- * Brief Description of file    :
+ * Brief Description of file    : It will buzzer at a desired frequency when you give oscillating                                      electronic signal.
  * Name of Author               : Soutrick Roy Chowdhury
  * Email ID                     : soutrick97@gmail.com
 
