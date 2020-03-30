@@ -22,9 +22,9 @@ PROGRAM ?=switch_mode
 #default target board
 TARGET ?= artix7_35t
 DEBUG ?=
-MARCH ?= rv32imac
-MABI  ?= ilp32
-XLEN  ?= 32
+MARCH ?= rv64imac
+MABI  ?= lp64
+XLEN  ?= 64
 FLAGS ?=
 
 all: create_dir

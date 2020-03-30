@@ -18,15 +18,15 @@ _start:
 	li      t0, 0x1800
 	csrrc   zero,mstatus, t0 
 	li      t0, 0x0800
-	csrs    mstatus, t0               # set mpp (previous mode) with supervisor mode
+	csrs    mstatus, t0          # set mpp (previous mode) with supervisor mode
 	la  t0, s_mode_begin         # set up mepc with address of supervisor mode re-entry function
 	csrw    mepc, t0
-	mret 
-
+	mret                         #exiting M mode 
+ 
 
 s_mode_begin:
-	sw x17, 0x60(x15) # Store word - Storing Word 
-	lw x12, 0x60(x15)  #load x15+0x60 location value to x12
+	la x17, _data1  #base address
+	sw x17, 0x4(x17) # Store word - Storing Word 
 	bnez x10, _start
 
 trap_handler:
