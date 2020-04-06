@@ -24,7 +24,7 @@ PROGRAM ?=
 TARGET ?= artix7_35t
 DEBUG ?=
 MARCH ?= rv32imac
-MABI  ?=
+MABI  ?= 
 XLEN  ?= 32
 FLAGS ?=
 
@@ -36,8 +36,8 @@ gyroi2c.riscv: create_dir
 	 
 	@echo -e $(BSP)
 	 
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c ./gyroi2c.c -o ./output/gyroi2c.o -march=$(MARCH) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri)  -I$(bspboard)  -c $(bspdri)/i2c/gpio_i2c.c -o ./output/gpio_i2c.o -march=$(MARCH) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c ./gyroi2c.c -o ./output/gyroi2c.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -I$(bspdri)  -I$(bspboard)  -c $(bspdri)/i2c/gpio_i2c.c -o ./output/gpio_i2c.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/gyroi2c.o ./output/gpio_i2c.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
