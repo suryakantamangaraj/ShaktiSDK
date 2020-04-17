@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           	        		:  shakti devt board
- * Name of the file	     	         	:  qspi_micron.c
- * Brief Description of file            :  source file for qspi_micron  
- * Name of Author    	                :  visvesh
- * Email ID                             :  
+ * Project           	        : shakti devt board
+ * Name of the file	     	    : qspi_micron.c
+ * Brief Description of file    : source file for qspi_micron  
+ * Name of Author    	        : visvesh
+ * Email ID                     : vishu.vivek@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ****************************************************************************/
 
 #include "qspi.h"
@@ -49,7 +48,7 @@ int* endmm    =      (const int*) ENDMM;
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int*, int
  * @param[Out] No output parameter
  */
 void set_qspi_shakti32(int* addr, int val)
@@ -61,7 +60,7 @@ void set_qspi_shakti32(int* addr, int val)
  * @brief 
  * @details
  * @warning 
- * @param[in] 
+ * @param[in] 16bitint*, 16bitint
  * @param[Out] No output parameter
  */
 void set_qspi_shakti16(int16_t* addr, int16_t val)
@@ -73,7 +72,7 @@ void set_qspi_shakti16(int16_t* addr, int16_t val)
  * @brief 
  * @details
  * @warning 
- * @param[in] char
+ * @param[in] char*, char
  * @param[Out] No output parameter
  */
 void set_qspi_shakti8(char* addr, char val)
@@ -85,7 +84,7 @@ void set_qspi_shakti8(char* addr, char val)
  * @brief 
  * @details
  * @warning 
- * @param[in] int   
+ * @param[in] int*   
  * @param[Out] int
  */
 int get_qspi_shakti(int* addr)
@@ -97,7 +96,7 @@ int get_qspi_shakti(int* addr)
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int, int, int, int, int
  * @param[Out] No output parameter
  */
 void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode){
@@ -165,7 +164,7 @@ int check_fail_bit(){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int, int, int, int
  * @param[Out] int
  */
 int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address){
@@ -198,7 +197,7 @@ int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int add
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int, int, int, int
  * @param[Out] int
  */
 int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address){
@@ -354,7 +353,7 @@ int flashEnable4ByteAddressingMode(){  //Enable 4-byte addressing Mode and read 
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int, int, int, int
  * @param[Out] int
  */
 int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
@@ -378,7 +377,7 @@ int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int 
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int 
  * @param[Out] int
  */
 int flashReadDualSPI(int address, int data_length){
@@ -403,7 +402,7 @@ int flashReadDualSPI(int address, int data_length){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int, int, int, int
  * @param[Out] int
  */
 int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
@@ -429,7 +428,7 @@ int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int da
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int*
  * @param[Out] int
  */
 int flashSingleSPIXip(int addr, int* dest_addr){
@@ -454,7 +453,7 @@ int flashSingleSPIXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int*
  * @param[Out] int
  */
 int flashSingleSPIDDRXip(int addr, int* dest_addr){
@@ -478,7 +477,7 @@ int flashSingleSPIDDRXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int*
  * @param[Out] int
  */
 int flashDualSPIXip(int addr, int* dest_addr){
@@ -503,7 +502,7 @@ int flashDualSPIXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int*
  * @param[Out] int
  */
 int flashDualSPIDDRXip(int addr, int* dest_addr){
@@ -527,7 +526,7 @@ int flashDualSPIDDRXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int*
  * @param[Out] int
  */
 int flashQuadSPIXip(int addr, int* dest_addr){
@@ -558,7 +557,7 @@ int flashQuadSPIXip(int addr, int* dest_addr){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int*
  * @param[Out] int
  */
 int flashQuadSPIDDRXip(int addr, int* dest_addr){
@@ -616,7 +615,7 @@ int flashWriteVolatileConfigReg(int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] No iput parameter
+ * @param[in] No input parameter
  * @param[Out] int
  */
  
@@ -633,7 +632,7 @@ int flash_Write_disable(){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int
  * @param[Out] int
  */
 int eraseSector(int command, int address){
@@ -723,7 +722,7 @@ int micron_enable_4byte_addressing(int status){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int
  * @param[Out] int
  */
 int micron_configure_xip_volatile(int status, int value){
@@ -742,7 +741,7 @@ int micron_configure_xip_volatile(int status, int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int ,int
  * @param[Out] int
  */
 int micron_disable_xip_volatile(int status, int value){
@@ -764,7 +763,7 @@ int micron_disable_xip_volatile(int status, int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int
  * @param[Out] int
  */
 int micron_read_id_cmd(int status, int value){
@@ -781,7 +780,7 @@ int micron_read_id_cmd(int status, int value){
  * @brief 
  * @details
  * @warning 
- * @param[in] int
+ * @param[in] int, int
  * @param[Out] int
  */
 int micron_read_configuration_register(int status, int value){

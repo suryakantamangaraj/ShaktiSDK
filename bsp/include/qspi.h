@@ -2,6 +2,8 @@
  * Project           			: shakti devt board
  * Name of the file	     		: qspi.h
  * Brief Description of file    : Header file for qspi.
+ * Name of Author    	        : visvesh
+ * Email ID                     : vishu.vivek@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -17,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ************************************************************************/
 /**
  * @file qspi.h

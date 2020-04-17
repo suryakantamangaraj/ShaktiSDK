@@ -1,10 +1,9 @@
 /***************************************************************************
  * Project           			:  shakti devt board
  * Name of the file	     		:  buttons.c
- * Created date			        :  22.08.2019
- * Brief Description of file            :  Read the value from the switches
- * Name of Author    	                :  Madan Kumar S
- * Email ID                             :  kumarmadan96@gmail.com
+ * Brief Description of file    :  Read the value from the switches
+ * Name of Author    	        :  Madan Kumar S
+ * Email ID                     :  kumarmadan96@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -34,7 +33,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation. 
  * @warning NO warning
- * @param[in] Delay  Required(ms) 
+ * @param[in] unsigned long, unsigned long 
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);

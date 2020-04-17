@@ -1,6 +1,7 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: gyroi2c.c 
+ * Brief Description of file    : reads acceleration & gyro info. with preconfigured sample rate                                       over I2C interface.
  * Name of Author    	        : Kotteeswaran
  * Email ID                     : kottee.1@gmail.com
  
@@ -58,7 +59,7 @@ static unsigned char delay = 100;
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
+ * @param[in] No input parameter
  * @param[Out] No output parameter
  */
 
@@ -89,8 +90,8 @@ void measuring_value()
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 
 int main()
@@ -141,10 +142,9 @@ int main()
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
-
 void calculate_imu_error()
 {
 	int c = 0;

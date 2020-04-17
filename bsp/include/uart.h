@@ -20,7 +20,6 @@
 
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ************************************************************************/
 /**
  * @file uart.h
@@ -61,26 +60,26 @@ typedef struct
 } uart_struct;
 
 #define STS_RX_THRESHOLD	0x1 << 8
-#define BREAK_ERROR	1 << 7
-#define FRAME_ERROR	1 << 6
-#define OVERRUN        	1 << 5
-#define PARITY_ERROR        	1 << 4
+#define BREAK_ERROR	        1 << 7
+#define FRAME_ERROR	        1 << 6
+#define OVERRUN        	    1 << 5
+#define PARITY_ERROR        1 << 4
 #define STS_RX_FULL 		1 << 3
-#define STS_RX_NOT_EMPTY 		1 << 2
+#define STS_RX_NOT_EMPTY    1 << 2
 #define STS_TX_FULL 		1 << 1
 #define STS_TX_EMPTY 		1 << 0
 
 /*! UART Interrupt Enable bits description */
-#define ENABLE_RX_THRESHOLD	1 << 8
+#define ENABLE_RX_THRESHOLD	    1 << 8
 #define ENABLE_BREAK_ERROR      1 << 7
 #define ENABLE_FRAME_ERROR      1 << 6
 #define ENABLE_OVERRUN          1 << 5
 #define ENABLE_PARITY_ERROR     1 << 4
-#define ENABLE_RX_FULL 		1 << 3
+#define ENABLE_RX_FULL 		    1 << 3
 #define ENABLE_RX_NOT_EMPTY 	1 << 2
-#define ENABLE_TX_FULL 		1 << 1
-#define ENABLE_TX_EMPTY 	1 << 0
-#define UARTX_BUFFER_SIZE 10000
+#define ENABLE_TX_FULL 		    1 << 1
+#define ENABLE_TX_EMPTY 	    1 << 0
+#define UARTX_BUFFER_SIZE       10000
 
 
 extern uart_struct *uart_instance[MAX_UART_COUNT];

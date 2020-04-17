@@ -19,7 +19,6 @@
 
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 #include "spi.h"
 #include "utils.h"
@@ -56,7 +55,7 @@ void configure_spi(int offset)
  * @brief to assign value to memory mapped spi register
  * @details 
  * @warning 
- * @param[in] int
+ * @param[in] int*, int
  * @param[Out] No output parameter 
  */
 void set_spi(int* addr, int val)
@@ -68,7 +67,7 @@ void set_spi(int* addr, int val)
  * @brief to get value for memory mapped spi register
  * @details 
  * @warning No warning
- * @param[in] int 
+ * @param[in] int*
  * @param[Out] int
  */
 int get_spi(int* addr)
@@ -117,8 +116,10 @@ void spi_rx_enable()
  * @brief Extract the k number of bit from (p-1) position of 'number'
  * @details If one want to extract the k bits from (p-1) position in 32 bit "number".   
  * @warning No warning
- * @param[in] number (32 bit ), k (number of bits to be extracted), p (position from where the bits to be extracted)
- * @param[Out] 32 bit which have k bit from "number" and rest are zero
+ * @param[in] int (number (32 bit)), 
+              int (k (number of bits to be extracted)) ,
+			  int (p (position from where the bits to be extracted))
+ * @param[Out] int (32 bit which have k bit from "number" and rest are zero)
  */
 int bitExtracted(int number, int k, int p) 
 {
@@ -130,7 +131,7 @@ int bitExtracted(int number, int k, int p)
  * @details As soons as data come to receive buffer this bit is set.  
  * @warning  No warning
  * @param[in] No input parameter
- * @param[Out] 1: if there is data into the RxFIFO else 0
+ * @param[Out] int (1: if there is data into the RxFIFO else 0)
  */
 int spi_rxne_enable()
 {
@@ -149,7 +150,7 @@ int spi_rxne_enable()
  * @details it read the status of bsy bit in spi_sr 
  * @warning One should check this bit before going to next transcation
  * @param[in] No input parameter
- * @param[Out]  0: SPI is busy in communication, 1: SPI nt busy
+ * @param[Out] int (0: SPI is busy in communication, 1: SPI nt busy)
  */
 int spi_notbusy()
 {
@@ -169,7 +170,7 @@ int spi_notbusy()
  * @details Before modifying content of flash, one should enable the WEL bit first
  * @warning Without enabling this bit one cannot erase/write into the flash
  * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[Out] int
  */
 int flash_write_enable()
 {
@@ -185,7 +186,7 @@ int flash_write_enable()
  * @details It will reset the bits of status register
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[Out] int
  */
 int flash_clear_sr()
 {
@@ -201,8 +202,8 @@ int flash_clear_sr()
  * @brief Use for sending 8bit of command + 32 bit of address 
  * @details Useful for function like erase
  * @warning to move data drom dr register to fifo there must be some data into spi_dr5 
- * @param[in] int command (opcode), addr (address after the opcode)
- * @param[Out] No output parameter
+ * @param[in] int (command (opcode)) , int (addr(address after the opcode))
+ * @param[Out] int
  */
 int flash_cmd_addr(int command, int addr)
 {
@@ -219,7 +220,7 @@ int flash_cmd_addr(int command, int addr)
  * @brief useful for function like Write 
  * @details use for sending 8bit command +32bit of write address + 32 bit of write data
  * @warning to move data from data register to fifo there must be some data into spi_dr5
- * @param[in] int command (opcode), addr (address after the opcode), data (data after the address)
+ * @param[in] int (command (opcode)), int (addr(address after the opcode)), int (data(data after the               address))
  * @param[Out] No output parameter
  */
 void flash_cmd_addr_data(int command, int addr, int data)
@@ -258,7 +259,7 @@ void flash_cmd_addr_data(int command, int addr, int data)
  * @brief  Write 4bytes of data from given address
  * @details flash_cmd_addr_data with opcode 12h.  
  * @warning before writing into the flash one should enable the WEL bit spi_sr by using write_enable()
- * @param[in] int addres (write address), data (write data)
+ * @param[in] int (addres (write address)), int (data (write data))
  * @param[Out] No output parameter
  */
 void flash_write(int address, int data)
@@ -270,8 +271,8 @@ void flash_write(int address, int data)
 * @briefUse useful for function like read
  * @details for sending command of 8bit + read address of 32bit + 8bit of dummy cycle and receive 32bit value from flash 
  * @warning As receive shoild start as soon as transmit state end, use spi_rx_tx_start() befor setting control register 1
- * @param[in] int command (opcode), addr (read_address)
- * @param[Out] int read data
+ * @param[in] int (command (opcode)), int (addr (read_address))
+ * @param[Out] int (read data)
  */
 int flash_cmd_to_read(int command, int addr)
 {
@@ -302,8 +303,8 @@ int flash_cmd_to_read(int command, int addr)
  * @brief read the 4bytes data from given address 
  * @details flash_cmd_to_read eith opcode 0ch for fast read
  * @warning No warning
- * @param[in] int address (read address)
- * @param[Out] int read data
+ * @param[in] int (address (read address))
+ * @param[Out] int (read data)
  */
 int flash_read(int address)
 {
@@ -316,8 +317,8 @@ int flash_read(int address)
  * @brief usefull for reading status register
  * @details use for sending 8bit command and receive the 32bit of data
  * @warning No warning
- * @param[in] int command (opcode)
- * @param[Out] int  value (flash response to opcode)
+ * @param[in] int (command (opcode))
+ * @param[Out] int (value (flash response to opcode))
  */
 int flash_cmd_read(int command)
 {
@@ -352,7 +353,7 @@ void flash_erase(int address)
  * @details  Using flash_cmd_read function with opcode 05h to check status of WIP(Write in progress) and WEL(Write Enable Latch) bit.
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[Out] int
  */
 int flash_status_register_read()
 {

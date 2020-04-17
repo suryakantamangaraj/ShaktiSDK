@@ -1,8 +1,7 @@
 /***************************************************************************
- * Project           	      : shakti devt board
- * Name of the file	      : human_detection.c
- * Created date		      : 20.08.2019
- * Brief Description of file  : Helps to detects the persons around the range of the module with the help of gpio pins
+ * Project           	        : shakti devt board
+ * Name of the file	          : human_detection.c
+ * Brief Description of file  : Helps to detects the persons around the range of the module with the                                 help of gpio pins
  * Name of Author             : Soutrick Roy Chowdhury
  * Email ID                   : soutrick97@gmail.com
 
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *****************************************************************************/
 #include <stdio.h>
 #include "gpio.h"
@@ -29,7 +27,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation  
  * @warning No warning
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
@@ -38,7 +36,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @brief Used to read through Human Detection Sensors
  * @details Printing the presence of a person near it
  * @warning We have to set the potentiometer correctly to get the correct result
- * @param[in] 
+ * @param[in] No input parameter
  * @param[Out] No output parameter
  */
 void main()

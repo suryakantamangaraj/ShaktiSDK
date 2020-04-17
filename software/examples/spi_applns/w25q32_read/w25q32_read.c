@@ -1,8 +1,7 @@
 /***************************************************************************
  * Project           					: shakti devt board
  * Name of the file	     				: w25q32_read.c
- * Created date			        		: 27.02.2020
- * Brief Description of file            : Performs the windonb flash  spi reading of 0 to 100 numbers.
+ * Brief Description of file            : Performs the windonb flash  spi reading of 0 to 100                                                  numbers.
  * Name of Author    	                : G Nambirajan & Koteeswaran
  * Email ID                             : nambirajan2004@gmail.com
 
@@ -36,8 +35,8 @@ cs  -spi cs
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void w25q32()
 {
@@ -64,8 +63,8 @@ void w25q32()
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void main()
 {

@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project               	    		: shakti devt board
- * Name of the file	            		: pwmdriver.h
- * Brief Description of file            : Header file for PWM Driver.
- * Name of Author    	                : Abhinav Ramnath
- * Email ID                             : abhinavramnath13@gmail.com
+ * Project               	    : shakti devt board
+ * Name of the file	            : pwmdriver.h
+ * Brief Description of file    : Header file for PWM Driver.
+ * Name of Author    	        : Abhinav Ramnath
+ * Email ID                     : abhinavramnath13@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 /**
  * @file pwm_driver.h

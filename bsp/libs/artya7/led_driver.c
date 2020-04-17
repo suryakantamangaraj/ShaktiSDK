@@ -1,7 +1,6 @@
 /***************************************************************************
 * Project           			: shakti devt board
 * Name of the file	     		: led_driver.c
-* Created date			        : 9.07.2019
 * Brief Description of file     : Performs the I2C operations using gpio pins.
 * Name of Author    	        : Kotteeswaran
 * Email ID                      : kottee.1@gmail.com
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
@@ -29,14 +27,20 @@
 #include "gpio.h"
 #include "led_driver.h"
 
+/** @fn delay_loop
+ * @brief Maintains the required delay to perform an operation
+ * @warning No warning
+ * @param[in] unsigned long, unsigned long
+ * @param[Out] No output parameter
+ */
 extern void delay_loop(unsigned long , unsigned long );
 
- /** @fn static void configure_ledx()
+ /** @fn  configure_ledx
  * @brief Configures Individual LED pins as output.
  * @details 8 GPIO pins are mapped to 8 LEDs. This function configures
  *          each LED as output pin.
  * @warning No warning
- * @param[in] pin_cntrl - Pin that needs to be configured as LED.
+ * @param[in] unsigned long (pin_cntrl- Pin that needs to be configured as LED.)
  * @param[Out] No output parameters.
  */
 void configure_ledx(unsigned long pin_cntrl)
@@ -52,7 +56,7 @@ void configure_ledx(unsigned long pin_cntrl)
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function configures
  *          each LED as output pin.
  * @warning No warning
- * @param[in] led_no - RGB LED that needs to be configured.
+ * @param[in] unsigned char (led_no - RGB LED that needs to be configured.)
  * @param[Out] No output parameters.
  */
 void configure_rgb_ledx(unsigned char led_no)
@@ -74,8 +78,8 @@ void configure_rgb_ledx(unsigned char led_no)
  * @details This function configures GPIO pins mapped to 
  *          Normal LEDs as output pins.
  * @warning No warning
- * @param[in]
- * @param[Out] No output parameters.
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void configure_normal_leds()
 {
@@ -91,8 +95,8 @@ void configure_normal_leds()
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
  *          gpio pins mapped to both RGB LEDs as output pins.
  * @warning No warning
- * @param[in]
- * @param[Out] No output parameters.
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void configure_rgb_leds()
 {
@@ -107,8 +111,8 @@ void configure_rgb_leds()
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
  *          all GPIO pins mapped to all the LEDs as output pins.
  * @warning No warning
- * @param[in]
- * @param[Out] No output parameters.
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void configure_all_leds()
 {
@@ -123,8 +127,8 @@ void configure_all_leds()
  * @details This function switches ON the LED based on
  *          the GPIO pin position passed.
  * @warning No warning
- * @param[in] pin_cntrl - GPIO Pin position of the LED that needs to be switched ON.
- * @param[Out] No output parameters.
+ * @param[in] unsigned long (pin_cntrl - GPIO Pin position of the LED that needs to be switched ON.)
+ * @param[Out] No output parameter
  */
 void turn_on_ledx(unsigned long pin_cntrl)
 {
@@ -139,7 +143,7 @@ void turn_on_ledx(unsigned long pin_cntrl)
  * @details This function switches OFF the LED based on
  *          the GPIO pin position passed.
  * @warning No warning
- * @param[in] pin_cntrl - GPIO Pin position of the LED that needs to be switched OFF.
+ * @param[in] unsigned long (pin_cntrl - GPIO Pin position of the LED that needs to be switched OFF)
  * @param[Out] No output parameters.
  */
 void turn_off_ledx(unsigned long pin_cntrl)
@@ -155,7 +159,7 @@ void turn_off_ledx(unsigned long pin_cntrl)
  * @details This function switches ON the Normal LEDs
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameters.
+ * @param[Out] No output parameter
  */
 void turn_on_normal_leds()
 {
@@ -170,7 +174,7 @@ void turn_on_normal_leds()
  * @details This function switches ON both RGB LED.
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameters.
+ * @param[Out] No output parameter.
  */
 void turn_off_normal_leds()
 {
@@ -185,8 +189,8 @@ void turn_off_normal_leds()
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function switches
  *          on passed RGB LED.
  * @warning No warning
- * @param[in] RGB LED that needs to be switched On[0,1].
- * @param[Out] No output parameters.
+ * @param[in] unsigned char (RGB LED that needs to be switched On[0,1].)
+ * @param[Out] No output parameter
  */
 void turn_on_rgb_ledx(unsigned char led_no)
 {
@@ -206,8 +210,8 @@ void turn_on_rgb_ledx(unsigned char led_no)
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function switches
  *          OFF passed RGB LED.
  * @warning No warning
- * @param[in] RGB LED that needs to be switched OFF[0,1].
- * @param[Out] No output parameters.
+ * @param[in] unsigned char (RGB LED that needs to be switched OFF[0,1].)
+ * @param[Out] No output parameter
  */
 void turn_off_rgb_ledx(unsigned char led_no)
 {
@@ -228,7 +232,7 @@ void turn_off_rgb_ledx(unsigned char led_no)
  *          ON both RGB LED.
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameters.
+ * @param[Out] No output parameter
  */
 void turn_on_rgb_leds()
 {
@@ -243,7 +247,7 @@ void turn_on_rgb_leds()
  * @details This function switches ON both RGB LED.
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameters.
+ * @param[Out] No output parameter
  */
 void turn_off_rgb_leds()
 {
@@ -258,7 +262,7 @@ void turn_off_rgb_leds()
  * @details This function switches ON all LEDs.
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameters.
+ * @param[Out] No output parameter
  */
 void turn_on_all_leds()
 {
@@ -273,7 +277,7 @@ void turn_on_all_leds()
  * @details This function switches OFF all LEDs.
  * @warning No warning
  * @param[in] No input parameter
- * @param[Out] No output parameters.
+ * @param[Out] No output parameter
  */
 void turn_off_all_leds()
 {
@@ -287,7 +291,7 @@ void turn_off_all_leds()
  * @brief Toggles the passed LED.
  * @details This function toggles given LED.
  * @warning No warning
- * @param[in] Led that needs to be toggled, delay.
+ * @param[in] unsigned long, unsigned long, unsigned long (Led that needs to be toggled, delay.)
  * @param[Out] No output parameters.
  */
 void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2)
@@ -306,8 +310,8 @@ void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long de
  * @details This function toggles given both the 
  *          normal LEDs.
  * @warning No warning
- * @param[in] delay1, delay2 
- * @param[Out] No output parameters.
+ * @param[in] unsigned long, unsigned long
+ * @param[Out] No output parameter
  */
 void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
 {
@@ -324,8 +328,8 @@ void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
  * @brief Toggles RGB LED.
  * @details This function toggles the RGB LEDs.
  * @warning No warning
- * @param[in] delay1, delay2.
- * @param[Out] No output parameters.
+ * @param[in] unsigned long, unsigned long
+ * @param[Out] No output parameter
  */
 void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
 {
@@ -342,7 +346,7 @@ void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
  * @brief Toggles All LEDs.
  * @details This function toggles  all the LEDs with a delay.
  * @warning No warning
- * @param[in] delay.
+ * @param[in] unsigned long ,unsigned long
  * @param[Out] No output parameters.
  */
 void toggle_all_leds( unsigned long delay1, unsigned long delay2)

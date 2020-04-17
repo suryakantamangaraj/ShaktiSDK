@@ -1,12 +1,11 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  switches.c
-* Created date			        :  22.08.2019
-* Brief Description of file             :  Read the value from the switches
-* Name of Author    	                :  Madan Kumar S
-* Email ID                              :  kumarmadan96@gmail.com
+* Project           			: shakti devt board
+* Name of the file	     		: switches.c
+* Brief Description of file     : Read the value from the switches
+* Name of Author    	        : Madan Kumar S
+* Email ID                      : kumarmadan96@gmail.com
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -35,10 +34,9 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
-
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 unsigned long read_data = 0;
@@ -47,8 +45,8 @@ unsigned long read_data = 0;
  * @brief Performs the toggling operation  with the help of button.
  * @details 
  * @warning 
- * @param[in] Registers,control word.
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void main()
 {

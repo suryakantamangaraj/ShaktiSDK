@@ -1,7 +1,7 @@
 /****************************************************************************
  * Project               	   	: shakti devt board
  * Name of the file	            : pinmux.h
- * Brief Description of file    : 
+ * Brief Description of file    : store pinmux configurations
  * Name of Author    	        : Sathya Narayanan N
  * Email ID                     : sathya281@gmail.com
  
@@ -19,12 +19,11 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *****************************************************************************/
 /**
  * @file pinmux.h
  * @project shakti devt board
- * @brief 
+ * @brief store pinmux configurations
  */
 
 #ifndef PINMUX_H

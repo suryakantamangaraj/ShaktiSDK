@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           		         	:  shakti devt board
- * Name of the file	                	:  switch_driver.h
- * Created date			                 :  22.08.2019
- * Brief Description of file             :   Header file for switches
- * Name of Author    	                :  Madan Kumar S
- * Email ID                              :  kumarmadan96@gmail.com
+ * Project           		       : shakti devt board
+ * Name of the file	               : switch_driver.h
+ * Brief Description of file       : Header file for switches
+ * Name of Author    	           : Madan Kumar S
+ * Email ID                        : kumarmadan96@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,18 +19,17 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ***************************************************************************/
+/**
+ * @file switch_driver.h
+ * @project shakti devt board
+ * @brief Header file for switches 
+ */
 #ifndef SWITCH_DRIVER_H
 #define SWITCH_DRIVER_H
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
-/**
- * @file switch_driver.h
- * @project
- * @brief  
- */
 #include "platform.h"
 #include "gpio.h"
 

@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: switch_driver.c
- * Created date			        : 22.08.2019
  * Brief Description of file    : Reads onboard switch values from gpio pins.
  * Name of Author    	        : Madan Kumar S
  * Email ID                     : kumarmadan96@gmail.com
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ***************************************************************************/
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
@@ -32,7 +30,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long , unsigned long );
@@ -42,7 +40,7 @@ extern void delay_loop(unsigned long , unsigned long );
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  each SW as input pin.
  * @warning No warning
- * @param[in] Pin that needs to be configured as SW.
+ * @param[in] unsigned long (Pin that needs to be configured as SW.)
  * @param[Out] No output parameters.
  */
 void configure_switch(unsigned long pinCntrl)
@@ -57,7 +55,7 @@ void configure_switch(unsigned long pinCntrl)
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  *          all SWs as input pin.
  * @warning No warning
- * @param[in]
+ * @param[in] No input parameter
  * @param[Out] No output parameters.
  */
 void configure_all_switchs()

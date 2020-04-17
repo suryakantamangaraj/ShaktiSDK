@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           			: shakti devt board
  * Name of the file	     		: pwminterrupt.c
- * Created date			        : 26.02.2019
  * Brief Description of file    : pwm interrupt .
  * Name of Author    	        : Sathya Narayanan N  & Abhinav Ramnath
  * Email ID                     : sathya281@gmail.com & abhinavramnath13@gmail.com 
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 
 #include "gpio.h"
@@ -35,8 +33,8 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int*, unsigned int
+ * @param[Out] No output parameter
  */
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
@@ -56,8 +54,8 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int*, unsigned int
+ * @param[Out] No output parameter
  */
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {
@@ -78,8 +76,8 @@ void dump_byte_memory(unsigned int* start, unsigned int word_length)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned 
+ * @param[Out] unsigned 
  */
 unsigned handle_button_press (unsigned num)
 {
@@ -91,8 +89,8 @@ unsigned handle_button_press (unsigned num)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int main(void){
 

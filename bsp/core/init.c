@@ -54,7 +54,7 @@ char *sbss_start=(char *)&__sbss_start;
 
 /** @fn section_init
  * @brief resets the different sections
- * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
+ * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections   *          of memory
  * @warning takes long time. so the caller is diabled as of now
  * @param[in] No input parameter
  * @param[Out] No output parameter
@@ -90,8 +90,8 @@ void section_init()
  * @brief Initialize the trap/interrupt callback routines with user defined handler.
  * @details  Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
- * @param[in]  void
- * @param[Out] void
+ * @param[in]  No input parameter
+ * @param[Out] No output parameter
  */
 void trap_init()
 {

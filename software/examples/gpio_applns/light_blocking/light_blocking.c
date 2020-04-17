@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           	: shakti devt board
- * Name of the file	    : light_blocking.c
- * Created date			: 20.08.2019
- * Name of Author       : Soutrick Roy Chowdhury
- * Email ID             : soutrick97@gmail.com
+ * Project           	      : shakti devt board
+ * Name of the file	          : light_blocking.c
+ * Brief Description of file  : Photo Interrupter key module will trigger a signal when light                                        between the sensor's gap is blocked.
+ * Name of Author             : Soutrick Roy Chowdhury
+ * Email ID                   : soutrick97@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -28,7 +28,7 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation  
  * @warning No warning  
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
@@ -37,8 +37,8 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
  * @brief Gives output as HIGH when partition is introduced and LOW when partition is removed       with the help of gpio pins 
  * @details    
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void main()
 {   

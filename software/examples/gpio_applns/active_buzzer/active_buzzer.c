@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           	  : shakti devt board
- * Name of the file	      : active_buzzer.c
- * Created date			  : 20.08.2019
- * Name of Author         : Soutrick Roy Chowdhury
- * Email ID               : soutrick97@gmail.com
+ * Project           	     : shakti devt board
+ * Name of the file	         : active_buzzer.c
+ * Brief Description of file : It will buzzer at a predefined frequency on its own, when applying                                   HIGH  signal.
+ * Name of Author            : Soutrick Roy Chowdhury
+ * Email ID                  : soutrick97@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -31,7 +31,7 @@
  * @brief Correspondingly making GPIO0 as HIGH and LOW.
  * @details It will make sound when you give HIGH signal
  * @warning 
- * @param[in] 
+ * @param[in] No input parameter
  * @param[Out] No output parameter
  */
 void main()

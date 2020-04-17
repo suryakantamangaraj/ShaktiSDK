@@ -30,8 +30,8 @@
  * @brief
  * @details
  * @warning
- * @param[in]
- * @param[Out]
+ * @param[in] const char
+ * @param[Out] unsigned integer
  */
 size_t strnlen(const char *s, size_t n)
 {
@@ -47,8 +47,8 @@ size_t strnlen(const char *s, size_t n)
  * @brief
  * @details
  * @warning
- * @param[in]
- * @param[Out]
+ * @param[in] unsigned long long int, unsigned 
+ * @param[Out] No output parameter
  */
 static inline void itoa (unsigned long long int number, unsigned base)
 {
@@ -83,8 +83,8 @@ static inline void itoa (unsigned long long int number, unsigned base)
  * @brief
  * @details
  * @warning
- * @param[in]
- * @param[Out]
+ * @param[in] const char
+ * @param[Out] No output parameter
  */
 void _printf_(const char *fmt, va_list ap)
 {
@@ -240,8 +240,8 @@ void _printf_(const char *fmt, va_list ap)
  * @brief
  * @details
  * @warning
- * @param[in]
- * @param[Out]
+ * @param[in] const char*
+ * @param[Out] int
  */
 int printf(const char* fmt, ...)
 {

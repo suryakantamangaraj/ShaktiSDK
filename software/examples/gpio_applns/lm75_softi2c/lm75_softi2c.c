@@ -1,8 +1,7 @@
 /***************************************************************************
  * Project           			 : shakti devt board
  * Name of the file	     		 : lm75_softi2c.c
- * Created date			         : 20.08.2019
- * Brief Description of file     : Helps to find out temperature of a surrounding with the help of gpio pins.
+ * Brief Description of file     : Helps to find out temperature of a surrounding with the help of                                      gpio pins.
  * Name of Author                : Soutrick Roy Chowdhury.
  * Email ID                      : soutrick97@gmail.com
 
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 *****************************************************************************/
 #include "gpio_i2c.h"
 
@@ -32,8 +30,8 @@
  * @brief Complete function to read value from LM75 sensors 
  * @details 
  * @warning No warning
- * @param[in] 
- * @param[Out] No output parameter
+ * @param[in] unsigned long
+ * @param[Out] unsigned int
  */
 unsigned int Lm75ReadTemperature(unsigned long delay)
 {
@@ -52,8 +50,8 @@ unsigned int Lm75ReadTemperature(unsigned long delay)
  * @brief Calling Lm75ReadTemperature to find the temperature
  * @details Printing the Current temperature
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void main() 
 {

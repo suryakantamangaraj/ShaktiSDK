@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           			   : shakti devt board
  * Name of the file	     	       : w25q32_write.c
- * Created date			           : 27.02.2020
  * Brief Description of file       : Performs the windonb flash  spi writing of 0 to 100 nos .
  * Name of Author    	           : G Nambirajan & Koteeswaran
  * Email ID                        : nambirajan2004@gmail.com
@@ -37,8 +36,8 @@ cs  -spi cs
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void w25q32()
 {
@@ -68,8 +67,8 @@ void w25q32()
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
 void main()
 {

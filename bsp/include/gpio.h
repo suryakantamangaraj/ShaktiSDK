@@ -1,10 +1,9 @@
 /************************************************************************
  * Project           			:  shakti devt board
  * Name of the file	     		:  gpio.h
- * Created date			        :  26.02.2019
- * Brief Description of file     :  Includes the definitions of gpio pins and functions.
+ * Brief Description of file    :  header file for gpio_applns
  * Name of Author    	        :  Sathya Narayanan N
- * Email ID                      :  sathya281@gmail.com
+ * Email ID                     :  sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,12 +19,11 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 /**
  * @file  gpio.h
  * @project shakti devt board
- * @brief  Includes the definitions of gpio pins and functions.
+ * @brief  header file for gpio_applns
  */
 #ifndef GPIO_H
 #define GPIO_H
@@ -46,7 +44,7 @@ long int read_word(int *addr);
 /**
  * @brief  writes a value to an address
  * @parameters int*
- * @return int
+ * @return No output parameter
  */
 void write_word(int *addr, unsigned long val);
 

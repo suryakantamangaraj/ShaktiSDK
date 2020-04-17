@@ -19,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 /**
  * @file log.h
@@ -32,8 +31,8 @@
 // Log Levels
 #define TRACE 5
 #define DEBUG 4
-#define INFO 3
-#define WARN 2
+#define INFO  3
+#define WARN  2
 #define ERROR 1
 #define FATAL 0
 

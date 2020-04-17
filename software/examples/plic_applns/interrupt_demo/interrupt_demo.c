@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:
- * Created date			        :  
- * Brief Description of file            :  
- * Name of Author    	                :  Sathya Narayanan N 
- * Email ID                             :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: interrupt_demo.c
+ * Brief Description of file    :  
+ * Name of Author    	        : Sathya Narayanan N 
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -36,8 +35,8 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int* , unsigned int
+ * @param[Out] No output parameter
  */
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
@@ -57,8 +56,8 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned int* ,unsigned int
+ * @param[Out] No output parameter
  */
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {
@@ -79,8 +78,8 @@ void dump_byte_memory(unsigned int* start, unsigned int word_length)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] unsigned
+ * @param[Out] unsigned
  */
 unsigned handle_button_press (unsigned num)
 {
@@ -92,8 +91,8 @@ unsigned handle_button_press (unsigned num)
  * @brief 
  * @details 
  * @warning 
- * @param[in] 
- * @param[Out] 
+ * @param[in] No input parameter
+ * @param[Out] int
  */
 int main(void){
 	unsigned int int_id = 1;

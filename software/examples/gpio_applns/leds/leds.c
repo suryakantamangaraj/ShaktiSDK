@@ -1,7 +1,6 @@
 /***************************************************************************
  * Project           	   	   :  shakti devt board
  * Name of the file	     	   :  leds.c
- * Created date			       :  26.02.2019
  * Brief Description of file   :  Control an led with the help of a button, gpio based.
  * Name of Author    	       :  Sathya Narayanan N
  * Email ID                    :  sathya281@gmail.com
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ***************************************************************************/
 #include "platform.h"
 #include "gpio.h" // includes definitions of gpio pins and read, write functions//
@@ -44,20 +42,18 @@
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
  * @warning No warning 
- * @param[in] Delay  Required(ms)
+ * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */
-
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main
  * @brief Performs the toggling operation  with the help of button.
  * @details    
  * @warning 
- * @param[in] Registers,control word.
+ * @param[in] No input parameter
  * @param[Out] No output parameter 
  */
-
 void main()
 {
 	//  write_word(GPIO_DIRECTION_CNTRL_REG, 0x0);
