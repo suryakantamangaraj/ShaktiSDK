@@ -45,10 +45,6 @@ The readme is a brief overview on gpio, i2c, uart example applications. Next Rel
      - This is the program that performs the toggling of led.
      -  src code:tglgpio.c
      -  Test components:led
-* gyro_softi2c
-     - This works with gyro sensor using gpio based i2c.
-     -  src code: gyroi2c.c
-     -  Test components:mpu6050
 
 ### I2C_APPLICATIONS
 - This consists of applications developed using the i2c communication protocol.
