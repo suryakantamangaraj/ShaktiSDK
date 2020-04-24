@@ -21,7 +21,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-#include<stdio.h>
+#include<uart.h>
 /** @fn main
  * @brief prints hello world
  * @warning No warning
@@ -30,10 +30,6 @@
  */
 void main()
 {
-float a =9.0;
-float b =8.9;
-float c;
- c = a-b+3/4;
  
-	printf ("i%fHello World !\n",c);
+	printf ("Hello World !\n");
 }
