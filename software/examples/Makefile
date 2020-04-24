@@ -55,10 +55,11 @@ else
 ifeq ($(TARGET),artix7_100t)
 	@$(eval XLEN = 64)
 	@$(eval FLAGS= -D ARTIX7_100T)
-	@$(eval MARCH=rv64imafdc)
-	@$(eval MABI=lp64d)
+	@$(eval MARCH=rv64imac)
+	@$(eval MABI=lp64)
 	@$(eval INTERFACE=$(bspboard)/ftdi)
 	@$(eval DC =$(FLAGS) $(D) )
+	@echo -e "$(MARCH) $(MABI) "
 else
 ifeq ($(TARGET),aardonyx)
 	@echo $(filepath)
@@ -84,19 +85,20 @@ endif
 compile:
 	@mkdir -p ./gen_lib
 	@echo $(bspboard)
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -c $(bspdri)/qspi/qspi_micron.c -o ./gen_lib/qspi_micron.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/pwm/pwm_driver.c -o ./gen_lib/pwm_driver.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/uart/uart.c -o ./gen_lib/uart.o -march=$(MARCH)  -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/i2c/i2c_driver.c -o ./gen_lib/i2c_driver.o -march=$(MARCH)	-mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -c $(bspdri)/qspi/qspi_micron.c -o ./gen_lib/qspi_micron.o  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/pwm/pwm_driver.c -o ./gen_lib/pwm_driver.o -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/uart/uart.c -o ./gen_lib/uart.o -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/i2c/i2c_driver.c -o ./gen_lib/i2c_driver.o  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/start.S -o ./gen_lib/start.o
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/trap.S -o ./gen_lib/trap.o
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH)  -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bsplib)/printf.c -o ./gen_lib/printf.shakti
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS)  -I$(bspinc)  -I$(bspboard) -c $(bsplib)/log.c -o ./gen_lib/log.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -c $(bspcore)/traps.c -o ./gen_lib/traps.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS)  -I$(bspinc)  -I$(bspboard) -c $(bsplib)/log.c -o ./gen_lib/log.o -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -c $(bspcore)/traps.c -o ./gen_lib/traps.o  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o          -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o        -lm -lgcc
+
 build:
 	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o 
 	
@@ -113,6 +115,9 @@ ifeq ($(PROGRAM),all)
 else
 ifeq ($(PROGRAM),hello)
 filepath := uart_applns/hello
+else
+ifeq ($(PROGRAM),asm_int)
+filepath := uart_applns/asm_int
 else
 ifeq ($(PROGRAM),csr_test)
 filepath := uart_applns/csr_test
@@ -237,9 +242,6 @@ else
 ifeq ($(PROGRAM),malloc_test)
 filepath := malloc_test/malloc_test
 else
-ifeq ($(PROGRAM),gyroi2c)
-filepath := gpio_applns/gyroi2c
-else
 ifeq ($(PROGRAM),buttons)
 filepath := gpio_applns/buttons
 else
@@ -279,7 +281,9 @@ else
 ifeq ($(PROGRAM),counter)
 filepath := clint_applns/counter
 else
-	@echo "Entry for $(PROGRAM) not present"
+echo -e "Entry for $(PROGRAM) not present"
+endif
+endif
 endif
 endif
 endif
@@ -335,8 +339,7 @@ endif
 endif
 endif
 endif
-endif
-endif
+
 upload: path do
 path:
 FILEPATH:='"$(GENLIB)$(filepath)"'

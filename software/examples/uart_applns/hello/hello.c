@@ -21,8 +21,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-#include "uart.h"
-
+#include<uart.h>
 /** @fn main
  * @brief prints hello world
  * @warning No warning
@@ -31,5 +30,6 @@
  */
 void main()
 {
+ 
 	printf ("Hello World !\n");
 }
