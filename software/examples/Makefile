@@ -32,8 +32,8 @@ DEBUG ?=
 UPLOAD ?=
 FLASH ?=
 XLEN ?=32
-filepath ?= 
-D ?= 
+filepath ?=
+D ?=
 
 # Invoke all possible combinations of applns for different targets
 # There is a provision to make in the exact folder where code is written
@@ -77,28 +77,27 @@ endif
 endif
 
 
-library: 
+library:
 ifeq ($(CLEAR),)
 	make compile build
 endif
 compile:
 	@mkdir -p ./gen_lib
-#	@echo $(bspboard)
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -c $(bspdri)/qspi/qspi_micron.c -o ./gen_lib/qspi_micron.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -c $(bspdri)/qspi/qspi_micron.c -o ./gen_lib/qspi_micron.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/pwm/pwm_driver.c -o ./gen_lib/pwm_driver.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/uart/uart.c -o ./gen_lib/uart.o -march=$(MARCH)  -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/i2c/i2c_driver.c -o ./gen_lib/i2c_driver.o -march=$(MARCH)	-mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/start.S -o ./gen_lib/start.o
-	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/trap.S -o ./gen_lib/trap.o
-	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH)  -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bsplib)/printf.c -o ./gen_lib/printf.shakti
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  $(FLAGS)  -I$(bspinc)  -I$(bspboard) -c $(bsplib)/log.c -o ./gen_lib/log.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -c $(bspcore)/traps.c -o ./gen_lib/traps.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf   $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o         -march=$(MARCH) -mabi=$(MABI)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/uart/uart.c -o ./gen_lib/uart.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/i2c/i2c_driver.c -o ./gen_lib/i2c_driver.o -march=$(MARCH)	-mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/start.S -o ./gen_lib/start.o
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/trap.S -o ./gen_lib/trap.o
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bsplib)/printf.c -o ./gen_lib/printf.shakti
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bsplib)/log.c -o ./gen_lib/log.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -c $(bspcore)/traps.c -o ./gen_lib/traps.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o   -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o   -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 build:
-	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o 
+	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o
 	
 do:
 ifeq ($(PROGRAM),all)
@@ -279,7 +278,7 @@ else
 ifeq ($(PROGRAM),counter)
 filepath := clint_applns/counter
 else
-	@echo "Entry for $(PROGRAM) not present"
+	echo "Entry for $(PROGRAM) not present"
 endif
 endif
 endif
@@ -337,6 +336,7 @@ endif
 endif
 endif
 endif
+
 upload: path do
 path:
 FILEPATH:='"$(GENLIB)$(filepath)"'
@@ -349,18 +349,18 @@ ifeq ($(UPLOAD),UPLOAD)
 	@gcc -g -w -D FILEPATH='"$(FILEPATH)"' $(UPLOADDIR)/elf_to_header.c -o $(filepath)/output/elf_to_header
 	@$(filepath)/output/elf_to_header
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(filepath)/output -c $(UPLOADER)/deploy.c -o $(filepath)/output/deploy.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(FLASHSPEC) -o $(filepath)/output/flash_driver.o -march=$(MARCH)  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -c $(FLASHSPEC) -o $(filepath)/output/flash_driver.o -march=$(MARCH) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(filepath)/output/deploy.o $(filepath)/output/flash_driver.o $(GENLIB)/gen_lib/libshakti$(XLEN).a -o $(filepath)/output/deploy.shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D $(filepath)/output/deploy.shakti > $(filepath)/output/deploy.dump
 	@echo -e "Upload elf to Flash"
 #@$(UPLOADDIR)/burnFlash.py ./gen)lib/deploy.shakti
-	@sudo $(OCDPATH)/openocd -f $(INTERFACE).cfg -c "reset init"  -c "load_image $(filepath)/output/deploy.shakti;resume 0x80000000;shutdown"
+	@sudo $(OCDPATH)/openocd -f $(INTERFACE).cfg -c "reset init" -c "load_image $(filepath)/output/deploy.shakti;resume 0x80000000;shutdown"
 	@rm -rf ./gen_lib/*.o
 endif
 
 
 flash:
-ifeq ($(FLASH),FLASH) 	
+ifeq ($(FLASH),FLASH)
 	@flashrom -p ft2232_spi:type=arm-usb-tiny-h > ./$(filepath)/output/flashoutput.txt
 	make aardonyx
 endif
@@ -368,18 +368,18 @@ aardonyx : flashsize flashcheck objectsize swap filesize fill layoutsize layout 
 flashsize:
 	@echo "Calculating flash size"
 	@$(eval FLASHROM = $(shell egrep -o -e '[0-9]+\ kB' ./$(filepath)/output/flashoutput.txt | egrep -o '[0-9]+') )
-	@$(eval FLASHSIZE = $(shell echo  $(FLASHROM)*1024  | bc ) )
+	@$(eval FLASHSIZE = $(shell echo $(FLASHROM)*1024 | bc ) )
 	@echo "Checking for flash"
 flashcheck:
 	@echo "Size of flash attached is" $(FLASHSIZE)
 #	Converts .shakti file to binary file	
-	@riscv32-unknown-elf-objcopy -O binary ./$(filepath)/output/$(PROGRAM).shakti ./$(filepath)/output/output.bin      
+	@riscv32-unknown-elf-objcopy -O binary ./$(filepath)/output/$(PROGRAM).shakti ./$(filepath)/output/output.bin
 
 objectsize:
 #Find size of output.bin and append it to the binary file
 	$(eval FILE = $(shell stat -c %s ./$(filepath)/output/output.bin))
 swap:
-	@echo "The size of the bin file is : " $(FILE) 
+	@echo "The size of the bin file is : " $(FILE)
 #	Swaps endianness from little-endian to big-endian as the flash programmer swaps endianness during write.
 	@hexdump -v -e '1/4 "%08x"' -e '"\n"' ./$(filepath)/output/output.bin | xxd -r -p > ./$(filepath)/output/bigoutput.bin	
 	@printf "%08x\n" $(FILE) > ./$(filepath)/output/size.txt
@@ -389,7 +389,7 @@ swap:
 filesize:
 	@$(eval FILESIZE=$(shell stat -c%s ./$(filepath)/output/newoutput.bin) )
 fill:
-	@$(eval SPACE = $(shell echo  $(FLASHSIZE)-$(FILESIZE)  | bc ) )
+	@$(eval SPACE = $(shell echo $(FLASHSIZE)-$(FILESIZE) | bc ) )
 	@echo "Expanding bin to flash size. This might take a few seconds.."
 #the file is expanded to 32kb and appended with 0's where required.
 	@dd if=/dev/zero of=./$(filepath)/output/newoutput.bin bs=1 count=$(SPACE) conv=notrunc oflag=append
@@ -420,6 +420,4 @@ else
 endif
 endif
 endif
-
-
 

@@ -41,7 +41,7 @@ _start:
 	andi ra,t2,0
 	andi gp,t2,0
 	andi tp,t2,0
-	andi fp,t2,0
+	andi s0,t2,0
 	li sp, 0x80010000
 	la t0, trap_entry
 	csrw mtvec, t0              #trying to access mtvec

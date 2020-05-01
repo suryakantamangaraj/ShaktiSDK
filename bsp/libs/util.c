@@ -20,7 +20,6 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************/
-
 /** @fn  waitfor
  * @brief stall the process fro given time 
  * @warning No warning
@@ -43,7 +42,8 @@ void delay(unsigned long seconds)
 {
     unsigned long cntr1 = seconds *1000;
     unsigned long tmpCntr;
-    while (cntr1--) {
+   
+ while (cntr1--) {
         tmpCntr = 1000;
         while (tmpCntr--);
     }
@@ -58,49 +58,53 @@ void delay(unsigned long seconds)
  */
 float pow_10(unsigned int y)
 {
-	unsigned int x;
-	float result;
+	unsigned int x=1;
+	float result=1;
 
 	for (unsigned int i=0; i <y; i++)
 	{
-		x += 10;
+		x *= 10;
 	}
 
 	return ((float) x);
 }
 /** @fn reverse 
- * @brief 
- * @details 
- * @warning 
+ * @brief reverse a string and store in the same string
+ * @warning none
  * @param[in] char, int
  * @param[Out] No output parameter
  */
-void reverse(char *str, int len) 
+void reverse(char *str, int length) 
 { 
-  int i=0, j=len-1, temp; 
-  while (i<j) 
-  { 
-    temp = str[i]; 
-    str[i] = str[j]; 
-    str[j] = temp; 
-    i++; j--; 
-  } 
+	int i = 0;
+	int j = length - 1;
+	char tmp;
+
+	while (i<j) 
+	{ 
+		tmp = str[i]; 
+		str[i] = str[j]; 
+		str[j] = tmp; 
+
+		i++;
+		j--; 
+	} 
 } 
 
-/** @fn intToStr 
- * @brief 
+/** @fn int_to_string
+ * @brief convert base 10 numbers to  
  * @details 
  * @warning 
  * @param[in] int, char, int
  * @param[Out] int
  */
-int intToStr(int x, char str[], int d) 
+int int_to_string(int num, char str[], int d) 
 { 
   int i = 0; 
 
-  while (x)  { 
-    str[i++] = (x%10) + '0'; 
-    x = x/10; 
+  while (num) { 
+    str[i++] = (num%10) + '0'; 
+    num = num/10; 
   } 
 
   while (i < d) 
@@ -108,6 +112,7 @@ int intToStr(int x, char str[], int d)
 
   reverse(str, i); 
   str[i] = '\0'; 
+
   return i; 
 } 
 
@@ -150,7 +155,7 @@ void ftoa(float n, char *res, int afterpoint)
       ipart =(-1)*ipart;
     }
 
-    i = intToStr(ipart, temp, 0); 
+    i = int_to_string(ipart, temp, 0); 
 
     strcpy(res+j,temp);
   }
@@ -174,9 +179,9 @@ void ftoa(float n, char *res, int afterpoint)
       fpart = fpart;
     }
 
-    fpart = fpart * pow(10, afterpoint); 
+    fpart = fpart * pow_10( afterpoint); 
 
-    intToStr((int)fpart, res + i + 1, afterpoint); 
+    int_to_string((int)fpart, res + i + 1, afterpoint); 
   } 
 } 
 
