@@ -44,12 +44,12 @@ size_t strnlen(const char *s, size_t n)
 }
 
 /** @fn  itoa
- * @brief
- * @details
- * @warning
+ * @brief integer to string conversion
+ * @warning none
  * @param[in] unsigned long long int, unsigned 
  * @param[Out] No output parameter
  */
+
 static inline void itoa (unsigned long long int number, unsigned base)
 {
 	unsigned int size = 0;
@@ -58,7 +58,6 @@ static inline void itoa (unsigned long long int number, unsigned base)
 	unsigned int digits[sizeof(number)*8];
 
 	while (1) {
-
 		digits[i] = number % base;
 
 		if (number < base)
@@ -68,6 +67,7 @@ static inline void itoa (unsigned long long int number, unsigned base)
 		i++;
 	}
 	i++;
+
 	while (i-- > 0)
 	{
 		if (digits[i] >= 10)
@@ -80,9 +80,9 @@ static inline void itoa (unsigned long long int number, unsigned base)
 }
 
 /** @fn _printf_
- * @brief
- * @details
- * @warning
+ * @brief Handles the input stream of characters to print on screen
+ * @details Identifies the type of format string, number of arguments and prints the right characer on screen 
+ * @warning none
  * @param[in] const char
  * @param[Out] No output parameter
  */
@@ -237,9 +237,9 @@ void _printf_(const char *fmt, va_list ap)
 }
 
 /** @fn printf
- * @brief
- * @details
- * @warning
+ * @brief function to print characters on file
+ * @details prints the characters on terminal 
+ * @warning none
  * @param[in] const char*
  * @param[Out] int
  */

@@ -24,9 +24,10 @@
 #include "traps.h"
 
 /** @fn extract_ie_code
- * @brief 
- * @details 
- * @warning 
+ * @brief Extract the exception code from the mcause reg
+ * @details Extract the exception code from the mcause reg
+ *	    by masking the most significant bit.
+ * @warning none 
  * @param[in] unsigned int 
  * @param[Out] unsigned int
  */
@@ -46,9 +47,8 @@ unsigned int extract_ie_code(unsigned int num)
 }
 
 /** @fn default_handler
- * @brief 
- * @details 
- * @warning 
+ * @brief default handler that loops infinitely 
+ * @warning none
  * @param[in] unsigned int ptr ,unsigned int ptr
  * @param[Out] No output parameter
  */
@@ -62,9 +62,10 @@ void default_handler(uintptr_t mcause, uintptr_t epc)
 }
 
 /** @fn handle_trap
- * @brief 
- * @details 
- * @warning 
+ * @brief Handles the trap, exception or interrupt is determined here
+ * @details Trap handler routine, which identifies the cause of trap 
+		and calls the respective trap handler.
+ * @warning none
  * @param[in] unsigned int ptr, unsigned int ptr
  * @param[Out] unsigned int ptr
  */

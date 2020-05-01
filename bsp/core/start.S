@@ -59,6 +59,8 @@ li  x29,0
 li  x30,0
 li  x31,0
 
+#clear any pending interrupt ?
+#sanity checkers
 
 /*
    set sp and gp

@@ -300,7 +300,6 @@ void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
 	   based address + priority offset + 4*interruptId
 	 */
 
-
 	interrupt_priority_address = (uint32_t *) (PLIC_BASE_ADDRESS +
 						      PLIC_PRIORITY_OFFSET +
 						      (int_id <<
@@ -411,7 +410,6 @@ void plic_init()
 	 */
 	/*set threshold value for interrupts*/
 	set_interrupt_threshold(PLIC_PRIORITY_2);
-
 
 	log_trace("plic_init exited \n");
 }

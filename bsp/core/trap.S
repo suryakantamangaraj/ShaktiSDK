@@ -74,10 +74,6 @@
   jal handle_trap
   csrw mepc, a0
 
-#remove setting MPP and CLIC generated multiple interrupts, PLIC interrupt also works
-#  li t0, MSTATUS_MPP
-#  csrs mstatus, t0
-
   LREG x1, 1*REGSIZE(sp)
   LREG x2, 2*REGSIZE(sp)
   LREG x3, 3*REGSIZE(sp)
