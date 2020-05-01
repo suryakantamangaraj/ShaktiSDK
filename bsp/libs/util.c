@@ -56,7 +56,6 @@ void delay(unsigned long seconds)
  * @param[in] unsigned int
  * @param[Out] 
  */
- #if defined(ARTIX7_35T) || defined(AARDONYX) 
 float pow_10(unsigned int y)
 {
 	unsigned int x;
@@ -69,7 +68,6 @@ float pow_10(unsigned int y)
 
 	return ((float) x);
 }
-#endif
 /** @fn reverse 
  * @brief 
  * @details 
@@ -122,7 +120,6 @@ int intToStr(int x, char str[], int d)
  *		        int (precision - afterpoint)
  * @param[Out]  No output parameter
  */
- #if defined(ARTIX7_35T) || defined(AARDONYX) 
 void ftoa(float n, char *res, int afterpoint) 
 { 
   int i=0;
@@ -183,7 +180,6 @@ void ftoa(float n, char *res, int afterpoint)
   } 
 } 
 
-#endif
 /** @fn delay_loop
  * @brief 
  * @details 
