@@ -19,7 +19,7 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*********************************************************************************/
+ *********************************************************************************/
 /** @fn  waitfor
  * @brief stall the process fro given time 
  * @warning No warning
@@ -34,27 +34,26 @@ void waitfor(unsigned int secs)
 
 /** @fn delay
  * @brief  sleeps for number seconds 
- * @warning 
+ * @warning none 
  * @param[in] unsigned long (number of seconds) 
  * @param[Out] No output parameter
  */
 void delay(unsigned long seconds)
 {
-    unsigned long cntr1 = seconds *1000;
-    unsigned long tmpCntr;
-   
- while (cntr1--) {
-        tmpCntr = 1000;
-        while (tmpCntr--);
-    }
+	unsigned long cntr1 = seconds *1000;
+	unsigned long tmpCntr;
+
+	while (cntr1--) {
+		tmpCntr = 1000;
+		while (tmpCntr--);
+	}
 }
 
 /** @fn pow_10
- * @brief 
- * @details 
- * @warning 
+ * @brief generate different powers of 10 
+ * @warning none
  * @param[in] unsigned int
- * @param[Out] 
+ * @param[Out] return result in float 
  */
 float pow_10(unsigned int y)
 {
@@ -92,28 +91,42 @@ void reverse(char *str, int length)
 } 
 
 /** @fn int_to_string
- * @brief convert base 10 numbers to  
- * @details 
+ * @brief convert decimal numbers to string
+ * @details Takes num as input and converts it to string.
+ *	    The converted string is stored in str. The 
+ * position of last character in the str is returned.
+ * This function is tailored to support ftoa.
  * @warning 
  * @param[in] int, char, int
  * @param[Out] int
  */
-int int_to_string(int num, char str[], int d) 
+int int_to_string(int number, char str[], int afterpoint) 
 { 
-  int i = 0; 
+	int i = 0; 
 
-  while (num) { 
-    str[i++] = (num%10) + '0'; 
-    num = num/10; 
-  } 
+	/*extract each digit and put into str[i]*/
 
-  while (i < d) 
-    str[i++] = '0'; 
+	while (number != 0) { 
+		str[i] = ((number%10) + '0'); 
+		i++;    
+		num = num/10; 
+	} 
 
-  reverse(str, i); 
-  str[i] = '\0'; 
+	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-  return i; 
+	while (i < afterpoint) {
+		str[i] = '0'; 
+		i++;
+	}
+
+	/*
+	   zeroth digit is in oth position in array,
+	   To read digits properly, reverse array
+	 */
+	reverse(str, i); 
+	str[i] = '\0'; 
+
+	return i; 
 } 
 
 /** @fn ftoa 
@@ -127,83 +140,80 @@ int int_to_string(int num, char str[], int d)
  */
 void ftoa(float n, char *res, int afterpoint) 
 { 
-  int i=0;
-  char temp[30]={'\0'};
+	int i=0;
+	char temp[30]={'\0'};
 
-  // Extract integer part 
-  int ipart = (int)n; 
+	// Extract integer part 
+	int ipart = (int)n; 
 
-  // Extract floating part 
-  float fpart = (float) (n - (float)ipart); 
-  int j=0;
+	// Extract floating part 
+	float fpart = (float) (n - (float)ipart); 
+	int j=0;
 
-  if(n < (0/1))
-  {
-    res[j]='-';
-    j=1;
+	if(n < (0/1))
+	{
+		res[j]='-';
+		j=1;
+	}
 
-  }
+	if (ipart == 0)
+	{
+		res[j]='0';
+		j=j+1;
+	}
+	else{
+		if (ipart <0)
+		{
+			ipart =(-1)*ipart;
+		}
 
-  if (ipart == 0)
-  {
-    res[j]='0';
-    j=j+1;
-  }
-  else{
-    if (ipart <0)
-    {
-      ipart =(-1)*ipart;
-    }
+		i = int_to_string(ipart, temp, 0); 
 
-    i = int_to_string(ipart, temp, 0); 
+		strcpy(res+j,temp);
+	}
 
-    strcpy(res+j,temp);
-  }
+	i = i+j;
 
-  i = i+j;
+	// check for display option after point 
+	if (afterpoint != 0) 
+	{ 
+		res[i] = '.'; // add dot 
 
+		if (fpart < 0/1)
+		{
 
-  // check for display option after point 
-  if (afterpoint != 0) 
-  { 
-    res[i] = '.'; // add dot 
+			fpart = (-1)*fpart;
 
-    if (fpart < 0/1)
-    {
+		}
+		else if (fpart == 0/1)
+		{
+			fpart = fpart;
+		}
 
-      fpart = (-1)*fpart;
+		fpart = fpart * pow_10( afterpoint); 
 
-    }
-    else if (fpart == 0/1)
-    {
-      fpart = fpart;
-    }
-
-    fpart = fpart * pow_10( afterpoint); 
-
-    int_to_string((int)fpart, res + i + 1, afterpoint); 
-  } 
+		int_to_string((int)fpart, res + i + 1, afterpoint); 
+	} 
 } 
 
 /** @fn delay_loop
- * @brief 
- * @details 
- * @warning 
+ * @brief Delay calculated interms of iterative operation 
+ * @warning none
  * @param[in] unsigned long , unsigned long
  * @param[Out] No output parameter
  */
 void delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
-    unsigned long tmpCntr = cntr2;
-    while (cntr1--) {
-        tmpCntr = cntr2;
-        while (tmpCntr--);
-    }
+	unsigned long tmpCntr = cntr2;
+	while (cntr1--) {
+		tmpCntr = cntr2;
+		while (tmpCntr--);
+	}
 }
 
 /** @fn read_word
  * @brief returns the value stored at a given address
-           Here we assume the word size to be 32 bits for gpio
+ Here we assume the word size to be 32 bits for gpio
  * @details
  * @warning
  * @param[in] int*
@@ -211,7 +221,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
  */
 long int read_word(int *addr)
 {
-//	log_info("addr = %x data = %x\n", addr, *addr);
+	//	log_info("addr = %x data = %x\n", addr, *addr);
 	return *addr;
 }
 
@@ -225,7 +235,6 @@ long int read_word(int *addr)
 void write_word(int *addr, unsigned long val)
 {
 	*addr = val;
-//	log_info("addr = %x data = %x\n", addr, *addr);
+	//	log_info("addr = %x data = %x\n", addr, *addr);
 }
-
 

@@ -61,7 +61,6 @@ ifeq ($(TARGET),artix7_100t)
 	@$(eval DC =$(FLAGS) $(D) )
 else
 ifeq ($(TARGET),aardonyx)
-#	@echo $(filepath)
 	@$(eval XLEN = 32)
 	@$(eval FLAGS= -D AARDONYX)
 	@$(eval MARCH=rv32imac)
@@ -278,7 +277,7 @@ else
 ifeq ($(PROGRAM),counter)
 filepath := clint_applns/counter
 else
-	echo "Entry for $(PROGRAM) not present"
+	@echo -e "Entry for $(PROGRAM) not present"
 endif
 endif
 endif

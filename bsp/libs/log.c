@@ -1,8 +1,8 @@
 /***************************************************************************
  * Project           		    : shakti devt board
- * Name of the file	     	    : log.c  
+ * Name of the file	     	    : log.c
  * Brief Description of file    : print control for all operation
- * Name of Author    	        : Sathya Narayanan N & Abhinav ramnath
+ * Name of Author    	        : Abhinav ramnath & Sathya Narayanan N
  * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -38,12 +38,12 @@
 void log_trace(const char* fmt, ...)
 {
 	if (TRACE <= LOG_LEVEL) {
-	va_list ap;
-	va_start(ap, fmt);
+		va_list ap;
+		va_start(ap, fmt);
 
-	_printf_(fmt, ap);
+		_printf_(fmt, ap);
 
-	va_end(ap);
+		va_end(ap);
 	}
 }
 
@@ -56,12 +56,12 @@ void log_trace(const char* fmt, ...)
 void log_info(const char* fmt, ...)
 {
 	if (INFO <= LOG_LEVEL) {
-	va_list ap;
-	va_start(ap, fmt);
+		va_list ap;
+		va_start(ap, fmt);
 
-	_printf_( fmt, ap);
+		_printf_( fmt, ap);
 
-	va_end(ap);
+		va_end(ap);
 	}
 }
 
@@ -74,12 +74,12 @@ void log_info(const char* fmt, ...)
 void log_debug(const char* fmt, ...)
 {
 	if (DEBUG <= LOG_LEVEL) {
-	va_list ap;
-	va_start(ap, fmt);
+		va_list ap;
+		va_start(ap, fmt);
 
-	_printf_(fmt, ap);
+		_printf_(fmt, ap);
 
-	va_end(ap);
+		va_end(ap);
 	}
 }
 
@@ -92,12 +92,12 @@ void log_debug(const char* fmt, ...)
 void log_warn(const char* fmt, ...)
 {
 	if (WARN <= LOG_LEVEL) {
-	va_list ap;
-	va_start(ap, fmt);
+		va_list ap;
+		va_start(ap, fmt);
 
-	_printf_( fmt, ap);
+		_printf_( fmt, ap);
 
-	va_end(ap);
+		va_end(ap);
 	}
 }
 
@@ -110,12 +110,12 @@ void log_warn(const char* fmt, ...)
 void log_error(const char* fmt, ...)
 {
 	if (ERROR <= LOG_LEVEL) {
-	va_list ap;
-	va_start(ap, fmt);
+		va_list ap;
+		va_start(ap, fmt);
 
-	_printf_( fmt, ap);
+		_printf_( fmt, ap);
 
-	va_end(ap);
+		va_end(ap);
 	}
 }
 
@@ -128,12 +128,12 @@ void log_error(const char* fmt, ...)
 void log_fatal(const char* fmt, ...)
 {
 	if (FATAL <= LOG_LEVEL) {
-	va_list ap;
-	va_start(ap, fmt);
+		va_list ap;
+		va_start(ap, fmt);
 
-	_printf_( fmt, ap);
+		_printf_( fmt, ap);
 
-	va_end(ap);
+		va_end(ap);
 	}
 
 	log_info("\n panic \n");

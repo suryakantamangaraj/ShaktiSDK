@@ -41,23 +41,23 @@ struct Header* global_base=NULL;
 
 struct Header* allocate_block(struct Header* last, size_t size)
 {
-if(last->size>size)
-{
-log_info("\n allocating space");
-struct Header* newblock;
-void *p = last;
-p+=size+sizeof(struct Header);
-newblock=p;
-newblock->size=last->size - size - sizeof(struct Header);
-last->size=size;
-last->free=0;
-last->next=newblock;
-newblock->free=1;
-newblock->next=NULL;
-return last;
-}
-else
-return NULL;
+	if(last->size>size)
+	{
+		log_info("\n allocating space");
+		struct Header* newblock;
+		void *p = last;
+		p+=size+sizeof(struct Header);
+		newblock=p;
+		newblock->size=last->size - size - sizeof(struct Header);
+		last->size=size;
+		last->free=0;
+		last->next=newblock;
+		newblock->free=1;
+		newblock->next=NULL;
+		return last;
+	}
+	else
+		return NULL;
 }
 
 //We search for free blocks
