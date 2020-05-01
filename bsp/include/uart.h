@@ -3,8 +3,8 @@
  * Project           			: shakti devt board
  * Name of the file	     		: uart.h
  * Brief Description of file    : Header file for uart.
- * Name of Author    	        : Niketan Shahapur & Sathya Narayanan N
- * Email ID                     : niketanshahpur@gmail.com, sathya281@gmail.com
+ * Name of Author    	        : Niketan Shahapur,Kotteeswaran & Sathya Narayanan N
+ * Email ID                     : niketanshahpur@gmail.com, kottee.1@gmail.com, sathya281@gmail.com
 
   Copyright (C) 2019  IIT Madras. All rights reserved.
 
