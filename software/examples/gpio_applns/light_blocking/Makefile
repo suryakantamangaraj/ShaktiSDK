@@ -24,7 +24,7 @@ PROGRAM ?=
 TARGET ?= artix7_35t
 DEBUG ?=
 MARCH ?= rv32imac
-MABI  ?= ilp32
+MABI  ?=
 XLEN  ?= 32
 FLAGS ?=
 
@@ -33,10 +33,7 @@ all: create_dir
 
 
 light_blocking.riscv: create_dir
-	 
-	@echo -e $(BSP)
-	 
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc)  -I$(bspboard) -c ./light_blocking.c -o ./output/light_blocking.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc)  -I$(bspboard) -c ./light_blocking.c -o ./output/light_blocking.o -march=$(MARCH) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/light_blocking.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 

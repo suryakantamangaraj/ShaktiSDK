@@ -35,9 +35,6 @@ all: create_dir
 
 
 pwmled.riscv: create_dir
-	 
-	@echo -e $(XLEN)
-	 
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -c ./pwmled.c -o ./output/pwmled.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 #	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bspboard) -c $(bspdri)/pwm/pwm_driver.c -o ./output/pwm_driver.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/pwmled.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
