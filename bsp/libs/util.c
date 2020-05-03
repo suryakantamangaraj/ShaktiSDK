@@ -20,6 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *********************************************************************************/
+
 /** @fn  waitfor
  * @brief stall the process fro given time 
  * @warning No warning
@@ -101,20 +102,22 @@ void reverse(char *str, int length)
  * @param[Out] int
  */
 int int_to_string(int number, char str[], int afterpoint) 
-{ 
+{
 	int i = 0; 
 
 	/*extract each digit and put into str[i]*/
 
-	while (number != 0) { 
-		str[i] = ((number%10) + '0'); 
-		i++;    
-		num = num/10; 
-	} 
+	while (number != 0) 
+	{
+		str[i] = ((number%10) + '0');
+		i++;
+		number = number/10;
+	}
 
 	/*insert 0 after the numbers, if count of digits less than afterpoint*/
 
-	while (i < afterpoint) {
+	while (i < afterpoint) 
+	{
 		str[i] = '0'; 
 		i++;
 	}
@@ -127,19 +130,20 @@ int int_to_string(int number, char str[], int afterpoint)
 	str[i] = '\0'; 
 
 	return i; 
-} 
+}
 
-/** @fn ftoa 
- * @brief converts float to string 
+/** @fn ftoa
+ * @brief converts float to string
  * @details Split floating number into fpart and ipart
- *          Finally merge it into one float number
+ *          Finally merge it into one float number.
+ *          Return a string, which has the float value.
  * @param[in] float (floating point number - n)
- *		        char (float in string - res)
- *		        int (precision - afterpoint)
- * @param[Out]  No output parameter
+ *	      char* (float in string - res)
+ *	      int (precision - afterpoint)
+ * @param[Out] No output parameter
  */
 void ftoa(float n, char *res, int afterpoint) 
-{ 
+{
 	int i=0;
 	char temp[30]={'\0'};
 
@@ -205,8 +209,11 @@ void ftoa(float n, char *res, int afterpoint)
 void delay_loop(unsigned long cntr1, unsigned long cntr2)
 {
 	unsigned long tmpCntr = cntr2;
-	while (cntr1--) {
+
+	while (cntr1--)
+	{
 		tmpCntr = cntr2;
+
 		while (tmpCntr--);
 	}
 }
@@ -221,7 +228,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
  */
 long int read_word(int *addr)
 {
-	//	log_info("addr = %x data = %x\n", addr, *addr);
+	log_debug("addr = %x data = %x\n", addr, *addr);
 	return *addr;
 }
 
@@ -235,6 +242,6 @@ long int read_word(int *addr)
 void write_word(int *addr, unsigned long val)
 {
 	*addr = val;
-	//	log_info("addr = %x data = %x\n", addr, *addr);
+	log_debug("addr = %x data = %x\n", addr, *addr);
 }
 

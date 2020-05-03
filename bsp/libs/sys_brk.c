@@ -22,38 +22,49 @@
 ***************************************************************************/
 
 #include "platform.h"
-extern char _end[];                /* _end is set in the linker command file */
-extern char _heap_end[];	   /* _heap_end is set in the linker command file */
+
+extern char _end[];                /* _end is set in the linker file */
+extern char _heap_end[];	   /* _heap_end is set in the linker file */
+
 char *heap_ptr=(char *)&_end;
 char *end_of_heap=(char *)&_heap_end;
 
 /* OS LESS IMPLEMENTATION OF SBRK
- * sbrk -- changes heap size size. Get nbytes more
- *         RAM. We just increment a pointer in what's
+ * sbrk -- changes heap size. Get nbytes more RAM.
+ *         We just increment a pointer in what's
  *         left of memory on the board.
  */
- /** @fn  m_sbrk
+
+
+/** @fn  m_sbrk
  * @brief  
  * @warning 
  * @param[in] 
  * @param[Out] char 
  */
 char * m_sbrk (nbytes)
-     int nbytes;
+	int nbytes;
 {
- 	char *base;
-	log_info("\nHeap pointer is %x",heap_ptr);
-    	if(!heap_ptr)
+	char *base;
+
+	log_debug("\nHeap pointer is %x",heap_ptr);
+
+	if(!heap_ptr)
 		heap_ptr = (char *)&_end;
+	else
+		log_fatal("\n heap_ptr is null");
+
 	base = heap_ptr;
-  	heap_ptr += nbytes;
- 	log_info("\nNew System BRK: %x %x %x",base,heap_ptr,end_of_heap);
-  	if(heap_ptr>end_of_heap)
-    	{
+	heap_ptr += nbytes;
+
+	log_info("\nNew System BRK: %x %x %x",base,heap_ptr,end_of_heap);
+
+	if(heap_ptr>end_of_heap)
+	{
 		log_error("\nMemory allocation error: Insufficient Space");
-        	return -1;
-    	}
-  return base;
+		return -1;
+	}
+	return base;
 }
 
 
