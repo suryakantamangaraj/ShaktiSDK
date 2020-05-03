@@ -66,7 +66,8 @@ void interrupt_complete(unsigned int interrupt_id)
 
 /** @fn  interrupt_claim_request
  * @brief know the id of the interrupt
- * @details read the interrupt claim register to know the interrupt id of the highest priority        *          pending interrupt 
+ * @details read the interrupt claim register to know the interrupt id
+ *           of the highest priority pending interrupt 
  * @warning No warning
  * @param[in] no input parameters
  * @param[Out] unsigned int
@@ -90,7 +91,7 @@ unsigned int interrupt_claim_request()
 	interrupt_id = *interrupt_claim_address;
 
 	log_info("interrupt id [%x] claimed  at address %x\n", interrupt_id,
-		interrupt_claim_address );
+		 interrupt_claim_address );
 
 	log_trace("interrupt_claim_request exited\n");
 
@@ -99,7 +100,8 @@ unsigned int interrupt_claim_request()
 
 /** @fn mach_plic_handler
  * @brief handle machine mode plic interrupts
- * @details find the int id that caused of interrupt, process it and complete the interrupt.
+ * @details find the int id that caused of interrupt, 
+ *	    process it and complete the interrupt.
  * @warning No warning
  * @param[in] unsigned int ptr, unsigned int ptr
  * @param[Out] No output parameter
@@ -218,7 +220,8 @@ void interrupt_enable(unsigned int interrupt_id)
 
 /** @fn interrupt_disable
  * @brief disable an interrupt
- * @details A single bit that enables an interrupt. The bit position corresponds to the interrupt id
+ * @details A single bit that enables an interrupt.
+ *          The bit position corresponds to the interrupt id
  * @warning No warning
  * @param[in] unsigned int
  * @param[Out] no output parameters
@@ -301,9 +304,9 @@ void set_interrupt_priority(unsigned int priority_value, unsigned int int_id)
 	 */
 
 	interrupt_priority_address = (uint32_t *) (PLIC_BASE_ADDRESS +
-						      PLIC_PRIORITY_OFFSET +
-						      (int_id <<
-						       PLIC_PRIORITY_SHIFT_PER_INT));
+						   PLIC_PRIORITY_OFFSET +
+						   (int_id <<
+						    PLIC_PRIORITY_SHIFT_PER_INT));
 
 	log_info("interrupt_priority_address = %x\n", interrupt_priority_address);
 
@@ -342,7 +345,9 @@ void configure_interrupt_pin(unsigned int id)
 
 /** @fn plic_init
  * @brief intitializes the plic module
- * @details intitializes the registers to default values. sets up the plic meta data table. assigns the plic handler to  mcause_interrupt_table.,By default interrupts are disabled.
+ * @details Intitializes the plic registers to default values.
+ *          Sets up the plic meta data table. Assigns the plic 
+ *          handler to mcause_interrupt_table.,By default interrupts are disabled.
  * @warning No warning
  * @param[in] no input parameters
  * @param[Out] no output parameters
@@ -382,7 +387,7 @@ void plic_init()
 		hart0_interrupt_matrix[int_id].priority = PLIC_PRIORITY_3;
 		hart0_interrupt_matrix[int_id].count = 0;
 
-                log_debug("\n*************************************************");
+		log_debug("\n*************************************************");
 
 		/*Disable all interrupts at the beginning*/
 		interrupt_disable(int_id);
@@ -395,12 +400,12 @@ void plic_init()
 		set_interrupt_priority(PLIC_PRIORITY_3, int_id);
 
 		log_debug("\ninterrupt id = %x \nreset to default values state = %x \
-			   \npriority = %x\ncount = %x\n \
-                           \n*************************************************",
-			    hart0_interrupt_matrix[int_id].id, \
-			    hart0_interrupt_matrix[int_id].state, \
-			    hart0_interrupt_matrix[int_id].priority, \
-			    hart0_interrupt_matrix[int_id].count);
+			  \npriority = %x\ncount = %x\n \
+			  \n*************************************************",
+			  hart0_interrupt_matrix[int_id].id, \
+			  hart0_interrupt_matrix[int_id].state, \
+			  hart0_interrupt_matrix[int_id].priority, \
+			  hart0_interrupt_matrix[int_id].count);
 	}
 
 	/* An isr for each and every unique interrupt source has to be added explicitly at init time*/
@@ -416,7 +421,8 @@ void plic_init()
 
 /** @fn configure_interrupt 
  * @brief configure the interrupt pin and enable bit
- * @details enables the interrupt and corresponding physical pin. Needs to be called in every         *          interrupt trigger and handling flow
+ * @details Enables the interrupt and corresponding physical pin (id needed).
+ *          This function needs to be part of interrupt trigger and handling flow
  * @warning Here it is assumed, to have a one to one mapping
  *          between interrupt enable bit and interrupt pin
  * @param[in] unsigned int 

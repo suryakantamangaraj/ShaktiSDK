@@ -76,8 +76,6 @@ Email id: sathya281@gmail.com
 #define PINMUX_CONFIGURE_REG 0x40310
 
 
-
-
 /*! Inter Integrated Circuit (I2C) Interface */
 #define I2C0_BASE 0x00040000
 #define I2C_OFFSET 0x400
