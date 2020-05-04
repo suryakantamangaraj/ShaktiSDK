@@ -70,7 +70,7 @@
 #define I2C_SCL (I2C_BASE_ADDRESS + 0x38)
 
 
-// Hardcoding the pointers with addresss -- let's see if this works
+
 int* i2c_control = (const int *) I2C_CONTROL;
 int* i2c_data    = (const int *) I2C_DATA;
 int* i2c_status  = (const int *) I2C_STATUS;
