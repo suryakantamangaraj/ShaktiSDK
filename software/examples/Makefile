@@ -90,7 +90,7 @@ compile:
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI)  -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf  -D__ASSEMBLY__=1 -I$(bspinc) -c $(bspcore)/trap.S -o ./gen_lib/trap.o
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH)  -mabi=$(MABI) -mcmodel=medany -static -std=gnu99 -fno-common -fno-builtin-printf  -I$(bspinc) -I$(bspboard) -c $(bsplib)/printf.c -o ./gen_lib/printf.shakti
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc)  -I$(bspboard) -c $(bsplib)/log.c -o ./gen_lib/log.o -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -lm -lgcc  
+	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -c $(bspcore)/traps.c -o ./gen_lib/traps.o  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o          -lm -lgcc
@@ -349,12 +349,12 @@ ifeq ($(UPLOAD),UPLOAD)
 	@gcc -g -w -D FILEPATH='"$(FILEPATH)"' $(UPLOADDIR)/elf_to_header.c -o $(filepath)/output/elf_to_header
 	@$(filepath)/output/elf_to_header
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(filepath)/output -c $(UPLOADER)/deploy.c -o $(filepath)/output/deploy.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -c $(FLASHSPEC) -o $(filepath)/output/flash_driver.o -march=$(MARCH) -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(FLASHSPEC) -o $(filepath)/output/flash_driver.o -march=$(MARCH)  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(filepath)/output/deploy.o $(filepath)/output/flash_driver.o $(GENLIB)/gen_lib/libshakti$(XLEN).a -o $(filepath)/output/deploy.shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D $(filepath)/output/deploy.shakti > $(filepath)/output/deploy.dump
 	@echo -e "Upload elf to Flash"
 #@$(UPLOADDIR)/burnFlash.py ./gen)lib/deploy.shakti
-	@sudo $(OCDPATH)/openocd -f $(INTERFACE).cfg -c "reset init" -c "load_image $(filepath)/output/deploy.shakti;resume 0x80000000;shutdown"
+	@sudo $(OCDPATH)/openocd -f $(INTERFACE).cfg -c "reset init"  -c "load_image $(filepath)/output/deploy.shakti;resume 0x80000000;shutdown"
 	@rm -rf ./gen_lib/*.o
 endif
 
@@ -368,12 +368,12 @@ aardonyx : flashsize flashcheck objectsize swap filesize fill layoutsize layout 
 flashsize:
 	@echo "Calculating flash size"
 	@$(eval FLASHROM = $(shell egrep -o -e '[0-9]+\ kB' ./$(filepath)/output/flashoutput.txt | egrep -o '[0-9]+') )
-	@$(eval FLASHSIZE = $(shell echo $(FLASHROM)*1024 | bc ) )
+	@$(eval FLASHSIZE = $(shell echo  $(FLASHROM)*1024  | bc ) )
 	@echo "Checking for flash"
 flashcheck:
 	@echo "Size of flash attached is" $(FLASHSIZE)
 #	Converts .shakti file to binary file	
-	@riscv32-unknown-elf-objcopy -O binary ./$(filepath)/output/$(PROGRAM).shakti ./$(filepath)/output/output.bin
+	@riscv32-unknown-elf-objcopy -O binary ./$(filepath)/output/$(PROGRAM).shakti ./$(filepath)/output/output.bin      
 
 objectsize:
 #Find size of output.bin and append it to the binary file
@@ -389,7 +389,7 @@ swap:
 filesize:
 	@$(eval FILESIZE=$(shell stat -c%s ./$(filepath)/output/newoutput.bin) )
 fill:
-	@$(eval SPACE = $(shell echo $(FLASHSIZE)-$(FILESIZE) | bc ) )
+	@$(eval SPACE = $(shell echo  $(FLASHSIZE)-$(FILESIZE)  | bc ) )
 	@echo "Expanding bin to flash size. This might take a few seconds.."
 #the file is expanded to 32kb and appended with 0's where required.
 	@dd if=/dev/zero of=./$(filepath)/output/newoutput.bin bs=1 count=$(SPACE) conv=notrunc oflag=append

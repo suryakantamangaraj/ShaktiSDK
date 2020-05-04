@@ -22,6 +22,7 @@
 
 ***************************************************************************/
 #include<uart.h>
+
 /** @fn main
  * @brief prints hello world
  * @warning No warning
@@ -30,6 +31,5 @@
  */
 void main()
 {
- 
 	printf ("Hello World !\n");
 }
