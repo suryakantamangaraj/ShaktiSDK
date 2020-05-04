@@ -31,5 +31,11 @@
  */
 void main()
 {
+	int x=99;
 	printf ("Hello World !\n");
+	printf ("%s","Hello World !\n");
+	printf ("%d\n",8);
+	printf ("%u\n",8);
+	printf ("%o\n",x);
+	printf ("%c",'6');
 }
