@@ -34,7 +34,7 @@ all: create_dir
 
 moisture.riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc)  -I$(bspboard) -c ./moisture.c -o ./output/moisture.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/moisture.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T -march=$(MARCH) -mabi=$(MABI)  $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/moisture.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:

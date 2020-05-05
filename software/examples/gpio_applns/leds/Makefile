@@ -35,7 +35,7 @@ all: create_dir
 leds.riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc)  -I$(bspboard) -I$(bsplib)/artya7 -c leds.c -o ./output/leds.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc)  -I$(bspboard) -c $(bsplib)/artya7/led_driver.c -o ./output/led_driver.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/leds.o ./output/led_driver.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T -march=$(MARCH) -mabi=$(MABI)  $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/leds.o ./output/led_driver.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:

@@ -34,7 +34,7 @@ all: create_dir
 buttons.riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(bsplib)/arty7 -I$(bspboard) -c ./buttons.c -o ./output/buttons.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc)  -I$(bspboard) -c $(bsplib)/arty7/button_driver.c -o ./output/button_driver.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/buttons.o ./output/button_driver.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc -T -march=$(MARCH) -mabi=$(MABI)  $(bspboard)/link.ld $(GENLIB)/gen_lib/libshakti$(XLEN).a ./output/buttons.o ./output/button_driver.o -o ./output/$(PROGRAM).shakti -static -nostartfiles -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:

@@ -32,7 +32,7 @@ all: create_dir
 
 $(PROGRAM).riscv: create_dir
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(flags) -c $(PROGRAM).S -o ./output/$(PROGRAM).o -march=$(MARCH) -mabi=$(MABI) 
-	@riscv$(XLEN)-unknown-elf-gcc -T $(bspboard)/link.ld ./output/$(PROGRAM).o -o ./output/$(PROGRAM).shakti -static -nostartfiles 
+	@riscv$(XLEN)-unknown-elf-gcc -T -march=$(MARCH) -mabi=$(MABI)  $(bspboard)/link.ld ./output/$(PROGRAM).o -o ./output/$(PROGRAM).shakti -static -nostartfiles 
 	@riscv$(XLEN)-unknown-elf-objdump -D ./output/$(PROGRAM).shakti > ./output/$(PROGRAM).dump
 
 create_dir:
