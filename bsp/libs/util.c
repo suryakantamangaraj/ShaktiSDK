@@ -50,7 +50,6 @@ void delay(unsigned long seconds)
 	}
 }
 
-#ifndef ARTIX7_100T
 /** @fn pow_10
  * @brief generate different powers of 10 
  * @warning none
@@ -199,7 +198,6 @@ void ftoa(float n, char *res, int afterpoint)
 		int_to_string((int)fpart, res + i + 1, afterpoint); 
 	} 
 } 
-#endif
 
 /** @fn delay_loop
  * @brief Delay calculated interms of iterative operation 
