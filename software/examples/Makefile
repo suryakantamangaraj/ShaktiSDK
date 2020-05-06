@@ -116,38 +116,8 @@ else
 ifeq ($(PROGRAM),csr_test)
 filepath := uart_applns/csr_test
 else
-ifeq ($(PROGRAM),uartmp3)
-filepath := uart_applns/uartmp3
-else
-ifeq ($(PROGRAM),wifi)
-filepath := uart_applns/wifi
-else
 ifeq ($(PROGRAM),pwminterrupt)
 filepath := plic_applns/pwminterrupt
-else
-ifeq ($(PROGRAM),pwminterrupt_test1)
-filepath := plic_applns/pwminterrupt_test1
-else
-ifeq ($(PROGRAM),pwminterrupt_test2)
-filepath := plic_applns/pwminterrupt_test2
-else
-ifeq ($(PROGRAM),pwminterrupt_test2)
-filepath := plic_applns/pwminterrupt_test2
-else
-ifeq ($(PROGRAM),pwminterrupt_test3)
-filepath := plic_applns/pwminterrupt_test3
-else
-ifeq ($(PROGRAM),pwminterrupt_test4)
-filepath := plic_applns/pwminterrupt_test4
-else
-ifeq ($(PROGRAM),pwminterrupt_test5)
-filepath := plic_applns/pwminterrupt_test5
-else
-ifeq ($(PROGRAM),pwminterrupt_test6)
-filepath := plic_applns/pwminterrupt_test6
-else
-ifeq ($(PROGRAM),esp8266)
-filepath := uart_applns/esp8266
 else
 ifeq ($(PROGRAM),lm75)
 filepath := i2c_applns/lm75
@@ -182,35 +152,11 @@ else
 ifeq ($(PROGRAM),maze)
 filepath := uart_applns/maze
 else
-ifeq ($(PROGRAM),adc)
-filepath := uart_applns/adc
-else
 ifeq ($(PROGRAM),active_buzzer)
 filepath := gpio_applns/active_buzzer
 else
 ifeq ($(PROGRAM),passive_buzzer)
 filepath := gpio_applns/passive_buzzer
-else
-ifeq ($(PROGRAM),pwminterrupt)
-filepath := plic_applns/pwminterrupt
-else
-ifeq ($(PROGRAM),pwminterrupt_test1)
-filepath := plic_applns/pwminterrupt_test1
-else
-ifeq ($(PROGRAM),pwminterrupt_test2)
-filepath := plic_applns/pwminterrupt_test2
-else
-ifeq ($(PROGRAM),pwminterrupt_test3)
-filepath := plic_applns/pwminterrupt_test3
-else
-ifeq ($(PROGRAM),pwminterrupt_test4)
-filepath := plic_applns/pwminterrupt_test4
-else
-ifeq ($(PROGRAM),pwminterrupt_test5)
-filepath := plic_applns/pwminterrupt_test5
-else
-ifeq ($(PROGRAM),pwminterrupt_test6)
-filepath := plic_applns/pwminterrupt_test6
 else
 ifeq ($(PROGRAM),rgb)
 filepath := gpio_applns/rgb
@@ -296,11 +242,6 @@ endif
 endif
 endif
 endif	
-endif
-endif
-endif
-endif
-endif
 endif
 endif
 endif
