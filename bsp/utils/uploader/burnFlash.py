@@ -47,7 +47,7 @@ class GDB:
 
 	def gdbStart(self,gdbPath):
 		#open log file
-		logFile = './output/copy_to_flash_'+str(datetime.now().strftime("%Y-%m-%d_%H:%M:%S"))+ '.log'
+		logFile = 'copy_to_flash_'+str(datetime.now().strftime("%Y-%m-%d_%H:%M:%S"))+ '.log'
 		self.opLog=open( logFile,'w+')
 		#open gdb
 		self.gdbmi=GdbController(gdb_path=gdbPath, gdb_args=None, time_to_check_for_additional_output_sec=4.5, rr=False, verbose=False)
@@ -91,7 +91,7 @@ class GDB:
 		self.gdbmi.send_signal_to_gdb(sig)
 
 if __name__ == "__main__":
-	print("Starting copy to Flash \n wait for 3 to 4 minutes for copy to complete\n")
+	print("Starting copy to Flash\n")
 	elf = "file "+ sys.argv[1]
 	path_to_sdk = os.getenv("SHAKTISDK")
 	if path_to_sdk == None:
@@ -126,7 +126,7 @@ if __name__ == "__main__":
 			break
 		gdbObject.getResponseTypeMsg(response)
 #close gdb
-	time.sleep(30)
+	time.sleep(60)
 	gdbObject.gdbClose()
 #close openocd
 	os.system("pkill openocd")

@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  motor.c
- * Created date			        :  26.02.2019
- * Brief Description of file             :  Determines the functioning of stepper motor with the  help of gpio pins.  
- * Name of Author    	                :  Sathya Narayanan N
- * Email ID                              :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: motor.c
+ * Brief Description of file    : Determines the functioning of stepper motor with the  help of                                        gpio pins.  
+ * Name of Author    	        : Sathya Narayanan N
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,7 +19,6 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
  ***************************************************************************/
 #include <stdio.h>/* Includes definitions of standard input/output functions*/
 #include "gpio.h"/*Incudes the defintions of gpio functions and registers*/
@@ -29,31 +27,28 @@
 #define MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
 #define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
 
- /** @fn void main()
- * @brief Runs the motor
- * @details 
- * @warning 
- * @param[in] NULL
- * @param[Out] NULL
+/** @fn main
+ * @brief Performs the intilization of the corresponding registers of gpio pins.
+ * @warning none 
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
-
 void main()
 {
-	printf("Motor Control\n");
+	log_info("Motor Control\n");
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
-	while(1)
-	{
+	while(1) {
 		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);
-		printf("Forward\n");
-		printf("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
-		DelayLoop(5000, 5000);
+		log_info("Forward\n");
+		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
+		delay_loop(5000, 5000);
 
 		write_word(GPIO_DATA_REG, MOTOR_REVERSE_CNTRL);
-		printf("Reverse\n");
-		printf("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
-		DelayLoop(5000, 5000);
+		log_info("Reverse\n");
+		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
+		delay_loop(5000, 5000);
 	}
 
-	DelayLoop(5000, 5000);
+	delay_loop(5000, 5000);
 }

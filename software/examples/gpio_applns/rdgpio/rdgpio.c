@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  rdgpio.c
- * Created date			        :  26.02.2019
- * Brief Description of file             :  Performs the reading operation with the help of gpio pins.
- * Name of Author    	                :  Sathya Narayanan N
- * Email ID                              :  sathya281@gmail.com
+* Project           		   : shakti devt board
+* Name of the file	     	   : rdgpio.c
+* Brief Description of file    : Performs the reading operation with the help of gpio pins.
+* Name of Author    	       : Sathya Narayanan N
+* Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,32 +19,41 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+***************************************************************************/
 
- ***************************************************************************/
-
-#include <stdio.h>//includes the definitions of standard input/output functions
-#include "gpio.h" // includes definitions of gpio pins and read, write functions
+#include <stdio.h>
+#include "gpio.h"
+#include "utils.h"
 #include "platform.h"
 
-extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
-
-/** @fn  void main()
- * @brief reads the value in a gpio pin
- * @details
- * @warning
- * @param[in] Registers,control word.
- * @param[Out] NULL
+/** @fn read_data
+ * @brief set the direction reg to input and start reading from the gpio data reg
+ * @details Configure the gpio direction reg to 0 for the corresponding gpio
+ * pins. start reading the gpio pin value from data reg. delay for some time and
+ * read data again
+ * @warning none
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
  */
-
-void main()
+void read_data()
 {
-	unsigned long readData = 0;
+	unsigned long data = 0;
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
 
-	while(1)
-	{
-		readData =read_word(GPIO_DATA_REG);//copies the GPIO_DATA_REG Register contents//
-		printf("\n Read Data is :0x%08x", readData);
-		DelayLoop(3000, 5000);
+	while (1) {
+		data =read_word(GPIO_DATA_REG);//copi GPIO_DATA_REG content
+		log_info("\n Read Data is :%x", data);
+		delay_loop(3000, 5000);
 	}
 }
+
+/** @fn main
+ * @brief initiate the reading from gpio
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
+ */
+void main()
+{
+    read_data();
+}
+

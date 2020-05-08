@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  tglgpio.c
- * Created date			        :  26.02.2019
- * Brief Description of file             :  Control an led with the help of a button, gpio based.
- * Name of Author    	                :  Sathya Narayanan N
- * Email ID                              :  sathya281@gmail.com
+* Project           			: shakti devt board
+* Name of the file	     		: tglgpio.c
+* Brief Description of file     : Control an led with the help of a button, gpio based.
+* Name of Author    	        : Sathya Narayanan N
+* Email ID                      : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,31 +20,40 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
+***************************************************************************/
 
 #include "platform.h"
-#include "gpio.h" // includes definitions of gpio pins and read, write functions//
+#include "utils.h" 
+#include "gpio.h" 
 
-extern void DelayLoop(unsigned long cntr1, unsigned long cntr2);
-
-/** @fn  main()
- * @brief  Toggles the LED
- * @details 
- * @warning
- * @param[in] NULL 
- * @param[Out] NULL
+/** @fn tglgpio
+ * @brief Performs the toggling operation  with the help of button.
+ * @warning No warning
+ * @param[in] Registers,control word
+ * @param[Out] No output parameter
  */
-
-void main()
+void tglgpio()
 {
-	//Assumption 1 ---> output, 0 ---> input
-	write_word(GPIO_DIRECTION_CNTRL_REG, 0x003FFFFF);
+//Assumption 1 ---> output, 0 ---> input
+	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00FFFFFF);
 
-	while(1)
-	{
-		write_word(GPIO_DATA_REG, 0x003FFFFF);
-		DelayLoop(1000, 5000);
+	while (1) {
+		write_word(GPIO_DATA_REG, 0x00FFFFFF);
+		delay_loop(1000, 5000);
 		write_word(GPIO_DATA_REG, 0x00);
-		DelayLoop(1000, 5000);
+		delay_loop(1000, 5000);
 	}
 }
+
+/** @fn main
+ * @brief Initiates writing to gpio pins by calling tglgpio
+ * @warning No warning
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
+ */ 
+void main()
+{
+	tglgpio();
+	return 0;
+}
+

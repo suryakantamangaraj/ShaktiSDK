@@ -1,10 +1,9 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  btnled.c
- * Created date			        :  26.02.2019
- * Brief Description of file             :  Controls the led operation with help of button,gpio based.
- * Name of Author    	                :  Sathya Narayanan N & Raghav
- * Email ID                              :  sathya281@gmail.com
+ * Project           			: shakti devt board
+ * Name of the file	     		: btnled.c
+ * Brief Description of file    : Controls the led operation with help of button,gpio based.
+ * Name of Author    	        : Sathya Narayanan N & Raghav
+ * Email ID                     : sathya281@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,65 +20,37 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
-#include "gpio.h" // includes definitions of gpio pins and read, write function
+***************************************************************************/
+#include "gpio.h" 
 #include "platform.h"
 
-/** @fn init
- * @brief Performs the intilization of the corresponding registers of gpio pins.
- * @details 
- * @warning 
- * @param[in] NULL
- * @param[Out] NULL
- */
-
-void init()
-{
-	write_word(GPIO_DIRECTION_CNTRL_REG, ~(1 << 0) );
-}
-
-/** @fn int main(void)
- * @brief a led glows when button is pressed
- * @details 
- * @warning
- * @param[in] NULL
+/** @fn main
+ * @brief on press of a button led grows. The technique used here is polling
+ * based.
  * @param[Out] int
  */
-
 int main(void)
 {
-	printf("Hello\n");
+	write_word(GPIO_DIRECTION_CNTRL_REG, ~(1 << 0) );
 
-	init();
+	while (1) {
 
-	while(1)
-	{
 		unsigned long readData = 0;
 
-		readData =  read_word(GPIO_DATA_REG) & 0x1;//copies the GPIO_DATA_REG Register contents// 
+		readData = read_word(GPIO_DATA_REG) & 0x1;    
 
+		log_debug("\n Read Data is :0x%08lx", readData);
 
-		printf("\n Read Data is :0x%08lx", readData);
-
-		if (readData )/*if readdata */
-		{
-			printf("; LED ON");
-			write_word(GPIO_DATA_REG, 0X2);//makes the led to turn on//
+		if (readData) {           //if readdata //
+			log_debug("; LED ON");
+			write_word(GPIO_DATA_REG, 0X2); 
 		}
-		else/*if not */
-		{
-			printf("; LED OFF");
-			write_word(GPIO_DATA_REG, 0X0);//makes the led to turn off//
+		else {                    //if not //
+			log_debug("; LED OFF");
+			write_word(GPIO_DATA_REG, 0X0); 
 		}
-		DelayLoop(1000,1000);
+		delay_loop(1000,1000);
 	}
 
-	int count =1;
-
-	while(count < 200)
-	{
-		count =count+1;
-	};
-	asm volatile("exit_handler : j exit_handler");
 	return 0;
 }
