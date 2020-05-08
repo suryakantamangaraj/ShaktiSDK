@@ -120,6 +120,7 @@ typedef struct
 } i2c_struct;
 
 
+void i2c_init();
 int config_i2c(i2c_struct *,unsigned char prescale_div, unsigned char scl_div);
 int wait_till_I2c_bus_free(i2c_struct *);
 int wait_till_txrx_operation_Completes(i2c_struct *,int *status);

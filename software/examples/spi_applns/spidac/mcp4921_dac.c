@@ -21,17 +21,22 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-
+/**
+@file   mcp4921_dac.c
+@brief  Configures and write a value to DAC.
+@detail SPI interface is used to configure the DAC and then write passed 
+        value to DAC for converstion.
+*/
 #include "spi.h"
 #include <stdint.h>
 
 /** @fn spi_dac
- * @brief config the DAC register
- * @details Write register value thru SPI over DAC interface
- * @warning 
+ * @brief Configures DAC and write digital value to DAC.
+ * @details configures the DAC and writes the digital value to DAC to convert 
+ *          with digital to analog. Configuration is done using SPI.
  * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
  * @param[Out] int
- * @return read status (zero on success)
+ * @return Void function.
  */
 void spi_dac()
 {
@@ -59,12 +64,11 @@ void spi_dac()
 } 
 
 /** @fn write_dac_value
- * @brief Writes the spi value to DAC
- * @details Writes SPI over DAC interface
- * @warning 
- * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
+ * @brief Writes the passed Value to DAC
+ * @details Writes Digital value that needs to be convert into analog over SPI interface
+ * @param[in]  unsigned int
  * @param[Out] int
- * @return write status (zero on success)
+ * @return One.
  */
 int write_dac_value(unsigned dac_value)
 {
@@ -88,12 +92,11 @@ int write_dac_value(unsigned dac_value)
 
 /** @fn main
  * @brief Configures and Write the SPI values.
- * @details Configures the SPI Write FLASH values, Write the same 
- * prints the write values.
- * @warning 
+ * @details Configures DAC registers and then write the digital 
+ *          that needs to be converted to analog.  
  * @param[in] No input parameter
- * @param[Out] int
- * @return Zero
+ * @param[Out] Nil
+ * @return Void function.
  */
 void main()
 {

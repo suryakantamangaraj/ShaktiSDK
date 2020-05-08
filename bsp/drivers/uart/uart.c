@@ -21,7 +21,12 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *****************************************************************************/
-
+/**
+@file   uart.c
+@brief  Contains the driver routines for UART interface.
+@detail The UART driver .has software functions to configure, transmit 
+        and receive over UART interface.
+*/
 #include "uart.h"
 #include "gpio.h"
 
@@ -48,13 +53,14 @@ uart_struct *uart_instance[MAX_UART_COUNT];
 
 /**
  * @fn uart_init
- * @brief 
- * @details 
- * @warning 
+ * @brief Initialise UART Array 
+ * @details Initialises given number of UART Arrays which has 
+ *          complete set of UART registers.
  * @param[in] No input parameters.
  * @param[Out] No ouput parameter 
+ * @return Void function.
  */
-uart_init()
+void uart_init()
 {
 	for(int i=0; i< MAX_UART_COUNT; i++)
 	{
@@ -66,9 +72,9 @@ uart_init()
  * @fn getchar()
  * @brief Function to read a single character from the standard input device.
  * @details This function will be called to write a single character from the stdin.
- * @warning 
  * @param[in] No input parameters.
  * @param[Out] Character as int.
+ * @return integer equivalent of the received character.
  */
 #undef getchar
 int getchar()
@@ -82,9 +88,9 @@ int getchar()
  * @brief Function to write a single character to the standard output device.
  * @details This function will be called to print a single character to the stdout by passing 
  * character as an integer.
- * @warning 
  * @param[in] character as int.
  * @param[Out] int
+ * @return Zero
  */
 #undef putchar
 int putchar(int ch)
@@ -100,10 +106,10 @@ int putchar(int ch)
  * @brief Function to initialize a specific UART with the baudrate.
  * @details This function will be called to initialize a specific UART by passing baudrate value
  * which in turn used to calculate the baud_count to set the baudrate.
- * @warning
  * @param[in]  UART instance, unsigned int
  * @param[Out] No output parameters.
-*/
+ * @return Void function
+ */
 void set_baud_rate(uart_struct *uart_instance, unsigned int baudrate)
 {
 	unsigned int baud_count = 0;
@@ -116,10 +122,10 @@ void set_baud_rate(uart_struct *uart_instance, unsigned int baudrate)
  * @brief Function to enable the interrupts of a perticular uart_instance.
  * @details This function will be called to enable the interrupts of a specific uart_instance by passing
  * the interrupt's values.
- * @warning
  * @param[in] uart_struct, unsigned char
  * @param[Out] No output parameters.
-*/	
+ * @return Void function
+ */	
 void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt)
 {
 	uart_instance->ien = interrupt; 
@@ -131,10 +137,10 @@ void enable_uart_interrupts(uart_struct * uart_instance, unsigned char interrupt
  * @brief Funtion to set the threshold value of the Rx FIFO.
  * @details This function will be called to set the threshold value of the Rx FIFO of a specific uart_instance
  * by passing the threshold value.
- * @warning
  * @param[in] uart_instance ,unsigned char
  * @param[Out] No output parameters.
-*/
+ * @return Void function
+ */
 void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshold)
 {
 	uart_instance->rx_threshold = rxthreshold;
@@ -146,10 +152,10 @@ void set_uart_rx_threshold(uart_struct * uart_instance, unsigned char rxthreshol
  * @brief Function to write a single character to a specific uart_instance. 
  * @details This function will be called to write a character to a specific uart_instance by passing the
  * character.
- * @warning
  * @param[in] uart_instance , unsigned 8bit int
  * @param[Out] unsigned 32bit int
-*/
+ * @return Nil. 
+ */
 uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character)
 {
 	while(uart_instance->status & STS_TX_FULL);
@@ -162,10 +168,10 @@ uint32_t write_uart_character(uart_struct * uart_instance, uint8_t prn_character
  * @brief Function to write a string to a specific uart_instance.
  * @details This function will be called to write a string to a specific uart_instance by passing the
  * string.
- * @warning
  * @param[in] uart_instance ,unsigned 8bit int
  * @param[Out] unsigned 32bit int
-*/
+ * @return Zero
+ */
 uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string)
 {
 	uint32_t i = 0;
@@ -183,10 +189,10 @@ uint32_t write_uart_string(uart_struct * uart_instance, uint8_t * ptr_string)
  * @brief Function to read a character from a specific uart_instance.
  * @details This function will be called to read a character from a specific uart_instance by passing the
  * character pointer to store the character.
- * @warning
  * @param[in] uart_instance , char*
  * @param[Out] unsigned 8bit int
-*/
+ * @return Received character value as integer
+ */
 uint8_t read_uart_character(uart_struct * uart_instance, char * prn_character)
 {
 	uint8_t temp = 0;
@@ -201,10 +207,10 @@ uint8_t read_uart_character(uart_struct * uart_instance, char * prn_character)
  * @brief Function to read a string from a specific uart_instance.
  * @details This function will be called to read a string, one character at a time from a 
  * specific uart_instance by passing the array in which to store the string by reference using pointers.
- * @warning
  * @param[in] UART instance and pointer to an array of character.
  * @param[Out] Length of the sring plus one(null character).
-*/
+ * @return length of the received string
+ */
 uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string) 
 {
 	uint32_t i = 0;
@@ -228,9 +234,9 @@ uint8_t read_uart_string(uart_struct * uart_instance, char * ptr_string)
  * @brief Function to flush the UART fifo queue.
  * @details This function will be called to flush the previous values stored in the UART fifo queue by
  * passing UART number for different offset addresses.
- * @warning 
  * @param[in] UART instance. 
  * @param[Out] No output parameters.
+ * @return Void function
  */
 void flush_uart(uart_struct * uart_instance)
 {
@@ -247,10 +253,10 @@ void flush_uart(uart_struct * uart_instance)
  * @details This function will be called to offer interrupt service routine for UART0 to read the
  * array of characters by handling interrupts such as RX_threshold, Rx_full, and RX_not_empty
  * based on the Rx fifo status and handles accordingly.
- * @warning
  * @param[in] No input parameters.
  * @param[Out] unsigned char
-*/
+ * @return Currently not returning any value
+ */
 #ifdef USE_INTERRUPT
 unsigned char uart0_isr()
 {
@@ -291,10 +297,10 @@ unsigned char uart0_isr()
  * @details This function will be called to offer interrupt service routine for uart_instance[1] to read the
  * array of characters by handling interrupts such as RX_threshold, Rx_full, and RX_not_empty
  * based on the Rx fifo status and handles accordingly.
- * @warning
  * @param[in] No input parameters.
  * @param[Out] unsigned char
-*/
+ * @return Currently not returning any value
+ */
 unsigned char uart1_isr()
 {
 	uint32_t status = 0;
@@ -335,10 +341,10 @@ unsigned char uart1_isr()
  * @details This function will be called to offer interrupt service routine for UART2 to read the
  * array of characters by handling interrupts such as RX_threshold, Rx_full, and RX_not_empty
  * based on the Rx fifo status and handles accordingly.
- * @warning
  * @param[in] No input parameters.
  * @param[Out] unsigned char
-*/
+ * @return Currently not returning any value
+ */
 unsigned char uart2_isr()
 {
 	uint32_t status = 0;

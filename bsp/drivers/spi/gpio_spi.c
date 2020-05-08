@@ -2,7 +2,7 @@
  * Project           	         		:  shakti devt board
  * Name of the file	     		        :  gpio_spi.c
  * Brief Description of file            :  driver file for using gpio pins as SPI
- * Name of Author    	                :  Kottee @ aditya dubey
+ * Name of Author    	                :  Kotteeswaran @ aditya dubey
  * Email ID                             :  kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -32,7 +32,6 @@
 /** @fn writebyte
  * @brief Writes a byte
  * @details This function writes a byte into SPI Slave device using GPIO lines.
- * @warning 
  * @param[in] unsigned char, unsigned char
  * @param[Out] No output parameter
  * @return Nil
@@ -79,7 +78,6 @@ static void writebyte(unsigned char writeData, unsigned char delay)
 /** @fn readbyte
  * @brief Reads a byte 
  * @details Reads a byte from slave SPI device using GPIO lines as SPI lines.
- * @warning 
  * @param[in] unsigned char
  * @param[Out] unsigned char
  * @return Read value
@@ -124,7 +122,6 @@ unsigned char readbyte(unsigned char delay)
 /** @fn config
  * @brief Configures the GPIO pins for SPI functionality
  * @details Configures the GPIO pins as input or output based on the SPI pin functionlity.
- * @warning 
  * @param[in] No input parameter
  * @param[Out] int
  * @return Nil
