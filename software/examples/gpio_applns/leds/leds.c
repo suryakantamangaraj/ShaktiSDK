@@ -20,6 +20,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ***************************************************************************/
+/**
+@file   leds.c
+@brief  Contains the driver routines to glow LEDs.
+@detail Switches ON/OFF/TOGGLE the LEDs.
+*/
 #include "platform.h"
 #include "gpio.h" 
 #include "led_driver.h"
@@ -49,10 +54,12 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main
  * @brief Performs the toggling operation  with the help of button.
- * @details    
+ * @details Based on the uncommented macro. Performs the on/off/toggle 
+ * operation on LEDS.    
  * @warning 
  * @param[in] No input parameter
  * @param[Out] No output parameter 
+ * @return Nil
  */
 void main()
 {

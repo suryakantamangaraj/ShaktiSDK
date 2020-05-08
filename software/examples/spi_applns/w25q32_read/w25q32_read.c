@@ -31,12 +31,14 @@ cs  -spi cs
 #include <stdint.h>
 #include "spi.h"
 
-/** @fn w25q32
- * @brief 
- * @details 
+/** 
+ * @fn read_w25q32_registers
+ * @brief Reads the spi value from w25q32
+ * @details Reads SPI over w25q32 interface
  * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
+ * @param[Out] int
+ * @return read status (zero on success)
  */
 void w25q32()
 {
@@ -59,12 +61,15 @@ void w25q32()
 	printf("SPI Read Successr\n");
 }
 
-/** @fn main
- * @brief 
- * @details 
+/** 
+ * @fn main
+ * @brief Configures and reads the SPI values.
+ * @details Configures the SPI read FLASH values, reads the same 
+ * prints the read values.
  * @warning 
  * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[Out] int
+ * @return Zero
  */
 void main()
 {

@@ -21,6 +21,11 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file   buttons.c
+@brief  Contains the driver routines to read the pressed button.
+@detail Detects the pressed key/button and prints pressed button.
+*/
 #include <stdio.h>        //includes the definitions of standard input/output functions
 #include "platform.h"
 #include "gpio.h"         // includes definitions of gpio pins and read, write functions
@@ -42,7 +47,8 @@ unsigned long read_data = 0;
 
 /** @fn main 
  * @brief Performs the toggling operation  with the help of button.
- * @details 
+ * @details Configures the buttons to be read as inputs and 
+ *          displays the pressed button value.
  * @warning 
  * @param[in] Registers,control word
  * @param[Out] No output parameter

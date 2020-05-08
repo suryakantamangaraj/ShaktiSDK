@@ -21,6 +21,11 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ************************************************************************/
+/**
+@file   keypad.c
+@brief  Contains the driver routines to read the pressed keypad.
+@detail Detects the pressed key/button and prints decoded keypad value (0 - 15).
+*/
 #include "gpio.h"
 #include "platform.h"
 #include "keypad.h"//Includes the definitions of keypad function//
@@ -48,7 +53,7 @@ int  key_table[4][4] =
 
 /** @fn set_pins
  * @brief This function sets the pins for the row and column
- * @details 
+ * @details Fills the row and coloumn values into row and coloumn arrays.
  * @warning 
  * @param[in] unsigned int*, unsigned int*
  * @param[Out] No output parameter
@@ -67,7 +72,7 @@ void set_pins(unsigned int*  row, unsigned int* col)
 
 /** @fn set_key_map
  * @brief This function maps table in to keymap
- * @details 
+ * @details Fills the passed array values into key_map array.
  * @warning 
  * @param[in] int
  * @param[Out] No output parameter
@@ -85,10 +90,12 @@ void set_key_map(int table[COLNUM][ROWNUM])
 
 /** @fn get_key_another_way
  * @brief This function returns the corresponding value in the keymap
- * @details 
+ * @details Detects the press key based on the row value in a particular colomun
+ * and returns the decoded key value.
  * @warning 
  * @param[in] No input parameter
  * @param[Out] int
+ * @return Key value pressed
  */
 int get_key_another_way()
 {
@@ -114,10 +121,12 @@ int get_key_another_way()
 
 /** @fn getkey
  * @brief This function returns the corresponding value in the keymap
- * @details 
+ * @details Detects the press key based on the row value in a particular colomun
+ * and returns the decoded key value.
  * @warning 
  * @param[in] int
  * @param[Out] int
+ * @return Key value pressed
  */
 int get_key(int col_row)
 {
@@ -131,6 +140,7 @@ int get_key(int col_row)
  * @warning 
  * @param[in] No output parameter
  * @param[Out] int
+ * @return Column and row combination.
  */
 int get_col_row(void)
 {
@@ -161,10 +171,11 @@ int get_col_row(void)
 
 /** @fn gpio_init
  * @brief This maps the keypad from pins
- * @details    
+ * @details  Initialises Rows pins and coloumn pins of the mapped GPIO lines to keypad.  
  * @warning 
  * @param[in] No input parameter
  * @param[Out] No output parameter
+ * @return Nil
  */
 void gpio_init()
 {
@@ -177,11 +188,12 @@ void gpio_init()
 }
 
 /** @fn main
- * @brief 
- * @details    
+ * @brief Detects the pressed key
+ * @details  Detects the pressed key and prints its decoded value.  
  * @warning 
  * @param[in] No input parameter
  * @param[Out] int
+ * @return Zero 
  */
 int main()
 {
