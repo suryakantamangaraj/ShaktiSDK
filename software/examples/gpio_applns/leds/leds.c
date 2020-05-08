@@ -2,8 +2,8 @@
  * Project           	   	   :  shakti devt board
  * Name of the file	     	   :  leds.c
  * Brief Description of file   :  Control an led with the help of a button, gpio based.
- * Name of Author    	       :  Sathya Narayanan N
- * Email ID                    :  sathya281@gmail.com
+ * Name of Author    	       :  Kotteeswaran
+ * Email ID                    :  kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,9 +19,9 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-***************************************************************************/
+ ***************************************************************************/
 #include "platform.h"
-#include "gpio.h" // includes definitions of gpio pins and read, write functions//
+#include "gpio.h" 
 #include "led_driver.h"
 
 
@@ -112,7 +112,6 @@ void main()
 	configure_all_leds();
 #endif
 
-
 	write_word(GPIO_DATA_REG, 0x0);
 
 	while (1){
@@ -194,7 +193,6 @@ void main()
 		delay_loop(DELAY1, DELAY2);
 		//  ToggleAllLeds(1000);
 #endif
-
 
 #ifdef TOGGLE_LEDX
 		toggle_ledx(LED0_R, DELAY1, DELAY2);
