@@ -32,12 +32,14 @@ cs  -spi cs
 #include <stdint.h>
 #include "spi.h"
 
-/** @fn w25q32
- * @brief 
- * @details 
+/** @fn Write_w25q32_registers
+ * @brief Writes the spi value to w25q32
+ * @details Writes SPI over w25q32 interface
  * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
+ * @param[Out] int
+ * @return write status (zero on success)
+
  */
 void w25q32()
 {
@@ -63,12 +65,15 @@ void w25q32()
 	printf("SPI Write Success\n");
 }
 
-/** @fn main
- * @brief 
- * @details 
+/**  @fn main
+ * @brief Configures and Write the SPI values.
+ * @details Configures the SPI Write FLASH values, Write the same 
+ * prints the write values.
  * @warning 
  * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[Out] int
+ * @return Zero
+
  */
 void main()
 {
