@@ -46,7 +46,7 @@
 
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
- * @warning No warning 
+ * @details adds cntr1 * cntr2 number of nops (delay)
  * @param[in] unsigned long, unsigned long
  * @param[Out] No output parameter
  */

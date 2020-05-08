@@ -37,9 +37,10 @@
 
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation. 
- * @warning NO warning
+ * @details adds cntr1 * cntr2 number of nops (delay)
  * @param[in] unsigned long, unsigned long 
  * @param[Out] No output parameter
+ * @return Nil
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
@@ -49,9 +50,9 @@ unsigned long read_data = 0;
  * @brief Performs the toggling operation  with the help of button.
  * @details Configures the buttons to be read as inputs and 
  *          displays the pressed button value.
- * @warning 
  * @param[in] Registers,control word
  * @param[Out] No output parameter
+ * @return Nil
  */
 void main()
 {
