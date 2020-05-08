@@ -20,17 +20,22 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ****************************************************************************/
-
+/**
+@file   gpio_spi.c
+@brief  Contains the driver routines for GPIO based SPI interface.
+@detail The GPIO_SPI module driver supports SPI driver routines using GPIO lines as SPI lines.
+*/
 #include "platform.h"
 #include "gpio.h"
 #include "gpio_spi.h"
 
 /** @fn writebyte
- * @brief 
- * @details 
+ * @brief Writes a byte
+ * @details This function writes a byte into SPI Slave device using GPIO lines.
  * @warning 
  * @param[in] unsigned char, unsigned char
  * @param[Out] No output parameter
+ * @return Nil
  */
 // at starting  edge sending
 static void writebyte(unsigned char writeData, unsigned char delay)
@@ -72,11 +77,12 @@ static void writebyte(unsigned char writeData, unsigned char delay)
 }
 
 /** @fn readbyte
- * @brief 
- * @details 
+ * @brief Reads a byte 
+ * @details Reads a byte from slave SPI device using GPIO lines as SPI lines.
  * @warning 
  * @param[in] unsigned char
  * @param[Out] unsigned char
+ * @return Read value
  */
 //reading at rising edge reading 
 unsigned char readbyte(unsigned char delay)
@@ -116,11 +122,12 @@ unsigned char readbyte(unsigned char delay)
 */
 
 /** @fn config
- * @brief 
- * @details 
+ * @brief Configures the GPIO pins for SPI functionality
+ * @details Configures the GPIO pins as input or output based on the SPI pin functionlity.
  * @warning 
  * @param[in] No input parameter
  * @param[Out] int
+ * @return Nil
  */
 int config()
 {
