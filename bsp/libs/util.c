@@ -144,6 +144,7 @@ void ftoa(float n, char *res, int afterpoint)
 {
 	int i=0;
 	char temp[30]={'\0'};
+	n += 0.0000001;
 
 	// Extract integer part 
 	int ipart = (int)n; 

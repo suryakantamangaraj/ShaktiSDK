@@ -28,5 +28,10 @@
  */
 void main()
 {
+	float x=.9898;
+
 	printf ("Hello World !\n");
+	printf ("%f\n",x);
+	 x=0.8;
+	printf ("%f\n",x);
 }
