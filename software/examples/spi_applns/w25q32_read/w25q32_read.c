@@ -20,7 +20,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-
+/**
+@file   w25q32_read.c
+@brief  Contains the driver routines for flash read over SPI interface.
+@detail Configures and reads the flash over SPI interface..
+*/
 /*********************************************
 PIN DETAILS CONNECTION OF WINBOND W25Q32 FLASH
 d1 - spi mosi
@@ -35,10 +39,9 @@ cs  -spi cs
  * @fn read_w25q32_registers
  * @brief Reads the spi value from w25q32
  * @details Reads SPI over w25q32 interface
- * @warning 
- * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
+ * @param[in]  Nil
  * @param[Out] int
- * @return read status (zero on success)
+ * @return Void function (Null)
  */
 void w25q32()
 {
@@ -66,10 +69,9 @@ void w25q32()
  * @brief Configures and reads the SPI values.
  * @details Configures the SPI read FLASH values, reads the same 
  * prints the read values.
- * @warning 
  * @param[in] No input parameter
  * @param[Out] int
- * @return Zero
+ * @return Void function (Null)
  */
 void main()
 {

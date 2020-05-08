@@ -21,6 +21,11 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file   w25q32_write.c
+@brief  Contains the driver routines for flash write over SPI interface.
+@detail Configures and writes the flash over SPI interface..
+*/
 /************************************************
 PIN DETAILS CONNECTIONS OF WINBOND W25Q32 FLASH
 d1 - spi mosi
@@ -35,11 +40,9 @@ cs  -spi cs
 /** @fn Write_w25q32_registers
  * @brief Writes the spi value to w25q32
  * @details Writes SPI over w25q32 interface
- * @warning 
  * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
  * @param[Out] int
- * @return write status (zero on success)
-
+ * @return Void function (Null)
  */
 void w25q32()
 {
@@ -69,11 +72,9 @@ void w25q32()
  * @brief Configures and Write the SPI values.
  * @details Configures the SPI Write FLASH values, Write the same 
  * prints the write values.
- * @warning 
  * @param[in] No input parameter
  * @param[Out] int
- * @return Zero
-
+ * @return Void function (Null)
  */
 void main()
 {
