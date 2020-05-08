@@ -22,14 +22,7 @@
 *****************************************************************************/
 #include "platform.h"
 #include "gpio.h"
-
-/** @fn delay_loop
- * @brief Maintains the required delay to perform an operation
- * @warning No warning
- * @param[in] unsigned long, unsigned long
- * @param[Out] No output parameter
- */
-extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
+#include "utils.h"
 
 /** @fn main
  * @brief Getting RGB light glow one by one

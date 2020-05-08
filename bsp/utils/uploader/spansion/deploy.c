@@ -29,12 +29,19 @@
 #include "spi.h"
 #include "flashdata.h"
 
-void main(){
+/** @fn deploy
+ * @brief Erases flash and writes the hex array entry by entry into the flash
+ * memory.
+ * @param[in] none 
+ * @param[Out] none
+ */
+void deploy()
+{
+	int read_address = 0x00b00000;  
+	double count=0.0;
 
 	spi_init();
 	flash_device_id(); 
-	int read_address = 0x00b00000;  
-	double count=0.0;
 
 	printf("\n Erasing FLASH\n");
 
@@ -56,7 +63,16 @@ void main(){
 	}
 
 	printf("\n Completed write to FLASH\n");
-
 	asm volatile ("ebreak");
+}
+
+/** @fn main
+ * @brief calls deploy function to load the code to flash memory
+ * @param[in] none 
+ * @param[Out] none
+ */
+void main(){
+
+	deploy();
 }
 

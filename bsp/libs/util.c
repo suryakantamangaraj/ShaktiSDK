@@ -97,7 +97,7 @@ void reverse(char *str, int length)
  *	    The converted string is stored in str. The 
  * position of last character in the str is returned.
  * This function is tailored to support ftoa.
- * @warning 
+ * @warning none 
  * @param[in] int, char, int
  * @param[Out] int
  */
@@ -220,8 +220,7 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
 /** @fn read_word
  * @brief returns the value stored at a given address
  Here we assume the word size to be 32 bits for gpio
- * @details
- * @warning
+ * @warning none
  * @param[in] int*
  * @param[Out] long int
  */
@@ -233,8 +232,7 @@ long int read_word(int *addr)
 
 /** @fn write_word
  * @brief  writes a value to an address
- * @details
- * @warning
+ * @warning none
  * @param[in] int* ,unsigned long
  * @param[Out] No output parameter
  */

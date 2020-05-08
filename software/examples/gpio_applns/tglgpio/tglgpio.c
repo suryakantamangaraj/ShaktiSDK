@@ -23,34 +23,15 @@
 ***************************************************************************/
 
 #include "platform.h"
-#include "gpio.h" // includes definitions of gpio pins and read, write functions//
-
-/** @fn delay_loop
- * @brief Maintains the required delay to perform an operation
- * @warning No warning
- * @param[in] unsigned long, unsigned long
- * @param[Out] No output parameter
- */
-extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
-
-/** @fn main
- * @brief 
- * @warning No warning
- * @param[in] No input parameter
- * @param[Out] No output parameter
- */ 
-void main()
-{
-	tglgpio();
-	return 0;
-}
+#include "utils.h" 
+#include "gpio.h" 
 
 /** @fn tglgpio
  * @brief Performs the toggling operation  with the help of button.
  * @warning No warning
  * @param[in] Registers,control word
  * @param[Out] No output parameter
- */  
+ */
 void tglgpio()
 {
 //Assumption 1 ---> output, 0 ---> input
@@ -63,3 +44,16 @@ void tglgpio()
 		delay_loop(1000, 5000);
 	}
 }
+
+/** @fn main
+ * @brief Initiates writing to gpio pins by calling tglgpio
+ * @warning No warning
+ * @param[in] No input parameter
+ * @param[Out] No output parameter
+ */ 
+void main()
+{
+	tglgpio();
+	return 0;
+}
+

@@ -24,28 +24,36 @@
 
 #include <stdio.h>
 
-#ifndef FILEPATH
-#endif
+/** @fn convert_hex_array
+ * @brief Converts the hex code to an array of hex code
+ * @details reads code.mem file and coverts the hex code into an array of hex
+ * codes in the flashdata.h, first entry in the array tells the size of file.
+ * @param[in] none
+ * @param[Out] none
+ */
 
-void main()
+void convert_hex_array()
 {
-	printf(" Converting codemem to array\n");
-	FILE *myFile;
-	FILE *Cypress;
 	unsigned int  i= 0;
 	int write_data;
 	int count=0;
+
+	FILE *myFile;
+	FILE *Cypress;
+
 	myFile = fopen(FILEPATH "/output/code.mem", "r");
 	Cypress = fopen(FILEPATH "/output/flashdata.h","w");
+
 	if(!myFile) {
 		printf(" unable to read code.mem\n");
 		return;
 	}
+
 	if(!Cypress) {
 		printf(" unable to open flashdata.h\n");
 		return;
 	}
-	
+
 	while (fscanf(myFile, "%x", &write_data) != EOF) {
 		count++;
 	}
@@ -60,13 +68,20 @@ void main()
 	}
 
 	fprintf(Cypress,"};\n\n");
-
 	fprintf(Cypress,"#define SIZE %d", count);
 
 	fclose(Cypress);
 	fclose(myFile);
 	printf("\n Converted codemem to array\n");
-
-	//asm volatile ("ebreak");
 }
 
+/** @fn main
+ * @brief Initiates conversion by calling convert_hex_array
+ * @param[in] none 
+ * @param[Out] none
+ */
+void main()
+{
+	printf(" Converting codemem to array\n");
+	convert_hex_array();
+}

@@ -21,45 +21,39 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
 
-#include <stdio.h>//includes the definitions of standard input/output functions
-#include "gpio.h" // includes definitions of gpio pins and read, write functions
+#include <stdio.h>
+#include "gpio.h"
+#include "utils.h"
 #include "platform.h"
 
-/** @fn delay_loop
- * @brief Maintains the required delay to perform an operation 
- * @warning No warning
- * @param[in] unsigned long, unsigned long
- * @param[Out] No output parameter
- */
-extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
-
-/** @fn readData
- * @brief 
- * @details 
- * @warning 
+/** @fn read_data
+ * @brief set the direction reg to input and start reading from the gpio data reg
+ * @details Configure the gpio direction reg to 0 for the corresponding gpio
+ * pins. start reading the gpio pin value from data reg. delay for some time and
+ * read data again
+ * @warning none
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
-void readData()
+void read_data()
 {
 	unsigned long data = 0;
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00000000);
 
 	while (1) {
-		data =read_word(GPIO_DATA_REG);//copies the GPIO_DATA_REG Register contents//
-		printf("\n Read Data is :%x", data);
+		data =read_word(GPIO_DATA_REG);//copi GPIO_DATA_REG content
+		log_info("\n Read Data is :%x", data);
 		delay_loop(3000, 5000);
 	}
 }
 
 /** @fn main
- * @brief 
+ * @brief initiate the reading from gpio
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
 void main()
 {
-    readData(); 
+    read_data();
 }
-
 

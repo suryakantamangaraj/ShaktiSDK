@@ -29,55 +29,11 @@
 #include "plic_driver.h"
 #include "log.h"
 #include "defines.h"
+#include "memory.h"
 #include "pwm_driver.h"
 
-/** @fn dump_word_memory
- * @brief 
- * @details 
- * @warning 
- * @param[in] unsigned int* , unsigned int
- * @param[Out] No output parameter
- */
-void dump_word_memory(unsigned int* start, unsigned int word_length)
-{
-	unsigned int i=0;
-	void *address;
-
-	address = (unsigned int *) start;
-
-	while(i++< word_length)
-	{
-		log_info("address = %x data = %x\n", address, *(unsigned int *) address);
-		address+=4;
-	}
-}
-
-/** @fn dump_byte_memory
- * @brief 
- * @details 
- * @warning 
- * @param[in] unsigned int* ,unsigned int
- * @param[Out] No output parameter
- */
-void dump_byte_memory(unsigned int* start, unsigned int word_length)
-{
-	unsigned int i=0;
-	void *address;
-
-	address = (unsigned char *) start;
-
-	while(i++< word_length)
-	{
-		log_info("address = %x data = %x\n", address, *(unsigned char
-							       *) address);
-		address+=1;
-	}
-}
-
 /** @fn handle_button_press 
- * @brief 
- * @details 
- * @warning 
+ * @brief a default handler to handle button press 
  * @param[in] unsigned
  * @param[Out] unsigned
  */
@@ -88,10 +44,8 @@ unsigned handle_button_press (unsigned num)
 }
 
 /** @fn main 
- * @brief 
- * @details 
- * @warning 
- * @param[in] No input parameter
+ * @brief sets up the environment for plic feature 
+ * @param[in] none
  * @param[Out] int
  */
 int main(void){
@@ -108,8 +62,6 @@ int main(void){
 	read_word(0x0c010010);
 
 	plic_init();
-
-	//interrupt id 13, 10, 14, 20, 21 are coming continuously without manual trigger
 
 	for(int i=1;i<25;i++)
 		configure_interrupt(i);
@@ -179,7 +131,6 @@ int main(void){
 			read_word(0x0c010000);
 			read_word(0x0c010010);
 		}
-
 	}
 
 	return 0;

@@ -29,25 +29,24 @@
 
 /** @fn main
  * @brief Performs the intilization of the corresponding registers of gpio pins.
- * @details 
- * @warning 
+ * @warning none 
  * @param[in] No input parameter
  * @param[Out] No output parameter
  */
 void main()
 {
-	printf("Motor Control\n");
+	log_info("Motor Control\n");
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0xFFFFFFFF);
 
 	while(1) {
 		write_word(GPIO_DATA_REG, MOTOR_FORWARD_CNTRL);
-		printf("Forward\n");
-		printf("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
+		log_info("Forward\n");
+		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
 		delay_loop(5000, 5000);
 
 		write_word(GPIO_DATA_REG, MOTOR_REVERSE_CNTRL);
-		printf("Reverse\n");
-		printf("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
+		log_info("Reverse\n");
+		log_info("GPIO Data Register Value: %d\n",GPIO_DATA_REG);
 		delay_loop(5000, 5000);
 	}
 

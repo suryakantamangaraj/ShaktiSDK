@@ -40,10 +40,12 @@ D ?=
 # We are using that provision to invole appropriate makefile scripts from top folder
 all: check library do upload flash finish
 	@echo "TARGET is" $(TARGET)
+
 check:
 ifeq ($(DEBUG),DEBUG)
 	@$(eval D = -g)
 endif
+
 ifeq ($(TARGET),artix7_35t)
 	@$(eval XLEN = 32)
 	@$(eval FLAGS= -D ARTIX7_35T)
@@ -74,7 +76,6 @@ else
 endif
 endif
 endif
-
 
 library:
 ifeq ($(CLEAR),)
@@ -264,19 +265,6 @@ endif
 endif
 endif
 endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
 
 upload: path do
 path:
@@ -284,9 +272,7 @@ FILEPATH:='"$(GENLIB)$(filepath)"'
 
 do:
 ifeq ($(UPLOAD),UPLOAD)
-#	@echo $(FILEPATH)	
 	@elf2hex 4 8192 $(filepath)/output/$(PROGRAM).shakti 2147483648 > $(filepath)/output/code.mem
-#	@echo -e $(BSP)
 	@gcc -g -w -D FILEPATH='"$(FILEPATH)"' $(UPLOADDIR)/elf_to_header.c -o $(filepath)/output/elf_to_header
 	@$(filepath)/output/elf_to_header
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspinc) -I$(filepath)/output -c $(UPLOADER)/deploy.c -o $(filepath)/output/deploy.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc

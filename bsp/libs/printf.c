@@ -26,23 +26,6 @@
 #include "utils.h"
 #include "uart.h"
 
-/** @fn size_t strnlen
- * @brief
- * @details
- * @warning
- * @param[in] const char
- * @param[Out] unsigned integer
- */
-size_t strnlen(const char *s, size_t n)
-{
-	const char *p = s;
-
-	while (n-- && *p)
-		p++;
-
-	return (p - s);
-}
-
 /** @fn  itoa
  * @brief integer to string conversion
  * @warning none

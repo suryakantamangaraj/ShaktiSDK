@@ -36,11 +36,12 @@ void waitfor(unsigned int secs);
 void delay(unsigned long seconds);
 float pow_10(unsigned int y);
 void reverse(char *str, int len);
-int intToStr(int x, char str[], int d);
 void ftoa( float, char *, unsigned);
 void delay_loop(unsigned long cntr1, unsigned long cntr2);
 long int read_word(int *addr);
 void write_word(int *addr, unsigned long val);
-size_t strnlen(const char *s, size_t n);
+int int_to_string(int number, char str[], int afterpoint);
+void _printf_(const char *fmt, va_list ap);
+int printf(const char* fmt, ...);
 
 #endif
