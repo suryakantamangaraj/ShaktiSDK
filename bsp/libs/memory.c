@@ -20,13 +20,17 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ***************************************************************************/
+/**
+@file memory.c
+@brief A library to display the memory contents
+@detail 
+*/
 
 /** @fn dump_word_memory
  * @brief dump contents of word addressabe location in the memory,
-*	 starting from the start address. 
- * @warning none 
- * @param[in] unsigned int* ,unsigned int
- * @param[Out] No output parameter
+ *	 starting from the start address. 
+ * @param unsigned int* 
+ * @param unsigned int
  */
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
@@ -44,10 +48,9 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
 
 /** @fn dump_byte_memory
  * @brief dump contents of byte addressabe location in the memory,
-*	 starting from the start address. 
- * @warning none 
- * @param[in] unsigned int*, unsigned int
- * @param[Out] No output parameter
+ *	 starting from the start address. 
+ * @param unsigned int*
+ * @param unsigned int
  */
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {

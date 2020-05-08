@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project           		    : shakti devt board
- * Name of the file	     	    : log.c
+ * Project           		: shakti devt board
+ * Name of the file	     	: log.c
  * Brief Description of file    : print control for all operation
  * Name of Author    	        : Abhinav ramnath & Sathya Narayanan N
  * Email ID                     : sathya281@gmail.com
@@ -19,7 +19,12 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- ***************************************************************************/
+***************************************************************************/
+/**
+@file log.c
+@brief print control for all operation
+@detail 
+*/ 
 
 #include "log.h"
 #include "uart.h"
@@ -32,8 +37,7 @@
 /** @fn log_trace
  * @brief Function to print trace logs
  * @details This function print trace logs if the LOG_LEVEL allows trace logs
- * @param[in] const char* (printf formatted arguments with format specifiers)
- * @param[Out] No output parameter
+ * @param const char* (printf formatted arguments with format specifiers)
  */
 void log_trace(const char* fmt, ...)
 {
@@ -50,8 +54,7 @@ void log_trace(const char* fmt, ...)
 /** @fn log_info
  * @brief Function to print info logs
  * @details This function print info logs if the LOG_LEVEL allows info logs
- * @param[in] const char* (printf formatted arguments with format specifiers)
- * @param[Out] No output parameter
+ * @param const char* (printf formatted arguments with format specifiers)
  */
 void log_info(const char* fmt, ...)
 {
@@ -68,8 +71,7 @@ void log_info(const char* fmt, ...)
 /** @fn log_debug
  * @brief Function to print debug logs
  * @details This function print debug logs if the LOG_LEVEL allows debug logs
- * @param[in] const char* (printf formatted arguments with format specifiers)
- * @param[Out] No output parameter
+ * @param const char* (printf formatted arguments with format specifiers)
  */
 void log_debug(const char* fmt, ...)
 {
@@ -86,8 +88,7 @@ void log_debug(const char* fmt, ...)
 /** @fn log_warn
  * @brief Function to print warn logs
  * @details This function print trace warn if the LOG_LEVEL allows warn logs
- * @param[in] const char* (printf formatted arguments with format specifiers)
- * @param[Out] No output parameter
+ * @param const char* (printf formatted arguments with format specifiers)
  */
 void log_warn(const char* fmt, ...)
 {
@@ -104,8 +105,7 @@ void log_warn(const char* fmt, ...)
 /** @fn log_error
  * @brief Function to print error logs
  * @details This function print error logs if the LOG_LEVEL allows error logs
- * @param[in] const char* (printf formatted arguments with format specifiers)
- * @param[Out] No output parameter
+ * @param const char* (printf formatted arguments with format specifiers)
  */
 void log_error(const char* fmt, ...)
 {
@@ -122,8 +122,7 @@ void log_error(const char* fmt, ...)
 /** @fn log_fatal
  * @brief Function to print fatal logs
  * @details This function print fatal logs if the LOG_LEVEL allows fatal logs
- * @param[in] const char* (printf formatted arguments with format specifiers)
- * @param[Out] No output parameter
+ * @param const char* (printf formatted arguments with format specifiers)
  */
 void log_fatal(const char* fmt, ...)
 {

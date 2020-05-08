@@ -1,8 +1,8 @@
 /***************************************************************************
- * Project           			     : shakti devt board
- * Name of the file	     		   : button_driver.c
+ * Project           	       : shakti devt board
+ * Name of the file	       : button_driver.c
  * Brief Description of file   : Reads onboard button values from gpio pins.
- * Name of Author    	         : Madan Kumar S
+ * Name of Author    	       : Madan Kumar S
  * Email ID                    : kumarmadan96@gmail.com
 
   Copyright (C) 2019  IIT Madras. All rights reserved.
@@ -20,6 +20,11 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
+/**
+@file button_driver.c
+@brief Reads onboard button values from gpio pins.
+@detail 
+*/ 
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
@@ -29,20 +34,18 @@
 
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
- * @warning No warning
- * @param[in] unsigned long, unsigned long
- * @param[Out] No output parameter
+ * @param unsigned long
+ * @param unsigned long
  */
 extern void delay_loop(unsigned long , unsigned long );
 
-/*
+/**
  * @fn static void configure_btn()
  * @brief Function for configure Individual Buttons as input.
  * @details 4 GPIO pins are mapped to 4 Buttons. This function configures
  *          each BTN as input pin.
- * @warning No warning
- * @param[in] unsigned long (Pin that needs to be configured as BTN.)
- * @param[Out] No output parameters.
+ *
+ * @param unsigned long (Pin that needs to be configured as BTN.)
  */
 void configure_btn(unsigned long pinCntrl)
 {
@@ -55,9 +58,6 @@ void configure_btn(unsigned long pinCntrl)
  * @brief Function for configure All BTNs as input.
  * @details 4 GPIO pins are mapped to 4 Buttons. This function configures
  *          all BTNs as input pin.
- * @warning No warning
- * @param[in] No input parameter
- * @param[Out] No output parameters.
  */
 void configure_all_btn()
 {

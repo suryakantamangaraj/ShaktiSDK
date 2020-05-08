@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: traps.c
+ * Project           		: shakti devt board
+ * Name of the file	     	: traps.c
  * Brief Description of file    : source file for first level of trap handling.
  * Name of Author    	        : Sathya Narayanan N
  * Email ID                     : sathya281@gmail.com
@@ -21,15 +21,20 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
  ***************************************************************************/
+/**
+@file traps.c
+@brief source file for first level of trap handling.
+@detail 
+*/
+
 #include "traps.h"
 
 /** @fn extract_ie_code
  * @brief Extract the exception code from the mcause reg
  * @details Extract the exception code from the mcause reg
- *	    by masking the most significant bit.
- * @warning none 
- * @param[in] unsigned int 
- * @param[Out] unsigned int
+ *	    by masking the most significant bit. 
+ * @param unsigned int 
+ * @return unsigned int
  */
 unsigned int extract_ie_code(unsigned int num)
 {
@@ -48,9 +53,8 @@ unsigned int extract_ie_code(unsigned int num)
 
 /** @fn default_handler
  * @brief default handler that loops infinitely 
- * @warning none
- * @param[in] unsigned int ptr ,unsigned int ptr
- * @param[Out] No output parameter
+ * @param unsigned int ptr 
+ * @param unsigned int ptr
  */
 void default_handler(uintptr_t mcause, uintptr_t epc)
 {
@@ -64,10 +68,10 @@ void default_handler(uintptr_t mcause, uintptr_t epc)
 /** @fn handle_trap
  * @brief Handles the trap, exception or interrupt is determined here
  * @details Trap handler routine, which identifies the cause of trap 
-		and calls the respective trap handler.
- * @warning none
- * @param[in] unsigned int ptr, unsigned int ptr
- * @param[Out] unsigned int ptr
+ *	    and calls the respective trap handler.
+ * @param unsigned int ptr
+ * @param unsigned int ptr
+ * @return unsigned int ptr
  */
 uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 {

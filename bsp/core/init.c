@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: init.c
+ * Project           		: shakti devt board
+ * Name of the file	     	: init.c
  * Brief Description of file    : source file for system initialization.
  * Name of Author    	        : Sathya Narayanan N & Abhinav Ramnath
  * Email ID                     : sathya281@gmail.com
@@ -21,6 +21,12 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
  ****************************************************************************/
+/**
+@file init.c
+@brief source file for system initialization
+@detail 
+*/ 
+
 #include "traps.h"
 #include "plic_driver.h"
 #include "clint_driver.h"
@@ -54,10 +60,8 @@ char *sbss_start=(char *)&__sbss_start;
 
 /** @fn section_init
  * @brief resets the different sections
- * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections   *          of memory
+ * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
- * @param[in] No input parameter
- * @param[Out] No output parameter
  */
 void section_init()
 {
@@ -88,10 +92,8 @@ void section_init()
 
 /** @fn trap_init
  * @brief Initialize the trap/interrupt callback routines with user defined handler.
- * @details  Assign default handler for trap / interrupt that does not have user defined
+ * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
- * @param[in]  No input parameter
- * @param[Out] No output parameter
  */
 void trap_init()
 {
@@ -154,8 +156,6 @@ void trap_init()
 
 /** @fn init
  * @brief initialize the necessary variables for system start
- * @param[in]  No input parameter
- * @param[Out] No output parameter
  */
 void init(void)
 {

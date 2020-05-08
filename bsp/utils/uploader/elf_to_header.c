@@ -5,31 +5,34 @@
 * Name of Author    	                :  Sathya Narayanan N & & Anand Kumar S
 * Email ID                              :  sathya281@gmail.com
 
-    Copyright (C) 2019  IIT Madras. All rights reserved.
+ Copyright (C) 2019  IIT Madras. All rights reserved.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file elf_to_header.c
+@brief Create hex array of the contents in elf.
+@detail 
+*/
 
 #include <stdio.h>
 
 /** @fn convert_hex_array
  * @brief Converts the hex code to an array of hex code
  * @details reads code.mem file and coverts the hex code into an array of hex
- * codes in the flashdata.h, first entry in the array tells the size of file.
- * @param[in] none
- * @param[Out] none
+ *     codes in the flashdata.h, first entry in the array tells the size of file.
  */
 
 void convert_hex_array()
@@ -77,8 +80,6 @@ void convert_hex_array()
 
 /** @fn main
  * @brief Initiates conversion by calling convert_hex_array
- * @param[in] none 
- * @param[Out] none
  */
 void main()
 {

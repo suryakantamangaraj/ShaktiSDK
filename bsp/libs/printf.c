@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project           			:  shakti devt board
- * Name of the file	     		:  printf.c
+ * Project           		:  shakti devt board
+ * Name of the file	     	:  printf.c
  * Brief Description of file    :  Print based command and control by uart
  * Name of Author    	        :  Sathya Narayanan N & Balaji venkat
  * Email ID                     :  sathya281@gmail.com
@@ -21,6 +21,12 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file printf.c
+@brief Print based command and control by uart
+@detail 
+*/ 
+
 #include <stdint.h>
 #include <stdarg.h>
 #include "utils.h"
@@ -28,9 +34,8 @@
 
 /** @fn  itoa
  * @brief integer to string conversion
- * @warning none
- * @param[in] unsigned long long int, unsigned 
- * @param[Out] No output parameter
+ * @param unsigned long long int
+ * @param unsigned 
  */
 
 static inline void itoa (unsigned long long int number, unsigned base)
@@ -65,9 +70,7 @@ static inline void itoa (unsigned long long int number, unsigned base)
 /** @fn _printf_
  * @brief Handles the input stream of characters to print on screen
  * @details Identifies the type of format string, number of arguments and prints the right characer on screen 
- * @warning none
- * @param[in] const char
- * @param[Out] No output parameter
+ * @param const char
  */
 void _printf_(const char *fmt, va_list ap)
 {
@@ -220,9 +223,8 @@ void _printf_(const char *fmt, va_list ap)
 /** @fn printf
  * @brief function to print characters on file
  * @details prints the characters on terminal 
- * @warning none
- * @param[in] const char*
- * @param[Out] int
+ * @param const char*
+ * @return int
  */
 int printf(const char* fmt, ...)
 {

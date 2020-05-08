@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: switch_driver.c
+ * Project           		: shakti devt board
+ * Name of the file	     	: switch_driver.c
  * Brief Description of file    : Reads onboard switch values from gpio pins.
  * Name of Author    	        : Madan Kumar S
  * Email ID                     : kumarmadan96@gmail.com
@@ -20,6 +20,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ***************************************************************************/
+/**
+@file switch_driver.c
+@brief Reads onboard switch values from gpio pins.
+@detail 
+*/ 
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
@@ -29,19 +34,16 @@
 
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
- * @warning No warning
- * @param[in] unsigned long, unsigned long
- * @param[Out] No output parameter
+ * @param unsigned long
+ * @param unsigned long
  */
 extern void delay_loop(unsigned long , unsigned long );
 
-/** @fn static void configure_switch()
+/** @fn static void configure_switch
  * @brief Function for configure Individual Switch pins as input.
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
- each SW as input pin.
- * @warning No warning
- * @param[in] unsigned long (Pin that needs to be configured as SW.)
- * @param[Out] No output parameters.
+ * each SW as input pin.
+ * @param unsigned long (Pin that needs to be configured as SW.)
  */
 void configure_switch(unsigned long pinCntrl)
 {
@@ -50,13 +52,10 @@ void configure_switch(unsigned long pinCntrl)
 	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(pinCntrl) ) );
 }
 
-/** @fn static void configure_all_switchs()
+/** @fn  void configure_all_switchs
  * @brief Function for configure All SWs as input.
  * @details 4 GPIO pins are mapped to 4 Switches. This function configures
  *          all SWs as input pin.
- * @warning No warning
- * @param[in] No input parameter
- * @param[Out] No output parameters.
  */
 void configure_all_switchs()
 {

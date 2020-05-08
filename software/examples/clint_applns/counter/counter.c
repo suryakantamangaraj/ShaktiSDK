@@ -21,6 +21,12 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file counter.c
+@brief source file for mtime counter
+@detail 
+*/ 
+
 #include "uart.h"
 #include "traps.h"
 #include "platform.h"
@@ -31,8 +37,7 @@
  * @brief 
  * @details 
  * @warning 
- * @param[in] No input parameter
- * @param[Out] int
+ * @return int
  */
 int main(void){
 
