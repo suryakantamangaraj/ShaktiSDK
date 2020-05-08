@@ -1,9 +1,9 @@
 /***************************************************************************
-* Project           			: shakti devt board
-* Name of the file	     		: led_driver.c
-* Brief Description of file     : Performs the I2C operations using gpio pins.
-* Name of Author    	        : Kotteeswaran
-* Email ID                      : kottee.1@gmail.com
+ * Project           		: shakti devt board
+ * Name of the file	     	: led_driver.c
+ * Brief Description of file    : Performs the I2C operations using gpio pins.
+ * Name of Author    	        : Kotteeswaran
+ * Email ID                     : kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -19,12 +19,12 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-***************************************************************************/
+ ***************************************************************************/
 /**
-@file led_driver.c
-@brief Performs the I2C operations using gpio pins.
-@detail 
-*/ 
+  @file led_driver.c
+  @brief Performs the I2C operations using gpio pins.
+  @detail 
+ */
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
 
@@ -39,7 +39,7 @@
  */
 extern void delay_loop(unsigned long , unsigned long );
 
- /** @fn  configure_ledx
+/** @fn  configure_ledx
  * @brief Configures Individual LED pins as output.
  * @details 8 GPIO pins are mapped to 8 LEDs. This function configures
  *          each LED as output pin.
@@ -63,12 +63,12 @@ void configure_rgb_ledx(unsigned char led_no)
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  if (0 == led_no)
-    write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB0 ) );
-  else if (1 == led_no)
-    write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB1  ) );
-  else
-    printf("\nInvalid LED No. Permissable values [0,1]");
+	if (0 == led_no)
+		write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB0 ) );
+	else if (1 == led_no)
+		write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | RGB1  ) );
+	else
+		printf("\nInvalid LED No. Permissable values [0,1]");
 	return ;
 }
 
@@ -82,7 +82,7 @@ void configure_normal_leds()
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | NORMAL_LEDS ) ) ;
+	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | NORMAL_LEDS ) ) ;
 	return ;
 }
 
@@ -96,7 +96,7 @@ void configure_rgb_leds()
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ( RGB_LEDS ) ) );
+	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ( RGB_LEDS ) ) );
 	return ;
 }
 
@@ -109,7 +109,7 @@ void configure_all_leds()
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DIRECTION_CNTRL_REG);
-  	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ALL_LEDS ) );
+	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ALL_LEDS ) );
 	return ;
 }
 
@@ -127,7 +127,7 @@ void turn_on_ledx(unsigned long pin_cntrl)
 	return ;
 }
 
- /** @fn static void turn_off_ledx()
+/** @fn static void turn_off_ledx()
  * @brief turn OFF the Individual LEDs.
  * @details This function switches OFF the LED based on
  *          the GPIO pin position passed.
@@ -149,7 +149,7 @@ void turn_on_normal_leds()
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
- 	write_word(GPIO_DATA_REG, ( read_data | NORMAL_LEDS ) );
+	write_word(GPIO_DATA_REG, ( read_data | NORMAL_LEDS ) );
 	return ;
 }
 
@@ -175,12 +175,12 @@ void turn_on_rgb_ledx(unsigned char led_no)
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
-  if (0 == led_no)
-    write_word(GPIO_DATA_REG, ( read_data | RGB0 ) );
-  else if (1 == led_no)
-    write_word(GPIO_DATA_REG, ( read_data | RGB1 ) );
-  else
-    printf("\n RGB Led number is not valid [0,1]");
+	if (0 == led_no)
+		write_word(GPIO_DATA_REG, ( read_data | RGB0 ) );
+	else if (1 == led_no)
+		write_word(GPIO_DATA_REG, ( read_data | RGB1 ) );
+	else
+		printf("\n RGB Led number is not valid [0,1]");
 	return ;
 }
 
@@ -194,12 +194,13 @@ void turn_off_rgb_ledx(unsigned char led_no)
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
-  if (0 == led_no)
-	 write_word(GPIO_DATA_REG, ( read_data & (~RGB0) ) );
-  else if (1 == led_no)
- 	  write_word(GPIO_DATA_REG, ( read_data & (~RGB1) ) );
-  else
-    printf("\n RGB Led number is not valid [0,1]");
+
+	if (0 == led_no)
+		write_word(GPIO_DATA_REG, ( read_data & (~RGB0) ) );
+	else if (1 == led_no)
+		write_word(GPIO_DATA_REG, ( read_data & (~RGB1) ) );
+	else
+		printf("\n RGB Led number is not valid [0,1]");
 	return ;
 }
 
@@ -211,8 +212,9 @@ void turn_off_rgb_ledx(unsigned char led_no)
 void turn_on_rgb_leds()
 {
 	unsigned long read_data = 0;
+
 	read_data = read_word(GPIO_DATA_REG);
-    write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
+	write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
 	return ;
 }
 
@@ -224,7 +226,7 @@ void turn_off_rgb_leds()
 {
 	unsigned long read_data = 0;
 	read_data = read_word(GPIO_DATA_REG);
- 	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
+	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
 	return ;
 }
 
@@ -235,6 +237,7 @@ void turn_off_rgb_leds()
 void turn_on_all_leds()
 {
 	unsigned long read_data = 0;
+
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | ALL_LEDS ) );
 	return ;
@@ -247,12 +250,13 @@ void turn_on_all_leds()
 void turn_off_all_leds()
 {
 	unsigned long read_data = 0;
+
 	read_data = read_word(GPIO_DATA_REG);
-  write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
+	write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
 	return ;
 }
 
- /** @fn static void toggle_ledx()
+/** @fn static void toggle_ledx()
  * @brief Toggles the passed LED.
  * @details This function toggles given LED.
  * @param unsigned long 
@@ -262,15 +266,17 @@ void turn_off_all_leds()
 void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2)
 {
 	unsigned long read_data = 0;
+
 	read_data = read_word(GPIO_DATA_REG);
 	write_word (GPIO_DATA_REG, ( read_data | (pin_cntrl ) ) );
 	delay_loop(delay1, delay2);
+
 	write_word(GPIO_DATA_REG, ( read_data & (~pin_cntrl) ) );
 	delay_loop(delay1, delay2);
 	return ;
 }
 
- /** @fn static void toggle_normal_leds()
+/** @fn static void toggle_normal_leds()
  * @brief toggles normal LEDs.
  * @details This function toggles given both the 
  *          normal LEDs.
@@ -280,10 +286,12 @@ void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long de
 void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
 {
 	unsigned long read_data = 0;
+
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | NORMAL_LEDS ) );
 	delay_loop(delay1, delay2);
- 	write_word(GPIO_DATA_REG, ( read_data & (~NORMAL_LEDS) ) );
+
+	write_word(GPIO_DATA_REG, ( read_data & (~NORMAL_LEDS) ) );
 	delay_loop(delay1, delay2);
 	return ;
 }
@@ -297,10 +305,12 @@ void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
 void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
 {
 	unsigned long read_data = 0;
+
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
 	delay_loop(delay1, delay2);
- 	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
+
+	write_word(GPIO_DATA_REG, ( read_data & (~RGB_LEDS) ) );
 	delay_loop(delay1, delay2);
 	return ;
 }
@@ -314,9 +324,11 @@ void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
 void toggle_all_leds( unsigned long delay1, unsigned long delay2)
 {
 	unsigned long read_data = 0;
+
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | ALL_LEDS ) );
 	delay_loop(delay1, delay2);
+
 	write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
 	delay_loop(delay1, delay2);
 	return ;

@@ -24,8 +24,9 @@
 /**
 @file printf.c
 @brief Print based command and control by uart
-@detail 
-*/ 
+@detail This file hosts a list of routines that helps in displaying variable's
+value based on there data type. Currently, shakti-sdk supports few formatting options.
+*/
 
 #include <stdint.h>
 #include <stdarg.h>
@@ -69,7 +70,7 @@ static inline void itoa (unsigned long long int number, unsigned base)
 
 /** @fn _printf_
  * @brief Handles the input stream of characters to print on screen
- * @details Identifies the type of format string, number of arguments and prints the right characer on screen 
+ * @details Identifies the type of format string, number of arguments and prints the right characer on screen
  * @param const char
  */
 void _printf_(const char *fmt, va_list ap)
@@ -222,7 +223,7 @@ void _printf_(const char *fmt, va_list ap)
 
 /** @fn printf
  * @brief function to print characters on file
- * @details prints the characters on terminal 
+ * @details prints the characters on terminal
  * @param const char*
  * @return int
  */
