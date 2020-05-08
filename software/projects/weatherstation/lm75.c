@@ -24,7 +24,11 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
-
+/**
+@file   lm75.c
+@brief  Reads room temperature.
+@detail Reads the temperature from LM75.
+*/
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
 #define DELAY_VALUE 900 
@@ -34,6 +38,14 @@
 #define LM75_I2C 1
 
 
+/** @fn temperature_value
+ * @brief reads temperature value from lm75 and prints the same.
+ * @details Configures the LM75, Reads the encoded temperature value, 
+ * calculates the actual temperature value and prints the same.
+ * @param[in] No input parameter
+ * @param[Out] int
+ * @return 999 on failure; else infinite loop to read temperature.
+ */
 int temperature_value(void)
 {
 	int timeout;

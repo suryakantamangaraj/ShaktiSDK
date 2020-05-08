@@ -54,9 +54,9 @@ int  key_table[4][4] =
 /** @fn set_pins
  * @brief This function sets the pins for the row and column
  * @details Fills the row and coloumn values into row and coloumn arrays.
- * @warning 
  * @param[in] unsigned int*, unsigned int*
  * @param[Out] No output parameter
+ * @return Nil
  */
 void set_pins(unsigned int*  row, unsigned int* col)
 {
@@ -73,9 +73,9 @@ void set_pins(unsigned int*  row, unsigned int* col)
 /** @fn set_key_map
  * @brief This function maps table in to keymap
  * @details Fills the passed array values into key_map array.
- * @warning 
  * @param[in] int
  * @param[Out] No output parameter
+ * @return Nil
  */
 void set_key_map(int table[COLNUM][ROWNUM])
 {
@@ -92,7 +92,6 @@ void set_key_map(int table[COLNUM][ROWNUM])
  * @brief This function returns the corresponding value in the keymap
  * @details Detects the press key based on the row value in a particular colomun
  * and returns the decoded key value.
- * @warning 
  * @param[in] No input parameter
  * @param[Out] int
  * @return Key value pressed
@@ -123,7 +122,6 @@ int get_key_another_way()
  * @brief This function returns the corresponding value in the keymap
  * @details Detects the press key based on the row value in a particular colomun
  * and returns the decoded key value.
- * @warning 
  * @param[in] int
  * @param[Out] int
  * @return Key value pressed
@@ -137,7 +135,6 @@ int get_key(int col_row)
  * @brief This function returns the column-row
  * @details Identifies the pressed key by making the corresponding coloumn
    low and reading the row values     
- * @warning 
  * @param[in] No output parameter
  * @param[Out] int
  * @return Column and row combination.
@@ -172,7 +169,6 @@ int get_col_row(void)
 /** @fn gpio_init
  * @brief This maps the keypad from pins
  * @details  Initialises Rows pins and coloumn pins of the mapped GPIO lines to keypad.  
- * @warning 
  * @param[in] No input parameter
  * @param[Out] No output parameter
  * @return Nil
@@ -190,7 +186,6 @@ void gpio_init()
 /** @fn main
  * @brief Detects the pressed key
  * @details  Detects the pressed key and prints its decoded value.  
- * @warning 
  * @param[in] No input parameter
  * @param[Out] int
  * @return Zero 

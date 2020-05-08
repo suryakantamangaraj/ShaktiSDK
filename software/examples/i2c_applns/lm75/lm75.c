@@ -109,7 +109,6 @@ int write_lm75_register(i2c_struct * i2c_instance, unsigned int reg_offset, unsi
  * @brief reads temperature value from lm75 and prints the same.
  * @details Configures the LM75, Reads the encoded temperature value, 
  * calculates the actual temperature value and prints the same.
- * @warning 
  * @param[in] No input parameter
  * @param[Out] int
  * @return Zero

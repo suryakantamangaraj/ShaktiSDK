@@ -33,7 +33,6 @@
 
 /** @fn delay_loop
  * @brief Maintains the required delay to perform an operation
- * @warning No warning
  * @param[in] unsigned long ,unsigned long
  * @param[Out] No output parameter
  * @return Nil
@@ -511,7 +510,6 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
  /** @fn I2c_shakti_readbytes
  * @brief To burst read (i.e read multiple bytes byte of data)
  * @details Reads "n" number of bytes from the slave device with the passed slave address
- * @warning 
  * @param[in] char, int, int, unsigned char (readbuf to store read data, count to tell how many bytes to read , last )
  * @param[Out] int ( No. of values(bytes) read)
  * @return Nil
