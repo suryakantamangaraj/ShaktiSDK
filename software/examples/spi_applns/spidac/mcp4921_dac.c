@@ -26,11 +26,12 @@
 #include <stdint.h>
 
 /** @fn spi_dac
- * @brief 
- * @details 
+ * @brief config the DAC register
+ * @details Write register value thru SPI over DAC interface
  * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
+ * @param[Out] int
+ * @return read status (zero on success)
  */
 void spi_dac()
 {
@@ -58,11 +59,12 @@ void spi_dac()
 } 
 
 /** @fn write_dac_value
- * @brief 
- * @details 
+ * @brief Writes the spi value to DAC
+ * @details Writes SPI over DAC interface
  * @warning 
- * @param[in] unsigned
- * @param[Out] int 
+ * @param[in]  unsigned int, unsigned int, unsigned char, unsigned long
+ * @param[Out] int
+ * @return write status (zero on success)
  */
 int write_dac_value(unsigned dac_value)
 {
@@ -85,11 +87,13 @@ int write_dac_value(unsigned dac_value)
 }
 
 /** @fn main
- * @brief 
- * @details 
+ * @brief Configures and Write the SPI values.
+ * @details Configures the SPI Write FLASH values, Write the same 
+ * prints the write values.
  * @warning 
  * @param[in] No input parameter
- * @param[Out] No output parameter
+ * @param[Out] int
+ * @return Zero
  */
 void main()
 {
