@@ -20,7 +20,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-
+/**
+@file   pcf8591.c
+@brief  Contains the driver routines to configure and read pcf8591.
+@detail I2C based routines to configures and read the adc value from pcf8591.
+*/
 #include <stdint.h>//Includes the definitions of standard input/output functions//
 #include "i2c.h"
 #include "log.h"
@@ -37,11 +41,12 @@
 #define I2C i2c_instance[0]
 
 /** @fn read_pcf8591_registers
- * @brief 
- * @details 
+ * @brief Reads the ADC value from PCF8591
+ * @details Reads 4 ADC values from PCF8591 over I2C interface
  * @warning 
  * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned char, unsigned long
  * @param[Out] int
+ * @return read status (zero on success)
  */
 int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
 {
@@ -77,11 +82,12 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 }
 
 /** @fn write_pcf8591_registers
- * @brief 
- * @details 
+ * @brief WRites into PCF8591 Register
+ * @details WRites the passed value into passed PCF8591 Register (address) over I2C interface.
  * @warning 
  * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned char, unsigned long
  * @param[Out] int
+ * @return Write status (Zero on success)
  */
 int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
 {
@@ -99,11 +105,13 @@ int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 }
 
 /** @fn main
- * @brief 
- * @details 
+ * @brief Configures and reads the ADC values.
+ * @details Configures the PCF8591 to read 4 ADC values, reads the same 
+ * prints the read values.
  * @warning 
  * @param[in] No input parameter
  * @param[Out] int
+ * @return Zero
  */
 int main()
 {
