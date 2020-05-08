@@ -474,10 +474,10 @@ void I2cStop(unsigned char delay)
 }
 
  /** @fn I2c_Write_byte
- * @brief To write one byte of data into a particular register of a partivular slave
- * @details 
+ * @brief To write one byte of data into a particular register of a particular slave
+ * @details Write one byte of data into the particulart register of slave device with given slave address 
  * @warning 
- * @param[in] unsigned char ,unsigned char , unsigned char, unsigned char(slave address, register     *             address, data to be written )
+ * @param[in] unsigned char ,unsigned char , unsigned char, unsigned char(slave address, register address, data to be written )
  * @param[Out] No output parameter
  * @return Nil
  */
@@ -491,7 +491,7 @@ void I2c_Write_byte(unsigned char slave_address,unsigned char reg_address, unsig
 
  /** @fn I2c_Read_byte
  * @brief To read one byte of data from a particular register of a partivular slave
- * @details 
+ * @details Reads one byte of data from the particulart register of slave device with given slave address
  * @warning 
  * @param[in] unsigned char ,unsigned char,unsigned char (slave address, register address)
  * @param[Out] int (readdata)
@@ -510,9 +510,9 @@ int I2c_Read_byte(unsigned char slave_address,unsigned char reg_address, unsigne
 
  /** @fn I2c_shakti_readbytes
  * @brief To burst read (i.e read multiple bytes byte of data)
- * @details 
+ * @details Reads "n" number of bytes from the slave device with the passed slave address
  * @warning 
- * @param[in] char, int, int, unsigned char (readbuf to store read data, count to tell how many       *             bytes to read , last )
+ * @param[in] char, int, int, unsigned char (readbuf to store read data, count to tell how many bytes to read , last )
  * @param[Out] int ( No. of values(bytes) read)
  * @return Nil
  */
