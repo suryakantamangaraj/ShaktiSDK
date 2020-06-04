@@ -22,8 +22,8 @@
 *******************************************************************************/
 /**
  * @file traps.h
- * @project shakti devt board
- * @brief Header file for handling traps 
+ * @brief Header file for handling traps
+ * @detail this is the header file traps.c  
  */
 
 #ifndef TRAPS_H
@@ -94,10 +94,7 @@
 #define RESERVED_INTERRUPT5            14
 #define RESERVED_INTERRUPT6            15
 
-/*
-   Traps
- */
-
+/* Traps */
 #define MAX_TRAP_VALUE                 16
 
 #define INSTRUCTION_ADDRESS_MISALIGNED  0

@@ -20,6 +20,12 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ***************************************************************************/
+/**
+@file motor.c
+@brief Determines the functioning of stepper motor with the  help of gpio pins. 
+@detail 
+*/
+
 #include <stdio.h>/* Includes definitions of standard input/output functions*/
 #include "gpio.h"/*Incudes the defintions of gpio functions and registers*/
 #include "platform.h"
@@ -27,11 +33,8 @@
 #define MOTOR_FORWARD_CNTRL (0xA << 0)/*Defines the Required Forward control word*/
 #define MOTOR_REVERSE_CNTRL (0x5 << 0)/*Defines the Required Reverse control word*/
 
-/** @fn main
+/** @fn void main()
  * @brief Performs the intilization of the corresponding registers of gpio pins.
- * @warning none 
- * @param[in] No input parameter
- * @param[Out] No output parameter
  */
 void main()
 {

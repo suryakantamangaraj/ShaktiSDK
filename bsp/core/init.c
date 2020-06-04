@@ -24,8 +24,11 @@
 /**
 @file init.c
 @brief source file for system initialization
-@detail 
-*/ 
+@detail This is the beginning part of a application beginning.
+Different sections are initialized. main function is called. 
+uart is initialized. Trap handler is initialized. 
+Disable Xip for Aardonyx
+*/
 
 #include "traps.h"
 #include "plic_driver.h"
@@ -58,7 +61,7 @@ char *bss_start=(char *)&__bss_start;
 char *sbss_end=(char *)&__sbss_end;
 char *sbss_start=(char *)&__sbss_start;
 
-/** @fn section_init
+/** @fn void section_init()
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory
  * @warning takes long time. so the caller is diabled as of now
@@ -90,7 +93,7 @@ void section_init()
 	}
 }
 
-/** @fn trap_init
+/** @fn void trap_init()
  * @brief Initialize the trap/interrupt callback routines with user defined handler.
  * @details Assign default handler for trap / interrupt that does not have user defined
  *          callback routines"
@@ -154,7 +157,7 @@ void trap_init()
 	log_info("trap_init exited \n ");
 }
 
-/** @fn init
+/** @fn void init(void)
  * @brief initialize the necessary variables for system start
  */
 void init(void)

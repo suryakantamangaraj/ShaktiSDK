@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: pwminterrupt.c
+ * Project           		: shakti devt board
+ * Name of the file	     	: pwminterrupt.c
  * Brief Description of file    : pwm interrupt .
  * Name of Author    	        : Sathya Narayanan N  & Abhinav Ramnath
  * Email ID                     : sathya281@gmail.com & abhinavramnath13@gmail.com 
@@ -20,6 +20,15 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
+/**
+@file pwminterrupt
+@brief A application to demonstrate working of pwm interrupts
+@detail This file contains an application to demonstrate the working of pwm
+ interrupts. The interrupts are enabled for a pwm module. The pwm module is
+ confiured for interrupt mode and pwm registers are setup appropriately.
+ Once the pwm timer overflows, an interrupt is generated and it is handled
+ by the isr.
+*/
 
 #include "gpio.h"
 #include "uart.h"
@@ -30,10 +39,10 @@
 #include "memory.h"
 #include "pwm_driver.h"
 
-/** @fn handle_button_press 
+/** @fn unsigned handle_button_press (unsigned num)
  * @brief a default handler to handle button press 
- * @param[in] unsigned 
- * @param[Out] unsigned 
+ * @param unsigned num
+ * @return unsigned 
  */
 unsigned handle_button_press (unsigned num)
 {
@@ -41,11 +50,9 @@ unsigned handle_button_press (unsigned num)
 	return 0;
 }
 
-/** @fn main 
+/** @fn void main(void) 
  * @brief sets up the environment for pwn interrupt feature 
- * @param[in]  none
- * @param[Out] int
- */
+  */
 int main(void){
 
 	unsigned int int_id = 1;

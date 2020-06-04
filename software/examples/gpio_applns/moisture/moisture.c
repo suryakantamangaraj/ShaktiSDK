@@ -20,6 +20,12 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 *****************************************************************************/
+/**
+@file moisture.c
+@brief Implements gpio functionality.
+@detail It helps to find the presence of moisture in the soil.
+*/
+
 #include "platform.h"
 #include "gpio.h"
 
@@ -30,13 +36,10 @@
 * @param[Out] No output parameter
 */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
-
-/** @fn main
-* @brief 
-* @details 
-* @warning 
-* @param[in] No input parameter 
-* @param[Out] No output parameter
+/** @fn void main()
+* @brief It used to check the moisture in the soil.
+* @details Soil moisture sensors typically refer to sensors that estimate volumetric water content
+* @warning  Connection should be done carefully.
 */
 void main()
 {

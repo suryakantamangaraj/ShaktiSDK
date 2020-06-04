@@ -33,7 +33,7 @@ value based on there data type. Currently, shakti-sdk supports few formatting op
 #include "utils.h"
 #include "uart.h"
 
-/** @fn  itoa
+/** @fn  static inline void itoa (unsigned long long int number, unsigned base)
  * @brief integer to string conversion
  * @param unsigned long long int
  * @param unsigned 
@@ -56,7 +56,6 @@ static inline void itoa (unsigned long long int number, unsigned base)
 		i++;
 	}
 	i++;
-
 	while (i-- > 0)
 	{
 		if (digits[i] >= 10)
@@ -68,7 +67,7 @@ static inline void itoa (unsigned long long int number, unsigned base)
 	}
 }
 
-/** @fn _printf_
+/** @fn void _printf_(const char *fmt, va_list ap)
  * @brief Handles the input stream of characters to print on screen
  * @details Identifies the type of format string, number of arguments and prints the right characer on screen
  * @param const char
@@ -221,7 +220,7 @@ void _printf_(const char *fmt, va_list ap)
 	}
 }
 
-/** @fn printf
+/** @fn int printf(const char* fmt, ...)
  * @brief function to print characters on file
  * @details prints the characters on terminal
  * @param const char*

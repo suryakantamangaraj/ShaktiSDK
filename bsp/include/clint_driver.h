@@ -1,6 +1,6 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  clint_driver.h
+* Project           		:  shakti devt board
+* Name of the file	     	:  clint_driver.h
 * Brief Description of file     :  Header file for clint.
 * Name of Author    	        :  Sathya Narayanan N
 * Email ID                      :  sathya281@gmail.com
@@ -20,11 +20,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-
 /**
  * @file clint_driver.h
- * @project shakti devt board
  * @brief  Header file for clint
+ * @detail this is the header file for clint_driver.c
  */
 #ifndef CLIC_DRIVER_H
 #define CLIC_DRIVER_H

@@ -1,9 +1,9 @@
 /***************************************************************************
-* Project                               :  shakti devt board
-* Name of the file                      :  spi.c
-* Brief Description of file             :  write data to flash by spi 
-* Name of Author                        :  Kaustubh Ghormade
-* Email ID                              :  kaustubh4347@gmail.com
+* Project                               : shakti devt board
+* Name of the file                      : spi.c
+* Brief Description of file             : write data to flash by spi 
+* Name of Author                        : Kaustubh Ghormade
+* Email ID                              : kaustubh4347@gmail.com
 
 Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,16 +20,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
+/**
+@file spi.c
+@brief  write data to flash by spi 
+@detail Contains driver codes to read and write flash using SPI interface.
+*/
 
 #include <stdint.h>
 #include "spi.h"
 
-/** @fn main
- * @brief 
- * @details 
- * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
+/** @fn void main()
+ * @brief Configures the SPI flash and writes into a flash location.
+ * @details Configures the SPI flash, Confirms the flash device id,erases a sector
+ *           and then write into a flash location and prints the value. 
  */
 void main()
 {

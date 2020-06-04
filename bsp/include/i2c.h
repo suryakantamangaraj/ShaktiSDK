@@ -1,6 +1,6 @@
 /**************************************************************************
  * Project           	         : shakti devt board
- * Name of the file	     		 : i2c.h
+ * Name of the file	         : i2c.h
  * Brief Description of file     : header file for i2c
  * Name of Author    	         : Kotteeswaran 
  * Email ID                      : kottee.1@gmail.com
@@ -22,8 +22,8 @@
 *****************************************************************************/
 /**
  * @file i2c.h
- * @project shakti devt board
  * @brief  Header file for i2c
+ * @detail this is the header file for i2c_driver.c
  */
 #ifndef I2C_H
 #define I2C_H
@@ -131,11 +131,9 @@ int i2c_send_slave_address(i2c_struct *,unsigned char slaveAddress, unsigned cha
 int i2c_write_data(i2c_struct *,unsigned char writeData, unsigned char delay);
 int i2c_read_data(i2c_struct *,unsigned char *read_data, unsigned char delay);
 
-
 unsigned char i2c_complete_flag;
 unsigned int i2c_read_value;
 
 extern i2c_struct *i2c_instance[MAX_I2C_COUNT];
-
 
 #endif

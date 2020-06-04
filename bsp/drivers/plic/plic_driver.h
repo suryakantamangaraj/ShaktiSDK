@@ -22,8 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ***************************************************************************/
 /**
  * @file plic_driver.h
- * @project shakti devt board
  * @brief  Header file for plic driver
+ * @detail
  */
 
 #ifndef PLIC_DRIVER_H
@@ -41,17 +41,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define PLIC_THRESHOLD_OFFSET           0x10000UL
 #define PLIC_CLAIM_OFFSET               0x10010UL
 
-/*
-   The priority value for each int src can be found at addresses 4 bytes apart
-   starting from base address + priority offset
- */
+/* The priority value for each int src can be found at addresses 4 bytes apart
+   starting from base address + priority offset */
 
 #define PLIC_PRIORITY_SHIFT_PER_INT  2
 
-/*
-   7 priority levels are supported.
-   PLIC_PRIORITY_1 means 'no interrupt'
- */
+/* 7 priority levels are supported.
+   PLIC_PRIORITY_1 means 'no interrupt */
 
 #define PLIC_PRIORITY_1 0X00
 #define PLIC_PRIORITY_2 0X01
@@ -63,7 +59,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #define PLIC_PENDING_SHIFT_PER_SOURCE   0
 
-/*  Enumerators */
+/* Enumerators */
 
 typedef enum
 {
@@ -83,16 +79,13 @@ typedef struct
 	unsigned int count; /*number of times this interrupt occured*/
 } interrupt_data_t;
 
-/*
-   Platform Level Interrupt Controller (PLIC) table
-   Each entry in the table corresponds to an interrupt service routine
- */
+/* Platform Level Interrupt Controller (PLIC) table
+   Each entry in the table corresponds to an interrupt service routine */
 
 typedef void (*plic_fptr_t) (unsigned int);
 plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
 /* Function prototypes */
-
 void interrupt_complete(unsigned int interrupt_id);
 unsigned int interrupt_claim_request();
 unsigned int isr_default(unsigned int interrupt_id);

@@ -1,6 +1,6 @@
 /****************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: utils.h
+ * Project           		: shakti devt board
+ * Name of the file	     	: utils.h
  * Brief Description of file    : Header file for utils
  * Name of Author    	        : Sathya Narayanan N
  * Email ID                     : sathya281@gmail.com
@@ -22,8 +22,8 @@
 *******************************************************************************/
 /**
  * @file utils.h
- * @project shakti devt board
  * @brief header file for utils
+ * @detail this is the header file for util.c
  */
 
 #ifndef UTIL_H

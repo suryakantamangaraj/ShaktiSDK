@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project               	    		: shakti devt board
- * Name of the file	            	: malloc_firstfit.c
+ * Project               	   : shakti devt board
+ * Name of the file	           : malloc_firstfit.c
  * Brief Description of file       : Malloc using First-fit algorithm code.
  * Name of Author    	            : Abhinav Ramnath
  * Email ID                        : abhinavramnath13@gmail.com
@@ -20,6 +20,12 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ***************************************************************************/
+/**
+@file malloc_firstfit.c
+@brief Malloc using First-fit algorithm code.
+@detail This algorithm implements the malloc function using the first-fit algorithm. It allocates and frees blocks of memory for usage.
+*/ 
+
 #include<unistd.h>
 #include<sys/types.h>
 #include "platform.h"
@@ -38,6 +44,14 @@ struct Header
 
 struct Header* global_base=NULL;
 
+/** @fn  struct Header* allocate_block(struct Header* last, size_t size)
+ * @brief it allocates a block of given size 
+ * @detail it allocates a block of the given size after receiving the parameter of the last allocated block
+ * @param struct Header* last -  pointer to the last allocated memory or the end of the heap
+ * @param size_t size - specifes the size of the block to be allocated
+ * @return returns a pointer to the newly allocated block
+ *         returns null if mmemory allocated or block allocation fails
+ */
 struct Header* allocate_block(struct Header* last, size_t size)
 {
 	log_trace("\nFunction allocate_block entered");
@@ -67,11 +81,13 @@ struct Header* allocate_block(struct Header* last, size_t size)
 }
 
 //We search for free blocks
-/** @fn  
- * @brief  
- * @warning 
- * @param[in] 
- * @param[Out] 
+/** @fn  struct Header *find_free_block(struct Header **last, size_t size)
+ * @brief finds free blocks from the linked list of blocks in the memory
+ * @detail  iterates through the linked list to find a block of required size that is free
+ * @param  struct Header **last - pointer to the heap
+ * @param  size_t size - size of the block 
+ * @return returns a free block if available
+ *         returns null if unavailable
  */
 struct Header *find_free_block(struct Header **last, size_t size) 
 {
@@ -97,11 +113,11 @@ struct Header *find_free_block(struct Header **last, size_t size)
 }
 
 //Creating a new block
-/** @fn  
- * @brief  
- * @warning 
- * @param[in] 
- * @param[Out] 
+/** @fn struct Header* request_heap()
+ * @brief  requests memory from the heap
+ * @detail  this function requests memory from the heap using the brk function
+ * @return returns a pointer to the allocated heap
+ *         returns NULL if heap is unable to be allocated
  */
 
 struct Header* request_heap()
@@ -132,11 +148,12 @@ struct Header* request_heap()
 }
 
 //malloc function to allocate space
-/** @fn  
- * @brief  
- * @warning 
- * @param[in] 
- * @param[Out] 
+/** @fn  void *malloc(size_t size)
+ * @brief  this function is used to dynamically allocate memory
+ * @detail  when this function is called memory is allocated in the heap during runtime
+ * @param size_t size - size of the block to be allocated
+ * @return  returns a pointer to the assigned block
+ *          returns NULL if allocation fails
  */
 void *malloc(size_t size) 
 {
@@ -172,14 +189,11 @@ void *malloc(size_t size)
 		log_error("\n No free blocks");
 		return NULL;
 	}    	
-
 	log_info("\nBlock = %x Block Size = %d Size = %d",block,block->size,size);
-
 	if (block->size>size) 	
 	{ // Failed to find free block.
-		block = allocate_block(last,size);
-
-		if (!block) 
+     		block = allocate_block(last,size);
+      		if (!block) 
 		{
 			return NULL;
 		}
@@ -193,16 +207,21 @@ void *malloc(size_t size)
 	return(block+1);
 }
 
+/** @fn  struct Header *get_block_ptr(void *ptr)
+ * @brief function to get block pointer
+ * @detail  function returns the pointer to the block
+ * @param void* ptr - pointer to the block
+ * @return returns pointer to the block
+ */
 struct Header *get_block_ptr(void *ptr) {
 	return (struct Header*)ptr - 1;
 }
 
 //free to free the memory allocated by malloc
-/** @fn  
- * @brief  
- * @warning 
- * @param[in] 
- * @param[Out] 
+/** @fn  void free(void *ptr)
+ * @brief frees the memory assigned by malloc
+ * @detail  frees the memory assigned by malloc and when freed this memory is added back to the list to be reused
+ * @param void *ptr - pointer to the memory assigned by malloc
  */
 void free(void *ptr) {
 

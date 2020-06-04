@@ -1,7 +1,7 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: passive_buzzer.c
- * Brief Description of file    : It will buzzer at a desired frequency when you give oscillating                                      electronic signal.
+ * Project           		: shakti devt board
+ * Name of the file	     	: passive_buzzer.c
+ * Brief Description of file    : It will buzzer at a desired frequency when you give oscillating electronic signal.
  * Name of Author               : Soutrick Roy Chowdhury
  * Email ID                     : soutrick97@gmail.com
 
@@ -21,6 +21,11 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *****************************************************************************/
+/**
+@file passive_buzzer.c
+@brief Implements gpio functionality
+@detail It will buzzer at a desired frequency when you give an oscillating electronic signal.
+*/
 
 #include "platform.h"
 #include "gpio.h"
@@ -33,14 +38,12 @@
 */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
-/** @fn main
+/** @fn void main()
  * @brief A passive buzzer (AKA magnetic transducer) can make different tones,
  *        but the devices that controls the buzzer has to provide it with an oscillating
  *        electronic signal at a desired frequency. The supplied frequency will determine 
  *        the tone. Supplying just a fixed voltage will generate no sound, except perhaps
  *        a slight "tick" at the point when the power source is connected or disconnected from the    *        buzzer.
- * @param[in]  No input parameter
- * @param[Out] No output parameter
  */
 void main()
 {

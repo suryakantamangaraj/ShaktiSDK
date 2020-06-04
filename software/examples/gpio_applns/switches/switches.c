@@ -21,6 +21,11 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file switches.c
+@brief Read the value from the switches
+@detail 
+*/
 
 #include <stdio.h> //includes the definitions of standard input/output functions
 #include "platform.h"
@@ -41,12 +46,10 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 unsigned long read_data = 0;
 
-/** @fn main 
+/** @fn  void main() 
  * @brief Performs the toggling operation  with the help of button.
  * @details 
  * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
  */
 void main()
 {

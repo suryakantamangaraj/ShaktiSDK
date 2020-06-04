@@ -22,8 +22,8 @@
 ***************************************************************************/
 /**
 @file log.c
-@brief print control for all operation
-@detail 
+@brief logger application for debugging and normal uart display.
+@detail This file contains implementation of different log levels.
 */ 
 
 #include "log.h"
@@ -34,7 +34,7 @@
 #define LOG_LEVEL 3 
 #endif
 
-/** @fn log_trace
+/** @fn void log_trace(const char*fmt, ...)
  * @brief Function to print trace logs
  * @details This function print trace logs if the LOG_LEVEL allows trace logs
  * @param const char* (printf formatted arguments with format specifiers)
@@ -51,7 +51,7 @@ void log_trace(const char* fmt, ...)
 	}
 }
 
-/** @fn log_info
+/** @fn void log_info(const char*fmt, ...)
  * @brief Function to print info logs
  * @details This function print info logs if the LOG_LEVEL allows info logs
  * @param const char* (printf formatted arguments with format specifiers)
@@ -68,7 +68,7 @@ void log_info(const char* fmt, ...)
 	}
 }
 
-/** @fn log_debug
+/** @fn void log_debug(const char*fmt, ...)
  * @brief Function to print debug logs
  * @details This function print debug logs if the LOG_LEVEL allows debug logs
  * @param const char* (printf formatted arguments with format specifiers)
@@ -85,7 +85,7 @@ void log_debug(const char* fmt, ...)
 	}
 }
 
-/** @fn log_warn
+/** @fn void log_warn(const char*fmt, ...)
  * @brief Function to print warn logs
  * @details This function print trace warn if the LOG_LEVEL allows warn logs
  * @param const char* (printf formatted arguments with format specifiers)
@@ -102,7 +102,7 @@ void log_warn(const char* fmt, ...)
 	}
 }
 
-/** @fn log_error
+/** @fn void log_error(const char*fmt, ...)
  * @brief Function to print error logs
  * @details This function print error logs if the LOG_LEVEL allows error logs
  * @param const char* (printf formatted arguments with format specifiers)
@@ -119,7 +119,7 @@ void log_error(const char* fmt, ...)
 	}
 }
 
-/** @fn log_fatal
+/** @fn void log_fatal(const char*fmt, ...)
  * @brief Function to print fatal logs
  * @details This function print fatal logs if the LOG_LEVEL allows fatal logs
  * @param const char* (printf formatted arguments with format specifiers)

@@ -1,7 +1,7 @@
 /***************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: interrupt_demo.c
- * Brief Description of file    :  
+ * Project           		: shakti devt board
+ * Name of the file	     	: interrupt_demo.c
+ * Brief Description of file    : A application to demonstrate working of plic
  * Name of Author    	        : Sathya Narayanan N 
  * Email ID                     : sathya281@gmail.com
 
@@ -21,6 +21,13 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
  ***************************************************************************/
+/**
+@file interrupt_demo.c
+@brief A application to demonstrate working of plic
+@detail Thsi file contains an application to demonstrate the working of plic.
+The interrupts are enabled for a gpio pin. Once the button connected to the gpio
+ pin is pressed. An interrupt is generated and it is handled by the isr.
+*/
 
 #include "gpio.h"
 #include "uart.h"
@@ -34,8 +41,8 @@
 
 /** @fn handle_button_press 
  * @brief a default handler to handle button press 
- * @param[in] unsigned
- * @param[Out] unsigned
+ * @param unsigned num
+ * @return unsigned
  */
 unsigned handle_button_press (unsigned num)
 {
@@ -45,8 +52,7 @@ unsigned handle_button_press (unsigned num)
 
 /** @fn main 
  * @brief sets up the environment for plic feature 
- * @param[in] none
- * @param[Out] int
+ * @return int
  */
 int main(void){
 	unsigned int int_id = 1;
@@ -132,7 +138,6 @@ int main(void){
 			read_word(0x0c010010);
 		}
 	}
-
 	return 0;
 }
 

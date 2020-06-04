@@ -1,6 +1,6 @@
 /************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: qspi.h
+ * Project           		: shakti devt board
+ * Name of the file	     	: qspi.h
  * Brief Description of file    : Header file for qspi.
  * Name of Author    	        : visvesh
  * Email ID                     : vishu.vivek@gmail.com
@@ -22,8 +22,8 @@
 ************************************************************************/
 /**
  * @file qspi.h
- * @project shakti devt board
  * @brief Header file for qspi.
+ * @detail this is the header file for qspi_micron.c
  */
 
 #ifndef QSPI_H

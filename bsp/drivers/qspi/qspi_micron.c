@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           	        : shakti devt board
- * Name of the file	     	    : qspi_micron.c
- * Brief Description of file    : source file for qspi_micron  
- * Name of Author    	        : visvesh
- * Email ID                     : vishu.vivek@gmail.com
+ * Project           	         : shakti devt board
+ * Name of the file	     	 : qspi_micron.c
+ * Brief Description of file     : source file for qspi_micron    
+ * Name of Author    	         : Vishvesh
+ * Email ID                      : vishu.vivek@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -21,11 +21,10 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ****************************************************************************/
 /**
-@file   qspi_micron.c
-@brief  Contains the driver routines for QSPI interface.
+@file qspi_micron.c
+@brief Contains the driver routines for QSPI interface.
 @detail The QSPI module driver supports QSPI driver routines for micron flash device.
 */
-
 
 #include "qspi.h"
 #include "utils.h"
@@ -50,47 +49,43 @@ int* lprt     =      (const int*) LPRT;
 int* startmm  =      (const int*) STARTMM;
 int* endmm    =      (const int*) ENDMM;
 
-/** @fn set_qspi_shakti32
+/** @fn void set_qspi_shakti32(int* addr, int val)
  * @brief Writes 32 bit value into QSPI register.
  * @details Writes 32 bit value into passed address QSPI register.
- * @param[in] int*, int
- * @param[Out] No output parameter
- * @return Nil
+ * @param int* addr 
+ * @param int val
  */
 void set_qspi_shakti32(int* addr, int val)
 {
     *addr = val;
 }
 
-/** @fn set_qspi_shakti16
+/** @fn void set_qspi_shakti16(int16_t* addr, int16_t val)
  * @brief Writes 16 bit value 
  * @details Writes 16 bit value into 16bit QSPI register 
- * @param[in] 16bitint*, 16bitint
- * @param[Out] No output parameter
- * @return Nil
+ * @param 16bitint* addr
+ * @param 16bitint val
  */
 void set_qspi_shakti16(int16_t* addr, int16_t val)
 {
     *addr = val;
 }
 
-/** @fn set_qspi_shakti8
+/** @fn void set_qspi_shakti8(char* addr, char val) 
  * @brief Writes 8 bit value.
  * @details Writes 8 bit value into 8 bit qspi register.
- * @param[in] char*, char
- * @param[Out] No output parameter
- * @return Nil
+ * @param char* addr
+ * @param char val
  */
 void set_qspi_shakti8(char* addr, char val)
 {
     *addr= val;
 }
 
-/** @fn get_qspi_shaktir
+/** @fn int get_qspi_shakti(int* addr)
  * @brief reads from qspi register
  * @details Reads from the passed QSPI register and returns the value.
- * @param[in] int*   
- * @param[Out] int
+ * @param int* addr   
  * @return Read value.
  */
 int get_qspi_shakti(int* addr)
@@ -98,12 +93,15 @@ int get_qspi_shakti(int* addr)
  return *addr;
 }
 
-/** @fn qspi_init
+/** @fn void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode)
  * @brief Initialises the qspi
  * @details Initialises the qspi registers for carrying out flash access operations.
- * @param[in] int, int, int, int, int, int
- * @param[Out] No output parameter
- * @return Nil
+ * @param int fsize
+ * @param int csht
+ * @param int prescaler
+ * @param int enable_interrupts
+ * @param int fthreshold
+ * @param int ck_mode
  */
 void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int fthreshold, int ck_mode){
     int int_vector = enable_interrupts? (CR_TOIE|CR_SMIE|CR_FTIE|CR_TCIE|CR_TEIE) : 0; 
@@ -111,23 +109,19 @@ void qspi_init(int fsize, int csht, int prescaler, int enable_interrupts, int ft
     set_qspi_shakti32(cr,(CR_PRESCALER(prescaler)|int_vector|CR_FTHRES(fthreshold)|CR_EN));
 }
 
-/** @fn reset_interrupt_flags
+/** @fn void reset_interrupt_flags()
  * @brief Resets interrupt flags.
  * @details Before carrying out any flash access operations, the interrupt flags are cleared.
- * @param[in] No input parameter
- * @param[Out] No output parameter
- * @return Nil
  */
 void reset_interrupt_flags(){
     set_qspi_shakti32(fcr,(FCR_CTOF|FCR_CSMF|FCR_CTCF|FCR_CTEF)); //Resetting all the flags
 }
 
-/** @fn wait_for_tcf
+/** @fn int wait_for_tcf(int status)
  * @brief Wait for the transfer complete flag.
  * @details WCF bit status register indicates the completion of flash 
  *  operation. The same is cheked here.
- * @param[in] int
- * @param[Out] int
+ * @param int status
  * @return Zero on success else -1
  */
 int wait_for_tcf(int status){
@@ -149,12 +143,9 @@ int wait_for_tcf(int status){
     return 0;
 }
 
-/** @fn check_fail_bit
+/** @fn int check_fail_bit()
  * @brief Checks the value of fail_bit.
  * @details Checks the fail bit whether the value is zero or not.
- * @param[in] No input parameter
- * @param[Out] int
- * @return Nil
  */
 int check_fail_bit(){
   if(fail_bit){
@@ -167,11 +158,14 @@ int check_fail_bit(){
     }
 }
 
-/** @fn pageProgramSingleSPI
+/** @fn int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address)
  * @brief Writes into page of flash over single SPI.
  * @details Writes into micron flash page memory over legacy SPI
- * @param[in] int, int, int, int, int
- * @param[Out] int
+ * @param int value1
+ * @param int value2
+ * @param int value3
+ * @param int value4
+ * @param int address
  * @return Zero on Success else -1
  */
 int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int address){
@@ -200,11 +194,14 @@ int pageProgramSingleSPI(int value1, int value2, int value3, int value4, int add
     return wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
 }
 
-/** @fn pageProgramQuadSPI
+/** @fn int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address)
  * @brief Writes a page over QSPI
  * @details Writes a page over Quad SPI  lines.
- * @param[in] int, int, int, int, int
- * @param[Out] int
+ * @param int value1
+ * @param int value2
+ * @param int value3
+ * @param int value4
+ * @param int address
  * @return Zero on success else -1
  */
 int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int address){
@@ -228,11 +225,9 @@ int pageProgramQuadSPI(int value1, int value2, int value3, int value4, int addre
     return wait_for_wip(); // Function which checks if WIP is done, indicating completion of Page Program
 }
 
-/** @fn flashIdentificationDevice
+/** @fn int flashIdentificationDevice()
  * @brief Reads flash id code.
  * @details Reads flash identification code from the flash device and checks whether it valid.
- * @param[in] No input parameter
- * @param[Out] int
  * @return Zero on success else -1
  */
 int flashIdentificationDevice(){
@@ -255,11 +250,9 @@ int flashIdentificationDevice(){
     }
 }
 
-/** @fn flashMemInit
+/** @fn int flashMemInit()
  * @brief Initialises flash memory 
  * @details Initialises flash device and check for id code.
- * @param[in] No input parameter
- * @param[Out] int
  * @return Zero on success else -1
  */
 int flashMemInit(){   //Supposedly a set of routines to check if the memory/interface or whatever is proper
@@ -273,11 +266,9 @@ int flashMemInit(){   //Supposedly a set of routines to check if the memory/inte
 	//to fill in code
 }
 
-/** @fn flashReadstatusRegister
+/** @fn int flashReadStatusRegister()
  * @brief Reads flash status register
  * @details Reads flash status register contents
- * @param[in] No input parameter
- * @param[Out] int
  * @return Status register value on success; else -1
  */
 int flashReadStatusRegister(){
@@ -300,24 +291,19 @@ int flashReadStatusRegister(){
     	return value;
 }
 
-/** @fn flashReadFlagRegister
+/** @fn int flashReadFlagRegister()
  * @brief Reads flash read flag. 
  * @details Reads the flash flag register.
  * @warning Not implemented now. Reserve for future.
- * @param[in] No input parameter 
- * @param[Out] int
- * @return Nil
  */
 int flashReadFlagRegister(){
 	return 0;
 }
 
-/** @fn flashWriteEnable
+/** @fn int flashWriteEnable()
  * @brief Enables flash enable bit
  * @details For any write operation into to flash device (erase, program, etc.)
  *          this enable bit needs to be enabled.
- * @param[in] No input parameter
- * @param[Out] int
  * @return TCF status
  */
 int flashWriteEnable(){
@@ -329,11 +315,9 @@ int flashWriteEnable(){
 }
 
 
-/** @fn flashEnable4ByteAddressingMode
+/** @fn int flashEnable4ByteAddressingMode()
  * @brief Selects the addressed mode.
  * @details Before accessing flash device, the number of bits used for (Q)SPI needs to be programmed.
- * @param[in] No input parameter
- * @param[Out] int
  * @return Status of the performed operation; else -1
  */
 int flashEnable4ByteAddressingMode(){  //Enable 4-byte addressing Mode and read the status to verify that it has happened correctly
@@ -358,11 +342,14 @@ int flashEnable4ByteAddressingMode(){  //Enable 4-byte addressing Mode and read 
         printf("\t 4-byte Addressing mode not Enabled\n");
 }
 
-/** @fn flashReadSingleSPI
+/** @fn int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize)
  * @brief Reads flash device over single SPI.
  * @details Reads the flash device over single spi (MOSI, MISO, CS, CLK)
- * @param[in] int, int, int, int, int
- * @param[Out] int
+ * @param int dummy_cycles
+ * @param int read_address
+ * @param int instruction
+ * @param int data_words
+ * @param int adsize
  * @return Status of the performed operation; else -1
  */
 int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
@@ -382,11 +369,11 @@ int flashReadSingleSPI(int dummy_cycles, int read_address, int instruction, int 
     return value;
 }
 
-/** @fn flashReadDualSPI
+/** @fn int flashReadDualSPI(int address, int data_length)
  * @brief  Reads flash device over two io lines SPI.
  * @details Reads the flash device over two io lines for spi (IO1, IO2, CS, CLK) data
- * @param[in] int, int 
- * @param[Out] int
+ * @param int address
+ * @param int data_length 
  * @return Status of the performed operation; else -1
  */
 int flashReadDualSPI(int address, int data_length){
@@ -407,11 +394,14 @@ int flashReadDualSPI(int address, int data_length){
     return value;
 }
 
-/** @fn flashReadQuadSPI
+/** @fn int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize)
  * @brief  Reads flash device over four io lines SPI.
  * @details Reads the flash device over two io lines for spi (IO1, IO2, IO3, IO4, CS, CLK) data
- * @param[in] int, int, int, int, int
- * @param[Out] int
+ * @param int dummy_cycles
+ * @param int read_address
+ * @param int instruction
+ * @param int data_words
+ * @param int adsize
  * @return Status of the performed operation; else -1
  */
 int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int data_words, int adsize){
@@ -433,11 +423,11 @@ int flashReadQuadSPI(int dummy_cycles, int read_address, int instruction, int da
      return value_1;
  }
 
-/** @fn flashSingleSPIXip 
+/** @fn int flashSingleSPIXip(int addr, int* dest_addr) 
  * @brief Reads over single SPI XIP
  * @details Generic Read for xip SPI Read.
- * @param[in] int, int*
- * @param[Out] int
+ * @param int addr
+ * @param int* dest_addr
  * @return Zero on success.
  */
 int flashSingleSPIXip(int addr, int* dest_addr){
@@ -458,11 +448,11 @@ int flashSingleSPIXip(int addr, int* dest_addr){
 	return 0;
 }
 
-/** @fn flashSingleSPIDDRXip 
+/** @fn int flashSingleSPIDDRXip(int addr, int* dest_addr)  
  * @brief Reads over DDR XIP mode.
  * @details Reads for DDR based XIP mode.
- * @param[in] int, int*
- * @param[Out] int
+ * @param int 
+ * @param int* dest_addr
  * @return Zero on Success
  */
 int flashSingleSPIDDRXip(int addr, int* dest_addr){
@@ -482,11 +472,11 @@ int flashSingleSPIDDRXip(int addr, int* dest_addr){
 	return 0;
 }
 
-/** @fn flashDualSPIXip 
+/** @fn int flashDualSPIXip(int addr, int* dest_addr)
  * @brief Reads over XIP mode.
  * @details Reads for XIP mode using two io bits for data.
- * @param[in] int, int*
- * @param[Out] int
+ * @param int addr 
+ * @param int* dest_addr
  * @return Zero on Success
  */
 int flashDualSPIXip(int addr, int* dest_addr){
@@ -507,11 +497,11 @@ int flashDualSPIXip(int addr, int* dest_addr){
 	return 0;
 }
 
-/** @fn flashDualSPIDDRXip
+/** @fn int flashDualSPIDDRXip(int addr, int* dest_addr) 
  * @brief Reads over XIP mode.
  * @details Reads for DDR based XIP mode using two io bits for data.
- * @param[in] int, int*
- * @param[Out] int
+ * @param int addr
+ * @param int* dest_addr
  * @return Zero on Success
  */
 int flashDualSPIDDRXip(int addr, int* dest_addr){
@@ -531,11 +521,11 @@ int flashDualSPIDDRXip(int addr, int* dest_addr){
 	return 0;
 }
 
-/** @fn flashQuadSPIXip
+/** @fn int flashQuadSPIXip(int addr, int* dest_addr)
  * @brief Reads over XIP mode.
  * @details Reads for DDR based XIP mode using quad io bits for data.
- * @param[in] int, int*
- * @param[Out] int
+ * @param int addr
+ * @param int* dest_addr
  * @return Zero on Success
  */
 int flashQuadSPIXip(int addr, int* dest_addr){
@@ -562,11 +552,11 @@ int flashQuadSPIXip(int addr, int* dest_addr){
 	return 0;
 }
 
-/** @fn flashQuadSPIDDRXip 
+/** @fn int flashQuadSPIDDRXip(int addr, int* dest_addr)
  * @brief Reads over XIP mode.
  * @details Reads for DDR based XIP mode using four io bits for data.
- * @param[in] int, int*
- * @param[Out] int
+ * @param int addr 
+ * @param int* dest_addr
  * @return Zero on Success
  */
 int flashQuadSPIDDRXip(int addr, int* dest_addr){
@@ -593,11 +583,10 @@ int flashQuadSPIDDRXip(int addr, int* dest_addr){
 	return 0;
 }
 
-/** @fn flashWriteVolatileConfigReg 
+/** @fn int flashWriteVolatileConfigReg(int value) 
  * @brief Writes into flash volatile configuration register.
  * @details Writes the passed value into flash volatile configuration register.
- * @param[in] int
- * @param[Out] int
+ * @param int value
  * @return Zero on Success
  */
 int flashWriteVolatileConfigReg(int value){
@@ -620,12 +609,10 @@ int flashWriteVolatileConfigReg(int value){
     return ret;
 }
 
-/** @fn flash_Write_disable
+/** @fn int flash_Write_disable()
  * @brief disables write operation
  * @details Write operation can be possible only after enabling write enable register.
- *  Here this is disabled using this function.
- * @param[in] No input parameter
- * @param[Out] int
+ *       Here this is disabled using this function.
  * @return Zero on Success
  */
  
@@ -637,12 +624,12 @@ int flash_Write_disable(){
 	reset_interrupt_flags();
 	return wait_for_wip();
 }
-
-/** @fn eraseSector 
+	
+/** @fn int eraseSector(int command, int address)
  * @brief Erases one sector 
  * @details Erases a complete sector which falls in the sector range.
- * @param[in] int, int
- * @param[Out] int
+ * @param int command 
+ * @param int address
  * @return Zero on Success
  */
 int eraseSector(int command, int address){
@@ -659,12 +646,10 @@ int eraseSector(int command, int address){
     return wait_for_wip(); //For sector erase maybe estat should be checked
 }
 
-/** @fn wait_for_wip
+/** @fn int wait_for_wip()
  * @brief Wait till a flash access is complete.
  * @details Reads the WIP bit in the status register to check the completion of flash access.
  * Useful during flash write operations.
- * @param[in] No input parameter
- * @param[Out] int
  * @return Zero on Success
  */
 int wait_for_wip(){
@@ -684,11 +669,10 @@ int wait_for_wip(){
     return 0;
 }	
 
-/** @fn micron_write_enable
+/** @fn int micron_write_enable(int status)
  * @brief Enables the micron flash for write operation.
  * @details Enables micron flash for programming flash data.
- * @param[in] int
- * @param[Out] int
+ * @param int status
  * @return Zero on Success
  */
 int micron_write_enable(int status){
@@ -699,11 +683,10 @@ int micron_write_enable(int status){
     return ret;
 }
 
-/** @fn micron_volatile_write_enable 
+/** @fn int micron_volatile_write_enable(int status) 
  * @brief Enable for volatile write.
  * @details Enables micron flash for programming volatile config. register.
- * @param[in] int
- * @param[Out] int
+ * @param int status
  * @return Zero on Success
  */
 int micron_volatile_write_enable(int status){
@@ -714,12 +697,11 @@ int micron_volatile_write_enable(int status){
     return ret;
 }
 
-/** @fn micron_enable_4byte_addressing 
+/** @fn int micron_enable_4byte_addressing(int status) 
  * @brief Enables micron flash for 4 byte addressing.
  * @details Address can be passed as 3 bytes or 4 bytes before read or write 
  * operation. This function sets the number of address bytes to 4 bytes.
- * @param[in] int
- * @param[Out] int
+ * @param int status
  * @return Zero on Success
  */
 int micron_enable_4byte_addressing(int status){
@@ -730,11 +712,11 @@ int micron_enable_4byte_addressing(int status){
     return ret;
 }
 
-/** @fn micron_configure_xip_volatile
+/** @fn int micron_configure_xip_volatile(int status, int value)
  * @brief Configures the xip volatile config. register.
  * @details Configures the volatile config. register for xip Read mode.
- * @param[in] int, int
- * @param[Out] int
+ * @param int status
+ * @param int value
  * @return Zero on Success
  */
 int micron_configure_xip_volatile(int status, int value){
@@ -749,11 +731,11 @@ int micron_configure_xip_volatile(int status, int value){
     return ret;
 }
 
-/** @fn micron_disable_xip_volatile
+/** @fn int micron_disable_xip_volatile(int status, int value)
  * @brief Configures(disables) the xip volatile config. register.
  * @details Configures(disables) the volatile config. register for xip Read mode.
- * @param[in] int ,int
- * @param[Out] int
+ * @param int status
+ * @param int value
  * @return Zero on Success
  */
 int micron_disable_xip_volatile(int status, int value){
@@ -771,12 +753,12 @@ int micron_disable_xip_volatile(int status, int value){
     return ret;
 }
 
-/** @fn micron_read_id_cmd
+/** @fn int micron_read_id_cmd(int status, int value)
  * @brief Reads the id of the micron flash.
  * @details Micron flash is having a fixed value as ID during production. This 
  * value is read to confirm proper flash device.
- * @param[in] int, int
- * @param[Out] int
+ * @param int status 
+ * @param int value
  * @return Zero on Success
  */
 int micron_read_id_cmd(int status, int value){
@@ -789,11 +771,11 @@ int micron_read_id_cmd(int status, int value){
     return ret;
 }
 
-/** @fn micron_read_configuration_register
+/** @fn int micron_read_configuration_register(int status, int value)
  * @brief Reads configuration register. 
  * @details The configurartion register is read using this function.
- * @param[in] int, int
- * @param[Out] int
+ * @param int status
+ * @param int value
  * @return Zero on Success
  */
 int micron_read_configuration_register(int status, int value){

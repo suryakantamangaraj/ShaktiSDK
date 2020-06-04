@@ -23,7 +23,7 @@
 /**
 @file button_driver.c
 @brief Reads onboard button values from gpio pins.
-@detail 
+@detail configures buttons to serve as Input 
 */ 
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
@@ -40,11 +40,10 @@
 extern void delay_loop(unsigned long , unsigned long );
 
 /**
- * @fn static void configure_btn()
+ * @fn void configure_btn(unsigned long pinCntrl)
  * @brief Function for configure Individual Buttons as input.
  * @details 4 GPIO pins are mapped to 4 Buttons. This function configures
  *          each BTN as input pin.
- *
  * @param unsigned long (Pin that needs to be configured as BTN.)
  */
 void configure_btn(unsigned long pinCntrl)
@@ -54,7 +53,7 @@ void configure_btn(unsigned long pinCntrl)
 	write_word(GPIO_DIRECTION_CNTRL_REG, ( read_data | ~(pinCntrl) ) );
 }
 
-/** @fn static void configure_allbtn()
+/** @fn void configure_all_btn()
  * @brief Function for configure All BTNs as input.
  * @details 4 GPIO pins are mapped to 4 Buttons. This function configures
  *          all BTNs as input pin.

@@ -21,7 +21,12 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- ***************************************************************************/
+***************************************************************************/
+/**
+@file deploy.c
+@brief Deploy elf into flash in board.
+@detail 
+*/
 
 #include <stdint.h>
 #include <uart.h>
@@ -29,11 +34,10 @@
 #include "spi.h"
 #include "flashdata.h"
 
-/** @fn deploy
+/** @fn void deploy()
  * @brief Erases flash and writes the hex array entry by entry into the flash
- * memory.
- * @param[in] none 
- * @param[Out] none
+ *       memory. 
+ * @detail
  */
 void deploy()
 {
@@ -66,10 +70,8 @@ void deploy()
 	asm volatile ("ebreak");
 }
 
-/** @fn main
- * @brief calls deploy function to load the code to flash memory
- * @param[in] none 
- * @param[Out] none
+/** @fn void main()
+ * @brief calls deploy function to load the code to flash memory 
  */
 void main(){
 

@@ -40,12 +40,15 @@
 #define SCLK_COUNT 0x91
 
 
-/** @fn read_ds3231_registers
+/** @fn int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
  * @brief Reads the date and time field of DS3231 registers.
  * @details Reads the date value (date, month and year) and time (hour, minutes and seconds) 
  * DS3231 registers.
- * @param[in] i2c_struct* ,unsigned int, unsigned int,unsigned int, unsigned char,unsigned long
- * @param[Out] int
+ * @param i2c_struct*
+ * @param reg_offset
+ * @param *readTemp
+ * @param length
+ * @param delay
  * @return read status (Zero of success)
  */
 int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
@@ -83,12 +86,15 @@ int read_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, un
 		return 0;
 }
 
-/** @fn  write_ds3231_registers
+/** @fn int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
  * @brief configures the DS3231 date and time format.
  * @details Configures the DS3231 Configuration registers with the required 
-  * Date and time format over I2C interface.
- * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned char, unsigned long
- * @param[Out] int
+ * Date and time format over I2C interface.
+ * @param i2c instance
+ * @param reg_offset
+ * @param *write_value
+ * @param length
+ * @param delay
  * @return write status (Zero on SUCCESS.)
  */
 int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -109,11 +115,12 @@ int write_ds3231_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 			return 0;
 }
 
-/** @fn dayofweek
+/** @fn int dayofweek(int d, int m, int y)
  * @brief Calculates day of the week.
  * @details Calculates the week day based on the passed date.
- * @param[in] int, int, int
- * @param[Out] int
+ * @param d
+ * @param m
+ * @param y
  * @return Day of the week (0 - 6)
  */
 int dayofweek(int d, int m, int y)
@@ -125,11 +132,10 @@ int dayofweek(int d, int m, int y)
              y / 400 + t[m - 1] + d) % 7;
 }
 
-/** @fn ds3231_decimal_to_hex
+/** @fn unsigned int ds3231_decimal_to_hex(unsigned int decimal)
  * @brief Decimal to hex conversion.
  * @details The configuration value is convertd to hex. which is converted from decimal.
- * @param[in] unsigned int
- * @param[Out] unsigned int
+ * @param decimal
  * @return Calculated hex value. 
  */
 unsigned int ds3231_decimal_to_hex(unsigned int decimal)
@@ -137,13 +143,10 @@ unsigned int ds3231_decimal_to_hex(unsigned int decimal)
 	return( ((decimal / 10 ) << 4) | (decimal % 10) );
 }
 
-/** @fn main
+/** @fn void main()
  * @brief Reads and prints the Date and Time information.
  * @details Configures the DS3231 and reads Date and time information and prints the 
- * in decimal 
- * @param[in] No input parameter
- * @param[Out] No output parameter
- * @return Nil
+ * in decimal
  */
 void main()
 {

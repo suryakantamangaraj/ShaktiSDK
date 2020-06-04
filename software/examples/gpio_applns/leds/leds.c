@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           	   	   :  shakti devt board
- * Name of the file	     	   :  leds.c
- * Brief Description of file   :  Control an led with the help of a button, gpio based.
- * Name of Author    	       :  Kotteeswaran
- * Email ID                    :  kottee.1@gmail.com
+ * Project           	       : shakti devt board
+ * Name of the file	       : leds.c
+ * Brief Description of file   : Control an led with the help of a button, gpio based.
+ * Name of Author    	       : Kotteeswaran
+ * Email ID                    : kottee.1@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -52,14 +52,10 @@
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
-/** @fn main
+/** @fn void main()
  * @brief Performs the toggling operation  with the help of button.
  * @details Based on the uncommented macro. Performs the on/off/toggle 
- * operation on LEDS.    
- * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter 
- * @return Nil
+ * operation on LEDS.     
  */
 void main()
 {

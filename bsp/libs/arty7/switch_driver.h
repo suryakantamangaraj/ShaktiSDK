@@ -1,6 +1,6 @@
 /***************************************************************************
- * Project           		       : shakti devt board
- * Name of the file	               : switch_driver.h
+ * Project           		   : shakti devt board
+ * Name of the file	           : switch_driver.h
  * Brief Description of file       : Header file for switches
  * Name of Author    	           : Madan Kumar S
  * Email ID                        : kumarmadan96@gmail.com
@@ -22,8 +22,7 @@
  ***************************************************************************/
 /**
  * @file switch_driver.h
- * @project shakti devt board
- * @brief Header file for switches 
+ * @brief Header file for switches
  */
 #ifndef SWITCH_DRIVER_H
 #define SWITCH_DRIVER_H

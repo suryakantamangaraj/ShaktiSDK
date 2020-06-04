@@ -1,6 +1,6 @@
 /***********************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  defines.h
+* Project           		:  shakti devt board
+* Name of the file	     	:  defines.h
 * Brief Description of file     :  Header file for handling traps
 * Name of Author    	        :  Sathya Narayanan N
 * Email ID                      :  sathya281@gmail.com
@@ -20,11 +20,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 **************************************************************************/
-
 /**
  * @file defines.h
- * @project shakti devt board
  * @brief Header file for handling traps
+ * @detail this is the header file for trap.s
  */
 #ifndef DEFINES_H
 #define DEFINES_H

@@ -21,13 +21,19 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file btnled.c
+@brief Controls the led operation with help of button,gpio based.
+@detail led glows when press on a button.
+*/ 
+
 #include "gpio.h" 
 #include "platform.h"
 
-/** @fn main
+/** @fn int main(void)
  * @brief on press of a button led grows. The technique used here is polling
- * based.
- * @param[Out] int
+ *    based.
+ * @return int
  */
 int main(void)
 {

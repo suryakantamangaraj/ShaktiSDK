@@ -1,7 +1,7 @@
 /***************************************************************************
  * Project           	      : shakti devt board
- * Name of the file	          : light_blocking.c
- * Brief Description of file  : Photo Interrupter key module will trigger a signal when light                                        between the sensor's gap is blocked.
+ * Name of the file	      : light_blocking.c
+ * Brief Description of file  : Photo Interrupter key module will trigger a signal when light between the sensor's gap is blocked.
  * Name of Author             : Soutrick Roy Chowdhury
  * Email ID                   : soutrick97@gmail.com
 
@@ -21,6 +21,12 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *****************************************************************************/
+/**
+@file light_blocking.c
+@brief Implements gpio functionality.
+@detail Photo Interrupter key module will trigger a signal when light between the sensor's gap is blocked.
+*/
+
 #include "gpio.h"
 #include "platform.h"
 #include <stdio.h>
@@ -35,11 +41,7 @@ extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
 /** @fn main
  * @brief Gives output as HIGH when partition is introduced and LOW when partition is removed       with the help of gpio pins 
- * @details    
- * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
- */
+  */
 void main()
 {   
     unsigned long readData = 0;

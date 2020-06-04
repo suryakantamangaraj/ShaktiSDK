@@ -1,7 +1,7 @@
 /*************************************************************************
  * Project           	       : shakti devt board
- * Name of the file	           : pcf8591.c
- * Brief Description of file   :
+ * Name of the file	       : pcf8591.c
+ * Brief Description of file   : Contains the driver routines to configure and read pcf8591.
  * Name of Author              : Kotteeswaran
  * Email ID                    : kottee.1@gmail.com
 
@@ -40,11 +40,14 @@
 
 #define I2C i2c_instance[0]
 
-/** @fn read_pcf8591_registers
+/** @fn int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
  * @brief Reads the ADC value from PCF8591
  * @details Reads 4 ADC values from PCF8591 over I2C interface
- * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned char, unsigned long
- * @param[Out] int
+ * @param i2c_struct*
+ * @param reg_offset
+ * @param *readTemp
+ * @param length
+ * @param delay
  * @return read status (zero on success)
  */
 int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *readTemp, unsigned char length, unsigned long delay)
@@ -80,11 +83,14 @@ int read_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, u
 	return 0;
 }
 
-/** @fn write_pcf8591_registers
+/** @fn int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
  * @brief WRites into PCF8591 Register
  * @details WRites the passed value into passed PCF8591 Register (address) over I2C interface.
- * @param[in] i2c_struct*, unsigned int, unsigned int, unsigned char, unsigned long
- * @param[Out] int
+ * @param i2c_struct*
+ * @param reg_offset
+ * @param write_value
+ * @param length
+ * @param delay
  * @return Write status (Zero on success)
  */
 int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, unsigned int *write_value, unsigned char length, unsigned long delay)
@@ -102,12 +108,10 @@ int write_pcf8591_registers(i2c_struct * i2c_instance, unsigned int reg_offset, 
 	return 0;
 }
 
-/** @fn main
+/** @fn int main()
  * @brief Configures and reads the ADC values.
  * @details Configures the PCF8591 to read 4 ADC values, reads the same 
- * prints the read values.
- * @param[in] No input parameter
- * @param[Out] int
+ * prints the read values
  * @return Zero
  */
 int main()

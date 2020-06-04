@@ -1,7 +1,7 @@
 /***************************************************************************
-* Project           			:  shakti devt board
-* Name of the file	     		:  hello.c
-* Brief Description of file     :  Does the printing of hello with the help of uart communication                                       protocol.
+* Project           		:  shakti devt board
+* Name of the file	     	:  hello.c
+* Brief Description of file     :  Does the printing of hello with the help of uart communication protocol.
 * Name of Author    	        :  Sathya Narayanan N
 * Email ID                      :  sathya281@gmail.com
 
@@ -21,9 +21,15 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ***************************************************************************/
+/**
+@file hello.c
+@brief Does the printing of hello with the help of uart communication
+@detail 
+*/
+
 #include<uart.h>
 
-/** @fn main
+/** @fn void main()
  * @brief prints hello world
  */
 void main()

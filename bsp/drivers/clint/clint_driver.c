@@ -23,8 +23,9 @@
 /**
 @file clint_driver.c
 @brief source file for clint.
-@detail 
-*/ 
+@detail This file is a driver file for clint. The file contains the clint 
+interrupt handler, configure the counter and support for e and c class clint timers. 
+*/
 
 #include "clint_driver.h"
 #include "log.h"
@@ -33,9 +34,9 @@
 uint64_t* mtime    = 0x0200bff8;
 uint64_t* mtimecmp = 0x02004000;
 
-/** @fn mtime_low
+/** @fn static unsigned long mtime_low( )
  * @brief return the lower 32bit of mtime.
- * @details return the lower half of mtime. And this is needed mostly in dealing mtime in 32 bit machines. 
+ * @details return the lower half of mtime. And this is needed mostly in dealing mtime in 32 bit machines.
  * @return unsigned long
  */
 static unsigned long mtime_low( )
@@ -47,9 +48,9 @@ static unsigned long mtime_low( )
 Get each 32 bit and append for full timer value
 */
 
-/** @fn  mtime_high
+/** @fn static uint32_t mtime_high(void)
  * @brief return the upper 32 bit of mtime
- * @details return the upper 32 bit of mtime register. This is very useful incase of 32 bit core.    
+ * @details return the upper 32 bit of mtime register. This is very useful incase of 32 bit core.
  *          Incase of 64 bit core this has to be appended with lower 32 bits adn sent.
  * @return unsigned 32bit int
  */
@@ -58,7 +59,7 @@ static uint32_t mtime_high(void)
   return *(volatile uint32_t *)(CLINT_BASE + MTIME + 4);
 }
 
-/** @fn  get_timer_value
+/** @fn uint64_t get_timer_value()
  * @brief return the mtime value for a 32 bit or 64 bit machine
  * @details return the mtime value based on the __riscv_xlen. Incase of 64 bit, this joins the upper
  *          and lower 32 bits of mtime and return
@@ -74,7 +75,7 @@ uint64_t get_timer_value()
 #endif
 }
 
-/** @fn configure_counter
+/** @fn void configure_counter( uint64_t value)
  * @brief sets up the timer
  * @details sets the mtimecmp to current mtime + delta
  * @param unsigned 64bit int (delta value after which interrupt happens)
@@ -86,10 +87,12 @@ void configure_counter( uint64_t value)
 	log_info("mtime value = %x\n", *mtime);
 }
 
-/** @fn  mach_clint_handler
+
+/** @fn void mach_clint_handler(uintptr_t int_id, uintptr_t epc)
  * @brief handler for machine timer interrupt
  * @details handler for machine timer interrupt. This handles the timer interrupt and sets mtimecmp to clear timer interrupt.
- * @param unsigned int ptr
+ * @param unsigned int ptr int_id
+ * @param unsigned int ptr epc
  */
 void mach_clint_handler(uintptr_t int_id, uintptr_t epc)
 {

@@ -1,6 +1,6 @@
 /**************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: i2c_driver.c
+ * Project           		: shakti devt board
+ * Name of the file	     	: i2c_driver.c
  * Brief Description of file    : Demonstartes the working of i2c protocol.
  * Name of Author               : Kotteeswaran
  * Email id                     : kottee.1@gmail.com
@@ -22,12 +22,10 @@
 ***************************************************************************/
 
 /**
-@file   i2c_driver.c
-@brief  Contains the driver routines for i2c driver using dedicated I2C pins.
-@detail The i2c module driver supports i2c driver routines using dedicated i2c pins.
-*/
-
-
+@file i2c_driver.c
+@brief Contains the driver routines for i2c driver using dedicated I2C pins.
+@detail This file has the driver support for i2c using dedicated i2c pins.
+ This file contains init, configure, read and write routines*/
 
 /* Enable these bits only when corresponding interrupt is needed.*/
 
@@ -44,12 +42,9 @@
 i2c_struct *i2c_instance[MAX_I2C_COUNT];
 
 /**
- * @fn i2c_init()
+ * @fn void i2c_init()
  * @brief Initialises the i2c modules.
  * @details Initialises the i2c array modules to the max. no of i2c modules present
- * @param[in] No input parameter
- * @param[Out] No output parameter 
- * @return Nil
  */
 void i2c_init()
 {
@@ -59,15 +54,16 @@ void i2c_init()
 	}
 }
 
-/** @fn config_i2c
+/** @fn int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned char scl_div)
  * @brief This routine configures the serial clock frequency count and
- * prescaler count.
+ *  prescaler count.
  * @details There are 4 registers which are configurable. This function
- *  writes into the register based on the passed address. he serial clock count
- *  and prescalar count decides the frequency (sck) that needs to be used for
- *  the I2C serial communication. Then resets status register.
- * @param[in] i2c_struct*, unsigned char , unsigned char 
- * @param[Out] int
+ *   writes into the registr based on the passed address. he serial clock count
+ *   and prescalar count decides the frequency (sck) that needs to be used for
+ *   the I2C serial communication. Then resets status register.
+ * @param i2c_struct*
+ * @param unsigned char prescale_div
+ * @param unsigned char scl_div
  * @return REturns 0 if success; else returns -ENXIO.
  */
 int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned char scl_div)
@@ -149,13 +145,12 @@ int config_i2c(i2c_struct * i2c_instance, unsigned char prescale_div, unsigned c
 }
 
 /**
- * @fn wait_till_I2C_bus_free
+ * @fn int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
  * @brief wait for the i2c bus to be freee.
  * @details once a I2C Transaction is started, the bus needs to be freed for other devices
- * to use the bus. This function checks the busy bit in status register to become free 
- * for a particular time. If it becomes free, returns 0, else negative value.
- * @param[in] i2c_struct *
- * @param[Out] int
+ *    to use the bus. This function checks the busy bit in status register to become free 
+ *    for a particular time. If it becomes free, returns 0, else negative value.
+ * @param i2c_struct*
  * @return Returns 0 if the bus becomes free; else returns ETIMEDOUT.
  */
 int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
@@ -180,12 +175,12 @@ int wait_till_I2c_bus_free(i2c_struct * i2c_instance)
 }
 
 /**
- * @fn wait_till_txrx_operation_completes
- * @brief Waits in the loop till the i2c tx/rx operation completes
+ * @fn int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
+ * @brief  Waits in the loop till the i2c tx/rx operation completes
  * @details The PIN bit in the status register becomes high when tx/rx operation 
- *          starts and becomes low once done. This function checks whether tx/rx operaiton is complete or not.
- * @param[in] i2c_struct* ,int
- * @param[Out] int *status  --> contents of the status register
+ *     starts and becomes low once done. This function checks whether tx/rx operaiton is complete or not. 
+ * @param i2c_struct* 
+ * @param int *status  --> contents of the status register
  * @return zero if success; else -ETIMEOUT
  */
 int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
@@ -209,11 +204,14 @@ int wait_till_txrx_operation_Completes(i2c_struct * i2c_instance, int *status)
 }
 
 /**
- * @fn sendbytes
- * @brief writes "n" number of bits over i2c bus.
+ * @fn int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, int eni)
+ * @brief  writes "n" number of bits over i2c bus.
  * @details Called when the user wants to write n number of bits over i2c bus.
- * @param[in] i2c_struct*, const char*, int, int ,int
- * @param[Out] int
+ * @param i2c_struct*
+ * @param const char *buf
+ * @param int count
+ * @param int last
+ * @param int eni
  * @return Returns number of bytes written else EREMOTEIO.
  */
 int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, int eni)
@@ -251,13 +249,15 @@ int sendbytes(i2c_struct * i2c_instance, const char *buf, int count, int last, i
 }
 
 /**
- * @fn readbytes
+ * @fn int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
  * @brief Reads "n" number of bytes from I2C Bus
  * @details Reads n number of bytes over I2C Bus and store teh same in 
  *          "buf" pointer.
- * @param[in] i2c_struct*, char *, int, int
- * @param[Out] int
- * @return Returns umber of bytest read over i2c bus. else -1.
+ * @param i2c_struct*
+ * @param char *buf
+ * @param int count
+ * @param int last
+ * @return Returns number of bytest read over i2c bus. else -1.
  */
 int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
 {
@@ -303,11 +303,13 @@ int readbytes(i2c_struct * i2c_instance, char *buf, int count, int last)
 }
 
 /**
- * @fn i2c_send_slave_address
+ * @fn int i2c_send_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
  * @brief  Performs the intilization of i2c slave.
  * @details Writes slave addresss into the i2b to start write or read operation.
- * @param[in] i2c_struct*, unsigned char, unsigned char, unsigned long
- * @param[Out] int
+ * @param i2c_struct*
+ * @param unsigned char slaveAddress
+ * @param unsigned char rdWrCntrl
+ * @param unsigned long delay
  * @return Zero if success; else non zero
  */
 int i2c_send_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
@@ -373,11 +375,12 @@ int i2c_send_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress
 }
 
 /**
- * @fn i2c_write_data
+ * @fn int i2c_write_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay)
  * @brief I does the reading or writing from the address specified .
  * @details Writes one byte to the slave I2C DEVICE.
- * @param[in] i2c_struct*, unsigned char,unsigned char
- * @param[Out] int
+ * @param i2c_struct*, 
+ * @param unsigned char writedata
+ * @param unsigned char delay
  * @return Returns Zeron on success; else -EREMOTEIO
  */
 int i2c_write_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay)
@@ -414,11 +417,12 @@ int i2c_write_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned 
 }
 
 /**
- * @fn i2c_read_data
+ * @fn int i2c_read_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned char delay)
  * @brief It does the reading or writing from the address specified .
  * @details Reads a byte of data over I2C bus from the passed I2C location.
- * @param[in] i2c_struct*,unsigned char,unsigned char
- * @param[Out] int
+ * @param i2c_struct*
+ * @param unsigned char  *read_data
+ * @param unsigned char delay
  * @return Zero on success; else -ETIMEOUT
  */
 //#define READ_INTERRUPT 1
@@ -448,11 +452,13 @@ int i2c_read_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned 
 }
 
 /**
- * @fn i2c_send_interrupt_slave_address
- * @brief  Sends the slave address over I2C Bus.
+ * @fn int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
+ * @brief Sends the slave address over I2C Bus.
  * @details Interrupt based routine to send slave address to the I2C slave device
- * @param[in] i2c_struct*,unsigned char,unsigned char,unsigned long
- * @param[Out] Nil
+ * @param i2c_struct*
+ * @param unsigned char slaveAddress
+ * @param unsigned char rdWrCntrl
+ * @param unsigned long delay
  * @return Zero on success. Else corresponding error value.
  */
 int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char slaveAddress, unsigned char rdWrCntrl, unsigned long delay)
@@ -515,11 +521,13 @@ int i2c_send_interrupt_slave_address(i2c_struct * i2c_instance, unsigned char sl
 }
 
 /**
- * @fn i2c_read_interrupt_data
+ * @fn int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned char delay, unsigned char last)
  * @brief  Interrupt based I2C read 
  * @details Interrupt based i2c read function to read from the I2C slave.
- * @param[in] i2c_struct, unsigned char, unsigned char, unsigned char 
- * @param[Out] int
+ * @param i2c_struct
+ * @param unsigned char *read_data
+ * @param unsigned char delay 
+ * @param unsigned char last
  * @return Zero on success.
  */
 int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data, unsigned char delay, 
@@ -568,11 +576,13 @@ int i2c_read_interrupt_data(i2c_struct * i2c_instance, unsigned char *read_data,
 
 
 /**
- * @fn i2c_write_interrupt_data
- * @brief  Interrupt based I2C write function.
+ * @fn int i2c_write_interrupt_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay, unsigned char last)
+ * @brief Interrupt based I2C write function.
  * @details Writes a byte of data into slave I2C bus using interrupt.
- * @param[in] i2c_struct*, unsigned char, unsigned char,unsigned char
- * @param[Out] int
+ * @param i2c_struct*
+ * @param unsigned char writeData
+ * @param unsigned char delay
+ * @param unsigned char last
  * @return Zero on success. Else based on the error.
  */
 int i2c_write_interrupt_data(i2c_struct * i2c_instance, unsigned char writeData, unsigned char delay, unsigned char last)

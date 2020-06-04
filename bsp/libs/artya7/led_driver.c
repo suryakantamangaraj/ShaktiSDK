@@ -23,7 +23,7 @@
 /**
   @file led_driver.c
   @brief Performs the I2C operations using gpio pins.
-  @detail 
+  @detail  Configures leds and maps to the gpio pins.
  */
 
 #if defined(ARTIX7_35T) || defined(ARTIX7_100T)
@@ -39,7 +39,7 @@
  */
 extern void delay_loop(unsigned long , unsigned long );
 
-/** @fn  configure_ledx
+/**  @fn void configure_ledx(unsigned long pin_cntrl)
  * @brief Configures Individual LED pins as output.
  * @details 8 GPIO pins are mapped to 8 LEDs. This function configures
  *          each LED as output pin.
@@ -53,7 +53,7 @@ void configure_ledx(unsigned long pin_cntrl)
 	return ;
 }
 
-/** @fn static void configure_rgb_ledx()
+/** @fn void configure_rgb_ledx(unsigned char led_no)
  * @brief Configures Individual RGB LED pins as output.
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function configures
  *          each LED as output pin.
@@ -72,8 +72,8 @@ void configure_rgb_ledx(unsigned char led_no)
 	return ;
 }
 
-/**
- * @fn static void configure_normal_leds()
+/*
+ * @fn void configure_normal_leds()
  * @brief Configures Normal LEDs 3 & 4 as as output.
  * @details This function configures GPIO pins mapped to 
  *          Normal LEDs as output pins.
@@ -86,11 +86,11 @@ void configure_normal_leds()
 	return ;
 }
 
-/**
- * @fn static void rgb_leds_configure()
+/*
+ * @fn void configure_rgb_leds()
  * @brief Configures RGB LEDs 0 & 1 as as output pins.
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
- *          gpio pins mapped to both RGB LEDs as output
+ *          gpio pins mapped to both RGB LEDs as output pins.
  */
 void configure_rgb_leds()
 {
@@ -100,7 +100,7 @@ void configure_rgb_leds()
 	return ;
 }
 
-/** @fn static void configure_all_leds()
+/** @fn void configure_all_leds()
  * @brief Configures GPIO pins mapped to all LEDs as as output pins.
  * @details 8 GPIO pins are mapped to 2 normal LEDs. This function configures
  *          all GPIO pins mapped to all the LEDs as output pins.
@@ -117,7 +117,7 @@ void configure_all_leds()
  * @brief turn ON the Individual LEDs.
  * @details This function switches ON the LED based on
  *          the GPIO pin position passed.
- * @param unsigned long (pin_cntrl - GPIO Pin position of the LED that needs to be switched ON.)
+ * @param pin_cntrl - GPIO Pin position of the LED that needs to be switched ON.
  */
 void turn_on_ledx(unsigned long pin_cntrl)
 {
@@ -127,11 +127,11 @@ void turn_on_ledx(unsigned long pin_cntrl)
 	return ;
 }
 
-/** @fn static void turn_off_ledx()
+ /** @fn void turn_off_ledx(unsigned long pin_cntrl)
  * @brief turn OFF the Individual LEDs.
  * @details This function switches OFF the LED based on
  *          the GPIO pin position passed.
- * @param unsigned long (pin_cntrl - GPIO Pin position of the LED that needs to be switched OFF)
+ * @param pin_cntrl - GPIO Pin position of the LED that needs to be switched OFF.
  */
 void turn_off_ledx(unsigned long pin_cntrl)
 {
@@ -141,7 +141,7 @@ void turn_off_ledx(unsigned long pin_cntrl)
 	return ;
 }
 
-/** @fn static void turn_on_normal_leds()
+/** @fn  void turn_on_normal_leds()
  * @brief turn ON the all Normal LEDs.
  * @details This function switches ON the Normal LEDs
  */
@@ -153,7 +153,7 @@ void turn_on_normal_leds()
 	return ;
 }
 
-/** @fn static void turn_off_normal_leds()
+/** @fn void turn_off_normal_leds()
  * @brief turn OFF the all Normal LEDs.
  * @details This function switches ON both RGB LED.
  */
@@ -165,7 +165,7 @@ void turn_off_normal_leds()
 	return ;
 }
 
-/** @fn static void turn_on_rgb_ledx()
+/** @fn void turn_on_rgb_ledx(unsigned char led_no)
  * @brief turn ON the Individual RGB LED.
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function switches
  *          on passed RGB LED.
@@ -184,7 +184,7 @@ void turn_on_rgb_ledx(unsigned char led_no)
 	return ;
 }
 
-/** @fn static void turn_off_rgb_ledx()
+/** @fn void turn_off_rgb_ledx(unsigned char led_no)
  * @brief turn OFF the Individual RGB LED.
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function switches
  *          OFF passed RGB LED.
@@ -204,7 +204,7 @@ void turn_off_rgb_ledx(unsigned char led_no)
 	return ;
 }
 
-/** @fn static void turn_on_rgb_leds()
+/** @fn void turn_on_rgb_leds()
  * @brief turn ON the all RGB LEDs.
  * @details 8 GPIO pins are mapped to 2 RGB LEDs. This function switches
  *          ON both RGB LED.
@@ -212,13 +212,12 @@ void turn_off_rgb_ledx(unsigned char led_no)
 void turn_on_rgb_leds()
 {
 	unsigned long read_data = 0;
-
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
 	return ;
 }
 
-/** @fn static void turn_off_rgb_leds()
+/** @fn void turn_off_rgb_leds()
  * @brief turn ON the all RGB LEDs.
  * @details This function switches ON both RGB LED.
  */
@@ -230,53 +229,49 @@ void turn_off_rgb_leds()
 	return ;
 }
 
-/** @fn static void turn_on_all_leds()
+/** @fn void turn_on_all_leds()
  * @brief turn ON the all LEDs.
  * @details This function switches ON all LEDs.
  */
 void turn_on_all_leds()
 {
 	unsigned long read_data = 0;
-
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | ALL_LEDS ) );
 	return ;
 }
 
-/** @fn static void turn_off_all_leds()
+/** @fn void turn_off_all_leds()
  * @brief turn OFF the all LEDs.
  * @details This function switches OFF all LEDs.
  */
 void turn_off_all_leds()
 {
 	unsigned long read_data = 0;
-
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
 	return ;
 }
 
-/** @fn static void toggle_ledx()
+ /** @fn void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2)
  * @brief Toggles the passed LED.
  * @details This function toggles given LED.
- * @param unsigned long 
- * @param unsigned long
- * @param unsigned long (Led that needs to be toggled, delay.)
+ * @param unsigned long pin_cntrl
+ * @param unsigned long delay1
+ * @param unsigned long delay2(Led that needs to be toggled, delay.)
  */
 void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long delay2)
 {
 	unsigned long read_data = 0;
-
 	read_data = read_word(GPIO_DATA_REG);
 	write_word (GPIO_DATA_REG, ( read_data | (pin_cntrl ) ) );
 	delay_loop(delay1, delay2);
-
 	write_word(GPIO_DATA_REG, ( read_data & (~pin_cntrl) ) );
 	delay_loop(delay1, delay2);
 	return ;
 }
 
-/** @fn static void toggle_normal_leds()
+ /** @fn void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
  * @brief toggles normal LEDs.
  * @details This function toggles given both the 
  *          normal LEDs.
@@ -286,7 +281,6 @@ void toggle_ledx(unsigned long pin_cntrl, unsigned long delay1, unsigned long de
 void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
 {
 	unsigned long read_data = 0;
-
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | NORMAL_LEDS ) );
 	delay_loop(delay1, delay2);
@@ -296,7 +290,7 @@ void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
 	return ;
 }
 
-/** @fn static void Toggle_RGB_Leds()
+/** @fn void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
  * @brief Toggles RGB LED.
  * @details This function toggles the RGB LEDs.
  * @param unsigned long delay1
@@ -305,7 +299,6 @@ void toggle_normal_leds( unsigned long delay1, unsigned long delay2 )
 void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
 {
 	unsigned long read_data = 0;
-
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | RGB_LEDS ) );
 	delay_loop(delay1, delay2);
@@ -315,7 +308,7 @@ void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
 	return ;
 }
 
-/** @fn static void toggle_all_leds()
+/** @fn void toggle_all_leds( unsigned long delay1, unsigned long delay2)
  * @brief Toggles All LEDs.
  * @details This function toggles  all the LEDs with a delay.
  * @param unsigned long delay1
@@ -324,11 +317,9 @@ void toggle_rgb_leds( unsigned long delay1, unsigned long delay2 )
 void toggle_all_leds( unsigned long delay1, unsigned long delay2)
 {
 	unsigned long read_data = 0;
-
 	read_data = read_word(GPIO_DATA_REG);
 	write_word(GPIO_DATA_REG, ( read_data | ALL_LEDS ) );
 	delay_loop(delay1, delay2);
-
 	write_word(GPIO_DATA_REG, ( read_data & (~ALL_LEDS) ) );
 	delay_loop(delay1, delay2);
 	return ;

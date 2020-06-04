@@ -23,8 +23,11 @@
 ***************************************************************************/
 /**
 @file counter.c
-@brief source file for mtime counter
-@detail 
+@brief source file for mtime counter example
+@detail This file contains an application to use clint counters. The counter
+ is configured for a time period and on expiry the timer interrupt handler
+ handles the interrupt. Subsequently the clint counter is configured for 
+ subsequent operation.
 */ 
 
 #include "uart.h"
@@ -33,11 +36,8 @@
 #include "clint_driver.h"
 #include "log.h"
 
-/** @fn main
- * @brief 
- * @details 
- * @warning 
- * @return int
+/** @fn int main(void)
+ * @brief A simple application to use clint (mtime)
  */
 int main(void){
 

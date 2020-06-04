@@ -21,18 +21,18 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 *****************************************************************************/
+/**
+@file active_buzzer.c
+@brief Implements gpio functionality
+@detail It will buzzer at a predefined frequency on its own, when applying HIGH signal.
+*/
+
 #include "platform.h"
 #include "gpio.h"
 
-
-//extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
-
-/** @fn main
+/** @fn void main()
  * @brief Correspondingly making GPIO0 as HIGH and LOW.
  * @details It will make sound when you give HIGH signal
- * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
  */
 void main()
 {

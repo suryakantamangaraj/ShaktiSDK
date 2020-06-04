@@ -24,16 +24,16 @@
 /**
 @file traps.c
 @brief source file for first level of trap handling.
-@detail 
+@detail This file contains Trap handler routines.
 */
 
 #include "traps.h"
 
-/** @fn extract_ie_code
+/** @fn unsigned int extract_ie_code(unsigned int num)
  * @brief Extract the exception code from the mcause reg
  * @details Extract the exception code from the mcause reg
  *	    by masking the most significant bit. 
- * @param unsigned int 
+ * @param unsigned int num
  * @return unsigned int
  */
 unsigned int extract_ie_code(unsigned int num)
@@ -51,10 +51,10 @@ unsigned int extract_ie_code(unsigned int num)
 	return exception_code;
 }
 
-/** @fn default_handler
+/** @fn void default_handler(uintptr_t mcause, uintptr_t epc)
  * @brief default handler that loops infinitely 
- * @param unsigned int ptr 
- * @param unsigned int ptr
+ * @param unsigned int ptr mcause
+ * @param unsigned int ptr epc
  */
 void default_handler(uintptr_t mcause, uintptr_t epc)
 {
@@ -65,12 +65,12 @@ void default_handler(uintptr_t mcause, uintptr_t epc)
 	log_trace("default_handler exited\n");
 }
 
-/** @fn handle_trap
+/** @fn uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
  * @brief Handles the trap, exception or interrupt is determined here
  * @details Trap handler routine, which identifies the cause of trap 
  *	    and calls the respective trap handler.
- * @param unsigned int ptr
- * @param unsigned int ptr
+ * @param unsigned int ptr mcause
+ * @param unsigned int ptr epc
  * @return unsigned int ptr
  */
 uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)

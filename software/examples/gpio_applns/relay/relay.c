@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project           			     : shakti devt board
- * Name of the file	     		     : relay.c
- * Brief Description of file     	 : Helps to on and off the relay through gpio pins
+ * Project                           : shakti devt board
+ * Name of the file	             : relay.c
+ * Brief Description of file         : Helps to on and off the relay through gpio pins
  * Name of Author                    : Soutrick Roy Chowdhury
- * Email ID                       	 : soutrick97@gmail.com
+ * Email ID                          : soutrick97@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,6 +20,12 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 *****************************************************************************/
+/**
+@file relay.c
+@brief Implements gpio functionality.
+@detail Helps to on and off the relay within a certain interval.
+*/
+
 #include "platform.h"
 #include "gpio.h"
 
@@ -31,12 +37,8 @@
  */
 extern void delay_loop(unsigned long cntr1, unsigned long cntr2);
 
-/** @fn main
- * @brief 
- * @details 
- * @warning 
- * @param[in] No input parameter
- * @param[Out] No output parameter
+/** @fn void main()
+ * @brief writes the data to the output register based on control word with a delay
  */
 void main()
 {

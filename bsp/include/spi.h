@@ -1,9 +1,9 @@
 /***************************************************************************
- * Project                           : shakti devt board
- * Name of the file                  : spi.h
- * Brief Description of file         : Header to spi driver
- * Name of Author                    : Kaustubh Ghormade
- * Email ID                          : kaustubh4347@gmail.com
+* Project                          : shakti devt board
+* Name of the file                 : spi.h
+* Brief Description of file        : Header to spi driver
+* Name of Author                   : Kaustubh Ghormade
+* Email ID                         : kaustubh4347@gmail.com
 
  Copyright (C) 2019  IIT Madras. All rights reserved.
 
@@ -20,13 +20,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-
 /**
  * @file spi.h
- * @project shakti devt board
- * @brief Header to spi driver 
+ * @brief Header to spi driver
+ * @detail this is the header file for spi_flash_w25q32.c,spi_spansion.c
  */
-
 #ifndef SPI_H
 #define SPI_H
 
@@ -36,7 +34,6 @@ SPI0 is not available externally in TARGET=artix7_35t*/
 #define SPI0_OFFSET 0x00000000
 #define SPI1_OFFSET 0x00000100
 #define SPI2_OFFSET 0x00000200
-
 
 #define SPI_CR1	     0x00020000
 #define SPI_CR2	     0x00020004
@@ -49,8 +46,6 @@ SPI0 is not available externally in TARGET=artix7_35t*/
 #define SPI_CRCPR    0x00020020
 #define SPI_RXCRCR   0x00020024
 #define SPI_TXCRCR   0x00020028
-
-
 
 // defining SPI_CR1 register
 #define SPI_CPHA				(1 << 0)

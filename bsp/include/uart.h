@@ -1,7 +1,7 @@
 
 /************************************************************************
- * Project           			: shakti devt board
- * Name of the file	     		: uart.h
+ * Project           		: shakti devt board
+ * Name of the file	     	: uart.h
  * Brief Description of file    : Header file for uart.
  * Name of Author    	        : Niketan Shahapur,Kotteeswaran & Sathya Narayanan N
  * Email ID                     : niketanshahpur@gmail.com, kottee.1@gmail.com, sathya281@gmail.com
@@ -23,10 +23,9 @@
 ************************************************************************/
 /**
  * @file uart.h
- * @project shakti devt board
- * @brief Header file for uart  
+ * @brief Header file for uart
+ * @detail this is the header file for uart.c   
  */
-
 #ifndef UART_H
 #define UART_H
 #include <stdint.h>

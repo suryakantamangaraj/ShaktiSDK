@@ -22,15 +22,14 @@
  ***************************************************************************/
 /**
 @file memory.c
-@brief A library to display the memory contents
-@detail 
+@brief A library to display the memory contents at byte and word level. 
 */
 
-/** @fn dump_word_memory
+/** @fn void dump_word_memory(unsigned int* start, unsigned int word_length)
  * @brief dump contents of word addressabe location in the memory,
  *	 starting from the start address. 
- * @param unsigned int* 
- * @param unsigned int
+ * @param unsigned int* start
+ * @param unsigned int word_length
  */
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
@@ -46,11 +45,11 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
 	}
 }
 
-/** @fn dump_byte_memory
+/** @fn void dump_byte_memory(unsigned int* start, unsigned int word_length) 
  * @brief dump contents of byte addressabe location in the memory,
  *	 starting from the start address. 
- * @param unsigned int*
- * @param unsigned int
+ * @param unsigned int* start
+ * @param unsigned int word_length
  */
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {
