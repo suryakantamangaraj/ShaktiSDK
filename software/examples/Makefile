@@ -85,6 +85,7 @@ compile:
 	@mkdir -p ./gen_lib
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf  -I$(bspinc) -c $(bsplib)/util.c -o ./gen_lib/util.o -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -c $(bspcore)/traps.c -o ./gen_lib/traps.o  -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -c $(bspcore)/vectored_traps.S -o ./gen_lib/vectored_traps.o  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -c $(bspdri)/qspi/qspi_micron.c -o ./gen_lib/qspi_micron.o  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/pwm/pwm_driver.c -o ./gen_lib/pwm_driver.o -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/uart/uart.c -o ./gen_lib/uart.o -lm -lgcc
@@ -96,9 +97,10 @@ compile:
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -I$(bspdri)/plic -c $(bspcore)/init.c -o ./gen_lib/init.o  -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/plic/plic_driver.c -o ./gen_lib/plic_driver.o          -lm -lgcc
 	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspdri)/clint/clint_driver.c -o ./gen_lib/clint_driver.o        -lm -lgcc
+	@riscv$(XLEN)-unknown-elf-gcc  -march=$(MARCH) -mabi=$(MABI) -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf -I$(bspinc) -I$(bspboard) -c $(bspcore)/vectored.c -o ./gen_lib/vectored.o -lm -lgcc
 
 build:
-	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o 
+	@riscv$(XLEN)-unknown-elf-ar rcs ./gen_lib/libshakti$(XLEN).a ./gen_lib/start.o ./gen_lib/trap.o ./gen_lib/util.o ./gen_lib/vectored_traps.o ./gen_lib/traps.o ./gen_lib/log.o ./gen_lib/printf.shakti ./gen_lib/qspi_micron.o ./gen_lib/uart.o ./gen_lib/i2c_driver.o ./gen_lib/clint_driver.o ./gen_lib/plic_driver.o ./gen_lib/init.o ./gen_lib/pwm_driver.o ./gen_lib/vectored.o 
 	
 do:
 ifeq ($(PROGRAM),all)
@@ -114,11 +116,17 @@ else
 ifeq ($(PROGRAM),hello)
 filepath := uart_applns/hello
 else
+ifeq ($(PROGRAM),asm_vectored)
+filepath := uart_applns/asm_vectored
+else
 ifeq ($(PROGRAM),csr_test)
 filepath := uart_applns/csr_test
 else
 ifeq ($(PROGRAM),pwminterrupt)
 filepath := plic_applns/pwminterrupt
+else
+ifeq ($(PROGRAM),vectored_test)
+filepath := clint_applns/vectored_test
 else
 ifeq ($(PROGRAM),lm75)
 filepath := i2c_applns/lm75
@@ -243,6 +251,8 @@ endif
 endif
 endif
 endif	
+endif
+endif
 endif
 endif
 endif
