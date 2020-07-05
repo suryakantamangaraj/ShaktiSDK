@@ -42,7 +42,7 @@
  * @return none
 */
 void enable_vectored(){
-    log_trace("\nenable_vector entered\n");
+    log_trace("enable_vector entered\n");
     asm volatile("la t0, vectored_trap_entry\t \n"
                 "csrw mtvec, t0\t \n"
                 "li t0, 0x1\t \n"
@@ -57,9 +57,9 @@ void enable_vectored(){
  */
 unsigned int m_t_wrapper(uintptr_t mcause, uintptr_t epc)
 {
-    log_trace("\nm_t_int entered\n");
+    //log_trace("\nm_t_int entered\n");
     mcause_interrupt_table[MACH_TIMER_INTERRUPT](mcause, epc);
-    log_trace("\nm_t_int exited\n");
+    //log_trace("m_t_int exited\n");
     return epc;
 }
 
