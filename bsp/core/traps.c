@@ -100,16 +100,20 @@ uintptr_t handle_trap(uintptr_t mcause, uintptr_t epc)
 	   The Exception Code field contains a code identifying the last exception
 	 */
 
-	if (mcause & 0x80000000){
+	log_debug("sizeof(uintptr)  = %d \n",sizeof(uintptr_t));
+	log_debug("__riscv_xlen     = %d \n",__riscv_xlen);
+	log_debug("__riscv_xlen - 1 = %d \n",0x1 << (__riscv_xlen - 1));
+
+	if (mcause & (0x1 << (__riscv_xlen -1))){
 
 		ie_entry = extract_ie_code(mcause);
 
-		log_debug("Source of Trap: Interrupt\n");
+		log_info("Source of Trap: Interrupt\n");
 
 		mcause_interrupt_table[ie_entry](mcause, epc);
 	}
 	else{
-		log_debug("Source of Trap: Software\n");
+		log_info("Source of Trap: Software\n");
 
 		mcause_trap_table[mcause](mcause, epc);
 	}

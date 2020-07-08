@@ -36,7 +36,6 @@ Email id: sathya281@gmail.com
 #define MCAUSE_INT         0x80000000
 #define MCAUSE_CAUSE       0x7FFFFFFF
 
-#define PINMUX_CONFIGURE_REG 0x40310
 
 /*!Debugger Offset */
 #define DBG_MEM_START 0x00000000
@@ -44,8 +43,8 @@ Email id: sathya281@gmail.com
 /*!Tightly Coupled Memory(TCM) Offset. Size 128mB */
 #define TCM_MEM_START 0x80000000 /*! DDR3 Memory Start address */
 
-/*!Tightly Coupled Memory(TCM) Size. Size 128kB */
-#define TCM_MEM_SIZE 0x8000000 /*! DDR3 Memory Size */
+/*!Tightly Coupled Memory(TCM) Size. Size 256mB */
+#define TCM_MEM_SIZE 0x10000000 /*! DDR3 Memory Size */
 
 /*!Percentage of Free Memory to be used as stack (0-100). The remaining space will be used by heap */
 #define STACK_PERCENTAGE 50 /*! DDR3 Memory Size */
@@ -62,8 +61,6 @@ Email id: sathya281@gmail.com
 #define UART_OFFSET 0x100
 #define MAX_UART_COUNT 1
 
-#define PINMUX_CONFIGURE_REG 0x40310
-
 /*! Core Local Interruptor CLINT */
 #define CLINT_START 0x02000000
 
@@ -74,9 +71,9 @@ Email id: sathya281@gmail.com
 
 /*! Programmable Logic Interrupt Interface */
 #define PLIC_BASE_ADDRESS 0x0C000000 /*! PLIC Interface Start */
-#define PLIC_INTERRUPT_1   1
-#define PLIC_INTERRUPT_2   2
-#define PLIC_INTERRUPT_3   3
+#define PLIC_INTERRUPT_1   1 //Grounded as per design
+#define PLIC_INTERRUPT_2   2 //i2c
+#define PLIC_INTERRUPT_3   3 //gpio start
 #define PLIC_INTERRUPT_4   4
 #define PLIC_INTERRUPT_5   5
 #define PLIC_INTERRUPT_6   6
@@ -90,7 +87,16 @@ Email id: sathya281@gmail.com
 #define PLIC_INTERRUPT_14  14
 #define PLIC_INTERRUPT_15  15
 #define PLIC_INTERRUPT_16  16
-#define PLIC_INTERRUPT_26  26
+#define PLIC_INTERRUPT_17  17
+#define PLIC_INTERRUPT_18  18 //gpio end
+#define PLIC_INTERRUPT_19  19// plic pin start
+#define PLIC_INTERRUPT_20  20
+#define PLIC_INTERRUPT_21  21
+#define PLIC_INTERRUPT_22  22
+#define PLIC_INTERRUPT_23  23
+#define PLIC_INTERRUPT_24  24
+#define PLIC_INTERRUPT_25  25
+#define PLIC_INTERRUPT_26  26 //plic pin end
 
 #define PLIC_MAX_INTERRUPT_SRC 26
 

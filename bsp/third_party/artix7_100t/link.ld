@@ -81,7 +81,7 @@ SECTIONS
   }
   . = ALIGN(4);
   _end = .;
-  . = 0x80000000 + 0x8000000 - 0x400;
+  . = 0x80000000 + 0x10000000 - 0x400;
   _free_space = . - _end;
   _STACK_SIZE = (_free_space * 50) / 100 ;
   _HEAP_SIZE = _free_space - _STACK_SIZE;
