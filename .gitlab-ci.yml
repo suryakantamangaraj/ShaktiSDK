@@ -4,6 +4,7 @@ build:
     GIT_SUBMODULE_STRATEGY: recursive
 
   script:
+    - git clone --recursive https://gitlab.com/shaktiproject/software/shakti-tools.git"
     - source ./setenv.sh
     - env
     - make all
