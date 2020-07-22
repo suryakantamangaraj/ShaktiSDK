@@ -20,7 +20,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-
 #include "platform.h"
 
 extern char _end[];                /* _end is set in the linker file */
@@ -66,5 +65,6 @@ char * m_sbrk (nbytes)
 	}
 	return base;
 }
+
 
 

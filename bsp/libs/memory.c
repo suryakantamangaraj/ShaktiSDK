@@ -32,6 +32,7 @@
  * @param unsigned int* 
  * @param unsigned int
  */
+
 void dump_word_memory(unsigned int* start, unsigned int word_length)
 {
 	unsigned int i=0;
@@ -45,6 +46,7 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
 		address+=4;
 	}
 }
+ 
 
 /** @fn dump_byte_memory
  * @brief dump contents of byte addressabe location in the memory,
@@ -52,6 +54,7 @@ void dump_word_memory(unsigned int* start, unsigned int word_length)
  * @param unsigned int*
  * @param unsigned int
  */
+
 void dump_byte_memory(unsigned int* start, unsigned int word_length)
 {
 	unsigned int i=0;
@@ -65,3 +68,4 @@ void dump_byte_memory(unsigned int* start, unsigned int word_length)
 		address+=1;
 	}
 }
+ 

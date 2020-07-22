@@ -24,7 +24,6 @@
 #include<sys/types.h>
 #include "platform.h"
 #include "log.h"
-
 extern char* _HEAP_SIZE[];
 char* HEAP_SIZE = (char *)&_HEAP_SIZE;
 

@@ -109,12 +109,10 @@ unsigned char uart1_isr();
 unsigned char uart2_isr();
 
 
-#undef putchar
-int putchar(int ch);
+int shakti_putchar(int ch);
 
 int is_empty();
 
-#undef getchar
-int getchar();
+int shakti_getchar();
 
 #endif

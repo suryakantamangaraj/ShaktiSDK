@@ -89,7 +89,7 @@ typedef struct
  */
 
 typedef void (*plic_fptr_t) (unsigned int);
-plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+extern plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
 /* Function prototypes */
 

@@ -58,6 +58,11 @@ char *bss_start=(char *)&__bss_start;
 char *sbss_end=(char *)&__sbss_end;
 char *sbss_start=(char *)&__sbss_start;
 
+mtrap_fptr_t mcause_trap_table[MAX_TRAP_VALUE];
+mtrap_fptr_t mcause_interrupt_table[MAX_INTERRUPT_VALUE];
+plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
+
+
 /** @fn section_init
  * @brief resets the different sections
  * @details Explicitly 0x0 or 0xffffffff is written all the addresses in different "write" sections of memory

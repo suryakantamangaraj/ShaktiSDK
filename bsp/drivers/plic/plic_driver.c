@@ -38,6 +38,7 @@
  */
 
 interrupt_data_t hart0_interrupt_matrix[PLIC_MAX_INTERRUPT_SRC];
+plic_fptr_t isr_table[PLIC_MAX_INTERRUPT_SRC];
 
 /** @fn interrupt_complete
  * @brief write the int_id to complete register

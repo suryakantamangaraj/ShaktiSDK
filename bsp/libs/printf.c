@@ -64,7 +64,7 @@ static inline void itoa (unsigned long long int number, unsigned base)
 		else
 			intermediate = '0';
 
-		putchar(digits[i] + intermediate);
+		shakti_putchar(digits[i] + intermediate);
 	}
 }
 
@@ -88,7 +88,7 @@ void _printf_(const char *fmt, va_list ap)
 		for (;(ch = *(unsigned char *) fmt) != '%'; fmt++) {
 			if (ch == '\0')
 				return;
-			putchar(ch);
+			shakti_putchar(ch);
 		}
 		fmt++;
 
@@ -109,7 +109,7 @@ void _printf_(const char *fmt, va_list ap)
 
 					// character
 				case 'c':
-					putchar(va_arg(ap, int));
+					shakti_putchar(va_arg(ap, int));
 					break;
 
 					// string
@@ -117,7 +117,7 @@ void _printf_(const char *fmt, va_list ap)
 					if ((p = va_arg(ap, char *)) == NULL)
 						p = "(null)";
 					for (; (ch = *p) != '\0' ;) {
-						putchar(ch);
+						shakti_putchar(ch);
 						p++;
 					}
 					break;
@@ -134,7 +134,7 @@ void _printf_(const char *fmt, va_list ap)
 						num = va_arg(ap, int);
 
 					if ((long long) num < 0) {
-						putchar('-');
+						shakti_putchar('-');
 						num = -(long long) num;
 					}
 
@@ -148,7 +148,7 @@ void _printf_(const char *fmt, va_list ap)
 
 					for( i = 0; float_arr[i] != '\0'; i++)
 					{
-						putchar(float_arr[i]);
+						shakti_putchar(float_arr[i]);
 						if(i > 29) break;
 					}
 					break;
@@ -200,12 +200,12 @@ void _printf_(const char *fmt, va_list ap)
 
 					// escaped '%' character
 				case '%':
-					putchar(ch);
+					shakti_putchar(ch);
 					break;
 
 					// unrecognized escape sequence - just print it literally
 				default:
-					putchar('%');
+					shakti_putchar('%');
 					fmt = last_fmt;
 					break;
 			}

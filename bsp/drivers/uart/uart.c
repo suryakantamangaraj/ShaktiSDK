@@ -76,8 +76,8 @@ void uart_init()
  * @param[Out] Character as int.
  * @return integer equivalent of the received character.
  */
-#undef getchar
-int getchar()
+
+int shakti_getchar()
 {
 	while((uart_instance[0]->status & STS_RX_NOT_EMPTY) == 0); 
 	return (uart_instance[0]->rcv_reg);
@@ -92,8 +92,8 @@ int getchar()
  * @param[Out] int
  * @return Zero
  */
-#undef putchar
-int putchar(int ch)
+
+int shakti_putchar(int ch)
 {
 //	uart_instance[0] = 0x11300 ;
 	while(uart_instance[0]->status & STS_TX_FULL);
